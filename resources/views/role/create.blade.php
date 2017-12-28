@@ -8,15 +8,20 @@
                 <div class="panel-heading">New Role</div>
 
                 <div class="panel-body">
-                  <form class="" action="{{ url('users/roles') }}" method="post">
-                    {{ csrf_field() }}
-                    <label for="name">Name</label>
-                    <input type="text" name="name" value="">
-                    <br>
-                    <label for="description">Description</label>
-                    <input type="text" name="description" value="">
-                    <br>
-                    <input type="submit" value="Save">
+                  {{ Html::ul($errors->all()) }}
+
+                  {{ Form::open(array('url' => 'users/roles')) }}
+                    <div class="form-group">
+                      {{ Form::label('name', 'Name') }}
+                      {{ Form::text('name', Input::old('name'), array('class' => 'form-control')) }}
+                    </div>
+
+                    <div class="form-group">
+                      {{ Form::label('description', 'Description') }}
+                      {{ Form::text('description', Input::old('description'), array('class' => 'form-control')) }}
+                    </div>
+
+                    {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
                   </form>
                 </div>
             </div>

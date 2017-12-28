@@ -8,15 +8,18 @@
                 <div class="panel-heading">Edit Role</div>
 
                 <div class="panel-body">
-                  <form class="" action="{{ route('roles.update', $role->id) }}" method="put">
-                    <label for="name">Name</label>
-                    <input type="text" name="name" value="{{ $role->name }}">
-                    <br>
-                    <label for="description">Description</label>
-                    <input type="text" name="description" value="{{ $role->description }}">
-                    <br>
-                    <input type="submit" value="Save">
-                  </form>
+                  {{ Form::model($role, array('route' => array('roles.update', $role->id), 'method' => 'PUT')) }}
+                    <div class="form-group">
+                      {{ Form::label('name', 'Name') }}
+                      {{ Form::text('name', Input::old('name'), array('class' => 'form-control')) }}
+                    </div>
+
+                    <div class="form-group">
+                      {{ Form::label('description', 'Description') }}
+                      {{ Form::text('description', Input::old('description'), array('class' => 'form-control')) }}
+                    </div>
+                    {{ Form::submit('Update', array('class' => 'btn btn-primary')) }}
+                  {{ Form::close() }}
                 </div>
             </div>
         </div>

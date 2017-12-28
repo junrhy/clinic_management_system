@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Role;
+use App\Model\Role;
 
 class RoleController extends Controller
 {
@@ -55,8 +55,10 @@ class RoleController extends Controller
      */
     public function show($id)
     {
+        $role = Role::find($id);
 
-
+        return view('role.show')
+                ->with('role', $role);
     }
 
     /**
@@ -98,6 +100,9 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $role = Role::find($id);
+        $role->delete();
+
+        return redirect('users/roles');
     }
 }
