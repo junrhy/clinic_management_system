@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Role;
+use App\Model\Role;
+use App\Model\Client;
 use App\User;
 
 use App\Mail\NewClient;
@@ -67,14 +68,25 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $client = new Client;
+        $client->name = $data['name'];
+        $client->save();
+
         $user = User::create([
+            'client_id'=> $client->id,
             'name'     => $data['name'],
             'email'    => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+        $role = new Role;
+        $role->name = 'Employee';
+        $role->description = 'Employee';
+        $role->save();
+
         $user
            ->roles()
-           ->attach(Role::where('name', 'employee')->first());
+           ->attach(Role::where('name', 'Employee')->first());
 
         Mail::to($data['email'])->send(new NewClient());
 
