@@ -22,7 +22,7 @@
                     </div>
 
                     {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
-                  </form>
+                  {{ Form::close() }}
                 </div>
             </div>
         </div>

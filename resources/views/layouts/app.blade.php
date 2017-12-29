@@ -53,7 +53,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ url('users/roles') }}">Roles</a></li>
-                                    <li><a href="{{ url('users/permissions') }}">Permissions</a></li>
+                                    <li><a href="{{ url('users/role_members') }}">Role Members</a></li>
                                 </ul>
                             </li>
 

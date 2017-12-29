@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\User;
+
 use App\Model\Role;
 use App\Model\RoleUser;
 
-class RoleController extends Controller
+class RoleUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +18,12 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
+      $roles = Role::all();
+      $users = User::all();
 
-        return view('role.index')
-              ->with('roles', $roles);
+      return view('role_member.index')
+            ->with('users', $users)
+            ->with('roles', $roles);
     }
 
     /**
@@ -29,7 +33,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-      return view('role.create');
+        //
     }
 
     /**
@@ -40,12 +44,22 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $role = new Role;
-        $role->name = $request->name;
-        $role->description = $request->description;
-        $role->save();
+        $role_user = RoleUser::where('user_id', $request->user_id)
+                            ->where('role_id', $request->role_id)
+                            ->first();
 
-        return redirect('users/roles');
+        if ($role_user) {
+          $status = "User already exist!";
+        } else {
+          $role_user = new RoleUser;
+          $role_user->role_id = $request->role_id;
+          $role_user->user_id = $request->user_id;
+          $role_user->save();
+
+          $status = "User successfully added!";
+        }
+
+        return redirect('users/role_members/'.$request->role_id)->with('status', $status);;
     }
 
     /**
@@ -58,8 +72,11 @@ class RoleController extends Controller
     {
         $role = Role::find($id);
 
-        return view('role.show')
-                ->with('role', $role);
+        $users = User::all()->pluck('name', 'id');
+
+        return view('role_member.show')
+              ->with('role', $role)
+              ->with('users', $users);
     }
 
     /**
@@ -70,10 +87,7 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        $role = Role::find($id);
-
-        return view('role.edit')
-                ->with('role', $role);
+        //
     }
 
     /**
@@ -85,12 +99,7 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $role = Role::find($id);
-        $role->name = $request->name;
-        $role->description = $request->description;
-        $role->save();
 
-        return redirect('users/roles');
     }
 
     /**
@@ -99,17 +108,16 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $role_users = RoleUser::where('role_id', $id)->get();
+        $user_id = $id;
 
-        foreach ($role_users as $role_user_key => $role_user) {
-          $role_user->delete();
-        }
+        $role_user = RoleUser::where('user_id', $user_id)
+                            ->where('role_id', $request->role_id)
+                            ->first();
 
-        $role = Role::find($id);
-        $role->delete();
+        $role_user->delete();
 
-        return redirect('users/roles');
+        return redirect('users/role_members/'.$request->role_id);
     }
 }

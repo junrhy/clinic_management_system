@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Role;
 use App\User;
+
+use App\Mail\NewClient;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
@@ -71,6 +75,8 @@ class RegisterController extends Controller
         $user
            ->roles()
            ->attach(Role::where('name', 'employee')->first());
+
+        Mail::to($data['email'])->send(new NewClient());
 
         return $user;
     }

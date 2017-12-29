@@ -13,7 +13,7 @@
                       <tr>
                         <td>Name</td>
                         <td>Description</td>
-                        <td>Members</td>
+                        <td>Number of Users</td>
                         <td>Action</td>
                       </tr>
                       <?php foreach ($roles as $role_key => $role_item): ?>
