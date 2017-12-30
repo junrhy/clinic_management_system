@@ -69,7 +69,8 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $client = new Client;
-        $client->name = $data['name'];
+        $client->name  = $data['name'];
+        $client->email = $data['email'];
         $client->save();
 
         $user = User::create([
@@ -80,13 +81,14 @@ class RegisterController extends Controller
         ]);
 
         $role = new Role;
-        $role->name = 'Employee';
-        $role->description = 'Employee';
+        $role->client_id = $client->id;
+        $role->name = 'Default User';
+        $role->description = 'Default User';
         $role->save();
 
         $user
            ->roles()
-           ->attach(Role::where('name', 'Employee')->first());
+           ->attach(Role::where('name', 'Default User')->first());
 
         Mail::to($data['email'])->send(new NewClient());
 

@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Model\Role;
-use App\Model\RoleUser;
+
+use App\User;
 
 use Auth;
 
-class RoleController extends Controller
+class StaffController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +19,10 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::where('client_id', Auth::user()->client_id)->get();
+        $staffs = User::where('client_id', Auth::user()->client_id)->get();
 
-        return view('role.index')
-              ->with('roles', $roles);
+        return view('staff.index')
+              ->with('staffs', $staffs);
     }
 
     /**
@@ -31,7 +32,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-      return view('role.create');
+        return view('staff.create');
     }
 
     /**
@@ -42,13 +43,17 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $role = new Role;
-        $role->client_id = Auth::user()->client_id;
-        $role->name = $request->name;
-        $role->description = $request->description;
-        $role->save();
+        $role_default = Role::where('name', 'Default User')->first();
 
-        return redirect('users/roles');
+        $staff = new User();
+        $staff->client_id = Auth::user()->client_id;
+        $staff->name = $request->name;
+        $staff->email = $request->email;
+        $staff->password = bcrypt($request->password);
+        $staff->save();
+        $staff->roles()->attach($role_default);
+
+        return redirect('client/staff');
     }
 
     /**
@@ -59,10 +64,10 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        $role = Role::find($id);
+        $staff = User::find($id);
 
-        return view('role.show')
-                ->with('role', $role);
+        return view('staff.show')
+                ->with('staff', $staff);
     }
 
     /**
@@ -73,10 +78,10 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        $role = Role::find($id);
+        $staff = User::find($id);
 
-        return view('role.edit')
-                ->with('role', $role);
+        return view('staff.edit')
+                ->with('staff', $staff);
     }
 
     /**
@@ -88,12 +93,17 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $role = Role::find($id);
-        $role->name = $request->name;
-        $role->description = $request->description;
-        $role->save();
+        $staff = User::find($id);
+        $staff->name = $request->name;
+        $staff->email = $request->email;
 
-        return redirect('users/roles');
+        $password = isset($request->password) ? $request->password : null;
+        if ($password)
+          $staff->password = bcrypt($password);
+
+        $staff->save();
+
+        return redirect('client/staff');
     }
 
     /**
@@ -104,15 +114,9 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        $role_users = RoleUser::where('role_id', $id)->get();
+        $staff = User::find($id);
+        $staff->delete();
 
-        foreach ($role_users as $role_user_key => $role_user) {
-          $role_user->delete();
-        }
-
-        $role = Role::find($id);
-        $role->delete();
-
-        return redirect('users/roles');
+        return redirect('client/staff');
     }
 }

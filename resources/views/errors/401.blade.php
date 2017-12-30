@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>Laravel</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -69,6 +69,7 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
+                        <a href="{{ url('/') }}">Home</a>
                         <a href="{{ url('/home') }}">App Dashboard</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
@@ -79,7 +80,11 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Landing Page
+                   Whoops!
+                </div>
+
+                <div class="links">
+                    You don't have access to this page.
                 </div>
             </div>
         </div>

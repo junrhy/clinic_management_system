@@ -12,11 +12,16 @@
                   Description: {{ $role->description }}<br>
                   <br>
                   <strong>Members</strong><br><br>
-                  {{ Form::open(array('url' => 'users/role_members')) }}
-                    {{ Form::select('user_id', $users) }}
-                    {{ Form::hidden('role_id', $role->id) }}
-                    {{ Form::submit('Add', array('class' => 'btn btn-primary')) }}
-                  {{ Form::close() }}
+                  <div class="row">
+                    {{ Form::open(array('url' => 'users/role_members')) }}
+                      <div class="col-md-4">
+                        {{ Form::select('user_id', $users, null, ['class' => 'form-control']) }}
+                      </div>
+
+                      {{ Form::hidden('role_id', $role->id) }}
+                      {{ Form::submit('Add Staff', array('class' => 'btn btn-primary')) }}
+                    {{ Form::close() }}
+                  </div>
                   <br>
                   @if (session('status'))
                       <div class="alert alert-success">
@@ -31,11 +36,15 @@
                     <tr>
                       <td>{{ $user->name }}</td>
                       <td>
-                        {{ Form::open(array('url' => 'users/role_members/' . $user->id, 'class' => 'pull-right')) }}
-                            {{ Form::hidden('role_id', $role->id) }}
-                            {{ Form::hidden('_method', 'DELETE') }}
-                            {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
-                        {{ Form::close() }}
+                        @if($user->email != $user->client->email)
+                          {{ Form::open(array('url' => 'users/role_members/' . $user->id, 'class' => 'pull-right')) }}
+                              {{ Form::hidden('role_id', $role->id) }}
+                              {{ Form::hidden('_method', 'DELETE') }}
+                              {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
+                          {{ Form::close() }}
+                        @else
+                          <span class="text-danger">Primary User</span>
+                        @endif
                       </td>
                     </tr>
                     <?php endforeach; ?>

@@ -9,6 +9,8 @@ use App\User;
 use App\Model\Role;
 use App\Model\RoleUser;
 
+use Auth;
+
 class RoleUserController extends Controller
 {
     /**
@@ -18,8 +20,8 @@ class RoleUserController extends Controller
      */
     public function index()
     {
-      $roles = Role::all();
-      $users = User::all();
+      $roles = $roles = Role::where('client_id', Auth::user()->client_id)->get();
+      $users = User::where('client_id', Auth::user()->client_id)->get();
 
       return view('role_member.index')
             ->with('users', $users)
@@ -72,7 +74,7 @@ class RoleUserController extends Controller
     {
         $role = Role::find($id);
 
-        $users = User::all()->pluck('name', 'id');
+        $users = User::where('client_id', Auth::user()->client_id)->get()->pluck('name', 'id');
 
         return view('role_member.show')
               ->with('role', $role)

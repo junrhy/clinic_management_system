@@ -11,10 +11,10 @@
                     <a class="btn btn-primary" href="{{ url('users/roles/create') }}">Add Role</a><br><br>
                     <table class="table">
                       <tr>
-                        <td>Name</td>
-                        <td>Description</td>
-                        <td>Number of Users</td>
-                        <td>Action</td>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Members</th>
+                        <th>Action</th>
                       </tr>
                       <?php foreach ($roles as $role_key => $role_item): ?>
                       <tr>
@@ -22,12 +22,16 @@
                         <td>{{ $role_item->description }}</td>
                         <td>{{ $role_item->users->count() }}</td>
                         <td>
-                          <a class='btn btn-success' href="{{ route('roles.show',$role_item->id) }}">Show</a>
-                          <a class='btn btn-warning' href="{{ route('roles.edit',$role_item->id) }}">Edit</a>
-                          {{ Form::open(array('url' => 'users/roles/' . $role_item->id, 'class' => 'pull-right')) }}
-                              {{ Form::hidden('_method', 'DELETE') }}
-                              {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
-                          {{ Form::close() }}
+                          @if($role_item->name != 'Default User')
+                            <a class='btn btn-success' href="{{ route('roles.show',$role_item->id) }}">Show</a>
+                            <a class='btn btn-warning' href="{{ route('roles.edit',$role_item->id) }}">Edit</a>
+                            {{ Form::open(array('url' => 'users/roles/' . $role_item->id, 'class' => 'pull-right')) }}
+                                {{ Form::hidden('_method', 'DELETE') }}
+                                {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
+                            {{ Form::close() }}
+                          @else
+                            <span class="text-primary">Default User</span>
+                          @endif
                         </td>
                       </tr>
                       <?php endforeach; ?>
