@@ -23,3 +23,4 @@ Route::resource('users/roles', 'RoleController');
 Route::resource('users/role_members', 'RoleUserController');
 Route::resource('client/staff', 'StaffController');
 Route::resource('patient', 'PatientController');
+Route::resource('clinic', 'ClinicController');

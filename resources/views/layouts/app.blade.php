@@ -47,6 +47,7 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
+                        <li><a href="{{ url('clinic') }}">Clinics</a></li>
                             <li><a href="{{ url('patient') }}">Patients</a></li>
                             <li><a href="{{ url('client/staff') }}">Staff</a></li>
                             <!-- <li><a href="{{ url('users/roles') }}">Roles</a></li>
