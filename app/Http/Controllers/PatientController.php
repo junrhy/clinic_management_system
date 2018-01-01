@@ -55,8 +55,8 @@ class PatientController extends Controller
         $patient->name_of_mother = $request->name_of_mother;
         $patient->mother_maiden_name = $request->mother_maiden_name;
         $patient->age = $request->age;
-        $patient->gender = $request->gender != 0 ? $request->gender : null;
-        $patient->civil_status = $request->civil_status != 0 ? $request->civil_status : null;
+        $patient->gender = $request->gender;
+        $patient->civil_status = $request->civil_status;
         $patient->number_of_children = $request->number_of_children;
         $patient->email = $request->email;
         $patient->contact_number = $request->contact_number;
@@ -132,8 +132,8 @@ class PatientController extends Controller
         $patient->name_of_mother = $request->name_of_mother;
         $patient->mother_maiden_name = $request->mother_maiden_name;
         $patient->age = $request->age;
-        $patient->gender = $request->gender != 0 ? $request->gender : null;
-        $patient->civil_status = $request->civil_status != 0 ? $request->civil_status : null;
+        $patient->gender = $request->gender;
+        $patient->civil_status = $request->civil_status;
         $patient->number_of_children = $request->number_of_children;
         $patient->email = $request->email;
         $patient->contact_number = $request->contact_number;
@@ -164,8 +164,10 @@ class PatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        $request->user()->authorizeRoles(['Client User', 'Admin User']);
+
         $patient = Patient::find($id);
         $patient->delete();
 

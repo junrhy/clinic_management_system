@@ -49,12 +49,12 @@
 
                     <div class="form-group col-md-2">
                       {{ Form::label('gender', 'Gender') }}
-                      {{ Form::select('gender', ['', 'Male', 'Female'], null, array('class' => 'form-control')) }}
+                      {{ Form::select('gender', ['' => '', 'Male' => 'Male', 'Female' => 'Female'], null, array('class' => 'form-control')) }}
                     </div>
 
                     <div class="form-group col-md-2">
                       {{ Form::label('civil_status', 'Civil Status') }}
-                      {{ Form::select('civil_status', ['', 'Single', 'Married', 'Widowed'], null, array('class' => 'form-control')) }}
+                      {{ Form::select('civil_status', ['' => '', 'Single' => 'Single', 'Married' => 'Married', 'Widowed' => 'Widowed'], null, array('class' => 'form-control')) }}
                     </div>
 
                     <div class="form-group col-md-1">

@@ -5,24 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Model\Role;
+use App\Model\RoleUser;
 
 use App\User;
 
 use Auth;
 
-class StaffController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $staffs = User::where('client_id', Auth::user()->client_id)->get();
+        $request->user()->authorizeRoles(['Client User', 'Admin User']);
 
-        return view('staff.index')
-              ->with('staffs', $staffs);
+        $users = User::where('client_id', Auth::user()->client_id)->get();
+
+        return view('user.index')
+              ->with('users', $users);
     }
 
     /**
@@ -32,7 +35,7 @@ class StaffController extends Controller
      */
     public function create()
     {
-        return view('staff.create');
+        return view('user.create');
     }
 
     /**
@@ -43,17 +46,19 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        $role_default = Role::where('name', 'Staff User')->first();
+        $request->user()->authorizeRoles(['Client User', 'Admin User']);
 
-        $staff = new User();
-        $staff->client_id = Auth::user()->client_id;
-        $staff->name = $request->name;
-        $staff->email = $request->email;
-        $staff->password = bcrypt($request->password);
-        $staff->save();
-        $staff->roles()->attach($role_default);
+        $role_default = Role::where('name', 'user User')->first();
 
-        return redirect('client/staff');
+        $user = new User();
+        $user->client_id = Auth::user()->client_id;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->save();
+        $user->roles()->attach($role_default);
+
+        return redirect('user');
     }
 
     /**
@@ -64,10 +69,10 @@ class StaffController extends Controller
      */
     public function show($id)
     {
-        $staff = User::find($id);
+        $user = User::find($id);
 
-        return view('staff.show')
-                ->with('staff', $staff);
+        return view('user.show')
+                ->with('user', $user);
     }
 
     /**
@@ -78,10 +83,10 @@ class StaffController extends Controller
      */
     public function edit($id)
     {
-        $staff = User::find($id);
+        $user = User::find($id);
 
-        return view('staff.edit')
-                ->with('staff', $staff);
+        return view('user.edit')
+                ->with('user', $user);
     }
 
     /**
@@ -93,17 +98,19 @@ class StaffController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $staff = User::find($id);
-        $staff->name = $request->name;
-        $staff->email = $request->email;
+        $request->user()->authorizeRoles(['Client User', 'Admin User']);
+
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
 
         $password = isset($request->password) ? $request->password : null;
         if ($password)
-          $staff->password = bcrypt($password);
+          $user->password = bcrypt($password);
 
-        $staff->save();
+        $user->save();
 
-        return redirect('client/staff');
+        return redirect('user');
     }
 
     /**
@@ -120,9 +127,9 @@ class StaffController extends Controller
           $role_user->delete();
         }
 
-        $staff = User::find($id);
-        $staff->delete();
+        $user = User::find($id);
+        $user->delete();
 
-        return redirect('client/staff');
+        return redirect('user');
     }
 }

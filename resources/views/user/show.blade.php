@@ -5,11 +5,11 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Staff</div>
+                <div class="panel-heading">User</div>
 
                 <div class="panel-body">
-                  Name: {{ $staff->name }}<br>
-                  Email: {{ $staff->email }}<br>
+                  Name: {{ $user->name }}<br>
+                  Email: {{ $user->email }}<br>
                 </div>
             </div>
         </div>

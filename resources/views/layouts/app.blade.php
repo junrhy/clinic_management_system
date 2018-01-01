@@ -47,9 +47,11 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-                        <li><a href="{{ url('clinic') }}">Clinics</a></li>
+                            <li><a href="{{ url('clinic') }}">Clinics</a></li>
+                            <li><a href="{{ url('therapist') }}">Therapists</a></li>
                             <li><a href="{{ url('patient') }}">Patients</a></li>
-                            <li><a href="{{ url('client/staff') }}">Staff</a></li>
+                            <li><a href="{{ url('document') }}">Documentation</a></li>
+                            <li><a href="{{ url('report') }}">Reports</a></li>
                             <!-- <li><a href="{{ url('users/roles') }}">Roles</a></li>
                             <li><a href="{{ url('users/role_members') }}">Role Members</a></li> -->
 
@@ -59,6 +61,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
+                                    <li><a href="{{ url('user') }}">Manage Users</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

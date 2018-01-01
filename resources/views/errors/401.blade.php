@@ -80,11 +80,11 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                   Whoops!
+                   Oops!
                 </div>
 
-                <div class="links">
-                    You don't have access to this page.
+                <div class="">
+                    <strong>You are not authorized to access this feature.</strong>
                 </div>
             </div>
         </div>

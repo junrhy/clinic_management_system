@@ -5,12 +5,10 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">New Staff</div>
+                <div class="panel-heading">Edit User</div>
 
                 <div class="panel-body">
-                  {{ Html::ul($errors->all()) }}
-
-                  {{ Form::open(array('url' => 'client/staff')) }}
+                  {{ Form::model($user, array('route' => array('user.update', $user->id), 'method' => 'PUT')) }}
                     <div class="form-group">
                       {{ Form::label('name', 'Name') }}
                       {{ Form::text('name', Input::old('name'), array('class' => 'form-control')) }}
@@ -25,8 +23,7 @@
                       {{ Form::label('password', 'Password') }}
                       {{ Form::password('password', array('class' => 'form-control')) }}
                     </div>
-
-                    {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
+                    {{ Form::submit('Update', array('class' => 'btn btn-primary')) }}
                   {{ Form::close() }}
                 </div>
             </div>

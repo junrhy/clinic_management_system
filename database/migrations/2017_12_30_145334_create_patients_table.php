@@ -22,7 +22,7 @@ class CreatePatientsTable extends Migration
             $table->string('name_of_father')->nullable();
             $table->string('name_of_mother')->nullable();
             $table->string('mother_maiden_name')->nullable();
-            $table->integer('age')->nullable();
+            $table->string('age')->nullable();
             $table->string('gender')->nullable();
             $table->string('civil_status')->nullable();
             $table->string('number_of_children')->nullable();
