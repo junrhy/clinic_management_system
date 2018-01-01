@@ -22,3 +22,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('users/roles', 'RoleController');
 Route::resource('users/role_members', 'RoleUserController');
 Route::resource('client/staff', 'StaffController');
+Route::resource('patient', 'PatientController');

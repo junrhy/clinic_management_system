@@ -33,20 +33,18 @@
                       <td colspan=2>Name</td>
                     </tr>
                     <?php foreach ($role->users as $user_key => $user): ?>
+                    @if($user->email != $user->client->email)
                     <tr>
                       <td>{{ $user->name }}</td>
                       <td>
-                        @if($user->email != $user->client->email)
                           {{ Form::open(array('url' => 'users/role_members/' . $user->id, 'class' => 'pull-right')) }}
                               {{ Form::hidden('role_id', $role->id) }}
                               {{ Form::hidden('_method', 'DELETE') }}
                               {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
                           {{ Form::close() }}
-                        @else
-                          <span class="text-danger">Primary User</span>
-                        @endif
                       </td>
                     </tr>
+                    @endif
                     <?php endforeach; ?>
                   </table>
                 </div>

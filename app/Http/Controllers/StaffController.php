@@ -43,7 +43,7 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        $role_default = Role::where('name', 'Default User')->first();
+        $role_default = Role::where('name', 'Staff User')->first();
 
         $staff = new User();
         $staff->client_id = Auth::user()->client_id;
@@ -114,6 +114,12 @@ class StaffController extends Controller
      */
     public function destroy($id)
     {
+        $role_users = RoleUser::where('user_id', $id)->get();
+
+        foreach ($role_users as $role_user_key => $role_user) {
+          $role_user->delete();
+        }
+
         $staff = User::find($id);
         $staff->delete();
 

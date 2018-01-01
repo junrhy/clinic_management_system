@@ -74,7 +74,11 @@ class RoleUserController extends Controller
     {
         $role = Role::find($id);
 
-        $users = User::where('client_id', Auth::user()->client_id)->get()->pluck('name', 'id');
+        $users = User::where('client_id', Auth::user()->client_id)
+                      ->where('email', '!=', Auth::user()->client->email)
+                      ->whereNotIn('id', RoleUser::select('user_id')->get()->toArray())
+                      ->get()
+                      ->pluck('name', 'id');
 
         return view('role_member.show')
               ->with('role', $role)

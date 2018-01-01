@@ -82,13 +82,18 @@ class RegisterController extends Controller
 
         $role = new Role;
         $role->client_id = $client->id;
-        $role->name = 'Default User';
-        $role->description = 'Default User';
+        $role->name = 'Client User';
+        $role->description = 'Client User';
+        $role->save();
+        $role = new Role;
+        $role->client_id = $client->id;
+        $role->name = 'Staff User';
+        $role->description = 'Staff User';
         $role->save();
 
         $user
            ->roles()
-           ->attach(Role::where('name', 'Default User')->first());
+           ->attach(Role::where('name', 'Client User')->first());
 
         Mail::to($data['email'])->send(new NewClient());
 
