@@ -13,6 +13,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @yield('page_level_script')
+    @yield('page_level_css')
 </head>
 <body>
     <div id="app">
@@ -48,12 +51,23 @@
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                             <li><a href="{{ url('clinic') }}">Clinics</a></li>
-                            <li><a href="{{ url('therapist') }}">Therapists</a></li>
+                            <li><a href="{{ url('doctor') }}">Doctors</a></li>
                             <li><a href="{{ url('patient') }}">Patients</a></li>
-                            <li><a href="{{ url('document') }}">Documentation</a></li>
-                            <li><a href="{{ url('report') }}">Reports</a></li>
+                            <li><a href="{{ url('user') }}">Users</a></li>
+                            <li><a href="{{ url('schedule') }}">Schedule</a></li>
                             <!-- <li><a href="{{ url('users/roles') }}">Roles</a></li>
                             <li><a href="{{ url('users/role_members') }}">Role Members</a></li> -->
+
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                    Reports <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ url('report/appointments') }}">Patient Appointments</a></li>
+                                </ul>
+                            </li>
 
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
@@ -61,7 +75,6 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{ url('user') }}">Manage Users</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -86,5 +99,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @yield('page_level_footer_script')
 </body>
 </html>

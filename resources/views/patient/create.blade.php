@@ -127,28 +127,28 @@
                     <h3 class="row col-md-12">In case of Emergency</h3>
 
                     <div class="form-group col-md-4">
-                      {{ Form::label('emergency_contact_name1', 'Emergency Contact Name 1') }}
+                      {{ Form::label('emergency_contact_name1', 'Contact Person Name1') }}
                       {{ Form::text('emergency_contact_name1', Input::old('emergency_contact_name1'), array('class' => 'form-control')) }}
-                      {{ Form::label('emergency_contact_number1', 'Emergency Contact Number 1') }}
+                      {{ Form::label('emergency_contact_number1', 'Contact Person Number1') }}
                       {{ Form::text('emergency_contact_number1', Input::old('emergency_contact_number1'), array('class' => 'form-control')) }}
                     </div>
 
                     <div class="form-group col-md-4">
-                      {{ Form::label('emergency_contact_name2', 'Emergency Contact Name 2') }}
+                      {{ Form::label('emergency_contact_name2', 'Contact Person Name2') }}
                       {{ Form::text('emergency_contact_name2', Input::old('emergency_contact_name1'), array('class' => 'form-control')) }}
-                      {{ Form::label('emergency_contact_number2', 'Emergency Contact Number 2') }}
+                      {{ Form::label('emergency_contact_number2', 'Contact Person Number2') }}
                       {{ Form::text('emergency_contact_number2', Input::old('emergency_contact_number1'), array('class' => 'form-control')) }}
                     </div>
 
                     <div class="form-group col-md-4">
-                      {{ Form::label('emergency_contact_name3', 'Emergency Contact Name 3') }}
+                      {{ Form::label('emergency_contact_name3', 'Contact Person3') }}
                       {{ Form::text('emergency_contact_name3', Input::old('emergency_contact_name1'), array('class' => 'form-control')) }}
-                      {{ Form::label('emergency_contact_number3', 'Emergency Contact Number 3') }}
+                      {{ Form::label('emergency_contact_number3', 'Contact Person Number3') }}
                       {{ Form::text('emergency_contact_number3', Input::old('emergency_contact_number1'), array('class' => 'form-control')) }}
                     </div>
 
-                    <div class="col-md-12">
-                      {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
+                    <div class="col-md-4">
+                      {{ Form::submit('Save', array('class' => 'btn btn-primary btn-block btn-lg')) }}
                     </div>
                   {{ Form::close() }}
                 </div>

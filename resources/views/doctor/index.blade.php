@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Therapists</div>
+                <div class="panel-heading">Doctors</div>
 
                 <div class="panel-body">
-                    <a class="btn btn-primary" href="{{ url('therapist/create') }}">Add Therapist</a>
+                    <a class="btn btn-primary" href="{{ url('doctor/create') }}">Add Doctor</a>
                     <br><br>
                     <table class="table">
                       <tr>
@@ -17,15 +17,15 @@
                         <th>Age</th>
                         <th>Action</th>
                       </tr>
-                      <?php foreach ($therapists as $therapist_key => $therapist_item): ?>
+                      <?php foreach ($doctors as $doctor_key => $doctor_item): ?>
                       <tr>
-                        <td>{{ $therapist_item->first_name }}</td>
-                        <td>{{ $therapist_item->last_name }}</td>
-                        <td>{{ $therapist_item->age }}</td>
+                        <td>{{ $doctor_item->first_name }}</td>
+                        <td>{{ $doctor_item->last_name }}</td>
+                        <td>{{ $doctor_item->age }}</td>
                         <td>
-                            <a class='btn btn-success' href="{{ route('therapist.show',$therapist_item->id) }}">Show</a>
-                            <a class='btn btn-warning' href="{{ route('therapist.edit',$therapist_item->id) }}">Edit</a>
-                            {{ Form::open(array('url' => 'therapist/' . $therapist_item->id, 'class' => 'pull-right')) }}
+                            <a class='btn btn-success' href="{{ route('doctor.show',$doctor_item->id) }}">Show</a>
+                            <a class='btn btn-warning' href="{{ route('doctor.edit',$doctor_item->id) }}">Edit</a>
+                            {{ Form::open(array('url' => 'doctor/' . $doctor_item->id, 'class' => 'pull-right')) }}
                                 {{ Form::hidden('_method', 'DELETE') }}
                                 {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
                             {{ Form::close() }}

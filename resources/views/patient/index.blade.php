@@ -14,14 +14,12 @@
                       <tr>
                         <th>First Name</th>
                         <th>Last Name</th>
-                        <th>Age</th>
                         <th>Action</th>
                       </tr>
                       <?php foreach ($patients as $patient_key => $patient_item): ?>
                       <tr>
                         <td>{{ $patient_item->first_name }}</td>
                         <td>{{ $patient_item->last_name }}</td>
-                        <td>{{ $patient_item->age }}</td>
                         <td>
                             <a class='btn btn-success' href="{{ route('patient.show',$patient_item->id) }}">Show</a>
                             <a class='btn btn-warning' href="{{ route('patient.edit',$patient_item->id) }}">Edit</a>

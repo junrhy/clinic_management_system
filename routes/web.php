@@ -18,10 +18,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('report/appointments', 'PatientAppointmentsController@index');
 
 Route::resource('users/roles', 'RoleController');
 Route::resource('users/role_members', 'RoleUserController');
 Route::resource('user', 'UserController');
 Route::resource('patient', 'PatientController');
 Route::resource('clinic', 'ClinicController');
-Route::resource('therapist', 'TherapistController');
+Route::resource('doctor', 'DoctorController');
+Route::resource('schedule', 'ScheduleController');
