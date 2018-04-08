@@ -15,4 +15,11 @@ class Patient extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    public static function patients($client_id)
+    {
+        $patients = Patient::where('client_id', $client_id)->get();
+
+        return $patients;
+    }
 }
