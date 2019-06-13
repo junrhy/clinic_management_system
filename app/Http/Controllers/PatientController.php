@@ -30,12 +30,7 @@ class PatientController extends Controller
      */
     public function create()
     {
-        $countries = app('pragmarx.countries');
-        $countries_names = $countries->all()->pluck('name.common', 'name.common')->toArray();
-        array_unshift($countries_names, null);
-
-        return view('patient.create')
-                  ->with('countries', $countries_names);
+        return view('patient.create');
     }
 
     /**
@@ -49,33 +44,10 @@ class PatientController extends Controller
         $patient = new Patient;
         $patient->client_id = Auth::user()->client_id;
         $patient->first_name = $request->first_name;
-        $patient->middle_name = $request->middle_name;
         $patient->last_name = $request->last_name;
-        $patient->name_of_father = $request->name_of_father;
-        $patient->name_of_mother = $request->name_of_mother;
-        $patient->mother_maiden_name = $request->mother_maiden_name;
-        $patient->age = $request->age;
         $patient->gender = $request->gender;
-        $patient->civil_status = $request->civil_status;
-        $patient->number_of_children = $request->number_of_children;
         $patient->email = $request->email;
         $patient->contact_number = $request->contact_number;
-        $patient->address1 = $request->address1;
-        $patient->address2 = $request->address2;
-        $patient->town = $request->town;
-        $patient->province = $request->province;
-        $patient->country = $request->country != 0 ? $request->country : null;
-        $patient->occupation = $request->occupation;
-        $patient->company_name = $request->company_name;
-        $patient->company_address = $request->company_address;
-        $patient->company_email = $request->company_email;
-        $patient->company_contact_number = $request->company_contact_number;
-        $patient->emergency_contact_name1 = $request->emergency_contact_name1;
-        $patient->emergency_contact_number1 = $request->emergency_contact_number1;
-        $patient->emergency_contact_name2 = $request->emergency_contact_name2;
-        $patient->emergency_contact_number2 = $request->emergency_contact_number2;
-        $patient->emergency_contact_name3 = $request->emergency_contact_name3;
-        $patient->emergency_contact_number3 = $request->emergency_contact_number3;
         $patient->save();
 
         return redirect('patient');
@@ -103,16 +75,10 @@ class PatientController extends Controller
      */
     public function edit($id)
     {
-        $countries = app('pragmarx.countries');
-        $countries_names = $countries->all()->pluck('name.common', 'name.common')->toArray();
-        array_unshift($countries_names, null);
-
         $patient = Patient::find($id);
 
         return view('patient.edit')
-                ->with('patient', $patient)
-                ->with('countries', $countries_names);
-
+                ->with('patient', $patient);
     }
 
     /**
@@ -126,33 +92,10 @@ class PatientController extends Controller
     {
         $patient = Patient::find($id);
         $patient->first_name = $request->first_name;
-        $patient->middle_name = $request->middle_name;
         $patient->last_name = $request->last_name;
-        $patient->name_of_father = $request->name_of_father;
-        $patient->name_of_mother = $request->name_of_mother;
-        $patient->mother_maiden_name = $request->mother_maiden_name;
-        $patient->age = $request->age;
         $patient->gender = $request->gender;
-        $patient->civil_status = $request->civil_status;
-        $patient->number_of_children = $request->number_of_children;
         $patient->email = $request->email;
         $patient->contact_number = $request->contact_number;
-        $patient->address1 = $request->address1;
-        $patient->address2 = $request->address2;
-        $patient->town = $request->town;
-        $patient->province = $request->province;
-        $patient->country = $request->country != 0 ? $request->country : null;
-        $patient->occupation = $request->occupation;
-        $patient->company_name = $request->company_name;
-        $patient->company_address = $request->company_address;
-        $patient->company_email = $request->company_email;
-        $patient->company_contact_number = $request->company_contact_number;
-        $patient->emergency_contact_name1 = $request->emergency_contact_name1;
-        $patient->emergency_contact_number1 = $request->emergency_contact_number1;
-        $patient->emergency_contact_name2 = $request->emergency_contact_name2;
-        $patient->emergency_contact_number2 = $request->emergency_contact_number2;
-        $patient->emergency_contact_name3 = $request->emergency_contact_name3;
-        $patient->emergency_contact_number3 = $request->emergency_contact_number3;
         $patient->save();
 
         return redirect('patient');

@@ -95,7 +95,7 @@ class RegisterController extends Controller
            ->roles()
            ->attach(Role::where('name', 'Client User')->first());
 
-        Mail::to($data['email'])->send(new NewClient());
+      // Mail::to($data['email'])->send(new NewClient());
 
         return $user;
     }

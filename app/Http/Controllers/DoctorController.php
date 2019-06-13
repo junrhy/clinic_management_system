@@ -30,12 +30,7 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        $countries = app('pragmarx.countries');
-        $countries_names = $countries->all()->pluck('name.common', 'name.common')->toArray();
-        array_unshift($countries_names, null);
-
-        return view('doctor.create')
-                  ->with('countries', $countries_names);
+        return view('doctor.create');
     }
 
     /**
@@ -48,19 +43,7 @@ class DoctorController extends Controller
     {
         $doctor = new Doctor;
         $doctor->client_id = Auth::user()->client_id;
-        $doctor->first_name = $request->first_name;
-        $doctor->middle_name = $request->middle_name;
-        $doctor->last_name = $request->last_name;
-        $doctor->age = $request->age;
-        $doctor->gender = $request->gender;
-        $doctor->civil_status = $request->civil_status;
-        $doctor->email = $request->email;
-        $doctor->contact_number = $request->contact_number;
-        $doctor->address1 = $request->address1;
-        $doctor->address2 = $request->address2;
-        $doctor->town = $request->town;
-        $doctor->province = $request->province;
-        $doctor->country = $request->country != '0' ? $request->country : null;
+        $doctor->name = $request->name;
         $doctor->save();
 
         return redirect('doctor');
@@ -88,15 +71,10 @@ class DoctorController extends Controller
      */
     public function edit($id)
     {
-        $countries = app('pragmarx.countries');
-        $countries_names = $countries->all()->pluck('name.common', 'name.common')->toArray();
-        array_unshift($countries_names, null);
-
         $doctor = Doctor::find($id);
 
         return view('doctor.edit')
-                ->with('doctor', $doctor)
-                ->with('countries', $countries_names);
+                ->with('doctor', $doctor);
     }
 
     /**
@@ -109,19 +87,7 @@ class DoctorController extends Controller
     public function update(Request $request, $id)
     {
         $doctor = Doctor::find($id);
-        $doctor->first_name = $request->first_name;
-        $doctor->middle_name = $request->middle_name;
-        $doctor->last_name = $request->last_name;
-        $doctor->age = $request->age;
-        $doctor->gender = $request->gender;
-        $doctor->civil_status = $request->civil_status;
-        $doctor->email = $request->email;
-        $doctor->contact_number = $request->contact_number;
-        $doctor->address1 = $request->address1;
-        $doctor->address2 = $request->address2;
-        $doctor->town = $request->town;
-        $doctor->province = $request->province;
-        $doctor->country = $request->country;
+        $doctor->name = $request->name;
         $doctor->save();
 
         return redirect('doctor');

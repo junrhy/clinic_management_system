@@ -20,7 +20,7 @@ class Doctor extends Model
 
     public static function doctors($client_id)
     {
-        $doctors = Doctor::select(DB::raw("CONCAT(first_name,' ',last_name) AS name"), 'id')->where('client_id', $client_id)->pluck('name', 'id');
+        $doctors = Doctor::where('client_id', $client_id)->pluck('name', 'id');
 
         return $doctors;
     }

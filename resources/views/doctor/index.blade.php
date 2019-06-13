@@ -12,16 +12,12 @@
                     <br><br>
                     <table class="table">
                       <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Age</th>
+                        <th>Name</th>
                         <th>Action</th>
                       </tr>
                       <?php foreach ($doctors as $doctor_key => $doctor_item): ?>
                       <tr>
-                        <td>{{ $doctor_item->first_name }}</td>
-                        <td>{{ $doctor_item->last_name }}</td>
-                        <td>{{ $doctor_item->age }}</td>
+                        <td>{{ $doctor_item->name }}</td>
                         <td>
                             <a class='btn btn-success' href="{{ route('doctor.show',$doctor_item->id) }}">Show</a>
                             <a class='btn btn-warning' href="{{ route('doctor.edit',$doctor_item->id) }}">Edit</a>
