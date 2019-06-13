@@ -26,4 +26,4 @@ Route::resource('user', 'UserController');
 Route::resource('patient', 'PatientController');
 Route::resource('clinic', 'ClinicController');
 Route::resource('doctor', 'DoctorController');
-Route::resource('schedule', 'ScheduleController');
+Route::resource('calendar', 'CalendarController');

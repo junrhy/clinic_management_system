@@ -10,7 +10,7 @@ use App\Model\Doctor;
 use App\Model\Patient;
 use Auth;
 
-class ScheduleController extends Controller
+class CalendarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,14 +24,9 @@ class ScheduleController extends Controller
         $clinics = Clinic::clinics($client_id);
         $doctors = Doctor::doctors($client_id);
 
-        return view('schedule.index')
+        return view('calendar.index')
                   ->with('clinics', $clinics)
                   ->with('doctors', $doctors);
-    }
-
-    public function patients_list()
-    {
-        return Datatables::of(Patient::query())->make(true);
     }
 
     /**

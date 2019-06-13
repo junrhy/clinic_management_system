@@ -17,8 +17,7 @@ class CreateClinicsTable extends Migration
             $table->increments('id');
             $table->integer('client_id');
             $table->string('name');
-            $table->string('address');
-            $table->string('email')->nullable();
+            $table->string('address')->nullable();
             $table->string('contact_number')->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Model\Role;
 use App\Model\Client;
+use App\Model\Clinic;
+use App\Model\Doctor;
 use App\User;
 
 use App\Mail\NewClient;
@@ -94,6 +96,17 @@ class RegisterController extends Controller
         $user
            ->roles()
            ->attach(Role::where('name', 'Client User')->first());
+
+        $clinic = new Clinic;
+        $clinic->client_id = $client->id;
+        $clinic->name = $client->name . ' Clinic';
+        $clinic->address = null;
+        $clinic->save();
+
+        $doctor = new Doctor;
+        $doctor->client_id = $client->id;
+        $doctor->name = $client->name;
+        $doctor->save();
 
       // Mail::to($data['email'])->send(new NewClient());
 

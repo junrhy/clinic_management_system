@@ -32,7 +32,7 @@
                               <div id="appointment_list"></div>
                         </div>
                         <div class="col-md-9">
-                            <div id='calendar2'></div>
+                            <input id='calendar2'></input>
                         </div>
                     </div>
                 </div>
