@@ -13,6 +13,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
+    <style type="text/css">
+        .swal2-popup {
+          font-size: 1.6rem !important;
+        }
+    </style>
 
     @yield('page_level_script')
     @yield('page_level_css')
