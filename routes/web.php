@@ -36,3 +36,5 @@ Route::delete('/patient/delete_charge/{id}', 'PatientController@delete_patient_c
 
 Route::post('/patient/create_billing_payment', 'PatientController@create_billing_payment');
 Route::delete('/patient/delete_payment/{id}', 'PatientController@delete_patient_payment');
+
+Route::post('/calendar/scheduled_patients', 'CalendarController@scheduled_patients');

@@ -15,6 +15,9 @@
   .ui-datepicker {
     width: 100%;
   }
+  .fc-state-highlight {
+    background:#ffcccc;
+  }
 </style>
 @endsection
 
@@ -27,12 +30,12 @@
 
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-3">
-                              <h4 class="select_date">Patients</h4>
-                              <div id="appointment_list"></div>
+                        <div class="col-md-6">
+                              <h4>Patients</h4>
+                              <div id="patient_list"></div>
                         </div>
-                        <div class="col-md-9">
-                            <input id='calendar2'></input>
+                        <div class="col-md-6">
+                            <div id='calendar'></div>
                         </div>
                     </div>
                 </div>
@@ -50,18 +53,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-  $("#calendar1").datepicker({
-      firstDay: 1,
-      minDate:0,
-      onSelect: function(){
-          var selected = $(this).val();
-          var selected_date = $.fullCalendar.moment(new Date(selected));
-          $('#calendar2').fullCalendar('changeView', 'agendaDay');
-          $('#calendar2').fullCalendar('gotoDate', selected_date);
-      }
-  });
-
-  $('#calendar2').fullCalendar({
+  $('#calendar').fullCalendar({
       firstDay: 1,
       minDate:0,
       viewRender: function(currentView){
@@ -71,9 +63,47 @@ $(document).ready(function() {
           }).addClass('fc-other-month');
       },
       dayClick: function(calEvent, jsEvent, view) {
-          var selected_date = $.fullCalendar.moment($(this).data('date'));
-          alert(selected_date);
+          $(".fc-state-highlight").removeClass("fc-state-highlight");
+
+          if ($(jsEvent.target).hasClass('fc-day')) {
+            $(jsEvent.target).addClass("fc-state-highlight");
+
+            $.ajax({
+              method: "POST",
+              url: "/calendar/scheduled_patients",
+              data: { 
+                date: $(this).data('date'),
+                _token: "{{ csrf_token() }}" 
+              }
+            })
+            .done(function( response ) {
+              $("#patient_list").html(response);
+            });
+          }
       }
+  });
+
+  $(function(){
+    var d = new Date();
+
+    var month = d.getMonth()+1;
+    var day = d.getDate();
+
+    var today = d.getFullYear() + '/' +
+        (month<10 ? '0' : '') + month + '/' +
+        (day<10 ? '0' : '') + day;
+
+    $.ajax({
+      method: "POST",
+      url: "/calendar/scheduled_patients",
+      data: { 
+        date: today,
+        _token: "{{ csrf_token() }}" 
+      }
+    })
+    .done(function( response ) {
+      $("#patient_list").html(response);
+    });
   });
 });
 </script>
