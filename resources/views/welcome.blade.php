@@ -72,14 +72,14 @@
                         <a href="{{ url('/home') }}">App Dashboard</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
+                       <!--  <a href="{{ route('register') }}">Register</a> -->
                     @endauth
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    Landing Page
+                    Welcome!
                 </div>
             </div>
         </div>

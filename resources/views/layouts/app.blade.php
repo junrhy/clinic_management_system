@@ -20,12 +20,14 @@
         }
     </style>
 
+    <script src="https://kit.fontawesome.com/e3497de5a4.js" crossorigin="anonymous"></script>
+
     @yield('page_level_script')
     @yield('page_level_css')
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top" style="background-color: #F0F4F5;">
             <div class="container">
                 <div class="navbar-header">
 
@@ -39,7 +41,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        PMS
+                        <i class="fa fa-clinic-medical"></i> {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
 
@@ -53,15 +55,15 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <!-- <li><a href="{{ route('login') }}">Login</a></li> -->
+                            <!-- <li><a href="{{ route('register') }}">Register</a></li> -->
                         @else
-                            <li><a href="{{ url('patient') }}">Patients</a></li>
-                            <li><a href="{{ url('calendar') }}">Calendar</a></li>
+                            <li><a href="{{ url('patient') }}"><i class="fa fa-notes-medical"></i> Patients</a></li>
+                            <li><a href="{{ url('calendar') }}"><i class="fa fa-calendar"></i> Calendar</a></li>
                      
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    <i class="fa fa-user"></i> {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">

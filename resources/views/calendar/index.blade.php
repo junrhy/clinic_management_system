@@ -2,7 +2,7 @@
 
 @section('page_level_script')
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
-
+<script src="https://kit.fontawesome.com/e3497de5a4.js" crossorigin="anonymous"></script>
 <script src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
 @endsection
 
@@ -26,12 +26,12 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Calendar</div>
+                <div class="panel-heading"><i class="fa fa-calendar"></i> Calendar</div>
 
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-6">
-                              <h4>Patients</h4>
+                              <h4>Appointments</h4>
                               <div id="patient_list"></div>
                         </div>
                         <div class="col-md-6">

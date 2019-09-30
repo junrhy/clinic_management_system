@@ -3,7 +3,7 @@
 @section('page_level_script')
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-<script src="https://use.fontawesome.com/94cab8750f.js"></script>
+<script src="https://kit.fontawesome.com/e3497de5a4.js" crossorigin="anonymous"></script>
 @endsection
 
 @section('page_level_css')
@@ -27,7 +27,7 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-body">
-                  Patient
+                  <i class="fa fa-notes-medical"></i> Patient
                   <div class="row" style="font-size:12pt;">
                     <h4 style="padding:10px;background-color:#45a29e;color:#fff;"><i class="fa fa-address-card"></i> Basic Information</h4>
 
@@ -76,7 +76,7 @@
                             @endforeach
                           @else
                             <tr>
-                              <td class="text-center" colspan="4">We don't have a record yet for {{ $patient->first_name }}. Use the form below to add new record.</td>
+                              <td class="text-center" colspan="4">We don't have a record yet for {{ $patient->first_name }} {{ $patient->last_name }}. Use the form below to add new record.</td>
                             </tr>
                           @endif
                           </tbody>

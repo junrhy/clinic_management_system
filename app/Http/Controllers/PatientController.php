@@ -133,8 +133,6 @@ class PatientController extends Controller
         PatientDetail::where('patient_id', $patient_id)->delete();
         PatientBillingCharge::where('patient_id', $patient_id)->delete();
         PatientBillingPayment::where('patient_id', $patient_id)->delete();
-
-        return redirect('patient');
     }
 
     public function create_patient_detail(Request $request)

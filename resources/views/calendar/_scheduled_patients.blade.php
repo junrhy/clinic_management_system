@@ -1,20 +1,18 @@
 <table class="table table-striped">
 	<thead>
 		<tr>
-			<th style="width:40%;">Name</th>
-			<th style="width:40%;">Description</th>
-			<th style="width:20%;"></th>
+			<th>#</th>
+			<th style="width:30%;">Name</th>
+			<th style="width:70%;">Description</th>
 		</tr>
 	</thead>
 	<tbody>
+		@foreach($scheduled as $key => $schedule)
 		<tr>
-			@foreach($scheduled as $schedule)
+			<td>{{ $key + 1 }}</td>
 			<td>{{ $schedule->patient->first_name }} {{ $schedule->patient->last_name }}</td>
 			<td>{{ $schedule->detail }}</td>
-			<th>
-				<a href="#">Show</a>
-			</th>
-			@endforeach
 		</tr>
+		@endforeach
 	</tbody>
 </table>
