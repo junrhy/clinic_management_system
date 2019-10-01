@@ -23,12 +23,16 @@ class PatientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $patients = Patient::where('client_id', Auth::user()->client_id)->get();
+        $patients = Patient::where('client_id', Auth::user()->client_id)
+                            ->where('first_name', 'like', $request->namelist . '%')
+                            ->orderBy('first_name', 'asc')
+                            ->paginate(30);
 
         return view('patient.index')
-              ->with('patients', $patients);
+              ->with('patients', $patients)
+              ->with('namelist', $request->namelist);
     }
 
     /**

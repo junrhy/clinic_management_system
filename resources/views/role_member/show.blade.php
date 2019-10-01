@@ -30,12 +30,14 @@
                   @endif
                   <table class="table">
                     <tr>
-                      <td colspan=2>Name</td>
+                      <td>Name</td>
+                      <td colspan=2>Email</td>
                     </tr>
                     <?php foreach ($role->users as $user_key => $user): ?>
                     @if($user->email != $user->client->email)
                     <tr>
                       <td>{{ $user->name }}</td>
+                      <td>{{ $user->email }}</td>
                       <td>
                           {{ Form::open(array('url' => 'users/role_members/' . $user->id, 'class' => 'pull-right')) }}
                               {{ Form::hidden('role_id', $role->id) }}

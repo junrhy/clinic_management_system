@@ -8,37 +8,86 @@
 
 @section('page_level_css')
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+
+<style type="text/css">
+  .namelist {
+    cursor:pointer;
+  }
+
+  .font-weight-bold {
+    font-weight:bold;
+    font-size:14pt;
+  }
+</style>
 @endsection
 
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading"><i class="fa fa-notes-medical" aria-hidden="true"></i> Patients</div>
 
                 <div class="panel-body">
-                    <a class="btn btn-primary" href="{{ url('patient/create') }}"><i class="fa fa-plus" aria-hidden="true"></i> Add Patient</a>
-                    <br><br>
+                    <div><a class="btn btn-primary" href="{{ url('patient/create') }}"><i class="fa fa-plus" aria-hidden="true"></i> Add</a></div>
+                    <br>
+                    <table width="100%">
+                      <tr>
+                        <td width="3.7%" class="namelist text-center" data-list="all">All</td>
+                        <td width="3.7%" class="namelist text-center" data-list="A">A</td>
+                        <td width="3.7%" class="namelist text-center" data-list="B">B</td>
+                        <td width="3.7%" class="namelist text-center" data-list="C">C</td>
+                        <td width="3.7%" class="namelist text-center" data-list="D">D</td>
+                        <td width="3.7%" class="namelist text-center" data-list="E">E</td>
+                        <td width="3.7%" class="namelist text-center" data-list="F">F</td>
+                        <td width="3.7%" class="namelist text-center" data-list="G">G</td>
+                        <td width="3.7%" class="namelist text-center" data-list="H">H</td>
+                        <td width="3.7%" class="namelist text-center" data-list="I">I</td>
+                        <td width="3.7%" class="namelist text-center" data-list="J">J</td>
+                        <td width="3.7%" class="namelist text-center" data-list="K">K</td>
+                        <td width="3.7%" class="namelist text-center" data-list="L">L</td>
+                        <td width="3.7%" class="namelist text-center" data-list="M">M</td>
+                        <td width="3.7%" class="namelist text-center" data-list="N">N</td>
+                        <td width="3.7%" class="namelist text-center" data-list="O">O</td>
+                        <td width="3.7%" class="namelist text-center" data-list="P">P</td>
+                        <td width="3.7%" class="namelist text-center" data-list="Q">Q</td>
+                        <td width="3.7%" class="namelist text-center" data-list="R">R</td>
+                        <td width="3.7%" class="namelist text-center" data-list="S">S</td>
+                        <td width="3.7%" class="namelist text-center" data-list="T">T</td>
+                        <td width="3.7%" class="namelist text-center" data-list="U">U</td>
+                        <td width="3.7%" class="namelist text-center" data-list="B">V</td>
+                        <td width="3.7%" class="namelist text-center" data-list="W">W</td>
+                        <td width="3.7%" class="namelist text-center" data-list="X">X</td>
+                        <td width="3.7%" class="namelist text-center" data-list="Y">Y</td>
+                        <td width="3.7%" class="namelist text-center" data-list="Z">Z</td>
+                      </tr>
+                    </table>
+                    <br>
                     <table class="table">
                       <tr>
-                        <th width="30%">First Name</th>
-                        <th width="30%">Last Name</th>
-                        <th>Action</th>
+                        <th width="20%">First Name</th>
+                        <th>Last Name</th>
+                        <th class="text-center" width="26%">Action</th>
                       </tr>
+                    @if($patients->count() > 0)
                       <?php foreach ($patients as $patient_key => $patient_item): ?>
                       <tr>
                         <td>{{ $patient_item->first_name }}</td>
                         <td>{{ $patient_item->last_name }}</td>
-                        <td>
-                            <a class='btn btn-success' href="{{ route('patient.show',$patient_item->id) }}"><i class="fa fa-notes-medical" aria-hidden="true"></i> Show</a>
-                            <a class='btn btn-warning' href="{{ route('patient.edit',$patient_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
-                            <a class="btn btn-danger delete-patient" data-id="{{ $patient_item->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
+                        <td class="text-right">
+                            <a class="btn btn-xs btn-danger delete-patient" data-id="{{ $patient_item->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
+                            <a class='btn btn-xs btn-warning' href="{{ route('patient.edit',$patient_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+                            <a class='btn btn-xs btn-success' href="{{ route('patient.show',$patient_item->id) }}"><i class="fa fa-notes-medical" aria-hidden="true"></i> View Records</a>
                         </td>
                       </tr>
                       <?php endforeach; ?>
+                    @else
+                      <tr>
+                        <td colspan="3" class="text-center">No records yet.</td>
+                      </tr>
+                    @endif
                     </table>
-
+                    <div align="center">{{ $patients->appends(['namelist' => $namelist])->links() }}</div>
                 </div>
             </div>
         </div>
@@ -83,6 +132,26 @@ $(document).ready(function() {
         });
       }
     })
+  });
+
+  $(".namelist").unbind().click(function(){
+    if ($(this).data('list') != 'all') {
+      location.href = '{{ Request::url() }}?namelist=' + $(this).data('list');
+    } else {
+      location.href = '{{ Request::url() }}';
+    }
+  });
+
+  $(function(){
+    $('.namelist').each(function(i, obj) {
+        if ($(this).data('list') == "{{ app('request')->namelist }}") {
+          $('.namelist').removeClass('font-weight-bold');
+          $(this).addClass('font-weight-bold');
+          return false;
+        } else {
+          $('.namelist').first().addClass('font-weight-bold');
+        }
+    });
   });
 });
 </script>
