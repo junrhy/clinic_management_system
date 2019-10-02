@@ -37,6 +37,9 @@ Route::resource('calendar', 'CalendarController');
 Route::post('/patient/create_detail', 'PatientController@create_patient_detail');
 Route::delete('/patient/delete_detail/{id}', 'PatientController@delete_patient_detail');
 
+Route::post('/patient/archive_detail/{id}', 'PatientController@archive_patient_detail');
+Route::post('/patient/unarchive_detail/{id}', 'PatientController@unarchive_patient_detail');
+
 Route::post('/patient/create_billing_charge', 'PatientController@create_billing_charge');
 Route::delete('/patient/delete_charge/{id}', 'PatientController@delete_patient_charge');
 

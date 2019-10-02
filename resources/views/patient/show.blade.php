@@ -9,7 +9,7 @@
 @section('page_level_css')
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
 <style type="text/css">
-  .delete-link {
+  .delete-link, .archive-detail , .unarchive-link{
     color: gray;
     font-size:12pt;
   }
@@ -57,40 +57,88 @@
 
                   <div class="form-group col-md-12">
                     <div class="row" style="margin-top:30px;">
-                      <h4 class="row" style="padding:10px;background-color:#45a29e;color:#fff;"><i class="fa fa-user-md" aria-hidden="true"></i> Medical Records</h4>
-                        <table class="table table-striped">
-                          <thead>
-                            <th style="width:15%">Created</th>
-                            <th style="width:40%">Description</th>
-                            <th style="width:20%">Schedule</th>
-                            <th style="width:1%;text-align:center;">Action</th>
-                          </thead>
+                      <h4 class="row" style="padding:10px;background-color:#45a29e;color:#fff;"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</h4>
+                        <ul class="nav nav-tabs">
+                          <li class="active"><a data-toggle="tab" href="#home">Records</a></li>
+                          <li><a data-toggle="tab" href="#menu1">Archived</a></li>
+                        </ul>
 
-                          <tbody>
-                          @if(count($details) > 0)
-                            @foreach ($details as $detail)
-                              <tr>
-                                  <td>{{ $detail->created_at->format('M d, Y') }}</td>
-                                  <td><?php echo $detail->detail ?></td>
-                                  <td>
-                                    @if($detail->date_scheduled != '')
-                                      {{ date('M d, Y', strtotime($detail->date_scheduled)) }}&nbsp;&nbsp;
-                                      {{ date('h:i a', strtotime($detail->time_scheduled)) }}
-                                    @else
-                                      n/a
-                                    @endif
-                                  </td>
-                                  <td class="text-center"><a class="delete-link delete-detail" data-id="{{ $detail->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
-                              </tr>
-                            @endforeach
-                          @else
-                            <tr>
-                              <td class="text-center" colspan="4">We don't have a record yet for {{ $patient->first_name }} {{ $patient->last_name }}. Use the form below to add new record.</td>
-                            </tr>
-                          @endif
-                          </tbody>
-                        </table>
-                      
+                        <div class="tab-content">
+                          <div id="home" class="tab-pane fade in active">
+                            <table class="table table-striped">
+                              <thead>
+                                <th style="width:15%">Created</th>
+                                <th style="width:40%">Description</th>
+                                <th style="width:20%">Schedule</th>
+                                <th style="width:1%;text-align:center;">Action</th>
+                              </thead>
+
+                              <tbody>
+                              @if(count($details) > 0)
+                                @foreach ($details as $detail)
+                                  <tr>
+                                      <td>{{ $detail->created_at->format('M d, Y') }}</td>
+                                      <td><?php echo $detail->detail ?></td>
+                                      <td>
+                                        @if($detail->date_scheduled != '')
+                                          {{ date('M d, Y', strtotime($detail->date_scheduled)) }}&nbsp;&nbsp;
+                                          {{ date('h:i a', strtotime($detail->time_scheduled)) }}
+                                        @else
+                                          n/a
+                                        @endif
+                                      </td>
+                                      <td class="text-center">
+                                        <a class="delete-link delete-detail" data-id="{{ $detail->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a> | 
+                                        <a class="archive-link archive-detail" data-id="{{ $detail->id }}"><i class="fa fa-archive" aria-hidden="true" title="Archive"></i></a>
+                                      </td>
+                                  </tr>
+                                @endforeach
+                              @else
+                                <tr>
+                                  <td class="text-center" colspan="4">Use the form below to add new record.</td>
+                                </tr>
+                              @endif
+                              </tbody>
+                            </table>
+                          </div>
+                          <div id="menu1" class="tab-pane fade">
+                            <table class="table table-striped">
+                              <thead>
+                                <th style="width:15%">Created</th>
+                                <th style="width:40%">Description</th>
+                                <th style="width:20%">Schedule</th>
+                                <th style="width:1%;text-align:center;">Action</th>
+                              </thead>
+
+                              <tbody>
+                              @if(count($archived_details) > 0)
+                                @foreach ($archived_details as $archive_detail)
+                                  <tr>
+                                      <td>{{ $archive_detail->created_at->format('M d, Y') }}</td>
+                                      <td><?php echo $archive_detail->detail ?></td>
+                                      <td>
+                                        @if($archive_detail->date_scheduled != '')
+                                          {{ date('M d, Y', strtotime($archive_detail->date_scheduled)) }}&nbsp;&nbsp;
+                                          {{ date('h:i a', strtotime($archive_detail->time_scheduled)) }}
+                                        @else
+                                          n/a
+                                        @endif
+                                      </td>
+                                      <td class="text-center">
+                                        <a class="delete-link delete-detail" data-id="{{ $archive_detail->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a> | 
+                                        <a class="unarchive-link unarchive-detail" data-id="{{ $archive_detail->id }}"><i class="fa fa-undo" aria-hidden="true" title="Restore"></i></a>
+                                      </td>
+                                  </tr>
+                                @endforeach
+                              @else
+                                <tr>
+                                  <td class="text-center" colspan="4">No archived record.</td>
+                                </tr>
+                              @endif
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
                     </div>
                   </div>
 
@@ -438,6 +486,47 @@ $(document).ready(function() {
     })
   });
 
+  $(".archive-detail").unbind().click(function(){
+    id = $(this).data('id');
+    
+    $.ajax({
+      method: "POST",
+      url: "/patient/archive_detail/" + id,
+      data: { 
+        _token: "{{ csrf_token() }}" 
+      }
+    })
+    .done(function( msg ) {
+      Swal.fire(
+        'Archived!',
+        'Record has been archived.',
+        'success'
+      ).then((result) => {
+        location.reload();
+      });
+    });
+  });
+
+  $(".unarchive-detail").unbind().click(function(){
+    id = $(this).data('id');
+    
+    $.ajax({
+      method: "POST",
+      url: "/patient/unarchive_detail/" + id,
+      data: { 
+        _token: "{{ csrf_token() }}" 
+      }
+    })
+    .done(function( msg ) {
+      Swal.fire(
+        'Restored!',
+        'Record has been restored.',
+        'success'
+      ).then((result) => {
+        location.reload();
+      });
+    });
+  });
 });
 </script>
 @endsection

@@ -76,13 +76,15 @@ class PatientController extends Controller
     {
         $patient = Patient::find($id);
 
-        $patient_details = PatientDetail::where('patient_id', $patient->id)->get();
+        $patient_details = PatientDetail::where('patient_id', $patient->id)->where('is_archived', false)->get();
+        $archived_details = PatientDetail::where('patient_id', $patient->id)->where('is_archived', true)->get();
         $billing_charges = PatientBillingCharge::where('patient_id', $patient->id)->get();
         $billing_payments = PatientBillingPayment::where('patient_id', $patient->id)->get();
 
         return view('patient.show')
                 ->with('patient', $patient)
                 ->with('details', $patient_details)
+                ->with('archived_details', $archived_details)
                 ->with('billing_charges', $billing_charges)
                 ->with('billing_payments', $billing_payments);
     }
@@ -158,6 +160,20 @@ class PatientController extends Controller
         $patient_id = $patient_detail->patient_id;
 
         $patient_detail->delete();
+    }
+
+    public function archive_patient_detail($id)
+    {
+        $patient_detail = PatientDetail::find($id);
+        $patient_detail->is_archived = true;
+        $patient_detail->save();
+    }
+
+    public function unarchive_patient_detail($id)
+    {
+        $patient_detail = PatientDetail::find($id);
+        $patient_detail->is_archived = false;
+        $patient_detail->save();
     }
 
     public function create_billing_charge(Request $request)
