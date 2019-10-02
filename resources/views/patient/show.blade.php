@@ -31,20 +31,28 @@
                   <div class="row" style="font-size:12pt;">
                     <h4 style="padding:10px;background-color:#45a29e;color:#fff;"><i class="fa fa-address-card"></i> Basic Information</h4>
 
-                    <div class="col-lg-2 text-right"><strong>First Name:</strong></div>
-                    <div class="col-lg-9">{{ $patient->first_name }}</div>
-
-                    <div class="col-lg-2 text-right"><strong>Last Name:</strong></div>
-                    <div class="col-lg-9">{{ $patient->last_name }}</div>
-
-                    <div class="col-lg-2 text-right"><strong>Gender:</strong></div>
-                    <div class="col-lg-9">{{ $patient->gender }}</div>
-
-                    <div class="col-lg-2 text-right"><strong>Email:</strong></div>
-                    <div class="col-lg-9">{{ $patient->email }}</div>
-
-                    <div class="col-lg-2 text-right"><strong>Contact No.:</strong></div>
-                    <div class="col-lg-9">{{ $patient->contact_number }}</div>
+                    <table class="col-md-offset-1">
+                      <tr>
+                        <td class="col-md-2 text-right">First Name:</td>
+                        <td>{{ $patient->first_name }}</td>
+                      </tr>
+                      <tr>
+                        <td class="col-md-2 text-right">Last Name:</td>
+                        <td>{{ $patient->last_name }}</td>
+                      </tr>
+                      <tr>
+                        <td class="col-md-2 text-right">Gender:</td>
+                        <td>{{ $patient->gender }}</td>
+                      </tr>
+                      <tr>
+                        <td class="col-md-2 text-right">Email:</td>
+                        <td>{{ $patient->email }}</td>
+                      </tr>
+                      <tr>
+                        <td class="col-md-2 text-right">Contact No.:</td>
+                        <td>{{ $patient->contact_number }}</td>
+                      </tr>
+                    </table>
                   </div>
 
                   <div class="form-group col-md-12">

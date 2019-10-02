@@ -18,6 +18,19 @@
     font-weight:bold;
     font-size:14pt;
   }
+
+  .link:hover {
+    text-decoration: none;
+  }
+
+  .delete-patient, .update-patient {
+    color: gray;
+  }
+
+  .delete-patient:hover {
+    color: red;
+    text-decoration: none;
+  }
 </style>
 @endsection
 
@@ -34,6 +47,7 @@
                     <table width="100%">
                       <tr>
                         <td width="3.7%" class="namelist text-center" data-list="all">All</td>
+
                         <td width="3.7%" class="namelist text-center" data-list="A">A</td>
                         <td width="3.7%" class="namelist text-center" data-list="B">B</td>
                         <td width="3.7%" class="namelist text-center" data-list="C">C</td>
@@ -65,25 +79,28 @@
                     <br>
                     <table class="table">
                       <tr>
-                        <th width="20%">First Name</th>
+                        <th>First Name</th>
                         <th>Last Name</th>
-                        <th class="text-center" width="26%">Action</th>
+                        <th>Medical Records</th>
+                        <th class="text-right">Action</th>
                       </tr>
                     @if($patients->count() > 0)
                       <?php foreach ($patients as $patient_key => $patient_item): ?>
                       <tr>
                         <td>{{ $patient_item->first_name }}</td>
                         <td>{{ $patient_item->last_name }}</td>
+                        <td><a class='link' href="{{ route('patient.show',$patient_item->id) }}"><i class="fa fa-notes-medical" aria-hidden="true"></i> View</a></td>
                         <td class="text-right">
-                            <a class="btn btn-xs btn-danger delete-patient" data-id="{{ $patient_item->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
-                            <a class='btn btn-xs btn-warning' href="{{ route('patient.edit',$patient_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
-                            <a class='btn btn-xs btn-success' href="{{ route('patient.show',$patient_item->id) }}"><i class="fa fa-notes-medical" aria-hidden="true"></i> View Records</a>
-                        </td>
+                          <div class="pull-right">
+                            <a class='update-patient' href="{{ route('patient.edit',$patient_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a> | 
+                            <a class="delete-patient" data-id="{{ $patient_item->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                          </div>
+                       </td>
                       </tr>
                       <?php endforeach; ?>
                     @else
                       <tr>
-                        <td colspan="3" class="text-center">No records yet.</td>
+                        <td colspan="3" class="text-center">No patients on this list</td>
                       </tr>
                     @endif
                     </table>
