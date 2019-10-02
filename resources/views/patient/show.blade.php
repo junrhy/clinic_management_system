@@ -50,7 +50,7 @@
                       </tr>
                       <tr>
                         <td class="col-md-2 text-right">Contact No.:</td>
-                        <td>{{ $patient->contact_number }}</td>
+                        <td><span style="font-family: sans-serif;">{{ $patient->contact_number }}</span></td>
                       </tr>
                     </table>
                   </div>
@@ -61,8 +61,8 @@
                         <table class="table table-striped">
                           <thead>
                             <th style="width:15%">Created</th>
-                            <th style="width:60%">Description</th>
-                            <th style="width:15%">Schedule</th>
+                            <th style="width:40%">Description</th>
+                            <th style="width:20%">Schedule</th>
                             <th style="width:1%;text-align:center;">Action</th>
                           </thead>
 
@@ -74,7 +74,8 @@
                                   <td><?php echo $detail->detail ?></td>
                                   <td>
                                     @if($detail->date_scheduled != '')
-                                      {{ date('M d, Y', strtotime($detail->date_scheduled)) }}
+                                      {{ date('M d, Y', strtotime($detail->date_scheduled)) }}&nbsp;&nbsp;
+                                      {{ date('h:i a', strtotime($detail->time_scheduled)) }}
                                     @else
                                       n/a
                                     @endif
@@ -101,7 +102,14 @@
                   <div class="form-group col-md-offset-8 col-md-4">
                     {{ Form::checkbox('checkbox_visit', 'Yes') }}
                     {{ Form::label('checkbox_visit', 'Schedule') }}
-                    {{ Form::text('schedule', null, array('id' => 'date_scheduled', 'class' => 'form-control', 'placeholder' => 'mm/dd/yyyy', 'disabled')) }}
+                    <div class="row">
+                      <div class="col-md-6">
+                        {{ Form::text('schedule', null, array('id' => 'date_scheduled', 'class' => 'form-control', 'placeholder' => 'mm/dd/yyyy', 'disabled')) }}
+                      </div>
+                      <div class="col-md-6">
+                        {{ Form::text('schedule_time', null, array('id' => 'time_scheduled', 'class' => 'form-control', 'placeholder' => '2:00 pm', 'disabled')) }}
+                      </div>
+                    </div>
                   </div>
      
                   <div class="col-md-offset-9 col-md-3">
@@ -230,11 +238,14 @@ $(document).ready(function() {
   $("input[name='checkbox_visit']").click(function(){
       $("#date_scheduled").prop("disabled", !$(this).is(":checked"));
       $("#date_scheduled").val('');
+      $("#time_scheduled").prop("disabled", !$(this).is(":checked"));
+      $("#time_scheduled").val('');
   });
 
   $("#record_detail").click(function(){
       var patient_detail = $("#patient_detail").val();
       var date_scheduled = $("#date_scheduled").val();
+      var time_scheduled = $("#time_scheduled").val();
 
       $.ajax({
         method: "POST",
@@ -243,6 +254,7 @@ $(document).ready(function() {
           patient_id: "{{ $patient->id }}",
           detail: patient_detail, 
           date_scheduled: date_scheduled, 
+          time_scheduled: time_scheduled,
           _token: "{{ csrf_token() }}" 
         }
       })

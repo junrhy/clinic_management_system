@@ -10,6 +10,7 @@ use App\Model\PatientBillingCharge;
 use App\Model\PatientBillingPayment;
 
 use Auth;
+use DateTime;
 
 class PatientController extends Controller
 {
@@ -147,6 +148,7 @@ class PatientController extends Controller
         $patient_detail->detail = nl2br($request->detail);
         $patient_detail->is_scheduled = $request->date_scheduled != '' ? true : false;
         $patient_detail->date_scheduled = $request->date_scheduled != '' ? date('Y-m-d', strtotime($request->date_scheduled)) : null;
+        $patient_detail->time_scheduled = DateTime::createFromFormat('H:i a', $request->time_scheduled);
         $patient_detail->save();
     }
 

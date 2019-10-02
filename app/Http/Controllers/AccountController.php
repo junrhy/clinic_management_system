@@ -7,12 +7,33 @@ use Illuminate\Http\Request;
 use Hash;
 
 use App\User;
+use App\Model\Client;
 
 class AccountController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function business_information()
+    {
+        $user = auth()->user();
+
+        return view('account.business_information')->with('user', $user);
+    }
+
+    public function update_business_information(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255']
+        ]);
+
+        $client = Client::where('email', $request->email)->first();
+        $client->name = $request->name;
+        $client->save();
+        
+        return back()->with('success','Business information successfully updated!');
     }
 
     public function change_password()
@@ -40,4 +61,5 @@ class AccountController extends Controller
       		return back()->with('success','Password successfully changed!');
 	    }
     }
+
 }

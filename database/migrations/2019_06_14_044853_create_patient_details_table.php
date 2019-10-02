@@ -20,6 +20,7 @@ class CreatePatientDetailsTable extends Migration
             $table->text('detail');
             $table->boolean('is_scheduled');
             $table->date('date_scheduled')->nullable();
+            $table->time('time_scheduled')->nullable();
             $table->boolean('is_archived')->nullable();
             $table->timestamps();
         });

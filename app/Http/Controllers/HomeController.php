@@ -26,7 +26,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $request->user()->authorizeRoles(Role::select('name')->where('client_id', Auth::user()->client_id)->get()->toArray());
+        //$request->user()->authorizeRoles(Role::select('name')->where('client_id', Auth::user()->client_id)->get()->toArray());
 
         return view('home');
     }

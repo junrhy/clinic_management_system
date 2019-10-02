@@ -17,6 +17,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/business_information', 'AccountController@business_information');
+Route::post('/update_business_information', 'AccountController@update_business_information');
+
 Route::get('/change_password', 'AccountController@change_password');
 Route::post('/update_password', 'AccountController@update_password');
 

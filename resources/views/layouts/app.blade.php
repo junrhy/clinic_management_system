@@ -41,7 +41,12 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        <i class="fa fa-clinic-medical"></i> {{ config('app.name', 'Laravel') }}
+                        <i class="fa fa-clinic-medical"></i> 
+                        @guest
+                        {{ config('app.name', 'Laravel') }}
+                        @else
+                        {{ Auth::user()->client->name }}
+                        @endguest
                     </a>
                 </div>
 
@@ -55,18 +60,19 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @guest
-                            <!-- <li><a href="{{ route('login') }}">Login</a></li> -->
-                            <!-- <li><a href="{{ route('register') }}">Register</a></li> -->
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                             <li><a href="{{ url('patient') }}"><i class="fa fa-notes-medical"></i> Patients</a></li>
                             <li><a href="{{ url('calendar') }}"><i class="fa fa-calendar"></i> Calendar</a></li>
                      
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    <i class="fa fa-user"></i> {{ Auth::user()->name }} <span class="caret"></span>
+                                    <i class="fa fa-user"></i> Profile <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">
+                                    <li class="dropdown"><a href="{{ url('business_information') }}">Business Information</a></li>
                                     <li class="dropdown"><a href="{{ url('change_password') }}">Change Password</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"

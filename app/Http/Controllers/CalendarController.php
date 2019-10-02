@@ -26,6 +26,7 @@ class CalendarController extends Controller
     {
         $scheduled = PatientDetail::where('client_id', Auth::user()->client_id)
                                 ->whereDate('date_scheduled', $request->date)
+                                ->orderBy('time_scheduled', 'asc')
                                 ->get();
 
         return view('calendar._scheduled_patients')

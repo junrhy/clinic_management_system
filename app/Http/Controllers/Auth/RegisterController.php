@@ -6,6 +6,7 @@ use App\Model\Role;
 use App\Model\Client;
 use App\Model\Clinic;
 use App\Model\Doctor;
+use App\Model\AdminSetting;
 use App\User;
 
 use App\Mail\NewClient;
@@ -70,6 +71,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $admin_setting = AdminSetting::where('name', 'allow_new_registration')->first();
+        $allow_new_registration = (boolean) $admin_setting->value;
+
+        if (!$allow_new_registration) {
+            return abort(404, 'New registrations is disabled. Please contact admin for details.');
+        }
+
         $client = new Client;
         $client->name  = $data['name'];
         $client->email = $data['email'];

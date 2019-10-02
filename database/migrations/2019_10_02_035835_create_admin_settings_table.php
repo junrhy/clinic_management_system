@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClientsTable extends Migration
+class CreateAdminSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateClientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('admin_settings', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('email', 150)->unique();
-            $table->boolean('is_active')->default(1);
+            $table->string('value');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateClientsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('admin_settings');
     }
 }

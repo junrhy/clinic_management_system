@@ -133,7 +133,7 @@ class UserController extends Controller
         }
 
         $user = User::find($id);
-        $user->delete();
+        $user->forceDelete();
 
         return redirect('user');
     }

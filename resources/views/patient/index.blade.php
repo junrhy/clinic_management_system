@@ -100,7 +100,7 @@
                       <?php endforeach; ?>
                     @else
                       <tr>
-                        <td colspan="3" class="text-center">No patients on this list</td>
+                        <td colspan="4" class="text-center">No patients on this list</td>
                       </tr>
                     @endif
                     </table>
