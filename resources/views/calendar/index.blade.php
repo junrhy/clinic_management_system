@@ -23,7 +23,7 @@
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -32,7 +32,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-6">
-                              <h4>Appointments</h4>
+                              <h4>Appointments | <span><i class="fa fa-plus"></i></span></h4>
                               <div id="patient_list"></div>
                         </div>
                         <div class="col-md-6">

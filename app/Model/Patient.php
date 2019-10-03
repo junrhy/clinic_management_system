@@ -12,7 +12,7 @@ class Patient extends Model
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    protected $dates = ['dob','deleted_at'];
 
     public static function patients($client_id)
     {

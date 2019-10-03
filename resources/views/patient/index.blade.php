@@ -35,14 +35,14 @@
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading"><i class="fa fa-notes-medical" aria-hidden="true"></i> Patients</div>
 
                 <div class="panel-body">
-                    <div><a class="btn btn-primary" href="{{ url('patient/create') }}"><i class="fa fa-plus" aria-hidden="true"></i> Add</a></div>
+                    <div><a class="btn btn-primary btn-round" href="{{ url('patient/create') }}"><i class="fa fa-plus" aria-hidden="true"></i> Add</a></div>
                     <br>
                     <table width="100%">
                       <tr>
@@ -77,33 +77,43 @@
                       </tr>
                     </table>
                     <br>
-                    <table class="table">
-                      <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Medical Records</th>
-                        <th class="text-right">Action</th>
-                      </tr>
-                    @if($patients->count() > 0)
-                      <?php foreach ($patients as $patient_key => $patient_item): ?>
-                      <tr>
-                        <td>{{ $patient_item->first_name }}</td>
-                        <td>{{ $patient_item->last_name }}</td>
-                        <td><a class='link' href="{{ route('patient.show',$patient_item->id) }}"><i class="fa fa-notes-medical" aria-hidden="true"></i> View</a></td>
-                        <td class="text-right">
-                          <div class="pull-right">
-                            <a class='update-patient' href="{{ route('patient.edit',$patient_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a> | 
-                            <a class="delete-patient" data-id="{{ $patient_item->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                          </div>
-                       </td>
-                      </tr>
-                      <?php endforeach; ?>
-                    @else
-                      <tr>
-                        <td colspan="4" class="text-center">No patients on this list</td>
-                      </tr>
-                    @endif
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table">
+                          <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Gender</th>
+                            <th>Date of Birth</th>
+                            <th>Age</th>
+                            <th>Contact</th>
+                            <th>Medical Records</th>
+                            <th>Action</th>
+                          </tr>
+                        @if($patients->count() > 0)
+                          <?php foreach ($patients as $patient_key => $patient_item): ?>
+                          <tr>
+                            <td>{{ $patient_item->first_name }}</td>
+                            <td>{{ $patient_item->last_name }}</td>
+                            <td>{{ $patient_item->gender }}</td>
+                            <td>{{ $patient_item->dob->format('M d, Y') }}</td>
+                            <td>{{ $patient_item->dob->age }}</td>
+                            <td><span style="font-family: sans-serif;">{{ $patient_item->contact_number }}</span></td>
+                            <td><a class='link' href="{{ route('patient.show',$patient_item->id) }}"><i class="fa fa-notes-medical" aria-hidden="true"></i> View</a></td>
+                            <td>
+                              <div>
+                                <a class='update-patient' href="{{ route('patient.edit',$patient_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a> | 
+                                <a class="delete-patient" data-id="{{ $patient_item->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                              </div>
+                           </td>
+                          </tr>
+                          <?php endforeach; ?>
+                        @else
+                          <tr>
+                            <td colspan="8" class="text-center">No patients on this list</td>
+                          </tr>
+                        @endif
+                        </table>
+                    </div>
                     <div align="center">{{ $patients->appends(['namelist' => $namelist])->links() }}</div>
                 </div>
             </div>

@@ -59,6 +59,7 @@ class PatientController extends Controller
         $patient->client_id = Auth::user()->client_id;
         $patient->first_name = $request->first_name;
         $patient->last_name = $request->last_name;
+        $patient->dob = $request->dob != '' ? date('Y-m-d', strtotime($request->dob)) : null;
         $patient->gender = $request->gender;
         $patient->email = $request->email;
         $patient->contact_number = $request->contact_number;
@@ -118,6 +119,7 @@ class PatientController extends Controller
         $patient = Patient::find($id);
         $patient->first_name = $request->first_name;
         $patient->last_name = $request->last_name;
+        $patient->dob = $request->dob != '' ? date('Y-m-d', strtotime($request->dob)) : null;
         $patient->gender = $request->gender;
         $patient->email = $request->email;
         $patient->contact_number = $request->contact_number;
@@ -151,6 +153,16 @@ class PatientController extends Controller
         $patient_detail->service = $request->service;
         $patient_detail->notes = nl2br($request->notes);
         $patient_detail->is_scheduled = $request->date_scheduled != '' ? true : false;
+        $patient_detail->date_scheduled = $request->date_scheduled != '' ? date('Y-m-d', strtotime($request->date_scheduled)) : null;
+        $patient_detail->time_scheduled = DateTime::createFromFormat('H:i a', $request->time_scheduled);
+        $patient_detail->save();
+    }
+
+    public function update_patient_detail(Request $request, $id)
+    {
+        $patient_detail = PatientDetail::find($id);
+        $patient_detail->service = $request->service;
+        $patient_detail->notes = nl2br($request->notes);
         $patient_detail->date_scheduled = $request->date_scheduled != '' ? date('Y-m-d', strtotime($request->date_scheduled)) : null;
         $patient_detail->time_scheduled = DateTime::createFromFormat('H:i a', $request->time_scheduled);
         $patient_detail->save();

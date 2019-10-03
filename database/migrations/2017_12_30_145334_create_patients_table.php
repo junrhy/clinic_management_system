@@ -18,7 +18,8 @@ class CreatePatientsTable extends Migration
             $table->integer('client_id');
             $table->string('first_name');
             $table->string('last_name')->nullable();
-               $table->string('gender')->nullable();
+            $table->date('dob');
+            $table->string('gender')->nullable();
             $table->string('email')->nullable();
             $table->string('contact_number')->nullable();
             $table->timestamps();

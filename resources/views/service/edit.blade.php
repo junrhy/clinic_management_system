@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Edit Service</div>
+                <div class="panel-heading"><i class="fa fa-user-md"></i> Edit Service</div>
 
                 <div class="panel-body">
                   {{ Form::model($service, array('route' => array('service.update', $service->id), 'method' => 'PUT')) }}
@@ -17,7 +17,7 @@
                     </div>
 
                     <div class="col-md-12">
-                      {{ Form::submit('Update', array('class' => 'btn btn-primary')) }}
+                      {{ Form::submit('Save Changes', array('class' => 'btn btn-primary btn-round')) }}
                     </div>
                   {{ Form::close() }}
                 </div>

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">New Patient</div>
 
@@ -23,6 +23,11 @@
                     </div>
 
                     <div class="form-group col-md-12">
+                      {{ Form::label('dob', 'Date of birth') }}
+                      {{ Form::text('dob', Input::old('dob'), array('class' => 'form-control', 'placeholder' => 'mm/dd/yyyy')) }}
+                    </div>
+
+                    <div class="form-group col-md-12">
                       {{ Form::label('gender', 'Gender') }}
                       {{ Form::select('gender', ['' => '', 'Male' => 'Male', 'Female' => 'Female'], null, array('class' => 'form-control')) }}
                     </div>
@@ -38,7 +43,7 @@
                     </div>
 
                     <div class="col-md-4">
-                      {{ Form::submit('Save', array('class' => 'btn btn-primary btn-block btn-lg')) }}
+                      {{ Form::submit('Submit', array('class' => 'btn btn-round btn-primary')) }}
                     </div>
                   {{ Form::close() }}
                 </div>

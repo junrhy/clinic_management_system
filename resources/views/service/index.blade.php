@@ -26,14 +26,14 @@
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Services</div>
+                <div class="panel-heading"><i class="fa fa-user-md"></i> Services</div>
 
                 <div class="panel-body">
-                    <a class="btn btn-primary" href="{{ url('service/create') }}"><i class="fa fa-plus" aria-hidden="true"></i> Add Service</a>
+                    <a class="btn btn-primary btn-round" href="{{ url('service/create') }}"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
                     <br><br>
                     <table class="table">
                       <tr>

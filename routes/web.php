@@ -34,6 +34,7 @@ Route::resource('calendar', 'CalendarController');
 Route::resource('service', 'ServiceController');
 
 Route::post('/patient/create_detail', 'PatientController@create_patient_detail');
+Route::post('/patient/update_detail/{id}', 'PatientController@update_patient_detail');
 Route::delete('/patient/delete_detail/{id}', 'PatientController@delete_patient_detail');
 
 Route::post('/patient/archive_detail/{id}', 'PatientController@archive_patient_detail');

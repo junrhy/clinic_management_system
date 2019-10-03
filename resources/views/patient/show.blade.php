@@ -27,11 +27,10 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-body">
-                  <i class="fa fa-notes-medical"></i> Patient
-                  <div class="row" style="font-size:12pt;">
-                    <h4 style="padding:10px;background-color:#45a29e;color:#fff;"><i class="fa fa-address-card"></i> Basic Information</h4>
+                  <div class="row" style="font-size:10pt;">
+                    <h4 style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;"><i class="fa fa-address-card"></i> Patient Information</h4>
 
-                    <table class="col-md-offset-1">
+                    <table class="">
                       <tr>
                         <td class="col-md-2 text-right">First Name:</td>
                         <td>{{ $patient->first_name }}</td>
@@ -39,6 +38,14 @@
                       <tr>
                         <td class="col-md-2 text-right">Last Name:</td>
                         <td>{{ $patient->last_name }}</td>
+                      </tr>
+                      <tr>
+                        <td class="col-md-2 text-right">Date of Birth:</td>
+                        <td>{{ $patient->dob->format('M d, Y') }}</td>
+                      </tr>
+                      <tr>
+                        <td class="col-md-2 text-right">Age:</td>
+                        <td>{{ $patient->dob->age }}</td>
                       </tr>
                       <tr>
                         <td class="col-md-2 text-right">Gender:</td>
@@ -57,54 +64,58 @@
 
                   <div class="form-group col-md-12">
                     <div class="row" style="margin-top:30px;">
-                      <h4 class="row" style="padding:10px;background-color:#45a29e;color:#fff;"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</h4>
+                      <h4 class="row" style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</h4>
                         <ul class="nav nav-tabs">
-                          <li class="active"><a data-toggle="tab" href="#home">Services</a></li>
+                          <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#home">Services</a></li>
                           <li><a data-toggle="tab" href="#menu1">Archived</a></li>
                         </ul>
 
                         <div class="tab-content">
                           <div id="home" class="tab-pane fade in active">
-                            <table class="table table-striped">
-                              <thead>
-                                <th style="width:15%">Created</th>
-                                <th style="width:20%">Service Type</th>
-                                <th>Notes</th>
-                                <th style="width:20%">Schedule</th>
-                                <th style="width:1%;text-align:center;">Action</th>
-                              </thead>
+                            <br>
+                            <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <th style="width:15%">Created</th>
+                                  <th style="width:20%">Service Type</th>
+                                  <th>Notes</th>
+                                  <th style="width:20%">Schedule</th>
+                                  <th style="width:1%;text-align:center;">Action</th>
+                                </thead>
 
-                              <tbody>
-                              @if(count($details) > 0)
-                                @foreach ($details as $detail)
+                                <tbody>
+                                @if(count($details) > 0)
+                                  @foreach ($details as $detail)
+                                    <tr>
+                                        <td>{{ $detail->created_at->format('M d, Y') }}</td>
+                                        <td>{{ $detail->service }}</td>
+                                        <td><?php echo $detail->notes ?></td>
+                                        <td>
+                                          @if($detail->date_scheduled != '')
+                                            {{ date('M d, Y', strtotime($detail->date_scheduled)) }}&nbsp;&nbsp;
+                                            {{ date('h:i a', strtotime($detail->time_scheduled)) }}
+                                          @else
+                                            n/a
+                                          @endif
+                                        </td>
+                                        <td class="text-center">
+                                          <a class="delete-link delete-detail" data-id="{{ $detail->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a> | 
+                                          <a class="archive-link archive-detail" data-id="{{ $detail->id }}"><i class="fa fa-archive" aria-hidden="true" title="Archive"></i></a>
+                                        </td>
+                                    </tr>
+                                  @endforeach
+                                @else
                                   <tr>
-                                      <td>{{ $detail->created_at->format('M d, Y') }}</td>
-                                      <td>{{ $detail->service }}</td>
-                                      <td><?php echo $detail->notes ?></td>
-                                      <td>
-                                        @if($detail->date_scheduled != '')
-                                          {{ date('M d, Y', strtotime($detail->date_scheduled)) }}&nbsp;&nbsp;
-                                          {{ date('h:i a', strtotime($detail->time_scheduled)) }}
-                                        @else
-                                          n/a
-                                        @endif
-                                      </td>
-                                      <td class="text-center">
-                                        <a class="delete-link delete-detail" data-id="{{ $detail->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a> | 
-                                        <a class="archive-link archive-detail" data-id="{{ $detail->id }}"><i class="fa fa-archive" aria-hidden="true" title="Archive"></i></a>
-                                      </td>
+                                    <td class="text-center" colspan="5">Use the form below to add new record.</td>
                                   </tr>
-                                @endforeach
-                              @else
-                                <tr>
-                                  <td class="text-center" colspan="5">Use the form below to add new record.</td>
-                                </tr>
-                              @endif
-                              </tbody>
-                            </table>
+                                @endif
+                                </tbody>
+                              </table>
+                            </div>
                           </div>
                           <div id="menu1" class="tab-pane fade">
-                            <table class="table table-striped">
+                            <br>
+                            <table class="table">
                               <thead>
                                 <th style="width:15%">Created</th>
                                 <th style="width:20%">Service Type</th>
@@ -146,36 +157,38 @@
                     </div>
                   </div>
 
-                  <div class="form-group col-md-3">
-                    {{ Form::label('service', 'Service Type') }}
-                    {{ Form::select('service', $services, '', ['class' => 'form-control']) }}
-                  </div>
+                  <div class="row">
+                    <div class="form-group col-md-3">
+                      {{ Form::label('service', 'Service Type') }}
+                      {{ Form::select('service', $services, '', ['class' => 'form-control']) }}
+                    </div>
 
-                  <div class="form-group col-md-12">
-                    {{ Form::label('notes', 'Notes') }}
-                    {{ Form::textarea('notes', null, ['id' => 'notes','class' => 'form-control', 'rows' => 4, 'cols' => 54, 'maxlength' => 300, 'placeholder' => 'Limit to 300 characters only', 'style' => 'resize:none']) }}
-                  </div>
-                  
-                  <div class="form-group col-md-offset-8 col-md-4">
-                    {{ Form::checkbox('checkbox_visit', 'Yes') }}
-                    {{ Form::label('checkbox_visit', 'Schedule') }}
-                    <div class="row">
-                      <div class="col-md-6">
-                        {{ Form::text('schedule', null, array('id' => 'date_scheduled', 'class' => 'form-control', 'placeholder' => 'mm/dd/yyyy', 'disabled')) }}
-                      </div>
-                      <div class="col-md-6">
-                        {{ Form::text('schedule_time', null, array('id' => 'time_scheduled', 'class' => 'form-control', 'placeholder' => '2:00 pm', 'disabled')) }}
+                    <div class="form-group col-md-12">
+                      {{ Form::label('notes', 'Notes') }}
+                      {{ Form::textarea('notes', null, ['id' => 'notes','class' => 'form-control', 'rows' => 4, 'cols' => 54, 'maxlength' => 300, 'placeholder' => 'Limit to 300 characters only', 'style' => 'resize:none']) }}
+                    </div>
+                    
+                    <div class="form-group col-md-offset-8 col-md-4">
+                      {{ Form::checkbox('checkbox_visit', 'Yes') }}
+                      {{ Form::label('checkbox_visit', 'Set Appointment') }}
+                      <div class="row">
+                        <div class="col-md-6">
+                          {{ Form::text('schedule', null, array('id' => 'date_scheduled', 'class' => 'form-control', 'placeholder' => 'mm/dd/yyyy', 'disabled')) }}
+                        </div>
+                        <div class="col-md-6">
+                          {{ Form::text('schedule_time', null, array('id' => 'time_scheduled', 'class' => 'form-control', 'placeholder' => '2:00 pm', 'disabled')) }}
+                        </div>
                       </div>
                     </div>
-                  </div>
-     
-                  <div class="col-md-offset-9 col-md-3">
-                    <a class="btn btn-primary form-control" id="record_detail"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
+       
+                    <div class="col-md-offset-9 col-md-3">
+                      <a class="btn btn-primary btn-round btn-block" id="record_detail"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
+                    </div>
                   </div>
 
                   <div class="form-group col-md-12">
                     <div class="row" style="margin-top:60px;">
-                      <h4 class="row" style="border-bottom:1px solid #eee;padding:10px;background-color:#45a29e;color:#fff;"><i class="fa fa-money" aria-hidden="true"></i> Billing Information</h4>
+                      <h4 class="row" style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;"><i class="fa fa-money" aria-hidden="true"></i> Billing Information</h4>
 
                       <h5 class="row col-md-12" style="margin-top: 30px;color:#45a29e;"><strong>Charges</strong></h5>
 
@@ -218,7 +231,7 @@
                                   </div>
 
                                   <div class="col-md-2">
-                                    <a class="btn btn-primary btn-block" id="add_charge"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
+                                    <a class="btn btn-primary btn-round btn-block" id="add_charge"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
                                   </div>               
                               </div>
                           </td>
@@ -266,7 +279,7 @@
                                 </div>
 
                                 <div class="col-md-2">
-                                  <a class="btn btn-primary btn-block" id="add_payment"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
+                                  <a class="btn btn-primary btn-round btn-block" id="add_payment"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
                                 </div>               
                             </div>
                           </td>
@@ -279,7 +292,6 @@
             </div>
         </div>
     </div>
-    <a href="#" id="username">superuser</a>
 </div>
 @endsection
 

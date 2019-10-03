@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">New Service</div>
+                <div class="panel-heading"><i class="fa fa-user-md"></i> New Service</div>
 
                 <div class="panel-body">
                   {{ Html::ul($errors->all()) }}
@@ -17,7 +17,7 @@
                     </div>
 
                     <div class="col-md-12">
-                      {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
+                      {{ Form::submit('Submit', array('class' => 'btn btn-primary btn-round')) }}
                     </div>
                   {{ Form::close() }}
                 </div>
