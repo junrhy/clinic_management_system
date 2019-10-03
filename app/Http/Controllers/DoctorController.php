@@ -106,8 +106,6 @@ class DoctorController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $request->user()->authorizeRoles(['Client User', 'Admin User']);
-
         $doctor = Doctor::find($id);
         $doctor->delete();
 

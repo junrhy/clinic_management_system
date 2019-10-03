@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Model\Role;
 use Auth;
 
 class HomeController extends Controller
@@ -26,8 +25,6 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        //$request->user()->authorizeRoles(Role::select('name')->where('client_id', Auth::user()->client_id)->get()->toArray());
-
         return view('home');
     }
 

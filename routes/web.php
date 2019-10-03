@@ -26,13 +26,12 @@ Route::post('/update_password', 'AccountController@update_password');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('patients_list', 'CalendarController@patients_list');
 
-Route::resource('users/roles', 'RoleController');
-Route::resource('users/role_members', 'RoleUserController');
 Route::resource('user', 'UserController');
 Route::resource('patient', 'PatientController');
 Route::resource('clinic', 'ClinicController');
 Route::resource('doctor', 'DoctorController');
 Route::resource('calendar', 'CalendarController');
+Route::resource('service', 'ServiceController');
 
 Route::post('/patient/create_detail', 'PatientController@create_patient_detail');
 Route::delete('/patient/delete_detail/{id}', 'PatientController@delete_patient_detail');

@@ -59,7 +59,7 @@
                     <div class="row" style="margin-top:30px;">
                       <h4 class="row" style="padding:10px;background-color:#45a29e;color:#fff;"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</h4>
                         <ul class="nav nav-tabs">
-                          <li class="active"><a data-toggle="tab" href="#home">Records</a></li>
+                          <li class="active"><a data-toggle="tab" href="#home">Services</a></li>
                           <li><a data-toggle="tab" href="#menu1">Archived</a></li>
                         </ul>
 
@@ -68,7 +68,8 @@
                             <table class="table table-striped">
                               <thead>
                                 <th style="width:15%">Created</th>
-                                <th style="width:40%">Description</th>
+                                <th style="width:20%">Service Type</th>
+                                <th>Notes</th>
                                 <th style="width:20%">Schedule</th>
                                 <th style="width:1%;text-align:center;">Action</th>
                               </thead>
@@ -78,7 +79,8 @@
                                 @foreach ($details as $detail)
                                   <tr>
                                       <td>{{ $detail->created_at->format('M d, Y') }}</td>
-                                      <td><?php echo $detail->detail ?></td>
+                                      <td>{{ $detail->service }}</td>
+                                      <td><?php echo $detail->notes ?></td>
                                       <td>
                                         @if($detail->date_scheduled != '')
                                           {{ date('M d, Y', strtotime($detail->date_scheduled)) }}&nbsp;&nbsp;
@@ -95,7 +97,7 @@
                                 @endforeach
                               @else
                                 <tr>
-                                  <td class="text-center" colspan="4">Use the form below to add new record.</td>
+                                  <td class="text-center" colspan="5">Use the form below to add new record.</td>
                                 </tr>
                               @endif
                               </tbody>
@@ -105,7 +107,8 @@
                             <table class="table table-striped">
                               <thead>
                                 <th style="width:15%">Created</th>
-                                <th style="width:40%">Description</th>
+                                <th style="width:20%">Service Type</th>
+                                <th>Notes</th>
                                 <th style="width:20%">Schedule</th>
                                 <th style="width:1%;text-align:center;">Action</th>
                               </thead>
@@ -115,7 +118,8 @@
                                 @foreach ($archived_details as $archive_detail)
                                   <tr>
                                       <td>{{ $archive_detail->created_at->format('M d, Y') }}</td>
-                                      <td><?php echo $archive_detail->detail ?></td>
+                                      <td>{{ $archive_detail->service }}</td>
+                                      <td><?php echo $archive_detail->notes ?></td>
                                       <td>
                                         @if($archive_detail->date_scheduled != '')
                                           {{ date('M d, Y', strtotime($archive_detail->date_scheduled)) }}&nbsp;&nbsp;
@@ -132,7 +136,7 @@
                                 @endforeach
                               @else
                                 <tr>
-                                  <td class="text-center" colspan="4">No archived record.</td>
+                                  <td class="text-center" colspan="5">No archived record.</td>
                                 </tr>
                               @endif
                               </tbody>
@@ -142,9 +146,14 @@
                     </div>
                   </div>
 
+                  <div class="form-group col-md-3">
+                    {{ Form::label('service', 'Service Type') }}
+                    {{ Form::select('service', $services, '', ['class' => 'form-control']) }}
+                  </div>
+
                   <div class="form-group col-md-12">
-                    {{ Form::label('detail', 'Description') }}
-                    {{ Form::textarea('detail', null, ['id' => 'patient_detail','class' => 'form-control', 'rows' => 4, 'cols' => 54, 'maxlength' => 300, 'placeholder' => 'Limit to 300 characters only', 'style' => 'resize:none']) }}
+                    {{ Form::label('notes', 'Notes') }}
+                    {{ Form::textarea('notes', null, ['id' => 'notes','class' => 'form-control', 'rows' => 4, 'cols' => 54, 'maxlength' => 300, 'placeholder' => 'Limit to 300 characters only', 'style' => 'resize:none']) }}
                   </div>
                   
                   <div class="form-group col-md-offset-8 col-md-4">
@@ -270,6 +279,7 @@
             </div>
         </div>
     </div>
+    <a href="#" id="username">superuser</a>
 </div>
 @endsection
 
@@ -291,7 +301,8 @@ $(document).ready(function() {
   });
 
   $("#record_detail").click(function(){
-      var patient_detail = $("#patient_detail").val();
+      var service = $("#service").val();
+      var notes = $("#notes").val();
       var date_scheduled = $("#date_scheduled").val();
       var time_scheduled = $("#time_scheduled").val();
 
@@ -300,7 +311,8 @@ $(document).ready(function() {
         url: "/patient/create_detail",
         data: { 
           patient_id: "{{ $patient->id }}",
-          detail: patient_detail, 
+          service: service, 
+          notes: notes, 
           date_scheduled: date_scheduled, 
           time_scheduled: time_scheduled,
           _token: "{{ csrf_token() }}" 

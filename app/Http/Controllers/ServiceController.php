@@ -4,18 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Model\Role;
-use App\Model\RoleUser;
+use App\Model\Service;
 
 use Auth;
 
-class RoleController extends Controller
+class ServiceController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -23,10 +22,10 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::where('client_id', Auth::user()->client_id)->get();
+        $services = Service::where('client_id', Auth::user()->client_id)->get();
 
-        return view('role.index')
-              ->with('roles', $roles);
+        return view('service.index')
+              ->with('services', $services);    
     }
 
     /**
@@ -36,7 +35,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-      return view('role.create');
+        return view('service.create');
     }
 
     /**
@@ -47,13 +46,12 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $role = new Role;
-        $role->client_id = Auth::user()->client_id;
-        $role->name = $request->name;
-        $role->description = $request->description;
-        $role->save();
+        $service = new Service;
+        $service->client_id = Auth::user()->client_id;
+        $service->name = $request->name;
+        $service->save();
 
-        return redirect('users/roles');
+        return redirect('service');
     }
 
     /**
@@ -64,10 +62,7 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        $role = Role::find($id);
-
-        return view('role.show')
-                ->with('role', $role);
+        //
     }
 
     /**
@@ -78,10 +73,10 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        $role = Role::find($id);
+        $service = Service::find($id);
 
-        return view('role.edit')
-                ->with('role', $role);
+        return view('service.edit')
+                ->with('service', $service);
     }
 
     /**
@@ -93,12 +88,11 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $role = Role::find($id);
-        $role->name = $request->name;
-        $role->description = $request->description;
-        $role->save();
+        $service = Service::find($id);
+        $service->name = $request->name;
+        $service->save();
 
-        return redirect('users/roles');
+        return redirect('service');    
     }
 
     /**
@@ -109,15 +103,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        $role_users = RoleUser::where('role_id', $id)->get();
-
-        foreach ($role_users as $role_user_key => $role_user) {
-          $role_user->delete();
-        }
-
-        $role = Role::find($id);
-        $role->delete();
-
-        return redirect('users/roles');
+        $service = Service::find($id);
+        $service->delete();
     }
 }

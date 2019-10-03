@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Model\Role;
-use App\Model\RoleUser;
-
 use App\User;
 
 use Auth;
@@ -25,8 +22,6 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $request->user()->authorizeRoles(['Client User', 'Admin User']);
-
         $users = User::where('client_id', Auth::user()->client_id)->get();
 
         return view('user.index')
@@ -51,8 +46,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->user()->authorizeRoles(['Client User', 'Admin User']);
-
         $role_default = Role::where('name', 'user User')->first();
 
         $user = new User();
@@ -103,8 +96,6 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->user()->authorizeRoles(['Client User', 'Admin User']);
-
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
@@ -126,12 +117,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $role_users = RoleUser::where('user_id', $id)->get();
-
-        foreach ($role_users as $role_user_key => $role_user) {
-          $role_user->delete();
-        }
-
         $user = User::find($id);
         $user->forceDelete();
 

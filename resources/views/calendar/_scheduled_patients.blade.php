@@ -8,14 +8,20 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach($scheduled as $key => $schedule)
-		<tr class="appointment" style="cursor:pointer;" data-patient="{{ $schedule->patient->first_name }} {{ $schedule->patient->last_name }}" data-detail="{{ $schedule->detail }}">
-			<td>{{ $key + 1 }}</td>
-			<td><span style="font-family: sans-serif;color: green">{{ date('h:i a', strtotime($schedule->time_scheduled)) }}</span></td>
-			<td>{{ $schedule->patient->first_name }} {{ $schedule->patient->last_name }}</td>
-			<td>{{ str_limit($schedule->detail, 30) }}</td>
-		</tr>
-		@endforeach
+		@if($scheduled->count() > 0)
+			@foreach($scheduled as $key => $schedule)
+			<tr class="appointment" style="cursor:pointer;" data-patient="{{ $schedule->patient->first_name }} {{ $schedule->patient->last_name }}" data-detail="{{ $schedule->detail }}">
+				<td>{{ $key + 1 }}</td>
+				<td><span style="font-family: sans-serif;color: green">{{ date('h:i a', strtotime($schedule->time_scheduled)) }}</span></td>
+				<td>{{ $schedule->patient->first_name }} {{ $schedule->patient->last_name }}</td>
+				<td>{{ str_limit($schedule->detail, 30) }}</td>
+			</tr>
+			@endforeach
+		@else
+			<tr>
+				<td colspan="4" class="text-center">No appointment on this date.</td>
+			</tr>
+		@endif
 	</tbody>
 </table>
 

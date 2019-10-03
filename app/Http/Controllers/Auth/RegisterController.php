@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Model\Role;
 use App\Model\Client;
 use App\Model\Clinic;
 use App\Model\Doctor;
@@ -89,21 +88,6 @@ class RegisterController extends Controller
             'email'    => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-
-        $role = new Role;
-        $role->client_id = $client->id;
-        $role->name = 'Client User';
-        $role->description = 'Client User';
-        $role->save();
-        $role = new Role;
-        $role->client_id = $client->id;
-        $role->name = 'Staff User';
-        $role->description = 'Staff User';
-        $role->save();
-
-        $user
-           ->roles()
-           ->attach(Role::where('name', 'Client User')->first());
 
         $clinic = new Clinic;
         $clinic->client_id = $client->id;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Model\Patient;
+use App\Model\Service;
 use App\Model\PatientDetail;
 use App\Model\PatientBillingCharge;
 use App\Model\PatientBillingPayment;
@@ -76,6 +77,7 @@ class PatientController extends Controller
     {
         $patient = Patient::find($id);
 
+        $services = Service::where('client_id', Auth::user()->client_id)->pluck('name', 'name');
         $patient_details = PatientDetail::where('patient_id', $patient->id)->where('is_archived', false)->get();
         $archived_details = PatientDetail::where('patient_id', $patient->id)->where('is_archived', true)->get();
         $billing_charges = PatientBillingCharge::where('patient_id', $patient->id)->get();
@@ -83,6 +85,7 @@ class PatientController extends Controller
 
         return view('patient.show')
                 ->with('patient', $patient)
+                ->with('services', $services)
                 ->with('details', $patient_details)
                 ->with('archived_details', $archived_details)
                 ->with('billing_charges', $billing_charges)
@@ -131,8 +134,6 @@ class PatientController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $request->user()->authorizeRoles(['Client User', 'Admin User']);
-
         $patient = Patient::find($id);
         $patient_id = $patient->id;
 
@@ -147,7 +148,8 @@ class PatientController extends Controller
         $patient_detail = new PatientDetail;
         $patient_detail->client_id = Auth::user()->client_id;
         $patient_detail->patient_id = $request->patient_id;
-        $patient_detail->detail = nl2br($request->detail);
+        $patient_detail->service = $request->service;
+        $patient_detail->notes = nl2br($request->notes);
         $patient_detail->is_scheduled = $request->date_scheduled != '' ? true : false;
         $patient_detail->date_scheduled = $request->date_scheduled != '' ? date('Y-m-d', strtotime($request->date_scheduled)) : null;
         $patient_detail->time_scheduled = DateTime::createFromFormat('H:i a', $request->time_scheduled);

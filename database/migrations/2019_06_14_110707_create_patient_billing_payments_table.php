@@ -17,6 +17,7 @@ class CreatePatientBillingPaymentsTable extends Migration
             $table->increments('id');
             $table->integer('client_id');
             $table->integer('patient_id');
+            $table->integer('doctor_id')->default(0);
             $table->string('description');
             $table->double('amount');
             $table->timestamps();

@@ -65,6 +65,7 @@
                         @else
                             <li><a href="{{ url('patient') }}"><i class="fa fa-notes-medical"></i> Patients</a></li>
                             <li><a href="{{ url('calendar') }}"><i class="fa fa-calendar"></i> Calendar</a></li>
+                            <li><a href="{{ url('service') }}"><i class="fa fa-calendar"></i> Services</a></li>
                      
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
