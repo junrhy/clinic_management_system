@@ -46,15 +46,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $role_default = Role::where('name', 'user User')->first();
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6',
+        ]);
 
         $user = new User();
         $user->client_id = Auth::user()->client_id;
-        $user->name = $request->name;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->save();
-        $user->roles()->attach($role_default);
 
         return redirect('user');
     }
@@ -97,7 +102,8 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-        $user->name = $request->name;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
         $user->email = $request->email;
 
         $password = isset($request->password) ? $request->password : null;
@@ -119,7 +125,5 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->forceDelete();
-
-        return redirect('user');
     }
 }

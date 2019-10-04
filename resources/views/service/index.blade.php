@@ -51,6 +51,7 @@
                 <div class="panel-heading"><i class="fa fa-user-md"></i> Services</div>
 
                 <div class="panel-body">
+                  <div class="table-responsive">
                     <table class="table">
                       <tr>
                         <th>Name</th>
@@ -68,7 +69,7 @@
                       </tr>
                       <?php endforeach; ?>
                     </table>
-
+                  </div>
                 </div>
             </div>
         </div>

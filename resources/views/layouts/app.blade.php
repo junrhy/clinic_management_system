@@ -63,6 +63,20 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fa fa-user-md"></i> 
+                            Users</a>
+
+                        <ul class="collapse list-unstyled" id="userSubmenu">
+                            <li>
+                                <a href="{{ url('user') }}">All Users</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('user/create') }}">Add User</a>
+                            </li>
+                        </ul>
+                    </li>
                     
                     <li>
                         <a href="#profileSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">

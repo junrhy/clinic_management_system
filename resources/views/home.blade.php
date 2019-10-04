@@ -1,5 +1,23 @@
 @extends('layouts.app')
 
+@section('page_level_css')
+<style type="text/css">
+    .m-t-0 {
+        margin-top: 0px;
+    }
+
+    .m-b-5 {
+        margin-bottom: 5px;
+    }
+
+    .card {
+        width:13em;
+        text-align: center;
+        padding:2em;
+    }
+</style>
+@endsection
+
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -27,7 +45,10 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <div class="card">
+                        <h2 class="number count-to m-t-0 m-b-5" data-from="0" data-to="501" data-speed="1000" data-fresh-interval="700">{{ $patient_count }}</h2>
+                        <p class="text-muted">Number of Patients</p>
+                    </div>
                 </div>
             </div>
         </div>

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use Auth;
 
+use App\Model\Patient;
+
 class HomeController extends Controller
 {
     /**
@@ -25,7 +27,10 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        return view('home');
+        $patient_count = Patient::where('client_id', Auth::user()->client_id)->count();
+
+        return view('home')
+                ->with('patient_count', $patient_count);
     }
 
 }

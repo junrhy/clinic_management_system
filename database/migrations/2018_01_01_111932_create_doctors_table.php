@@ -17,6 +17,8 @@ class CreateDoctorsTable extends Migration
             $table->increments('id');
             $table->integer('client_id');
             $table->string('name');
+            $table->string('first_name', 150);
+            $table->string('last_name', 150);
             $table->timestamps();
             $table->softDeletes();
         });

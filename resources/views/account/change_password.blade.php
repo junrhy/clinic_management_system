@@ -43,12 +43,12 @@
 
                     <div class="form-group">
                       {{ Form::label('password', 'Password') }}
-                      {{ Form::text('password', null, array('class' => 'form-control', 'required')) }}
+                      {{ Form::password('password', array('class' => 'form-control', 'required')) }}
                     </div>
 
                     <div class="form-group">
                       {{ Form::label('new_password', 'New Password') }}
-                      {{ Form::text('new_password', null, array('class' => 'form-control', 'required')) }}
+                      {{ Form::password('new_password', array('class' => 'form-control', 'required')) }}
                     </div>
 
                     {{ Form::submit('Change Password', array('class' => 'btn btn-primary pull-right')) }}
