@@ -34,9 +34,35 @@
                     <li><a href="{{ route('login') }}">Login</a></li>
                     <li><a href="{{ route('register') }}">Register</a></li>
                 @else
-                    <li><a href="{{ url('patient') }}"><i class="fa fa-notes-medical"></i> Patients</a></li>
+                    <li>
+                        <a href="#patientSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fa fa-notes-medical">
+                            </i> Patients</a>
+
+                        <ul class="collapse list-unstyled" id="patientSubmenu">
+                            <li>
+                                <a href="{{ url('patient') }}">All Patients</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('patient/create') }}">Add Patient</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li><a href="{{ url('calendar') }}"><i class="fa fa-calendar"></i> Calendar</a></li>
-                    <li><a href="{{ url('service') }}"><i class="fa fa-user-md"></i> Services</a></li>
+                    <li>
+                        <a href="#serviceSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fa fa-user-md"></i> 
+                            Services</a>
+
+                        <ul class="collapse list-unstyled" id="serviceSubmenu">
+                            <li>
+                                <a href="{{ url('service') }}">All Services</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('patient/create') }}">Add Service</a>
+                            </li>
+                        </ul>
+                    </li>
                     
                     <li>
                         <a href="#profileSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -72,6 +98,7 @@
         <div id="content">
 
             <nav class="navbar navbar-default navbar-static-top" style="background-color: #01d8da;">
+
                 <div class="container-fluid">
                     <a id="sidebarCollapse" class="navbar-brand"><i class="fas fa-exchange-alt"></i></a>
                 </div>
