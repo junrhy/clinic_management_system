@@ -77,6 +77,8 @@
                             </li>
                         </ul>
                     </li>
+
+
                     
                     <li>
                         <a href="#profileSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -87,20 +89,16 @@
                             <li>
                                 <a href="{{ url('business_information') }}">Business Information</a>
                             </li>
+
                             <li>
                                 <a href="{{ url('change_password') }}">Change Password</a>
                             </li>
-                            <li>
-                                <a href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                    Logout
-                                </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
+                            @if(Auth::user()->client->account_type == 'basic')
+                            <li>
+                                <a href="https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7B7DXYEA9FKLA&custom=client_id_{{  Auth::user()->client->id }}">Go Premium</a>
                             </li>
+                            @endif
                         </ul>
                     </li>
                 @endguest
@@ -115,6 +113,20 @@
 
                 <div class="container-fluid">
                     <a id="sidebarCollapse" class="navbar-brand"><i class="fas fa-exchange-alt"></i></a>
+
+                    <div style="margin-top:6px;">
+                        <a class="btn btn-round btn-white float-right" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                            <i class="fas fa-power-off"></i> Logout
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+
+                        <div class="float-right" style="margin: 8px;font-size: 11pt;color:#fff;">Account Type: <strong>{{ ucfirst(Auth::user()->client->account_type) }}</strong></div>
+                    </div>
                 </div>
             </nav>
 

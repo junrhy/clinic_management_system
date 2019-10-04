@@ -60,38 +60,40 @@
                 <div class="panel-heading"><i class="fa fa-notes-medical" aria-hidden="true"></i> Patient List</div>
 
                 <div class="panel-body">
-                    <table width="100%">
-                      <tr>
-                        <td width="3.7%" class="namelist text-center" data-list="all">All</td>
+                    <div class="table-responsive">
+                      <table width="100%">
+                        <tr>
+                          <td width="3.7%" class="namelist text-center" data-list="all">All</td>
 
-                        <td width="3.7%" class="namelist text-center" data-list="A">A</td>
-                        <td width="3.7%" class="namelist text-center" data-list="B">B</td>
-                        <td width="3.7%" class="namelist text-center" data-list="C">C</td>
-                        <td width="3.7%" class="namelist text-center" data-list="D">D</td>
-                        <td width="3.7%" class="namelist text-center" data-list="E">E</td>
-                        <td width="3.7%" class="namelist text-center" data-list="F">F</td>
-                        <td width="3.7%" class="namelist text-center" data-list="G">G</td>
-                        <td width="3.7%" class="namelist text-center" data-list="H">H</td>
-                        <td width="3.7%" class="namelist text-center" data-list="I">I</td>
-                        <td width="3.7%" class="namelist text-center" data-list="J">J</td>
-                        <td width="3.7%" class="namelist text-center" data-list="K">K</td>
-                        <td width="3.7%" class="namelist text-center" data-list="L">L</td>
-                        <td width="3.7%" class="namelist text-center" data-list="M">M</td>
-                        <td width="3.7%" class="namelist text-center" data-list="N">N</td>
-                        <td width="3.7%" class="namelist text-center" data-list="O">O</td>
-                        <td width="3.7%" class="namelist text-center" data-list="P">P</td>
-                        <td width="3.7%" class="namelist text-center" data-list="Q">Q</td>
-                        <td width="3.7%" class="namelist text-center" data-list="R">R</td>
-                        <td width="3.7%" class="namelist text-center" data-list="S">S</td>
-                        <td width="3.7%" class="namelist text-center" data-list="T">T</td>
-                        <td width="3.7%" class="namelist text-center" data-list="U">U</td>
-                        <td width="3.7%" class="namelist text-center" data-list="B">V</td>
-                        <td width="3.7%" class="namelist text-center" data-list="W">W</td>
-                        <td width="3.7%" class="namelist text-center" data-list="X">X</td>
-                        <td width="3.7%" class="namelist text-center" data-list="Y">Y</td>
-                        <td width="3.7%" class="namelist text-center" data-list="Z">Z</td>
-                      </tr>
-                    </table>
+                          <td width="3.7%" class="namelist text-center" data-list="A">A</td>
+                          <td width="3.7%" class="namelist text-center" data-list="B">B</td>
+                          <td width="3.7%" class="namelist text-center" data-list="C">C</td>
+                          <td width="3.7%" class="namelist text-center" data-list="D">D</td>
+                          <td width="3.7%" class="namelist text-center" data-list="E">E</td>
+                          <td width="3.7%" class="namelist text-center" data-list="F">F</td>
+                          <td width="3.7%" class="namelist text-center" data-list="G">G</td>
+                          <td width="3.7%" class="namelist text-center" data-list="H">H</td>
+                          <td width="3.7%" class="namelist text-center" data-list="I">I</td>
+                          <td width="3.7%" class="namelist text-center" data-list="J">J</td>
+                          <td width="3.7%" class="namelist text-center" data-list="K">K</td>
+                          <td width="3.7%" class="namelist text-center" data-list="L">L</td>
+                          <td width="3.7%" class="namelist text-center" data-list="M">M</td>
+                          <td width="3.7%" class="namelist text-center" data-list="N">N</td>
+                          <td width="3.7%" class="namelist text-center" data-list="O">O</td>
+                          <td width="3.7%" class="namelist text-center" data-list="P">P</td>
+                          <td width="3.7%" class="namelist text-center" data-list="Q">Q</td>
+                          <td width="3.7%" class="namelist text-center" data-list="R">R</td>
+                          <td width="3.7%" class="namelist text-center" data-list="S">S</td>
+                          <td width="3.7%" class="namelist text-center" data-list="T">T</td>
+                          <td width="3.7%" class="namelist text-center" data-list="U">U</td>
+                          <td width="3.7%" class="namelist text-center" data-list="B">V</td>
+                          <td width="3.7%" class="namelist text-center" data-list="W">W</td>
+                          <td width="3.7%" class="namelist text-center" data-list="X">X</td>
+                          <td width="3.7%" class="namelist text-center" data-list="Y">Y</td>
+                          <td width="3.7%" class="namelist text-center" data-list="Z">Z</td>
+                        </tr>
+                      </table>
+                    </div>
                     <br>
                     <div class="table-responsive">
                         <table class="table">

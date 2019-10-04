@@ -51,7 +51,7 @@
                       {{ Form::password('new_password', array('class' => 'form-control', 'required')) }}
                     </div>
 
-                    {{ Form::submit('Change Password', array('class' => 'btn btn-primary pull-right')) }}
+                    {{ Form::submit('Change Password', array('class' => 'btn btn-primary btn-round pull-right')) }}
        		       {{ Form::close() }}
                 </div>
             </div>

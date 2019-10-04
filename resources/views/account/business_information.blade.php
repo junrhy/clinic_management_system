@@ -45,7 +45,7 @@
                       {{ Form::text('name', $user->client->name, array('class' => 'form-control')) }}
                     </div>
 
-                    {{ Form::submit('Save Changes', array('class' => 'btn btn-primary pull-right')) }}
+                    {{ Form::submit('Save Changes', array('class' => 'btn btn-primary btn-round pull-right')) }}
        		       {{ Form::close() }}
                 </div>
             </div>

@@ -18,6 +18,7 @@ class CreateClientsTable extends Migration
             $table->string('name');
             $table->string('email', 150)->unique();
             $table->boolean('is_active')->default(1);
+            $table->string('account_type')->default('basic');
             $table->timestamps();
         });
     }

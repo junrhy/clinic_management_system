@@ -316,6 +316,12 @@ ul ul a {
     background: rgba(255,255,255,0.3);
 }
 
+@media (max-width: 768px) {
+    .breadcrumb, .btn-icon {
+        display: none;
+    }
+}
+
 .btn.btn-icon, .navbar .navbar-nav>a.btn.btn-icon {
     height: 3.7rem;
     min-width: 3.7rem;
