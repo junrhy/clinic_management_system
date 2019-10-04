@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.register')
 
 @section('content')
 <div class="container">
@@ -63,9 +63,11 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    Sign Up
                                 </button>
+                                <br>
+                                <a href="{{ route('login') }}">You already have a membership?</a>
                             </div>
                         </div>
                     </form>

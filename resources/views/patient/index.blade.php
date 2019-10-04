@@ -38,12 +38,28 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
+            <div class="block-header">
+                <div class="row">
+                    <div class="col-lg-5 col-md-5 col-sm-12">
+                        <h2>All Patients <small class="text-muted">Welcome to {{ Auth::user()->client->name }}</small></h2>
+                    </div>            
+                    <div class="col-lg-7 col-md-7 col-sm-12 text-right">
+                        <a class="btn btn-white btn-icon btn-round float-right m-l-10" href="{{ url('patient/create') }}" type="button">
+                            <i class="fa fa-plus"></i>
+                        </a>
+
+                        <ul class="breadcrumb float-md-right">
+                            <li class="breadcrumb-item"><a href="/home"><i class="fa fa-home"></i> {{ Auth::user()->client->name }}</a></li>
+                            <li class="breadcrumb-item">Patients</li>
+                            <li class="breadcrumb-item active">All Patients</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <div class="panel panel-default">
-                <div class="panel-heading"><i class="fa fa-notes-medical" aria-hidden="true"></i> Patients</div>
+                <div class="panel-heading"><i class="fa fa-notes-medical" aria-hidden="true"></i> Patient List</div>
 
                 <div class="panel-body">
-                    <div><a class="btn btn-primary btn-round" href="{{ url('patient/create') }}"><i class="fa fa-plus" aria-hidden="true"></i> Add</a></div>
-                    <br>
                     <table width="100%">
                       <tr>
                         <td width="3.7%" class="namelist text-center" data-list="all">All</td>
