@@ -108,11 +108,7 @@ class ClinicController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $request->user()->authorizeRoles(['Client User', 'Admin User']);
-
         $clinic = Clinic::find($id);
         $clinic->delete();
-
-        return redirect('clinic');
     }
 }

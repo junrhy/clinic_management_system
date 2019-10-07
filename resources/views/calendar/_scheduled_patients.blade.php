@@ -13,46 +13,58 @@
 		width: 200px;
 	}
 </style>
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th>#</th>
-			<th>Time</th>
-			<th>Name</th>
-			<th>Service Type</th>
-		</tr>
-	</thead>
-	<tbody>
-		@if($scheduled->count() > 0)
-			@foreach($scheduled as $key => $schedule)
-			<tr class="appointment" style="cursor:pointer;" 
-					data-id="{{ $schedule->id }}" 
-					data-patient="{{ $schedule->patient->first_name }} {{ $schedule->patient->last_name }}" 
-					data-service="{{ $schedule->service }}" 
-					data-schedule_date="{{ date('m/d/Y', strtotime($schedule->date_scheduled)) }}" 
-					data-schedule_time="{{ date('h:i a', strtotime($schedule->time_scheduled)) }}"  
-					data-detail="{{ strip_tags($schedule->notes) }}">
 
-				<td>{{ $key + 1 }}</td>
-				<td><span style="font-family: sans-serif;color: green">{{ date('h:i a', strtotime($schedule->time_scheduled)) }}</span></td>
-				<td>{{ $schedule->patient->first_name }} {{ $schedule->patient->last_name }}</td>
-				<td>{{ $schedule->service }}</td>
-			</tr>
-			@endforeach
-		@else
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
 			<tr>
-				<td colspan="4" class="text-center">No appointment on this date.</td>
+				<th>#</th>
+				<th>Time</th>
+				<th>Name</th>
+				<th>Clinic</th>
+				<th>Doctor</th>
+				<th>Service Type</th>
+				<th>Status</th>
 			</tr>
-		@endif
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+			@if($scheduled->count() > 0)
+				@foreach($scheduled as $key => $schedule)
+				<tr class="appointment" style="cursor:pointer;" 
+						data-id="{{ $schedule->id }}" 
+						data-patient="{{ $schedule->patient->first_name }} {{ $schedule->patient->last_name }}" 
+						data-clinic="{{ $schedule->clinic }}" 
+						data-doctor="{{ $schedule->doctor }}" 
+						data-service="{{ $schedule->service }}" 
+						data-schedule_date="{{ date('m/d/Y', strtotime($schedule->date_scheduled)) }}" 
+						data-schedule_time="{{ date('g:i a', strtotime($schedule->time_scheduled)) }}"  
+						data-status="{{ $schedule->status }}" 
+						data-detail="{{ strip_tags($schedule->notes) }}">
+
+					<td>{{ $key + 1 }}</td>
+					<td><span style="font-family: sans-serif;color: green">{{ date('g:i a', strtotime($schedule->time_scheduled)) }}</span></td>
+					<td>{{ $schedule->patient->first_name }} {{ $schedule->patient->last_name }}</td>
+					<td>{{ $schedule->clinic }}</td>
+					<td>{{ $schedule->doctor }}</td>
+					<td>{{ $schedule->service }}</td>
+					<td>{{ $schedule->status }}</td>
+				</tr>
+				@endforeach
+			@else
+				<tr>
+					<td colspan="7" class="text-center">No appointment on this date.</td>
+				</tr>
+			@endif
+		</tbody>
+	</table>
+</div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="appointment_modal" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
 	  <div class="modal-header">
-        
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -64,6 +76,14 @@
       			<td width="19%" align="right" style="padding-right: 15px;">Patient Name: </td>
       			<td><span id="appointment_patient_name"></span></td>
       		</tr>
+      		<tr>
+      			<td width="19%" align="right" style="padding-right: 15px;">Clinic: </td>
+      			<td>{{ Form::text('appointment_clinic', null, array('class' => 'custom-text-input')) }}</td>
+      		</tr>
+      		<tr>
+      			<td width="19%" align="right" style="padding-right: 15px;">Doctor: </td>
+      			<td>{{ Form::text('appointment_doctor', null, array('class' => 'custom-text-input')) }}</td>
+      		</tr>
   			<tr>
       			<td width="19%" align="right" style="padding-right: 15px;">Service Type: </td>
       			<td>{{ Form::text('appointment_service_type', null, array('class' => 'custom-text-input')) }}</td>
@@ -74,6 +94,10 @@
       				{{ Form::text('appointment_schedule_date', null, array('class' => 'custom-text-input', 'style' => 'width:103px', 'readonly')) }}
       				{{ Form::text('appointment_schedule_time', null, array('class' => 'custom-text-input', 'style' => 'width:85px')) }}
       			</td>
+      		</tr>
+      		<tr>
+      			<td width="19%" align="right" style="padding-right: 15px;">Status: </td>
+      			<td>{{ Form::select('appointment_status', array('Open' => 'Open', 'In Progress' => 'In Progress', 'Done' => 'Done'), null, array('class' => 'custom-text-input')) }}</td>
       		</tr>
       	</table>
       	<br>
@@ -97,9 +121,12 @@ $(document).ready(function() {
 
 	$(".appointment").unbind().click(function(){
 		$('#appointment_patient_name').html($(this).data('patient'));
+		$("input[name='appointment_clinic']").val($(this).data('clinic'));
+		$("input[name='appointment_doctor']").val($(this).data('doctor'));
 		$("input[name='appointment_service_type']").val($(this).data('service'));
 		$("input[name='appointment_schedule_date']").val($(this).data('schedule_date'));
 		$("input[name='appointment_schedule_time']").val($(this).data('schedule_time'));
+		$("select[name='appointment_status']").val($(this).data('status'));
 		$("textarea[name='notes']").text($(this).data('detail'));
 		$("#btn-save-changes").attr('data-id', $(this).data('id'));
 	    $('#appointment_modal').modal('show');
@@ -107,18 +134,24 @@ $(document).ready(function() {
 
 	$("#btn-save-changes").click(function(){
 		id = $("#btn-save-changes").data('id');
+		clinic = $("input[name='appointment_clinic']").val();
+		doctor = $("input[name='appointment_doctor']").val();
 		service = $("input[name='appointment_service_type']").val();
 		date_scheduled = $("input[name='appointment_schedule_date']").val();
 		time_scheduled = $("input[name='appointment_schedule_time']").val();
+		status = $("select[name='appointment_status']").val();
 		notes = $("textarea[name='notes']").val();
 
 		$.ajax({
           method: "POST",
           url: "/patient/update_detail/" + id,
           data: { 
+            clinic: clinic, 
+            doctor: doctor, 
             service: service, 
             date_scheduled: date_scheduled, 
             time_scheduled: time_scheduled, 
+            status: status, 
             notes: notes,
             _token: "{{ csrf_token() }}" 
           }

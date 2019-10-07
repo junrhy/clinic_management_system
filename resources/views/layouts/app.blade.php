@@ -25,7 +25,7 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3 class="text-center"><i class="fa fa-clinic-medical"></i> ClinicAssistant</h3>
+                <h3 class="text-center"><i class="fa fa-stethoscope"></i> {{ config('app.name', 'Laravel') }}</h3>
                 <strong>CA</strong>
             </div>
 
@@ -34,6 +34,8 @@
                     <li><a href="{{ route('login') }}">Login</a></li>
                     <li><a href="{{ route('register') }}">Register</a></li>
                 @else
+                    <li><a href="{{ url('home') }}"><i class="fa fa-chalkboard"></i> Dashboard</a></li>
+                    <li><a href="{{ url('calendar') }}"><i class="fa fa-calendar"></i> Calendar</a></li>
                     <li>
                         <a href="#patientSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <i class="fa fa-notes-medical">
@@ -48,10 +50,37 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a href="{{ url('calendar') }}"><i class="fa fa-calendar"></i> Calendar</a></li>
+                    <li>
+                        <a href="#clinicSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fa fa-clinic-medical"></i> 
+                            Clinics</a>
+
+                        <ul class="collapse list-unstyled" id="clinicSubmenu">
+                            <li>
+                                <a href="{{ url('clinic') }}">All Clinics</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('clinic/create') }}">Add Clinic</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#doctorSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fa fa-user-md"></i> 
+                            Doctors</a>
+
+                        <ul class="collapse list-unstyled" id="doctorSubmenu">
+                            <li>
+                                <a href="{{ url('doctor') }}">All Doctors</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('doctor/create') }}">Add Doctor</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li>
                         <a href="#serviceSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <i class="fa fa-user-md"></i> 
+                            <i class="fa fa-briefcase-medical"></i> 
                             Services</a>
 
                         <ul class="collapse list-unstyled" id="serviceSubmenu">
@@ -59,13 +88,13 @@
                                 <a href="{{ url('service') }}">All Services</a>
                             </li>
                             <li>
-                                <a href="{{ url('patient/create') }}">Add Service</a>
+                                <a href="{{ url('service/create') }}">Add Service</a>
                             </li>
                         </ul>
                     </li>
                     <li>
                         <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <i class="fa fa-user-md"></i> 
+                            <i class="fa fa-users"></i> 
                             Users</a>
 
                         <ul class="collapse list-unstyled" id="userSubmenu">
@@ -96,7 +125,7 @@
 
                             @if(Auth::user()->client->account_type == 'basic')
                             <li>
-                                <a href="https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7B7DXYEA9FKLA&custom=client_id_{{  Auth::user()->client->id }}">Go Premium</a>
+                                <a href="https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7B7DXYEA9FKLA&custom=client_id_{{  Auth::user()->client->id }}">Upgrade Account</a>
                             </li>
                             @endif
                         </ul>

@@ -19,11 +19,7 @@
     font-size:14pt;
   }
 
-  .link:hover {
-    text-decoration: none;
-  }
-
-  .delete-patient, .update-patient {
+  .show-patient, .delete-patient, .update-patient {
     color: gray;
   }
 
@@ -116,7 +112,7 @@
                             <td>{{ $patient_item->dob->format('M d, Y') }}</td>
                             <td>{{ $patient_item->dob->age }}</td>
                             <td><span style="font-family: sans-serif;">{{ $patient_item->contact_number }}</span></td>
-                            <td><a class='link' href="{{ route('patient.show',$patient_item->id) }}"><i class="fa fa-notes-medical" aria-hidden="true"></i> View</a></td>
+                            <td><a class='show-patient' href="{{ route('patient.show',$patient_item->id) }}"><i class="fa fa-notes-medical" aria-hidden="true"></i> View Record</a></td>
                             <td>
                               <div>
                                 <a class='update-patient' href="{{ route('patient.edit',$patient_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a> | 

@@ -90,19 +90,6 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-        $clinic = new Clinic;
-        $clinic->client_id = $client->id;
-        $clinic->name = $client->name;
-        $clinic->address = null;
-        $clinic->save();
-
-        $doctor = new Doctor;
-        $doctor->client_id = $client->id;
-        $doctor->name = $client->name;
-        $doctor->first_name = $data['first_name'];
-        $doctor->last_name = $data['last_name'];
-        $doctor->save();
-
       // Mail::to($data['email'])->send(new NewClient());
 
         return $user;

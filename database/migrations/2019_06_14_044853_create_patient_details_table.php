@@ -17,13 +17,14 @@ class CreatePatientDetailsTable extends Migration
             $table->increments('id');
             $table->integer('client_id');
             $table->integer('patient_id');
-            $table->integer('doctor_id')->default(0);
+            $table->string('clinic')->nullable();
+            $table->string('doctor')->nullable();
             $table->string('service')->nullable();
             $table->text('notes')->nullable();
             $table->boolean('is_scheduled');
-            $table->string('status');
             $table->date('date_scheduled')->nullable();
             $table->time('time_scheduled')->nullable();
+            $table->string('status')->nullable();
             $table->boolean('is_archived')->default(0);
             $table->timestamps();
         });

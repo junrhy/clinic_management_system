@@ -48,7 +48,8 @@ class DoctorController extends Controller
     {
         $doctor = new Doctor;
         $doctor->client_id = Auth::user()->client_id;
-        $doctor->name = $request->name;
+        $doctor->first_name = $request->first_name;
+        $doctor->last_name = $request->last_name;
         $doctor->save();
 
         return redirect('doctor');
@@ -108,7 +109,5 @@ class DoctorController extends Controller
     {
         $doctor = Doctor::find($id);
         $doctor->delete();
-
-        return redirect('doctor');
     }
 }

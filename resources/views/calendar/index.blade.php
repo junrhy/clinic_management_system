@@ -34,21 +34,21 @@
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                         <ul class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><a href="/home"><i class="fa fa-home"></i> {{ Auth::user()->client->name }}</a></li>
-                            <li class="breadcrumb-item active">Calendar</li>
+                            <li class="breadcrumb-item">Calendar</li>
+                            <li class="breadcrumb-item active">Appointments</li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading"><i class="fa fa-calendar"></i> Calendar</div>
+                <div class="panel-heading"><i class="fa fa-calendar"></i> Appointments</div>
 
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-md-6">
-                              <h4>Appointments</h4>
-                              <div id="patient_list"></div>
+                        <div class="col-md-8">
+                            <div id="patient_list"></div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div id='calendar'></div>
                         </div>
                     </div>

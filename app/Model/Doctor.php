@@ -24,4 +24,5 @@ class Doctor extends Model
 
         return $doctors;
     }
+
 }

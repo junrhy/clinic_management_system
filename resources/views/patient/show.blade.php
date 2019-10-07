@@ -91,9 +91,11 @@
                               <table class="table">
                                 <thead>
                                   <th style="width:15%">Created</th>
+                                  <th style="width:20%">Clinic</th>
+                                  <th style="width:20%">Doctor</th>
                                   <th style="width:20%">Service Type</th>
                                   <th>Notes</th>
-                                  <th style="width:20%">Schedule</th>
+                                  <th style="width:20%">Appointment</th>
                                   <th style="width:1%;text-align:center;">Action</th>
                                 </thead>
 
@@ -102,6 +104,8 @@
                                   @foreach ($details as $detail)
                                     <tr>
                                         <td>{{ $detail->created_at->format('M d, Y') }}</td>
+                                        <td>{{ $detail->clinic }}</td>
+                                        <td>{{ $detail->doctor }}</td>
                                         <td>{{ $detail->service }}</td>
                                         <td><?php echo $detail->notes ?></td>
                                         <td>
@@ -120,7 +124,7 @@
                                   @endforeach
                                 @else
                                   <tr>
-                                    <td class="text-center" colspan="5">Use the form below to add new record.</td>
+                                    <td class="text-center" colspan="7">Use the form below to add new record.</td>
                                   </tr>
                                 @endif
                                 </tbody>
@@ -132,9 +136,11 @@
                             <table class="table">
                               <thead>
                                 <th style="width:15%">Created</th>
+                                <th style="width:20%">Clinic</th>
+                                <th style="width:20%">Doctor</th> 
                                 <th style="width:20%">Service Type</th>
                                 <th>Notes</th>
-                                <th style="width:20%">Schedule</th>
+                                <th style="width:20%">Appointment</th>
                                 <th style="width:1%;text-align:center;">Action</th>
                               </thead>
 
@@ -143,6 +149,8 @@
                                 @foreach ($archived_details as $archive_detail)
                                   <tr>
                                       <td>{{ $archive_detail->created_at->format('M d, Y') }}</td>
+                                      <td>{{ $archive_detail->clinic }}</td>
+                                      <td>{{ $archive_detail->doctor }}</td>
                                       <td>{{ $archive_detail->service }}</td>
                                       <td><?php echo $archive_detail->notes ?></td>
                                       <td>
@@ -161,7 +169,7 @@
                                 @endforeach
                               @else
                                 <tr>
-                                  <td class="text-center" colspan="5">No archived record.</td>
+                                  <td class="text-center" colspan="7">No archived record.</td>
                                 </tr>
                               @endif
                               </tbody>
@@ -172,6 +180,16 @@
                   </div>
 
                   <div class="row">
+                    <div class="form-group col-md-3">
+                      {{ Form::label('clinic', 'Clinic') }}
+                      {{ Form::select('clinic', $clinics, '', ['class' => 'form-control']) }}
+                    </div>
+
+                    <div class="form-group col-md-3">
+                      {{ Form::label('doctor', 'Doctor') }}
+                      {{ Form::select('doctor', $doctors, '', ['class' => 'form-control']) }}
+                    </div>
+
                     <div class="form-group col-md-3">
                       {{ Form::label('service', 'Service Type') }}
                       {{ Form::select('service', $services, '', ['class' => 'form-control']) }}
@@ -327,6 +345,8 @@ $(document).ready(function() {
   });
 
   $("#record_detail").click(function(){
+      var clinic = $("#clinic").val();
+      var doctor = $("#doctor").val();
       var service = $("#service").val();
       var notes = $("#notes").val();
       var date_scheduled = $("#date_scheduled").val();
@@ -337,6 +357,8 @@ $(document).ready(function() {
         url: "/patient/create_detail",
         data: { 
           patient_id: "{{ $patient->id }}",
+          clinic: clinic, 
+          doctor: doctor, 
           service: service, 
           notes: notes, 
           date_scheduled: date_scheduled, 
