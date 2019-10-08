@@ -21,6 +21,10 @@
     @yield('page_level_css')
 </head>
 <body>
+    <div id="progress" class="waiting">
+        <dt></dt>
+        <dd></dd>
+    </div>
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">

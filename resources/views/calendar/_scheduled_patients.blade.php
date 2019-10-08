@@ -12,12 +12,17 @@
 	.ui-datepicker {
 		width: 200px;
 	}
+
+	.app-action {
+		margin: 0px 5px;
+	}
 </style>
 
 <div class="table-responsive">
 	<table class="table table-striped">
 		<thead>
 			<tr>
+				<th></th>
 				<th>#</th>
 				<th>Time</th>
 				<th>Name</th>
@@ -30,7 +35,7 @@
 		<tbody>
 			@if($scheduled->count() > 0)
 				@foreach($scheduled as $key => $schedule)
-				<tr class="appointment" style="cursor:pointer;" 
+				<tr style="cursor:pointer;" 
 						data-id="{{ $schedule->id }}" 
 						data-patient="{{ $schedule->patient->first_name }} {{ $schedule->patient->last_name }}" 
 						data-clinic="{{ $schedule->clinic }}" 
@@ -41,108 +46,61 @@
 						data-status="{{ $schedule->status }}" 
 						data-detail="{{ strip_tags($schedule->notes) }}">
 
-					<td>{{ $key + 1 }}</td>
-					<td><span style="font-family: sans-serif;color: green">{{ date('g:i a', strtotime($schedule->time_scheduled)) }}</span></td>
-					<td>{{ $schedule->patient->first_name }} {{ $schedule->patient->last_name }}</td>
-					<td>{{ $schedule->clinic }}</td>
-					<td>{{ $schedule->doctor }}</td>
-					<td>{{ $schedule->service }}</td>
-					<td>{{ $schedule->status }}</td>
+					<td class="appointment"><input type="checkbox" name="appointment-action" data-id="{{ $schedule->id }}"></td>
+					<td class="appointment">{{ $key + 1 }}</td>
+					<td class="appointment"><span style="font-family: sans-serif;color: green">{{ date('g:i a', strtotime($schedule->time_scheduled)) }}</span></td>
+					<td class="appointment">{{ $schedule->patient->first_name }} {{ $schedule->patient->last_name }}</td>
+					<td class="appointment">{{ $schedule->clinic }}</td>
+					<td class="appointment">{{ $schedule->doctor }}</td>
+					<td class="appointment">{{ $schedule->service }}</td>
+					<td class="appointment">{{ $schedule->status }}</td>
 				</tr>
 				@endforeach
 			@else
 				<tr>
-					<td colspan="7" class="text-center">No appointment on this date.</td>
+					<td colspan="8" class="text-center">No appointment on this date.</td>
 				</tr>
 			@endif
 		</tbody>
 	</table>
 </div>
 
-
-<!-- Modal -->
-<div class="modal fade" id="appointment_modal" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-	  <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h5 class="modal-title">Appointment</h5>
-      </div>
-      <div class="modal-body">
-      	<table width="100%">
-      		<tr>
-      			<td width="19%" align="right" style="padding-right: 15px;">Patient Name: </td>
-      			<td><span id="appointment_patient_name"></span></td>
-      		</tr>
-      		<tr>
-      			<td width="19%" align="right" style="padding-right: 15px;">Clinic: </td>
-      			<td>{{ Form::text('appointment_clinic', null, array('class' => 'custom-text-input')) }}</td>
-      		</tr>
-      		<tr>
-      			<td width="19%" align="right" style="padding-right: 15px;">Doctor: </td>
-      			<td>{{ Form::text('appointment_doctor', null, array('class' => 'custom-text-input')) }}</td>
-      		</tr>
-  			<tr>
-      			<td width="19%" align="right" style="padding-right: 15px;">Service Type: </td>
-      			<td>{{ Form::text('appointment_service_type', null, array('class' => 'custom-text-input')) }}</td>
-      		</tr>
-  			<tr>
-      			<td width="19%" align="right" style="padding-right: 15px;">Schedule: </td>
-      			<td>
-      				{{ Form::text('appointment_schedule_date', null, array('class' => 'custom-text-input', 'style' => 'width:103px', 'readonly')) }}
-      				{{ Form::text('appointment_schedule_time', null, array('class' => 'custom-text-input', 'style' => 'width:85px')) }}
-      			</td>
-      		</tr>
-      		<tr>
-      			<td width="19%" align="right" style="padding-right: 15px;">Status: </td>
-      			<td>{{ Form::select('appointment_status', array('Open' => 'Open', 'In Progress' => 'In Progress', 'Done' => 'Done'), null, array('class' => 'custom-text-input')) }}</td>
-      		</tr>
-      	</table>
-      	<br>
-      	<h5>Notes</h5>
-      	{{ Form::textarea('notes', null, ['id' => 'notes','class' => 'form-control', 'rows' => 4, 'cols' => 54, 'maxlength' => 300, 'placeholder' => 'Limit to 300 characters only', 'style' => 'resize:none']) }}
-        
-      </div>
-      <div class="modal-footer">
-  		 <button type="button" id="btn-save-changes" data-id="" class="btn btn-primary btn-round" data-dismiss="modal">Save Changes</button>
-	     <button type="button" class="btn btn-default btn-round" data-dismiss="modal">Close</button>
-	  </div>
-    </div>
-  </div>
-</div>
-
 <script type="text/javascript">
 $(document).ready(function() {
-	$("input[name='appointment_schedule_date']").datepicker({
-    	minDate: 0
-  	});
+  $("input[name='appointment_schedule_date']").datepicker({
+    minDate: 0
+  });
 
-	$(".appointment").unbind().click(function(){
-		$('#appointment_patient_name').html($(this).data('patient'));
-		$("input[name='appointment_clinic']").val($(this).data('clinic'));
-		$("input[name='appointment_doctor']").val($(this).data('doctor'));
-		$("input[name='appointment_service_type']").val($(this).data('service'));
-		$("input[name='appointment_schedule_date']").val($(this).data('schedule_date'));
-		$("input[name='appointment_schedule_time']").val($(this).data('schedule_time'));
-		$("select[name='appointment_status']").val($(this).data('status'));
-		$("textarea[name='notes']").text($(this).data('detail'));
-		$("#btn-save-changes").attr('data-id', $(this).data('id'));
-	    $('#appointment_modal').modal('show');
-	});
+  $("input[name='new_appointment_schedule_date']").datepicker({
+    minDate: 0
+  });
 
-	$("#btn-save-changes").click(function(){
-		id = $("#btn-save-changes").data('id');
-		clinic = $("input[name='appointment_clinic']").val();
-		doctor = $("input[name='appointment_doctor']").val();
-		service = $("input[name='appointment_service_type']").val();
-		date_scheduled = $("input[name='appointment_schedule_date']").val();
-		time_scheduled = $("input[name='appointment_schedule_time']").val();
-		status = $("select[name='appointment_status']").val();
-		notes = $("textarea[name='notes']").val();
+  $(".appointment").unbind().click(function(){
+  	if($(this).index() != 0){
+	    $('#appointment_patient_name').html($(this).parent().data('patient'));
+	    $("select[name='appointment_clinic']").val($(this).parent().data('clinic'));
+	    $("select[name='appointment_doctor']").val($(this).parent().data('doctor'));
+	    $("select[name='appointment_service_type']").val($(this).parent().data('service'));
+	    $("input[name='appointment_schedule_date']").val($(this).parent().data('schedule_date'));
+	    $("input[name='appointment_schedule_time']").val($(this).parent().data('schedule_time'));
+	    $("select[name='appointment_status']").val($(this).parent().data('status'));
+	    $("textarea[name='notes']").text($(this).parent().data('detail'));
+	    $("#btn-save-changes").attr('data-id', $(this).parent().data('id'));
+	 	$('#edit_appointment_modal').modal('show');
+ 	}
+  });
 
-		$.ajax({
+  $("#btn-save-changes").unbind().click(function(){
+    id = $("#btn-save-changes").data('id');
+    clinic = $("select[name='appointment_clinic']").val();
+    doctor = $("select[name='appointment_doctor']").val();
+    service = $("select[name='appointment_service_type']").val();
+    date_scheduled = $("input[name='appointment_schedule_date']").val();
+    time_scheduled = $("input[name='appointment_schedule_time']").val();
+    status = $("select[name='appointment_status']").val();
+    notes = $("textarea[name='notes']").val();
+
+    $.ajax({
           method: "POST",
           url: "/patient/update_detail/" + id,
           data: { 
@@ -166,6 +124,93 @@ $(document).ready(function() {
           });
         });
 
-	});
+  });
+
+  $("#btn-submit-appointment").unbind().click(function(){
+    id = $("select[name='new_appointment_patient']").val();
+    clinic = $("select[name='new_appointment_clinic']").val();
+    doctor = $("select[name='new_appointment_doctor']").val();
+    service = $("select[name='new_appointment_service_type']").val();
+    date_scheduled = $("input[name='new_appointment_schedule_date']").val();
+    time_scheduled = $("input[name='new_appointment_schedule_time']").val();
+    status = $("select[name='new_appointment_status']").val();
+    notes = $("textarea[name='new_notes']").val();
+
+    $.ajax({
+          method: "POST",
+          url: "/patient/create_detail",
+          data: { 
+            patient_id: id,
+            clinic: clinic, 
+            doctor: doctor, 
+            service: service, 
+            date_scheduled: date_scheduled, 
+            time_scheduled: time_scheduled, 
+            status: status, 
+            notes: notes,
+            _token: "{{ csrf_token() }}" 
+          }
+        })
+        .done(function( msg ) {
+          Swal.fire(
+            'Saved!',
+            'Changes successfully saved.',
+            'success'
+          ).then((result) => {
+            location.reload();
+          });
+        });
+
+  });
+
+  $("input[name='appointment-action']").unbind().click(function(){
+  	var checkedNum = $('input[name="appointment-action"]:checked').length;
+
+  	if (checkedNum > 0) {
+  		$(".bulk-delete-appointment").removeClass('hidden');
+  	} else {
+  		$(".bulk-delete-appointment").addClass('hidden');
+  	}
+  });
+
+  $(".bulk-delete-appointment").click(function(){
+  	var detail_ids = [];
+
+  	$('input[name="appointment-action"]:checked').each(function(i){
+      detail_ids[i] = $(this).data('id');
+    });
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.value) {
+        $.ajax({
+          method: "POST",
+          url: "/patient/bulk_delete_detail",
+          data: { 
+          	ids: detail_ids,
+            _token: "{{ csrf_token() }}" 
+          }
+        })
+        .done(function( msg ) {
+          Swal.fire(
+            'Deleted!',
+            'Record has been deleted.',
+            'success'
+          ).then((result) => {
+            location.reload();
+          });
+        });
+      }
+  	});
+  });
+
 });
 </script>
+

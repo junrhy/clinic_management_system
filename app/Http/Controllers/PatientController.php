@@ -192,9 +192,13 @@ class PatientController extends Controller
     public function delete_patient_detail(Request $request, $id)
     {
         $patient_detail = PatientDetail::find($id);
-        $patient_id = $patient_detail->patient_id;
 
         $patient_detail->delete();
+    }
+
+    public function bulk_delete_patient_detail(Request $request)
+    {
+        PatientDetail::whereIn('id', $request->ids)->delete(); 
     }
 
     public function archive_patient_detail($id)
