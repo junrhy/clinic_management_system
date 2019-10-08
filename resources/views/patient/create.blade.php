@@ -24,7 +24,7 @@
                 <div class="panel-body">
                   {{ Html::ul($errors->all()) }}
 
-                  {{ Form::open(array('url' => 'patient')) }}
+                  {{ Form::open(array('url' => 'patient', 'id' => 'form-add-patient')) }}
                     <h3 class="row col-md-12">Personal</h3>
                     <div class="form-group col-md-12">
                       {{ Form::label('first_name', 'First Name') }}
@@ -33,12 +33,12 @@
 
                     <div class="form-group col-md-12">
                       {{ Form::label('last_name', 'Last Name') }}
-                      {{ Form::text('last_name', Input::old('last_name'), array('class' => 'form-control')) }}
+                      {{ Form::text('last_name', Input::old('last_name'), array('class' => 'form-control', 'required')) }}
                     </div>
 
                     <div class="form-group col-md-12">
                       {{ Form::label('dob', 'Date of birth') }}
-                      {{ Form::text('dob', Input::old('dob'), array('class' => 'form-control', 'placeholder' => 'mm/dd/yyyy')) }}
+                      {{ Form::text('dob', Input::old('dob'), array('class' => 'form-control', 'required', 'placeholder' => 'mm/dd/yyyy')) }}
                     </div>
 
                     <div class="form-group col-md-12">

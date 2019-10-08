@@ -8,6 +8,9 @@ use Hash;
 
 use App\User;
 use App\Model\Client;
+use App\Model\Patient;
+
+use Auth;
 
 class AccountController extends Controller
 {
@@ -62,4 +65,13 @@ class AccountController extends Controller
 	    }
     }
 
+    public function success(Request $request)
+    {
+        return view('account.success');
+    }
+
+    public function failed()
+    {
+        return view('account.failed');
+    }
 }

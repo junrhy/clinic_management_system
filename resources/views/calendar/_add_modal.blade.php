@@ -29,8 +29,8 @@
         <tr>
             <td width="19%" align="right" style="padding-right: 15px;">Schedule: </td>
             <td>
-              {{ Form::text('new_appointment_schedule_date', null, array('class' => 'custom-text-input', 'style' => 'width:103px', 'readonly')) }}
-              {{ Form::text('new_appointment_schedule_time', null, array('class' => 'custom-text-input', 'style' => 'width:85px')) }}
+              {{ Form::text('new_appointment_schedule_date', date("m/d/Y"), array('class' => 'custom-text-input', 'style' => 'width:103px', 'readonly')) }}
+              {{ Form::text('new_appointment_schedule_time', '8:00 am', array('class' => 'custom-text-input', 'style' => 'width:85px')) }}
             </td>
           </tr>
           <tr>

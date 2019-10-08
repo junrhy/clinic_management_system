@@ -25,11 +25,15 @@
         <dt></dt>
         <dd></dd>
     </div>
+    <input type="hidden" data-account-type="{{ Auth::user()->client->account_type }}" id="check-account-type">
+    <input type="hidden" data-clinic-count="{{ Auth::user()->client->clinics->count() }}" id="check-clinic-count">
+    <input type="hidden" data-patient-count="{{ Auth::user()->client->patients->count() }}" id="check-patient-count">
+    <input type="hidden" data-user-count="{{ Auth::user()->client->users->count() }}" id="check-user-count">
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3 class="text-center"><i class="fa fa-stethoscope"></i> {{ config('app.name', 'Laravel') }}</h3>
+                <h3 class="text-center"><i class="fa fa-clinic-medical"></i> {{ config('app.name', 'Laravel') }}</h3>
                 <strong>CA</strong>
             </div>
 
@@ -39,7 +43,17 @@
                     <li><a href="{{ route('register') }}">Register</a></li>
                 @else
                     <li><a href="{{ url('home') }}"><i class="fa fa-chalkboard"></i> Dashboard</a></li>
-                    <li><a href="{{ url('calendar') }}"><i class="fa fa-calendar"></i> Calendar</a></li>
+                    <li>
+                        <a href="#calendarSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fa fa-calendar">
+                            </i> Calendar</a>
+
+                        <ul class="collapse list-unstyled" id="calendarSubmenu">
+                            <li>
+                                <a href="{{ url('calendar') }}">All Appointments</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li>
                         <a href="#patientSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <i class="fa fa-notes-medical">
@@ -129,7 +143,7 @@
 
                             @if(Auth::user()->client->account_type == 'basic')
                             <li>
-                                <a href="https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7B7DXYEA9FKLA&custom=client_id_{{  Auth::user()->client->id }}">Upgrade Account</a>
+                                <a id="sidebar-menu-upgrade-account" href="#">Upgrade to Business Account</a>
                             </li>
                             @endif
                         </ul>
@@ -166,11 +180,9 @@
             <div style="height:200px;width:100%;position:absolute;left:0px;top:50px;z-index: -1;background-color: #01d8da;"></div>
             @yield('content')
         </div>
-
-
-        
     </div>
 
+    @include('account._upgrade_account')
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

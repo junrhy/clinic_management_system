@@ -34,7 +34,7 @@
                         <h2>Calendar <small class="text-muted">Welcome to {{ Auth::user()->client->name }}</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
-                        <a class="btn btn-white btn-icon btn-round float-right m-l-10" id="add-appointment" href="#" type="button">
+                        <a class="btn btn-white btn-icon btn-round float-right m-l-10" id="add-appointment" type="button">
                             <i class="fa fa-plus"></i>
                         </a>
 

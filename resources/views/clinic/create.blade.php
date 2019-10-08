@@ -24,7 +24,7 @@
                 <div class="panel-body">
                   {{ Html::ul($errors->all()) }}
 
-                  {{ Form::open(array('url' => 'clinic')) }}
+                  {{ Form::open(array('url' => 'clinic', 'id' => 'form-add-clinic')) }}
                     <div class="form-group">
                       {{ Form::label('name', 'Name') }}
                       {{ Form::text('name', Input::old('name'), array('class' => 'form-control')) }}

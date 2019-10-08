@@ -86,8 +86,8 @@ $(document).ready(function() {
 	    $("select[name='appointment_status']").val($(this).parent().data('status'));
 	    $("textarea[name='notes']").text($(this).parent().data('detail'));
 	    $("#btn-save-changes").attr('data-id', $(this).parent().data('id'));
-	 	$('#edit_appointment_modal').modal('show');
- 	}
+	 	  $('#edit_appointment_modal').modal('show');
+ 	  }
   });
 
   $("#btn-save-changes").unbind().click(function(){
@@ -154,7 +154,7 @@ $(document).ready(function() {
         .done(function( msg ) {
           Swal.fire(
             'Saved!',
-            'Changes successfully saved.',
+            'Record successfully added.',
             'success'
           ).then((result) => {
             location.reload();

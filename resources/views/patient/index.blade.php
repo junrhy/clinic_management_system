@@ -100,7 +100,7 @@
                             <th>Date of Birth</th>
                             <th>Age</th>
                             <th>Contact</th>
-                            <th>Medical Records</th>
+                            <th>Clinical Records</th>
                             <th>Action</th>
                           </tr>
                         @if($patients->count() > 0)

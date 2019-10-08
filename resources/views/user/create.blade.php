@@ -24,7 +24,7 @@
                 <div class="panel-body">
                   {{ Html::ul($errors->all()) }}
 
-                  {{ Form::open(array('url' => 'user')) }}
+                  {{ Form::open(array('url' => 'user', 'id' => 'form-add-user')) }}
                     <div class="form-group">
                       {{ Form::label('first_name', 'First Name') }}
                       {{ Form::text('first_name', Input::old('first_name'), array('class' => 'form-control')) }}
