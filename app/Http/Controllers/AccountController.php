@@ -34,6 +34,8 @@ class AccountController extends Controller
 
         $client = Client::where('email', $request->email)->first();
         $client->name = $request->name;
+        $client->secondary_email = $request->secondary_email;
+        $client->contact = $request->contact;
         $client->save();
         
         return back()->with('success','Business information successfully updated!');

@@ -67,6 +67,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('contact') ? ' has-error' : '' }}">
+                            <label for="contact" class="col-md-4 control-label">Contact No.</label>
+
+                            <div class="col-md-6">
+                                <input id="contact" type="text" class="form-control" name="contact" value="{{ old('contact') }}" required autofocus>
+
+                                @if ($errors->has('contact'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('contact') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
 
@@ -94,8 +108,7 @@
                                 <button type="submit" class="btn btn-primary btn-block">
                                     Sign Up
                                 </button>
-                                <br>
-                                <a href="{{ route('login') }}">You already have a membership?</a>
+                                <div class="text-center"><a href="{{ route('login') }}">You already have a membership?</a></div>
                             </div>
                         </div>
                     </form>

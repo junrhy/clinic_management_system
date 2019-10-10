@@ -36,13 +36,24 @@
       				  @endif
 
                 {{ Form::open(array('url' => 'update_business_information')) }}
-                    <div class="form-group">
-                      {{ Form::hidden('email', $user->client->email, array('class' => 'form-control')) }}
-                    </div>
-
                   	<div class="form-group">
                       {{ Form::label('name', 'Business Name') }}
                       {{ Form::text('name', $user->client->name, array('class' => 'form-control')) }}
+                    </div>
+
+                    <div class="form-group">
+                      {{ Form::label('name', 'Primary Email') }}
+                      {{ Form::text('email', $user->client->email, array('class' => 'form-control', 'readonly')) }}
+                    </div>
+
+                    <div class="form-group">
+                      {{ Form::label('name', 'Secondary Email') }}
+                      {{ Form::text('secondary_email', $user->client->secondary_email, array('class' => 'form-control')) }}
+                    </div>
+
+                    <div class="form-group">
+                      {{ Form::label('contact', 'Contact No.') }}
+                      {{ Form::text('contact', $user->client->contact, array('class' => 'form-control')) }}
                     </div>
 
                     {{ Form::submit('Save Changes', array('class' => 'btn btn-primary btn-round pull-right')) }}

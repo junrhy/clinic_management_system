@@ -44,7 +44,7 @@
                 @else
                     <li><a href="{{ url('home') }}"><i class="fa fa-chalkboard"></i> Dashboard</a></li>
 
-                  @if(Auth::user()->client->is_active)
+                  @if(Auth::user()->client->is_active && Auth::user()->client->is_suspended == 0)
                     <li><a href="{{ url('calendar') }}"><i class="fa fa-calendar"></i> Calendar</a></li>
                     <li>
                         <a href="#patientSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -143,6 +143,10 @@
                                 <a style="cursor:pointer;" id="sidebar-menu-activate-account">Activate my Account</a>
                             </li>
                             @endif
+
+                            @if(Auth::user()->client->is_active != 0 && Auth::user()->client->is_suspended == 1)
+                                <a style="cursor:pointer;" id="sidebar-menu-reactivate-account">Request to Reactivate Account</a>
+                            @endif
                         </ul>
                     </li>
                 @endguest
@@ -169,7 +173,17 @@
                             {{ csrf_field() }}
                         </form>
 
-                        <div class="float-right" style="margin: 8px;font-size: 11pt;color:#fff;">Account Type: <strong>{{ ucfirst(Auth::user()->client->account_type) }}</strong></div>
+                        <div class="float-right" style="margin: 8px;font-size: 11pt;color:#fff;">
+                            Account Type: <strong>{{ ucfirst(Auth::user()->client->account_type) }}</strong> 
+
+                            @if(Auth::user()->client->is_active == 0)
+                                <strong style="color:#000;">( This account is not active )</strong>
+                            @endif
+
+                            @if(Auth::user()->client->is_suspended == 1)
+                                <strong style="color:#000;">( This account is suspended )</strong>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -180,6 +194,8 @@
     </div>
 
     @include('account._upgrade_account')
+    @include('account._activate_account')
+    @include('account._reactivate_account')
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

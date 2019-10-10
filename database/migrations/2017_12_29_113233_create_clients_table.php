@@ -17,6 +17,8 @@ class CreateClientsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email', 150)->unique();
+            $table->string('secondary_email', 150)->nullable();
+            $table->string('contact')->nullable();
             $table->string('account_type')->default('basic');
             $table->boolean('is_active')->default(1);
             $table->boolean('is_suspended')->default(0);

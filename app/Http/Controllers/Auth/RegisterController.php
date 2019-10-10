@@ -80,6 +80,7 @@ class RegisterController extends Controller
         $client = new Client;
         $client->name  = $data['name'];
         $client->email = $data['email'];
+        $client->contact = $data['contact'];
         $client->save();
 
         $user = User::create([
