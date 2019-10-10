@@ -133,9 +133,8 @@
 	<section class="relative video-bxslider">
 		<div id="form_slider" class='video-bxslider' data-anchor="form_slider">
 			<div class="container relative body-slide text-center">
-				<h2 class='largeh-Bold-white text-center'>For Easy Start</h2>
-				<h3 class='xxxmedium-h text-center white'>Nulla ornare tortor quis rhoncus vulputate. Vivamus a enim vel erat accumsan hendrerit.
-					Nulla ornare tortor quis rhoncus vulputate. Vivamus a enim vel erat accumsan hendrerit.</h3>
+				<h2 class='largeh-Bold-white text-center'>To Better Organize</h2>
+				<h3 class='xxxmedium-h text-center white'>We introduced to you our most promising service our Clinic Management Software that can help you organize your medical records and a better view of your patient appointments, charges and payments.</h3>
 
 				<div class="visible-xs">
 					<a class="link-video group5" href="video/stock-footage-slo-motion-lemon-falling-into-wedges-against-black-drop.mp4">
@@ -145,18 +144,18 @@
 				</div>
 
 				<div class="dv2 ver2">
-					<a href="http://footage.shutterstock.com/clip-1881004-stock-footage-slo-motion-lemon-falling-into-wedges-against-black-drop.html?src=rel/1878937:2" class='btn submit no-mar white-btn a-trig glam-btn'>Take a Demo</a>
-					<a href="#myModalform" data-toggle="modal" role="button" class='btn submit a-trig'>Register Now</a>
+					<a href="#" class='btn submit no-mar white-btn a-trig glam-btn'>Take a Demo</a>
+					<a href="{{ route('register') }}" data-toggle="modal" role="button" class='btn submit a-trig'>Register Now</a>
 				</div>
 			</div>
 
 
 			<!-- When do you have video uncomment video tag -->
-			<video loop autoplay class="media-player hidden-xs">
+			<!-- <video loop autoplay class="media-player hidden-xs">
 				<source src="video/stock-footage-slo-motion-lemon-falling-into-wedges.wav" type='video/wav'>
 				<source src="video/stock-footage-slo-motion-lemon-falling-into-wedges-against-black-drop.mp4" type="video/mp4">
 				<source src="video/stock-footage-slo-motion-lemon-falling-into-wedges-against-black-drop.webm" type="video/webm">
-			</video> 
+			</video>  -->
 		</div>
 	</section>
 
@@ -165,29 +164,29 @@
 		<div class="container make-row">
 			<div class="row">
 				<div class="col-md-3 col-sm-6 make-md">
-					<h4 class='division-h sem-h' id='animIt1'>Next seminar</h4>
+					<h4 class='division-h sem-h' id='animIt1'>Next meet up</h4>
 				</div>
 
 				<ul class='list-unstyled seminars'>
 					<li id='animIt2' class='col-md-3 col-sm-6'>
 						<i class="fa fa-calendar"></i>
 						<div class="media">
-							<h4 class='division-h'>Date</h4>
-							<span>Desember 27th, 2013</span>
+							<h4 class='division-h'>Oct 30, 2019</h4>
+							<span>Date</span>
 						</div>
 					</li>
 					<li id='animIt3' class='col-md-3 col-sm-6'>
 						<i class="fa fa-clock-o"></i>
 						<div class="media">
-							<h4 class='division-h'>Time</h4>
-							<span>10:00 am - 4:30 pm </span>
+							<h4 class='division-h'>10am</h4>
+							<span>Time</span>
 						</div>
 					</li>
 					<li id='animIt4' class='col-md-3 col-sm-6'>
 						<i class="fa fa-map-marker"></i>
 						<div class="media">
-							<h4 class='division-h'>Location</h4>
-							<span>Deutsche Bahn, Ulm, Baden-Württemberg</span>
+							<h4 class='division-h'>Ayala Cebu Business Park</h4>
+							<span>Location</span>
 						</div>
 					</li>
 				</ul>
@@ -197,16 +196,16 @@
 
 	<section class="container" data-anchor="features">
 		<div class="spacer6"></div>
-			<h2 class='text-center xxh-Bold'>Why people choose Advisa Trainings?</h2>
+			<h2 class='text-center xxh-Bold'>Why people choose GoDoktor Clinic System?</h2>
 			<h3 class='text-center xmedium-h'>Your main Features</h3>
 			<div class="row trainings" id='trainings'>
 				<div class="col-md-3 col-xs-6 hov1">
 					<figure class='thumbnails'>
 						<i class='fa fa-shield'></i>
 					</figure>
-					<h4 class='xxsmall-h text-center transition-h'>Yearly Programs Upgrades</h4>
+					<h4 class='xxsmall-h text-center transition-h'>Maintenance & Updates</h4>
 					<div class="full-text">
-						Nulla ornare tortor quis rhoncus vulputate. Suspendisse commodo fringilla tellus vitae facilisis.
+						We give you a lifetime free maintenance on our system and unlimited updates on all of our app features.
 					</div>
 				</div>
 
@@ -214,9 +213,9 @@
 					<figure class='thumbnails'>
 						<i class='fa fa-heart-o'></i>
 					</figure>
-					<h4 class='xxsmall-h text-center transition-h'>Best Learning Programs</h4>
+					<h4 class='xxsmall-h text-center transition-h'>Design for You</h4>
 					<div class="full-text">
-						Nulla ornare tortor quis rhoncus vulputate. Quisque vehicula quis sapien a accumsan
+						Part of our team are Doctors who help us design the system to perfectly make the right service.
 					</div>
 				</div>
 
@@ -226,7 +225,7 @@
 					</figure>
 					<h4 class='xxsmall-h text-center transition-h'>100% Money Back</h4>
 					<div class="full-text">
-						Nulla ornare tortor quis rhoncus vulputate. Fusce enim erat, volutpat id nisi quis, blandit sodales est
+						If you are not happy with our services. We will refund you right away, No question ask.
 					</div>
 				</div>
 
@@ -234,9 +233,9 @@
 					<figure class='thumbnails'>
 						<i class='fa fa-book'></i>
 					</figure>
-					<h4 class='xxsmall-h text-center transition-h'>Small groups, Individual Learning</h4>
+					<h4 class='xxsmall-h text-center transition-h'>24/7 Support</h4>
 					<div class="full-text">
-						Nulla ornare tortor quis rhoncus vulputate. Vivamus a enim
+						We are always here every time you need us. You can reach us anytime through our contact information.
 					</div>
 				</div>
 			</div>
@@ -336,12 +335,12 @@
 						<caption class='noR-border'>Basic</caption>
 						 <thead>
 							<tr>
-								<td><b><sup>$</sup>99</b>.95</td>
+								<td><b>Free</b></td>
 							</tr>
 						 </thead>
 						<tbody>
 							<tr>
-								<td>Morbi Vel Aliquet Arcu</td>
+								<td>For a Start</td>
 							</tr>
 							<tr>
 								<td>300 Aenean Hendrerit Tempor <br> Quisque Lectus Leo</td>
@@ -361,12 +360,12 @@
 						<caption>Business</caption>
 						 <thead>
 							<tr>
-								<td><b><sup>$</sup>499</b>.95</td>
+								<td><b><sup>&#8369;</sup>1,000</b>.00</td>
 							</tr>
 						 </thead>
 						<tbody>
 							<tr>
-								<td>Morbi vel aliquet arcu</td>
+								<td>When You Are Growing</td>
 							</tr>
 							<tr>
 								<td>4×300 Aenean Hendrerit Tempor <br> Quisque Lectus Leo</td>
@@ -392,27 +391,27 @@
 						<caption class='noL-border'>Premium</caption>
 						 <thead>
 							<tr>
-								<td><b><sup>$</sup>799</b>.95</td>
+								<td><b><sup>&#8369;</sup>TBA</b></td>
 							</tr>
 						 </thead>
 						<tbody>
 							<tr>
-								<td>Morbi vel aliquet arcu</td>
+								<td>Expand Your Horizon</td>
 							</tr>
 							<tr>
-								<td>8×300 Aenean Hendrerit Tempor <br> Quisque Lectus Leo</td>
+								<td>Coming Soon!</td>
 							</tr>
 							<tr>
-								<td>12×300 Vestibulum Nisi</td>
+								<td>Coming Soon!</td>
 							</tr>
 							<tr>
-								<td>8×300 Aenean Hendrerit Tempor</td>
+								<td>Coming Soon!</td>
 							</tr>
 							<tr>
-								<td>Vitae Pretium</td>
+								<td>Coming Soon!</td>
 							</tr>
 							<tr class='lastTr'>
-								<td><a class='btn buy-now offsetY-6' href='#'>Buy Now</a></td>
+								<td>Coming Soon!</td>
 							</tr>
 						</tbody>
 					</table>
@@ -561,7 +560,7 @@
 		</div>
 	</div>
 	<div class="container">
-		<a href="#" data-scroll="form_slider" class='btn submit a-trig reg-footer'>Register Now</a>
+		<a href="{{ route('register') }}" class='btn submit a-trig reg-footer'>Register Now</a>
 	</div>
 	<div class="container bottom">
 
@@ -581,7 +580,7 @@
 		</ul>
 		<div class="clearifx"></div>
 		<span class="copyright">
-			&#169; 2013 Advisa.com
+			&#169; 2019 Godoktor.com.ph
 		</span>
 		<div class="container-fluid responsive-switcher hidden-md hidden-lg">
 			<i class="fa fa-mobile"></i>
