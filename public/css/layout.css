@@ -151,7 +151,6 @@
 }
 
 #sidebar ul li a {
-    font-size: 1.1em;
     display: block;
     color:#888;
     position: relative;
@@ -352,7 +351,7 @@ ul ul a {
     left: -6px;
     width: 0%;
     height: 2px;
-    background: #b91f1f;
+    background: #FF6065;
     -moz-border-radius: 1px;
     -webkit-border-radius: 1px;
     border-radius: 1px;

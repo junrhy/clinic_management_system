@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-6 col-md-offset-3 m-t-10">
+        <div class="col-md-6 col-md-offset-3 m-t-100">
             <div class="panel panel-default">
-                <div class="panel-heading"><h3 style="color:#fff;">Login</h3></div>
+                <div class="panel-heading"><h3 class="text-center">Login</h3></div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">

@@ -51,5 +51,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         config.hostmanager.aliases = settings['sites'].map { |site| site['map'] }
     end
 
-    config.vm.network "public_network"
+    # config.vm.network "public_network"
 end

@@ -34,7 +34,7 @@
         <nav id="sidebar">
             <div class="sidebar-header">
                 <h3 class="text-center"><i class="fa fa-clinic-medical"></i> {{ config('app.name', 'Laravel') }}</h3>
-                <strong>CA</strong>
+                <strong>GD</strong>
             </div>
 
             <ul class="list-unstyled components">
@@ -43,17 +43,9 @@
                     <li><a href="{{ route('register') }}">Register</a></li>
                 @else
                     <li><a href="{{ url('home') }}"><i class="fa fa-chalkboard"></i> Dashboard</a></li>
-                    <li>
-                        <a href="#calendarSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <i class="fa fa-calendar">
-                            </i> Calendar</a>
 
-                        <ul class="collapse list-unstyled" id="calendarSubmenu">
-                            <li>
-                                <a href="{{ url('calendar') }}">All Appointments</a>
-                            </li>
-                        </ul>
-                    </li>
+                  @if(Auth::user()->client->is_active)
+                    <li><a href="{{ url('calendar') }}"><i class="fa fa-calendar"></i> Calendar</a></li>
                     <li>
                         <a href="#patientSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <i class="fa fa-notes-medical">
@@ -124,8 +116,7 @@
                             </li>
                         </ul>
                     </li>
-
-
+                  @endif
                     
                     <li>
                         <a href="#profileSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -143,7 +134,13 @@
 
                             @if(Auth::user()->client->account_type == 'basic')
                             <li>
-                                <a id="sidebar-menu-upgrade-account" href="#">Upgrade to Business Account</a>
+                                <a style="cursor:pointer;" id="sidebar-menu-upgrade-account">Upgrade to Business Account</a>
+                            </li>
+                            @endif
+
+                            @if(Auth::user()->client->is_active == 0 && Auth::user()->client->account_type == 'business')
+                            <li>
+                                <a style="cursor:pointer;" id="sidebar-menu-activate-account">Activate my Account</a>
                             </li>
                             @endif
                         </ul>

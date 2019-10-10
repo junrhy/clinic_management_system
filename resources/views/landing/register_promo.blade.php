@@ -6,7 +6,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
-	<title>Advisa Fullsize Slider</title>
+	<title>{{ config('app.name', 'Laravel') }}</title>
 	<meta content="" name="keywords">
 	<meta content="" name="description">
 
@@ -40,7 +40,7 @@
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
 					<div class="logo navbar-brand">
-						<a href="#" title="Advisa"></a>
+						{{ config('app.name', 'Laravel') }}
 					</div>
 		      <button class='toggle-slide-left visible-xs collapsed navbar-toggle' type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><i class="fa fa-bars"></i></button>
 				</div>

@@ -12,15 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('landing.register_promo');
+    return view('landing.register_with_video');
 });
 
 Auth::routes();
 
 Route::get('/business_information', 'AccountController@business_information');
 Route::post('/update_business_information', 'AccountController@update_business_information');
+
 Route::get('/success', 'AccountController@success');
-Route::get('/failed', 'AccountController@failed');
+Route::get('/cancel', 'AccountController@cancel');
 
 Route::get('/change_password', 'AccountController@change_password');
 Route::post('/update_password', 'AccountController@update_password');
@@ -50,3 +51,6 @@ Route::post('/patient/create_billing_payment', 'PatientController@create_billing
 Route::delete('/patient/delete_payment/{id}', 'PatientController@delete_patient_payment');
 
 Route::post('/calendar/scheduled_patients', 'CalendarController@scheduled_patients');
+
+// Webhooks
+Route::any('/paypal_subscription_activated', 'WebhookController@paypal_subscription_activated');

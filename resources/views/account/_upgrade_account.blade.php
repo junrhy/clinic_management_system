@@ -109,8 +109,8 @@
         <br>
       </div>
       <div class="modal-footer">
-       <a href="https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7B7DXYEA9FKLA&custom=client_id_{{  Auth::user()->client->id }}" type="button" id="btn-upgrade-account" data-id="" class="btn btn-upgrade btn-round">Upgrade to Business Account</a>
        <button type="button" class="btn btn-default btn-round" data-dismiss="modal">Close</button>
+       <a href="https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7B7DXYEA9FKLA&notify_url={{ url('/paypal_subscription_activated') }}&custom=clientid_{{  Auth::user()->client->id }}" type="button" id="btn-upgrade-account" data-id="" class="btn btn-upgrade btn-round">Upgrade to Business Account</a>
     </div>
     </div>
   </div>

@@ -67,11 +67,15 @@ class AccountController extends Controller
 
     public function success(Request $request)
     {
+        // $client = Client::find(Auth::user()->client_id);
+        // $client->account_type = 'business';
+        // $client->save();
+
         return view('account.success');
     }
 
-    public function failed()
+    public function cancel()
     {
-        return view('account.failed');
+        return view('account.cancel');
     }
 }

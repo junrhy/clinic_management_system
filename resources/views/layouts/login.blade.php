@@ -15,9 +15,15 @@
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 
     <script src="https://kit.fontawesome.com/e3497de5a4.js" crossorigin="anonymous"></script>
+
+    <style type="text/css">
+      body {
+        background: #FFFFFF;
+      }
+    </style>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top" style="background-color: #01d8da;">
             <div class="container">
                 <div class="navbar-header">
 
@@ -45,7 +51,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a href="{{ route('register') }}">Signup</a></li>
+                            <li><a href="{{ route('register') }}">Sign Up</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
