@@ -21,20 +21,21 @@ class AccountController extends Controller
 
     public function business_information()
     {
-        $user = auth()->user();
+        $client = auth()->user()->client;
 
-        return view('account.business_information')->with('user', $user);
+        return view('account.business_information')->with('client', $client);
     }
 
     public function update_business_information(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255']
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
         ]);
 
-        $client = Client::where('email', $request->email)->first();
+        $client = Client::find($request->id);
         $client->name = $request->name;
-        $client->secondary_email = $request->secondary_email;
+        $client->email = $request->email;
         $client->contact = $request->contact;
         $client->save();
         
