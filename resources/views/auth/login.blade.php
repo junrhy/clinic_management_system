@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3 m-t-200">
             <div class="panel panel-default">
-                <div class="panel-heading"><h3 class="text-center">Login</h3></div>
+                <div class="panel-heading"><h3 class="text-center" style="font-weight:bold;color:#01d8da;"><i class="fa fa-hand-holding-heart"></i> Patiently</h3></div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
@@ -13,7 +13,7 @@
 
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
             
-                            <div class="col-md-8 col-md-offset-2">
+                            <div class="col-md-10 col-md-offset-1">
                                 <div class="input-group input-lg">
                                     <input id="username" type="text" class="form-control" name="username" placeholder="Enter username" value="{{ old('username') }}" required autofocus>
                                     <span class="input-group-addon">
@@ -32,7 +32,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <div class="col-md-8 col-md-offset-2">
+                            <div class="col-md-10 col-md-offset-1">
                                 <div class="input-group input-lg">
                                     <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
                                     <span class="input-group-addon">
@@ -59,16 +59,22 @@
                         </div> -->
 
                         <div class="form-group">
-                            <div class="col-md-8 col-md-offset-2">
+                            <div class="col-md-10 col-md-offset-1">
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-primary btn-lg btn-round btn-block">
                                         Login
                                     </button>
                                 </div>
                             </div>
+                            
                             <div class="col-md-8 col-md-offset-4">
+                                <br>
+                                <br>
                                 <a class="btn btn-link btn-forgot-password" href="{{ route('password.request') }}">
                                     Forgot Your Password?
+                                </a> | 
+                                <a class="btn btn-link btn-register" href="{{ route('register') }}">
+                                    Register
                                 </a>
                             </div>
                         </div>

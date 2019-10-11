@@ -32,7 +32,7 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-12">
-                        <h2>All Clinics <small class="text-muted">Welcome to {{ Auth::user()->client->name }}</small></h2>
+                        <h2>All Clinics <small class="text-muted">List of all Clinics</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                         <a class="btn btn-white btn-icon btn-round float-right m-l-10" href="{{ url('clinic/create') }}" type="button">
@@ -51,26 +51,28 @@
                 <div class="panel-heading">All Clinics</div>
 
                 <div class="panel-body">
-                    <table class="table">
-                      <tr>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th class="text-right">Action</th>
-                      </tr>
-                      <?php foreach ($clinics as $clinic_key => $clinic_item): ?>
-                      <tr>
-                        <td>{{ $clinic_item->name }}</td>
-                        <td>{{ $clinic_item->address }}</td>
-                        <td>
-                            <div class="pull-right">
-                              <a class='update-clinic' href="{{ route('clinic.edit',$clinic_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a> | 
-                              <a class="delete-clinic" data-id="{{ $clinic_item->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                            </div>
-                        </td>
-                      </tr>
-                      <?php endforeach; ?>
-                    </table>
-
+                    Listing: {{ $clinics->count() }}
+                    <div class="responsive">
+                      <table class="table">
+                        <tr>
+                          <th>Name</th>
+                          <th>Address</th>
+                          <th class="text-right">Action</th>
+                        </tr>
+                        <?php foreach ($clinics as $clinic_key => $clinic_item): ?>
+                        <tr>
+                          <td>{{ $clinic_item->name }}</td>
+                          <td>{{ $clinic_item->address }}</td>
+                          <td>
+                              <div class="pull-right">
+                                <a class='update-clinic' href="{{ route('clinic.edit',$clinic_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a> | 
+                                <a class="delete-clinic" data-id="{{ $clinic_item->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                              </div>
+                          </td>
+                        </tr>
+                        <?php endforeach; ?>
+                      </table>
+                    </div>
                 </div>
             </div>
         </div>

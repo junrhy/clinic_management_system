@@ -5,14 +5,14 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3 m-t-30">
             <div class="panel panel-default">
-                <div class="panel-heading"><h3 class="text-center">Register</h3></div>
+                <div class="panel-heading"><h3 class="text-center" style="font-weight:bold;color:#01d8da;"><i class="fa fa-hand-holding-heart"></i> Patiently</h3></div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <div class="col-md-8 col-md-offset-2">
+                            <div class="col-md-10 col-md-offset-1">
                                 <div class="input-group input-lg">
                                     <input id="name" type="text" class="form-control" name="name" placeholder="Business Name" value="{{ old('name') }}" required autofocus>
                                     <span class="input-group-addon">
@@ -30,7 +30,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                            <div class="col-md-8 col-md-offset-2">
+                            <div class="col-md-10 col-md-offset-1">
                                 <div class="input-group input-lg">
                                     <input id="first_name" type="text" class="form-control" name="first_name" placeholder="First Name" value="{{ old('first_name') }}" required autofocus>
                                     <span class="input-group-addon">
@@ -48,7 +48,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                            <div class="col-md-8 col-md-offset-2">
+                            <div class="col-md-10 col-md-offset-1">
                                 <div class="input-group input-lg">
                                     <input id="last_name" type="text" class="form-control" name="last_name" placeholder="Last Name" value="{{ old('last_name') }}" required autofocus>
                                     <span class="input-group-addon">
@@ -66,7 +66,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <div class="col-md-8 col-md-offset-2">
+                            <div class="col-md-10 col-md-offset-1">
                                 <div class="input-group input-lg">
                                     <input id="email" type="email" class="form-control" name="email" placeholder="E-Mail Address" value="{{ old('email') }}" required>
                                     <span class="input-group-addon">
@@ -84,7 +84,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('contact') ? ' has-error' : '' }}">
-                            <div class="col-md-8 col-md-offset-2">
+                            <div class="col-md-10 col-md-offset-1">
                                 <div class="input-group input-lg">
                                     <input id="contact" type="text" class="form-control" name="contact" placeholder="Contact Number" value="{{ old('contact') }}" required autofocus>
                                     <span class="input-group-addon">
@@ -102,7 +102,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                            <div class="col-md-8 col-md-offset-2">
+                            <div class="col-md-10 col-md-offset-1">
                                 <div class="input-group input-lg">
                                     <input id="username" type="username" class="form-control" name="username" placeholder="Username" required>
                                     <span class="input-group-addon">
@@ -120,7 +120,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <div class="col-md-8 col-md-offset-2">
+                            <div class="col-md-10 col-md-offset-1">
                                 <div class="input-group input-lg">
                                     <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
                                     <span class="input-group-addon">
@@ -138,7 +138,7 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-8 col-md-offset-2">
+                            <div class="col-md-10 col-md-offset-1">
                                 <div class="input-group input-lg">
                                     <input id="password-confirm" type="password" class="form-control" placeholder="Confirm Password" name="password_confirmation" required>
                                     <span class="input-group-addon">
@@ -149,7 +149,7 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-8 col-md-offset-2">
+                            <div class="col-md-10 col-md-offset-1">
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-primary btn-block btn-round">
                                         Register

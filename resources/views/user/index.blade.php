@@ -32,7 +32,7 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-12">
-                        <h2>All Users <small class="text-muted">Welcome to {{ Auth::user()->client->name }}</small></h2>
+                        <h2>All Users <small class="text-muted">List of all Users</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                         <a class="btn btn-white btn-icon btn-round float-right m-l-10" href="{{ url('user/create') }}" type="button">
@@ -51,6 +51,7 @@
                 <div class="panel-heading">All Users</div>
 
                 <div class="panel-body">
+                  Listing: {{ $users->count() }}
                   <div class="table-responsive">
                     <table class="table">
                       <tr>

@@ -33,8 +33,8 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3 class="text-center"><i class="fa fa-clinic-medical"></i> {{ config('app.name', 'Laravel') }}</h3>
-                <strong>GD</strong>
+                <h3 class="text-center"><i class="fa fa-hand-holding-heart"></i> {{ config('app.name', 'Laravel') }}</h3>
+                <strong>P</strong>
             </div>
 
             <ul class="list-unstyled components">
