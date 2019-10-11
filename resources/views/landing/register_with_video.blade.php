@@ -134,7 +134,7 @@
 		<div id="form_slider" class='video-bxslider' data-anchor="form_slider">
 			<div class="container relative body-slide text-center">
 				<h2 class='largeh-Bold-white text-center'>To Better Organize</h2>
-				<h3 class='xxxmedium-h text-center white'>We introduced to you our most promising service our Clinic Management Software that can help you organize your medical records and a better view of your patient appointments, charges and payments.</h3>
+				<h3 class='xxxmedium-h text-center white'>We introduced to you the most promising service our online Clinic Management Software that can help you organize your medical records and a better way to handle your patient appointments, charges and payments.</h3>
 
 				<div class="visible-xs">
 					<a class="link-video group5" href="video/stock-footage-slo-motion-lemon-falling-into-wedges-against-black-drop.mp4">
@@ -215,7 +215,7 @@
 					</figure>
 					<h4 class='xxsmall-h text-center transition-h'>Design for You</h4>
 					<div class="full-text">
-						Part of our team are Doctors who help us design the system to perfectly make the right service.
+						Part of our team are Doctors who help us design the system to perfectly make the right service for you.
 					</div>
 				</div>
 

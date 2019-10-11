@@ -22,6 +22,8 @@
                 <div class="panel-heading">Edit User</div>
 
                 <div class="panel-body">
+                  {{ Html::ul($errors->all()) }}
+
                   {{ Form::model($user, array('route' => array('user.update', $user->id), 'method' => 'PUT')) }}
                     <div class="form-group">
                       {{ Form::label('first_name', 'First Name') }}

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-6 col-md-offset-3 m-t-100">
+        <div class="col-md-6 col-md-offset-3 m-t-200">
             <div class="panel panel-default">
                 <div class="panel-heading"><h3 class="text-center">Login</h3></div>
 
@@ -11,22 +11,24 @@
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
             
                             <div class="col-md-8 col-md-offset-2">
                                 <div class="input-group input-lg">
-                                    <input id="email" type="email" class="form-control" name="email" placeholder="Enter email address" value="{{ old('email') }}" required autofocus>
+                                    <input id="username" type="text" class="form-control" name="username" placeholder="Enter username" value="{{ old('username') }}" required autofocus>
                                     <span class="input-group-addon">
                                         <i class="fa fa-user-circle"></i>
                                     </span>
                                 </div>
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                                <div class="col-md-12">
+                                    @if ($errors->has('username'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('username') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                              </div>
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
@@ -34,7 +36,7 @@
                                 <div class="input-group input-lg">
                                     <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
                                     <span class="input-group-addon">
-                                        <i class="fa fa-lock"></i>
+                                        <i class="fa fa-key"></i>
                                     </span>
                                 </div>
 
@@ -58,7 +60,7 @@
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-2">
-                                <div style="padding: 25px 18px;">
+                                <div class="col-md-12">
                                     <button type="submit" class="btn btn-primary btn-lg btn-round btn-block">
                                         Login
                                     </button>

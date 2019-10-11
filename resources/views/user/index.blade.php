@@ -56,14 +56,15 @@
                       <tr>
                         <th>First Name</th>
                         <th>Last Name</th>
+                        <th>Username</th>
                         <th>Email</th>
                         <th class="text-right">Action</th>
                       </tr>
                       <?php foreach ($users as $user_key => $user_item): ?>
-                      @if($user_item->email != $user_item->client->email)
                       <tr>
                         <td>{{ $user_item->first_name }}</td>
                         <td>{{ $user_item->last_name }}</td>
+                        <td>{{ $user_item->username }}</td>
                         <td>{{ $user_item->email }}</td>
                         <td>
                             <div class="pull-right">
@@ -72,7 +73,6 @@
                             </div>
                         </td>
                       </tr>
-                      @endif
                       <?php endforeach; ?>
                     </table>
                   </div>

@@ -1,0 +1,36 @@
+/* navbar */
+.navbar-default {
+    background-color: #F8F8F8;
+    border-color: #fff;
+}
+/* Title */
+.navbar-default .navbar-brand {
+    color: #fff;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav>li>a, .navbar-default .navbar-text {
+    color: #fff;
+}
+
+.m-t-30 {
+    margin-top: 30px;
+}
+
+.btn-round {
+    border-width: 1px;
+    border-radius: 30px !important;
+    padding: 11px 23px;
+}
+
+.bg-darkblue {
+	background: url("/landing/img/bg-darkblue.jpg") repeat-x fixed 0 0  #2F4050;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+}
