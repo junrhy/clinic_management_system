@@ -75,6 +75,14 @@
                       </tr>
                     </table>
                   </div>
+                  
+                  <div class="row" style="font-size:10pt;">
+                    <h4 style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;"><i class="fa fa-tooth"></i> Dental Chart</h4>
+                    <div>
+                      <br>
+                      @include('patient.dental_chart')
+                    </div>
+                  </div>
 
                   <div class="form-group col-md-12">
                     <div class="row" style="margin-top:30px;">
@@ -133,47 +141,49 @@
                           </div>
                           <div id="menu1" class="tab-pane fade">
                             <br>
-                            <table class="table">
-                              <thead>
-                                <th style="width:15%">Created</th>
-                                <th style="width:20%">Clinic</th>
-                                <th style="width:20%">Doctor</th> 
-                                <th style="width:20%">Service Type</th>
-                                <th>Notes</th>
-                                <th style="width:20%">Appointment</th>
-                                <th style="width:1%;text-align:center;">Action</th>
-                              </thead>
+                            <div class="table-responsive">
+                                <table class="table">
+                                  <thead>
+                                    <th style="width:15%">Created</th>
+                                    <th style="width:20%">Clinic</th>
+                                    <th style="width:20%">Doctor</th> 
+                                    <th style="width:20%">Service Type</th>
+                                    <th>Notes</th>
+                                    <th style="width:20%">Appointment</th>
+                                    <th style="width:1%;text-align:center;">Action</th>
+                                  </thead>
 
-                              <tbody>
-                              @if(count($archived_details) > 0)
-                                @foreach ($archived_details as $archive_detail)
-                                  <tr>
-                                      <td>{{ $archive_detail->created_at->format('M d, Y') }}</td>
-                                      <td>{{ $archive_detail->clinic }}</td>
-                                      <td>{{ $archive_detail->doctor }}</td>
-                                      <td>{{ $archive_detail->service }}</td>
-                                      <td><?php echo $archive_detail->notes ?></td>
-                                      <td>
-                                        @if($archive_detail->date_scheduled != '')
-                                          {{ date('M d, Y', strtotime($archive_detail->date_scheduled)) }}&nbsp;&nbsp;
-                                          {{ date('h:i a', strtotime($archive_detail->time_scheduled)) }}
-                                        @else
-                                          n/a
-                                        @endif
-                                      </td>
-                                      <td class="text-center">
-                                        <a class="delete-link delete-detail" data-id="{{ $archive_detail->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a> | 
-                                        <a class="unarchive-link unarchive-detail" data-id="{{ $archive_detail->id }}"><i class="fa fa-undo" aria-hidden="true" title="Restore"></i></a>
-                                      </td>
-                                  </tr>
-                                @endforeach
-                              @else
-                                <tr>
-                                  <td class="text-center" colspan="7">No archived record.</td>
-                                </tr>
-                              @endif
-                              </tbody>
-                            </table>
+                                  <tbody>
+                                  @if(count($archived_details) > 0)
+                                    @foreach ($archived_details as $archive_detail)
+                                      <tr>
+                                          <td>{{ $archive_detail->created_at->format('M d, Y') }}</td>
+                                          <td>{{ $archive_detail->clinic }}</td>
+                                          <td>{{ $archive_detail->doctor }}</td>
+                                          <td>{{ $archive_detail->service }}</td>
+                                          <td><?php echo $archive_detail->notes ?></td>
+                                          <td>
+                                            @if($archive_detail->date_scheduled != '')
+                                              {{ date('M d, Y', strtotime($archive_detail->date_scheduled)) }}&nbsp;&nbsp;
+                                              {{ date('h:i a', strtotime($archive_detail->time_scheduled)) }}
+                                            @else
+                                              n/a
+                                            @endif
+                                          </td>
+                                          <td class="text-center">
+                                            <a class="delete-link delete-detail" data-id="{{ $archive_detail->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a> | 
+                                            <a class="unarchive-link unarchive-detail" data-id="{{ $archive_detail->id }}"><i class="fa fa-undo" aria-hidden="true" title="Restore"></i></a>
+                                          </td>
+                                      </tr>
+                                    @endforeach
+                                  @else
+                                    <tr>
+                                      <td class="text-center" colspan="7">No archived record.</td>
+                                    </tr>
+                                  @endif
+                                  </tbody>
+                                </table>
+                            </div>
                           </div>
                         </div>
                     </div>
