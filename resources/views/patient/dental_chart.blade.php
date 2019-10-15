@@ -1,14 +1,33 @@
 <style type="text/css">
-	img {
-		height: 150px;
-		width: 40px;
+	img.root {
+		height: 62px;
+		width: 45px;
 	}
 
+	img.crown {
+		height: 40px;
+		width: 45px;
+	}
+
+	img.filling-none {
+		height: 56px;
+		width: 56px;
+		position: relative;
+		top:-15px;
+		left:-13px;
+	}
+
+	.upper-jaw-crown {
+		position: relative;
+		top: -1px;
+	}
+
+
 	.chart {
-		background:#ffe6ee;
+		background:#fff;
 		margin-left: 13px;
 		margin-right: 20px;
-		width: 54em;
+		width: 60em;
 		padding:10px;
 	}
 
@@ -19,7 +38,7 @@
 		display: inline-block;
 		text-align: center;
 		font-size: 12pt;
-		margin:5px;
+		margin:5px 7px 5px 8px;
 		padding-top: 2px;
 		border-radius: 50%;
 		cursor: pointer;
@@ -31,11 +50,11 @@
 	}
 
 	.vl {
-	  	border-left: 1px solid #ffb3b3;
+	  	border-left: 1px solid #01d8da;
 	}
 
 	.hl {
-		border-bottom: 3px solid #ffb3b3;
+		border-bottom: 1px solid #01d8da;
 		margin-top: 5px;
 		margin-bottom: 5px;
 	}
@@ -44,42 +63,120 @@
 		border: 1px solid #eee;
 	}
 
-	.tooth-details img {
-		height: 200px;
-		width: 60px;
+	.filling {
+	  border-top: 6px solid #ffebcc;
+	  border-right: 6px solid #ffebcc;
+	  border-bottom: 6px solid #ffebcc;
+	  border-left: 6px solid #fff;
+	  background-color: #ffebcc;
+	  border-radius:50%;
+	  height:40px;
+	  width:40px;
+	  margin-left: 2px;
+	  margin-right: 3px;
+	  display: inline-block;
 	}
 
-	.extracted {
-		position: absolute;
-		width: 30px;
+	.upper-jaw-root, .lower-jaw-root {
+		background-color:#ffe6e6; 
 	}
 </style>
 
 <div class="table-responsive" class="col-md-12">
 	<div class="col-md-6 chart">
-		<div>
-			<img src="/img/dental-chart/18.gif">
-			<img class="extracted" style="left:16px;" src="/img/dental-chart/extracted.gif">
-			<img src="/img/dental-chart/17.gif">
-			<img class="extracted" style="left:58px;" src="/img/dental-chart/extracted.gif">
-			<img src="/img/dental-chart/16.gif">
-			<img src="/img/dental-chart/15.gif">
-			<img src="/img/dental-chart/14.gif">
-			<img src="/img/dental-chart/13.gif">
-			<img src="/img/dental-chart/12.gif">
-			<img src="/img/dental-chart/11.gif">
+		<h3 class="text-center">Upper Jaw</h3>
+		<div class="upper-jaw-root">
+			<img class="root" src="/img/dental-chart/18_root.gif">
+			<img class="root" src="/img/dental-chart/17_root.gif">
+			<img class="root" src="/img/dental-chart/16_root.gif">
+			<img class="root" src="/img/dental-chart/15_root.gif">
+			<img class="root" src="/img/dental-chart/14_root.gif">
+			<img class="root" src="/img/dental-chart/13_root.gif">
+			<img class="root" src="/img/dental-chart/12_root.gif">
+			<img class="root" src="/img/dental-chart/11_root.gif">
 			
-			<img class="vl" src="/img/dental-chart/21.gif">
-			<img src="/img/dental-chart/22.gif">
-			<img src="/img/dental-chart/23.gif">
-			<img src="/img/dental-chart/24.gif">
-			<img src="/img/dental-chart/25.gif">
-			<img src="/img/dental-chart/26.gif">
-			<img src="/img/dental-chart/27.gif">
-			<img src="/img/dental-chart/28.gif">
+			<img class="root vl" src="/img/dental-chart/21_root.gif">
+			<img class="root" src="/img/dental-chart/22_root.gif">
+			<img class="root" src="/img/dental-chart/23_root.gif">
+			<img class="root" src="/img/dental-chart/24_root.gif">
+			<img class="root" src="/img/dental-chart/25_root.gif">
+			<img class="root" src="/img/dental-chart/26_root.gif">
+			<img class="root" src="/img/dental-chart/27_root.gif">
+			<img class="root" src="/img/dental-chart/28_root.gif">
 		</div>
-		<div>
-			<div class="tooth-number tooth-no-selected" data-tooth-no="18">18</div>
+		<div class="upper-jaw-crown">
+			<img class="crown" src="/img/dental-chart/18_crown.gif">
+			<img class="crown" src="/img/dental-chart/17_crown.gif">
+			<img class="crown" src="/img/dental-chart/16_crown.gif">
+			<img class="crown" src="/img/dental-chart/15_crown.gif">
+			<img class="crown" src="/img/dental-chart/14_crown.gif">
+			<img class="crown" src="/img/dental-chart/13_crown.gif">
+			<img class="crown" src="/img/dental-chart/12_crown.gif">
+			<img class="crown" src="/img/dental-chart/11_crown.gif">
+			
+			<img class="crown vl" src="/img/dental-chart/21_crown.gif">
+			<img class="crown" src="/img/dental-chart/22_crown.gif">
+			<img class="crown" src="/img/dental-chart/23_crown.gif">
+			<img class="crown" src="/img/dental-chart/24_crown.gif">
+			<img class="crown" src="/img/dental-chart/25_crown.gif">
+			<img class="crown" src="/img/dental-chart/26_crown.gif">
+			<img class="crown" src="/img/dental-chart/27_crown.gif">
+			<img class="crown" src="/img/dental-chart/28_crown.gif">
+		</div>
+		
+		<div class="upper-jaw-filling">
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+		</div>
+		<div class="upper-jaw-tooth-no">
+			<div class="tooth-number" data-tooth-no="18">18</div>
 			<div class="tooth-number" data-tooth-no="17">17</div>
 			<div class="tooth-number" data-tooth-no="16">16</div>
 			<div class="tooth-number" data-tooth-no="15">15</div>
@@ -98,7 +195,7 @@
 			<div class="tooth-number" data-tooth-no="28">28</div>
 		</div>
 		<div class="hl"></div>
-		<div>
+		<div class="lower-jaw-tooth-no">
 			<div class="tooth-number" data-tooth-no="48">48</div>
 			<div class="tooth-number" data-tooth-no="47">47</div>
 			<div class="tooth-number" data-tooth-no="46">46</div>
@@ -117,30 +214,100 @@
 			<div class="tooth-number" data-tooth-no="37">37</div>
 			<div class="tooth-number" data-tooth-no="38">38</div>
 		</div>
-		<div>
-			<img src="/img/dental-chart/48.gif">
-			<img src="/img/dental-chart/47.gif">
-			<img src="/img/dental-chart/46.gif">
-			<img src="/img/dental-chart/45.gif">
-			<img src="/img/dental-chart/44.gif">
-			<img src="/img/dental-chart/43.gif">
-			<img src="/img/dental-chart/42.gif">
-			<img src="/img/dental-chart/41.gif">
-
-			<img class="vl" src="/img/dental-chart/31.gif">
-			<img src="/img/dental-chart/32.gif">
-			<img src="/img/dental-chart/33.gif">
-			<img src="/img/dental-chart/34.gif">
-			<img src="/img/dental-chart/35.gif">
-			<img src="/img/dental-chart/36.gif">
-			<img src="/img/dental-chart/37.gif">
-			<img src="/img/dental-chart/38.gif">
+		<div class="lower-jaw-filling">
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
+			<div class="filling">
+				<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+			</div>
 		</div>
-
+		<div class="lower-jaw-crown">
+			<img class="crown" src="/img/dental-chart/48_crown.gif">
+			<img class="crown" src="/img/dental-chart/47_crown.gif">
+			<img class="crown" src="/img/dental-chart/46_crown.gif">
+			<img class="crown" src="/img/dental-chart/45_crown.gif">
+			<img class="crown" src="/img/dental-chart/44_crown.gif">
+			<img class="crown" src="/img/dental-chart/43_crown.gif">
+			<img class="crown" src="/img/dental-chart/42_crown.gif">
+			<img class="crown" src="/img/dental-chart/41_crown.gif">
+			
+			<img class="crown vl" src="/img/dental-chart/31_crown.gif">
+			<img class="crown" src="/img/dental-chart/32_crown.gif">
+			<img class="crown" src="/img/dental-chart/33_crown.gif">
+			<img class="crown" src="/img/dental-chart/34_crown.gif">
+			<img class="crown" src="/img/dental-chart/35_crown.gif">
+			<img class="crown" src="/img/dental-chart/36_crown.gif">
+			<img class="crown" src="/img/dental-chart/37_crown.gif">
+			<img class="crown" src="/img/dental-chart/38_crown.gif">
+		</div>
+		<div class="lower-jaw-root">
+			<img class="root" src="/img/dental-chart/48_root.gif">
+			<img class="root" src="/img/dental-chart/47_root.gif">
+			<img class="root" src="/img/dental-chart/46_root.gif">
+			<img class="root" src="/img/dental-chart/45_root.gif">
+			<img class="root" src="/img/dental-chart/44_root.gif">
+			<img class="root" src="/img/dental-chart/43_root.gif">
+			<img class="root" src="/img/dental-chart/42_root.gif">
+			<img class="root" src="/img/dental-chart/41_root.gif">
+			
+			<img class="root vl" src="/img/dental-chart/31_root.gif">
+			<img class="root" src="/img/dental-chart/32_root.gif">
+			<img class="root" src="/img/dental-chart/33_root.gif">
+			<img class="root" src="/img/dental-chart/34_root.gif">
+			<img class="root" src="/img/dental-chart/35_root.gif">
+			<img class="root" src="/img/dental-chart/36_root.gif">
+			<img class="root" src="/img/dental-chart/37_root.gif">
+			<img class="root" src="/img/dental-chart/38_root.gif">
+		</div>
+		<h3 class="text-center">Lower Jaw</h3>
 	</div>
 
 	<div class="col-md-2">
-		Details:<br>
+		Diagnosis<br>
 		<div class="tooth-details text-center">
 			<img id="selected-tooth" class="hidden">
 		</div>
