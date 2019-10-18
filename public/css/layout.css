@@ -49,6 +49,23 @@
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.15);
 }
 
+.btn-primary:active {
+  background: #00e2e6;
+  outline: none;
+}
+
+.btn-primary:active:focus {
+  color: #ffffff; 
+  background-color: #00e2e6; 
+  outline: none;
+}
+
+.btn-primary.focus, .btn-primary:focus {
+    color: #ffffff; 
+    background-color: #00cfd1; 
+    outline: none;
+}
+
 .btn-default {
     background: #ddd;
     color:#636b6f;

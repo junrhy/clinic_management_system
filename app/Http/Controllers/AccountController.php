@@ -44,9 +44,9 @@ class AccountController extends Controller
 
     public function change_password()
     {
-    	$email = auth()->user()->email;
+    	$username = auth()->user()->username;
 
-        return view('account.change_password')->with('email', $email);
+        return view('account.change_password')->with('username', $username);
     }
 
     public function update_password(Request $request)
@@ -56,7 +56,7 @@ class AccountController extends Controller
 		]);
 
 
-    	$user = User::where('email', $request->email)->first();
+    	$user = User::where('username', $request->username)->first();
 
     	if(!Hash::check($request->password, $user->password)){
 	        return back()->withErrors('The password you have entered does not match your current one.');

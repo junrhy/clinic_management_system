@@ -69,8 +69,12 @@
                         <td>{{ $user_item->email }}</td>
                         <td>
                             <div class="pull-right">
-                              <a class='update-user' href="{{ route('user.edit',$user_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a> | 
-                              <a class="delete-user" data-id="{{ $user_item->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                              @if($user_item->username != auth()->user()->username)
+                                <a class='update-user' href="{{ route('user.edit',$user_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a> | 
+                                <a class="delete-user" data-id="{{ $user_item->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                              @else
+                                <a class='update-user' href="{{ route('user.edit',$user_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                              @endif
                             </div>
                         </td>
                       </tr>

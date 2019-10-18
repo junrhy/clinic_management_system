@@ -36,6 +36,22 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    const ADMIN_TYPE = 'admin';
+    const PATIENT_TYPE = 'patient';
+    const DEFAULT_TYPE = 'default';
+
+    public function isDefault()    {        
+        return $this->type === self::DEFAULT_TYPE;    
+    }
+
+    public function isAdmin()    {        
+        return $this->type === self::ADMIN_TYPE;    
+    }
+
+    public function isPatient()    {        
+        return $this->type === self::PATIENT_TYPE;    
+    }
+
     public function client()
     {
         return $this->belongsTo(\App\Model\Client::class);

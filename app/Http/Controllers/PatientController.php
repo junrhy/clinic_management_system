@@ -11,6 +11,7 @@ use App\Model\Service;
 use App\Model\PatientDetail;
 use App\Model\PatientBillingCharge;
 use App\Model\PatientBillingPayment;
+use App\Model\DentalChart;
 
 use DB;
 use Auth;
@@ -249,5 +250,10 @@ class PatientController extends Controller
         $patient_id = $billing_payment->patient_id;
 
         $billing_payment->delete();
+    }
+
+    public function patient_view()
+    {
+        return view('patient.patient_view');
     }
 }

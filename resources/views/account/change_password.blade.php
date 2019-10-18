@@ -36,10 +36,7 @@
 				  @endif
 
                   {{ Form::open(array('url' => 'update_password')) }}
-                  	<div class="form-group">
-                      {{ Form::label('email', 'Email') }}
-                      {{ Form::text('email', $email, array('class' => 'form-control', 'readonly')) }}
-                    </div>
+                    {{ Form::hidden('username', $username, array('class' => 'form-control', 'readonly')) }}
 
                     <div class="form-group">
                       {{ Form::label('password', 'Password') }}

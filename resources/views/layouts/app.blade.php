@@ -58,6 +58,9 @@
                             <li>
                                 <a href="{{ url('patient/create') }}">Add Patient</a>
                             </li>
+                            <li>
+                                <a href="{{ url('/dental_chart') }}">Dental Chart</a>
+                            </li>
                         </ul>
                     </li>
                     <li>

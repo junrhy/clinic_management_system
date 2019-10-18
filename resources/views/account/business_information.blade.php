@@ -22,7 +22,7 @@
                 <div class="panel-heading">Business Information</div>
 
                 <div class="panel-body">
-       	              @if (count($errors) > 0)
+ 	              @if (count($errors) > 0)
       				     <span style="color:red">
       			            {{ Html::ul($errors->all()) }}
       			         </span>

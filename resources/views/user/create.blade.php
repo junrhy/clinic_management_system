@@ -22,7 +22,11 @@
                 <div class="panel-heading">Add User</div>
 
                 <div class="panel-body">
-                  {{ Html::ul($errors->all()) }}
+                  @if (count($errors) > 0)
+                     <span style="color:red">
+                        {{ Html::ul($errors->all()) }}
+                     </span>
+                  @endif
 
                   {{ Form::open(array('url' => 'user', 'id' => 'form-add-user')) }}
                     <div class="form-group">

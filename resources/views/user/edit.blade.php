@@ -22,7 +22,11 @@
                 <div class="panel-heading">Edit User</div>
 
                 <div class="panel-body">
-                  {{ Html::ul($errors->all()) }}
+                  @if (count($errors) > 0)
+                     <span style="color:red">
+                        {{ Html::ul($errors->all()) }}
+                     </span>
+                  @endif
 
                   {{ Form::model($user, array('route' => array('user.update', $user->id), 'method' => 'PUT')) }}
                     <div class="form-group">

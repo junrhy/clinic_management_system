@@ -75,20 +75,12 @@
                       </tr>
                     </table>
                   </div>
-                  
-                  <div class="row" style="font-size:10pt;">
-                    <h4 style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;"><i class="fa fa-tooth"></i> Dental Chart</h4>
-                    <div>
-                      <br>
-                      @include('patient.dental_chart')
-                    </div>
-                  </div>
 
                   <div class="form-group col-md-12">
                     <div class="row" style="margin-top:30px;">
                       <h4 class="row" style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</h4>
                         <ul class="nav nav-tabs">
-                          <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#home">Services</a></li>
+                          <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#home">Transactions</a></li>
                           <li><a data-toggle="tab" href="#menu1">Archived</a></li>
                         </ul>
 

@@ -22,7 +22,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::where('client_id', Auth::user()->client_id)->get();
+        $users = User::where('client_id', Auth::user()->client_id)->where('type', 'default')->get();
 
         return view('user.index')
               ->with('users', $users);
