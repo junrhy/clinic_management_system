@@ -35,7 +35,7 @@
                         <h2>All Doctors <small class="text-muted">List of all Doctors</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
-                        <a class="btn btn-white btn-icon btn-round float-right m-l-10" href="{{ url('doctor/create') }}" type="button">
+                        <a class="btn btn-white btn-icon btn-round float-right m-l-10 {{ App\Model\FeatureUser::is_feature_allowed('add_doctor', Auth::user()->id) }}" href="{{ url('doctor/create') }}" type="button">
                             <i class="fa fa-plus"></i>
                         </a>
 
@@ -65,8 +65,9 @@
                         <td>{{ $doctor_item->last_name }}</td>
                         <td>
                             <div class="pull-right">
-                              <a class='update-doctor' href="{{ route('doctor.edit',$doctor_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a> | 
-                              <a class="delete-doctor" data-id="{{ $doctor_item->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                              <a class="update-doctor {{ App\Model\FeatureUser::is_feature_allowed('edit_doctor', Auth::user()->id) }}" href="{{ route('doctor.edit',$doctor_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a> | 
+
+                              <a class="delete-doctor {{ App\Model\FeatureUser::is_feature_allowed('delete_doctor', Auth::user()->id) }}" data-id="{{ $doctor_item->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                             </div>
                         </td>
                       </tr>

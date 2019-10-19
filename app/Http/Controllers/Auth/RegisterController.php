@@ -6,6 +6,7 @@ use App\Model\Client;
 use App\Model\Clinic;
 use App\Model\Doctor;
 use App\Model\AdminSetting;
+use App\Model\FeatureUser;
 use App\User;
 
 use App\Mail\NewClient;
@@ -93,6 +94,24 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             'type'     => User::DEFAULT_TYPE,
         ]);
+
+        $features = FeatureUser::all();
+        $features->each(function ($feature, $key) use ($user) {
+            $feature = FeatureUser::find($feature->id);
+
+            $user_ids = array_map('intval', explode(',', $feature->user_ids));
+
+            sort($user_ids);
+            
+            array_push($user_ids, $user['id']);
+
+            if (($key = array_search(0, $user_ids)) !== false) {
+                unset($user_ids[$key]);
+            }
+
+            $feature->user_ids = implode(',', $user_ids);
+            $feature->save();
+        });
 
       // Mail::to($data['email'])->send(new NewClient());
 

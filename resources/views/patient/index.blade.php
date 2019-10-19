@@ -40,7 +40,7 @@
                         <h2>All Patients <small class="text-muted">Organize your Patient's Records</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
-                        <a class="btn btn-white btn-icon btn-round float-right m-l-10" href="{{ url('patient/create') }}" type="button">
+                        <a class="btn btn-white btn-icon btn-round float-right m-l-10 {{ App\Model\FeatureUser::is_feature_allowed('add_patient', Auth::user()->id) }}" href="{{ url('patient/create') }}" type="button">
                             <i class="fa fa-plus"></i>
                         </a>
 
@@ -112,11 +112,12 @@
                             <td>{{ $patient_item->dob->format('M d, Y') }}</td>
                             <td>{{ $patient_item->dob->age }}</td>
                             <td><span style="font-family: sans-serif;">{{ $patient_item->contact_number }}</span></td>
-                            <td><a class='show-patient' href="{{ route('patient.show',$patient_item->id) }}"><i class="fa fa-notes-medical" aria-hidden="true"></i> View Record</a></td>
+                            <td><a class="show-patient {{ App\Model\FeatureUser::is_feature_allowed('view_patient_record', Auth::user()->id) }}" href="{{ route('patient.show',$patient_item->id) }}"><i class="fa fa-notes-medical" aria-hidden="true"></i> View Record</a></td>
                             <td>
                               <div>
-                                <a class='update-patient' href="{{ route('patient.edit',$patient_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a> | 
-                                <a class="delete-patient" data-id="{{ $patient_item->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                <a class="update-patient {{ App\Model\FeatureUser::is_feature_allowed('edit_patient', Auth::user()->id) }}" href="{{ route('patient.edit',$patient_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                <span class="update-patient {{ App\Model\FeatureUser::is_feature_allowed('delete_patient', Auth::user()->id) }}"> | </span>
+                                <a class="delete-patient {{ App\Model\FeatureUser::is_feature_allowed('delete_patient', Auth::user()->id) }}" data-id="{{ $patient_item->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                               </div>
                            </td>
                           </tr>

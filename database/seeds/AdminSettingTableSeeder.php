@@ -18,6 +18,6 @@ class AdminSettingTableSeeder extends Seeder
         $AdminSetting->value = '1';
         $AdminSetting->save();
 
-        $this->command->info('Admin settings list created.');
+        $this->command->info('Admin settings list seeded.');
     }
 }

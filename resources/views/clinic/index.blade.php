@@ -35,7 +35,7 @@
                         <h2>All Clinics <small class="text-muted">List of all Clinics</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
-                        <a class="btn btn-white btn-icon btn-round float-right m-l-10" href="{{ url('clinic/create') }}" type="button">
+                        <a class="btn btn-white btn-icon btn-round float-right m-l-10 {{ App\Model\FeatureUser::is_feature_allowed('add_clinic', Auth::user()->id) }}" href="{{ url('clinic/create') }}" type="button">
                             <i class="fa fa-plus"></i>
                         </a>
 
@@ -65,8 +65,9 @@
                           <td>{{ $clinic_item->address }}</td>
                           <td>
                               <div class="pull-right">
-                                <a class='update-clinic' href="{{ route('clinic.edit',$clinic_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a> | 
-                                <a class="delete-clinic" data-id="{{ $clinic_item->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                <a class="update-clinic {{ App\Model\FeatureUser::is_feature_allowed('edit_clinic', Auth::user()->id) }}" href="{{ route('clinic.edit',$clinic_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a> | 
+
+                                <a class="delete-clinic {{ App\Model\FeatureUser::is_feature_allowed('delete_clinic', Auth::user()->id) }}" data-id="{{ $clinic_item->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                               </div>
                           </td>
                         </tr>

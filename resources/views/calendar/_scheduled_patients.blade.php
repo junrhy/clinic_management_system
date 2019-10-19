@@ -77,6 +77,12 @@ $(document).ready(function() {
 
   $(".appointment").unbind().click(function(){
   	if($(this).index() != 0){
+      var is_feature_allowed = "{{ App\Model\FeatureUser::is_feature_allowed('edit_appointment', Auth::user()->id) }}";
+
+      if (is_feature_allowed == 'hidden') {
+          return false;
+      }
+
 	    $('#appointment_patient_name').html($(this).parent().data('patient'));
 	    $("select[name='appointment_clinic']").val($(this).parent().data('clinic'));
 	    $("select[name='appointment_doctor']").val($(this).parent().data('doctor'));

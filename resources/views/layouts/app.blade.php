@@ -38,121 +38,120 @@
             </div>
 
             <ul class="list-unstyled components">
-                @guest
-                    <li><a href="{{ route('login') }}">Login</a></li>
-                    <li><a href="{{ route('register') }}">Register</a></li>
-                @else
-                    <li><a href="{{ url('home') }}"><i class="fa fa-chalkboard"></i> Dashboard</a></li>
+                <li class="{{ App\Model\FeatureUser::is_feature_allowed('dashboard', Auth::user()->id) }}">
+                    <a href="{{ url('home') }}"><i class="fa fa-chalkboard"></i> Dashboard</a>
+                </li>
 
-                  @if(Auth::user()->client->is_active && Auth::user()->client->is_suspended == 0)
-                    <li><a href="{{ url('calendar') }}"><i class="fa fa-calendar"></i> Calendar</a></li>
-                    <li>
-                        <a href="#patientSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <i class="fa fa-notes-medical">
-                            </i> Patients</a>
+              @if(Auth::user()->client->is_active && Auth::user()->client->is_suspended == 0)
+                <li class="{{ App\Model\FeatureUser::is_feature_allowed('calendar', Auth::user()->id) }}">
+                    <a href="{{ url('calendar') }}"><i class="fa fa-calendar"></i> Calendar</a>
+                </li>
+                <li class="{{ App\Model\FeatureUser::is_feature_allowed('patients', Auth::user()->id) }}">
+                    <a href="#patientSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fa fa-notes-medical">
+                        </i> Patients</a>
 
-                        <ul class="collapse list-unstyled" id="patientSubmenu">
-                            <li>
-                                <a href="{{ url('patient') }}">All Patients</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('patient/create') }}">Add Patient</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/dental_chart') }}">Dental Chart</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#clinicSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <i class="fa fa-clinic-medical"></i> 
-                            Clinics</a>
+                    <ul class="collapse list-unstyled" id="patientSubmenu">
+                        <li class="{{ App\Model\FeatureUser::is_feature_allowed('patients', Auth::user()->id) }}">
+                            <a href="{{ url('patient') }}">All Patients</a>
+                        </li>
+                        <li class="{{ App\Model\FeatureUser::is_feature_allowed('add_patient', Auth::user()->id) }}">
+                            <a href="{{ url('patient/create') }}">Add Patient</a>
+                        </li>
+                        <li class="{{ App\Model\FeatureUser::is_feature_allowed('dental_chart', Auth::user()->id) }}">
+                            <a href="{{ url('/dental_chart') }}">Dental Chart</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="{{ App\Model\FeatureUser::is_feature_allowed('clinics', Auth::user()->id) }}">
+                    <a href="#clinicSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fa fa-clinic-medical"></i> 
+                        Clinics</a>
 
-                        <ul class="collapse list-unstyled" id="clinicSubmenu">
-                            <li>
-                                <a href="{{ url('clinic') }}">All Clinics</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('clinic/create') }}">Add Clinic</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#doctorSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <i class="fa fa-user-md"></i> 
-                            Doctors</a>
+                    <ul class="collapse list-unstyled" id="clinicSubmenu">
+                        <li class="{{ App\Model\FeatureUser::is_feature_allowed('clinics', Auth::user()->id) }}">
+                            <a href="{{ url('clinic') }}">All Clinics</a>
+                        </li>
+                        <li class="{{ App\Model\FeatureUser::is_feature_allowed('add_clinic', Auth::user()->id) }}">
+                            <a href="{{ url('clinic/create') }}">Add Clinic</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="{{ App\Model\FeatureUser::is_feature_allowed('doctors', Auth::user()->id) }}">
+                    <a href="#doctorSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fa fa-user-md"></i> 
+                        Doctors</a>
 
-                        <ul class="collapse list-unstyled" id="doctorSubmenu">
-                            <li>
-                                <a href="{{ url('doctor') }}">All Doctors</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('doctor/create') }}">Add Doctor</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#serviceSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <i class="fa fa-briefcase-medical"></i> 
-                            Services</a>
+                    <ul class="collapse list-unstyled" id="doctorSubmenu">
+                        <li class="{{ App\Model\FeatureUser::is_feature_allowed('doctors', Auth::user()->id) }}">
+                            <a href="{{ url('doctor') }}">All Doctors</a>
+                        </li>
+                        <li class="{{ App\Model\FeatureUser::is_feature_allowed('add_doctor', Auth::user()->id) }}">
+                            <a href="{{ url('doctor/create') }}">Add Doctor</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="{{ App\Model\FeatureUser::is_feature_allowed('services', Auth::user()->id) }}">
+                    <a href="#serviceSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fa fa-briefcase-medical"></i> 
+                        Services</a>
 
-                        <ul class="collapse list-unstyled" id="serviceSubmenu">
-                            <li>
-                                <a href="{{ url('service') }}">All Services</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('service/create') }}">Add Service</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <i class="fa fa-users"></i> 
-                            Users</a>
+                    <ul class="collapse list-unstyled" id="serviceSubmenu">
+                        <li class="{{ App\Model\FeatureUser::is_feature_allowed('services', Auth::user()->id) }}">
+                            <a href="{{ url('service') }}">All Services</a>
+                        </li>
+                        <li class="{{ App\Model\FeatureUser::is_feature_allowed('add_service', Auth::user()->id) }}">
+                            <a href="{{ url('service/create') }}">Add Service</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="{{ App\Model\FeatureUser::is_feature_allowed('users', Auth::user()->id) }}">
+                    <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fa fa-users"></i> 
+                        Users</a>
 
-                        <ul class="collapse list-unstyled" id="userSubmenu">
-                            <li>
-                                <a href="{{ url('user') }}">All Users</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('user/create') }}">Add User</a>
-                            </li>
-                        </ul>
-                    </li>
-                  @endif
-                    
-                    <li>
-                        <a href="#profileSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <i class="fas fa-user"></i>
-                            Profile
-                        </a>
-                        <ul class="collapse list-unstyled" id="profileSubmenu">
-                            <li>
-                                <a href="{{ url('business_information') }}">Business Information</a>
-                            </li>
+                    <ul class="collapse list-unstyled" id="userSubmenu">
+                        <li class="{{ App\Model\FeatureUser::is_feature_allowed('users', Auth::user()->id) }}">
+                            <a href="{{ url('user') }}">All Users</a>
+                        </li>
+                        <li class="{{ App\Model\FeatureUser::is_feature_allowed('add_user', Auth::user()->id) }}">
+                            <a href="{{ url('user/create') }}">Add User</a>
+                        </li>
+                    </ul>
+                </li>
+              @endif
+                
+                <li class="{{ App\Model\FeatureUser::is_feature_allowed('settings', Auth::user()->id) }}">
+                    <a href="#profileSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-user-cog"></i>
+                        Settings
+                    </a>
+                    <ul class="collapse list-unstyled" id="profileSubmenu">
+                        <li class="{{ App\Model\FeatureUser::is_feature_allowed('edit_business_information', Auth::user()->id) }}">
+                            <a href="{{ url('business_information') }}">Business Information</a>
+                        </li>
 
-                            <li>
-                                <a href="{{ url('change_password') }}">Change Password</a>
-                            </li>
+                        <li>
+                            <a href="{{ url('change_password') }}">Change Password</a>
+                        </li>
 
-                            @if(Auth::user()->client->account_type == 'basic')
-                            <li>
-                                <a style="cursor:pointer;" id="sidebar-menu-upgrade-account">Upgrade to Business Account</a>
-                            </li>
-                            @endif
+                        @if(Auth::user()->client->account_type == 'basic')
+                        <li>
+                            <a style="cursor:pointer;" id="sidebar-menu-upgrade-account">Upgrade to Business Account</a>
+                        </li>
+                        @endif
 
-                            @if(Auth::user()->client->is_active == 0 && Auth::user()->client->account_type == 'business')
-                            <li>
-                                <a style="cursor:pointer;" id="sidebar-menu-activate-account">Activate my Account</a>
-                            </li>
-                            @endif
+                        @if(Auth::user()->client->is_active == 0 && Auth::user()->client->account_type == 'business')
+                        <li>
+                            <a style="cursor:pointer;" id="sidebar-menu-activate-account">Activate my Account</a>
+                        </li>
+                        @endif
 
-                            @if(Auth::user()->client->is_active != 0 && Auth::user()->client->is_suspended == 1)
-                                <a style="cursor:pointer;" id="sidebar-menu-reactivate-account">Request to Reactivate Account</a>
-                            @endif
-                        </ul>
-                    </li>
-                @endguest
+                        @if(Auth::user()->client->is_active != 0 && Auth::user()->client->is_suspended == 1)
+                            <a style="cursor:pointer;" id="sidebar-menu-reactivate-account">Request to Reactivate Account</a>
+                        @endif
+                    </ul>
+                </li>
             </ul>
 
         </nav>

@@ -117,8 +117,8 @@
                                           @endif
                                         </td>
                                         <td class="text-center">
-                                          <a class="delete-link delete-detail" data-id="{{ $detail->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a> | 
-                                          <a class="archive-link archive-detail" data-id="{{ $detail->id }}"><i class="fa fa-archive" aria-hidden="true" title="Archive"></i></a>
+                                          <a class="delete-link delete-detail {{ App\Model\FeatureUser::is_feature_allowed('delete_patient_detail', Auth::user()->id) }}" data-id="{{ $detail->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a> | 
+                                          <a class="archive-link archive-detail {{ App\Model\FeatureUser::is_feature_allowed('archive_patient_detail', Auth::user()->id) }}" data-id="{{ $detail->id }}"><i class="fa fa-archive" aria-hidden="true" title="Archive"></i></a>
                                         </td>
                                     </tr>
                                   @endforeach
@@ -163,8 +163,8 @@
                                             @endif
                                           </td>
                                           <td class="text-center">
-                                            <a class="delete-link delete-detail" data-id="{{ $archive_detail->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a> | 
-                                            <a class="unarchive-link unarchive-detail" data-id="{{ $archive_detail->id }}"><i class="fa fa-undo" aria-hidden="true" title="Restore"></i></a>
+                                            <a class="delete-link delete-detail {{ App\Model\FeatureUser::is_feature_allowed('delete_patient_detail', Auth::user()->id) }}" data-id="{{ $archive_detail->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a> | 
+                                            <a class="unarchive-link unarchive-detail {{ App\Model\FeatureUser::is_feature_allowed('unarchive_patient_detail', Auth::user()->id) }}" data-id="{{ $archive_detail->id }}"><i class="fa fa-undo" aria-hidden="true" title="Restore"></i></a>
                                           </td>
                                       </tr>
                                     @endforeach
@@ -181,7 +181,7 @@
                     </div>
                   </div>
 
-                  <div class="row">
+                  <div class="row {{ App\Model\FeatureUser::is_feature_allowed('add_patient_detail', Auth::user()->id) }}">
                     <div class="form-group col-md-3">
                       {{ Form::label('clinic', 'Clinic') }}
                       {{ Form::select('clinic', $clinics, '', ['class' => 'form-control']) }}
@@ -202,7 +202,7 @@
                       {{ Form::textarea('notes', null, ['id' => 'notes','class' => 'form-control', 'rows' => 4, 'cols' => 54, 'maxlength' => 300, 'placeholder' => 'Limit to 300 characters only', 'style' => 'resize:none']) }}
                     </div>
                     
-                    <div class="form-group col-md-offset-8 col-md-4">
+                    <div class="form-group col-md-offset-8 col-md-4 {{ App\Model\FeatureUser::is_feature_allowed('add_appointment', Auth::user()->id) }}">
                       {{ Form::checkbox('checkbox_visit', 'Yes') }}
                       {{ Form::label('checkbox_visit', 'Set Appointment') }}
                       <div class="row">
@@ -221,7 +221,7 @@
                   </div>
 
                   <div class="form-group col-md-12">
-                    <div class="row" style="margin-top:60px;">
+                    <div class="row">
                       <h4 class="row" style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;"><i class="fa fa-money" aria-hidden="true"></i> Billing Information</h4>
 
                       <h5 class="row col-md-12" style="margin-top: 30px;color:#45a29e;"><strong>Charges</strong></h5>
@@ -241,7 +241,7 @@
                             <td>{{ $billing_charge->created_at->format('M d, Y') }}</td>
                             <td>{{ $billing_charge->description }}</td>
                             <td class="text-right">{{ number_format($billing_charge->amount, 2) }}</td>
-                            <td class="text-center"></span><a class="delete-link delete-charge" data-id="{{ $billing_charge->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                            <td class="text-center"></span><a class="delete-link delete-charge {{ App\Model\FeatureUser::is_feature_allowed('delete_patient_charge', Auth::user()->id) }}" data-id="{{ $billing_charge->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
                           </tr>
                           @endforeach
                           <tr>
@@ -254,7 +254,7 @@
                             <td></td>
                           </tr>
                         </tbody>
-                        <tfoot class="bg-info">
+                        <tfoot class="bg-info {{ App\Model\FeatureUser::is_feature_allowed('add_patient_charge', Auth::user()->id) }}">
                           <td colspan="4">
                               <div class="row">
                                   <div class="col-md-6 col-md-offset-2">
@@ -289,7 +289,7 @@
                             <td>{{ $billing_payment->created_at->format('M d, Y') }}</td>
                             <td>{{ $billing_payment->description }}</td>
                             <td class="text-right">{{ number_format($billing_payment->amount, 2) }}</td>
-                            <td class="text-center"><a class="delete-link delete-payment" data-id="{{ $billing_payment->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                            <td class="text-center {{ App\Model\FeatureUser::is_feature_allowed('delete_patient_payment', Auth::user()->id) }}"><a class="delete-link delete-payment" data-id="{{ $billing_payment->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
                           </tr>
                           @endforeach
                           <tr>
@@ -302,7 +302,7 @@
                             <td></td>
                           </tr>
                         </tbody>
-                        <tfoot class="bg-info">
+                        <tfoot class="bg-info {{ App\Model\FeatureUser::is_feature_allowed('add_patient_payment', Auth::user()->id) }}">
                           <td colspan="4">
                             <div class="row">
                                 <div class="col-md-6 col-md-offset-2">

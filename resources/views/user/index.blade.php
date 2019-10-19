@@ -22,6 +22,10 @@
     color: red;
     text-decoration: none;
   }
+
+  .show-privileges {
+    color: #01d8da;
+  }
 </style>
 @endsection
 
@@ -35,7 +39,7 @@
                         <h2>All Users <small class="text-muted">List of all Users</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
-                        <a class="btn btn-white btn-icon btn-round float-right m-l-10" href="{{ url('user/create') }}" type="button">
+                        <a class="btn btn-white btn-icon btn-round float-right m-l-10 {{ App\Model\FeatureUser::is_feature_allowed('add_user', Auth::user()->id) }}" href="{{ url('user/create') }}" type="button">
                             <i class="fa fa-plus"></i>
                         </a>
 
@@ -59,6 +63,7 @@
                         <th>Last Name</th>
                         <th>Username</th>
                         <th>Email</th>
+                        <th>Privileges</th>
                         <th class="text-right">Action</th>
                       </tr>
                       <?php foreach ($users as $user_key => $user_item): ?>
@@ -68,12 +73,15 @@
                         <td>{{ $user_item->username }}</td>
                         <td>{{ $user_item->email }}</td>
                         <td>
+                          <a class="show-privileges" href="">Show Privileges</a>
+                        </td>
+                        <td>
                             <div class="pull-right">
                               @if($user_item->username != auth()->user()->username)
-                                <a class='update-user' href="{{ route('user.edit',$user_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a> | 
-                                <a class="delete-user" data-id="{{ $user_item->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                <a class="update-user {{ App\Model\FeatureUser::is_feature_allowed('edit_user', Auth::user()->id) }}" href="{{ route('user.edit',$user_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a> | 
+                                <a class="delete-user {{ App\Model\FeatureUser::is_feature_allowed('delete_user', Auth::user()->id) }}" data-id="{{ $user_item->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                               @else
-                                <a class='update-user' href="{{ route('user.edit',$user_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                <a class="update-user {{ App\Model\FeatureUser::is_feature_allowed('edit_user', Auth::user()->id) }}" href="{{ route('user.edit',$user_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                               @endif
                             </div>
                         </td>
