@@ -25,6 +25,12 @@
 
   .show-privileges {
     color: #01d8da;
+    
+  }
+
+  .show-privileges:hover, .show-privileges:visited, .show-privileges:active, .show-privileges:focus {
+    color: #01d8da;
+    text-decoration: none;
   }
 </style>
 @endsection
@@ -73,7 +79,7 @@
                         <td>{{ $user_item->username }}</td>
                         <td>{{ $user_item->email }}</td>
                         <td>
-                          <a class="show-privileges" href="">Show Privileges</a>
+                          <a class="show-privileges" href="{{ route('user.show',$user_item->id) }}">Show Privileges</a>
                         </td>
                         <td>
                             <div class="pull-right">

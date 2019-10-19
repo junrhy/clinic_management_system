@@ -17,6 +17,7 @@ class CreateFeatureUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->longText('user_ids')->nullable();
+            $table->integer('order')->nullable();
             $table->timestamps();
         });
     }

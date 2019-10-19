@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\User;
+use App\Model\FeatureUser;
 
 use Auth;
 
@@ -75,9 +76,12 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
+        
+        $features = FeatureUser::all();
 
         return view('user.show')
-                ->with('user', $user);
+                ->with('user', $user)
+                ->with('features', $features);
     }
 
     /**
@@ -122,6 +126,43 @@ class UserController extends Controller
         $user->save();
 
         return redirect('user');
+    }
+
+    public function update_privilege(Request $request, $id)
+    {
+        $user_id = Auth::user()->id;
+
+
+        foreach($request->user_features as $key => $feature){
+            $feature_id = $feature['feature_id'];
+
+            $UserFeature = FeatureUser::find($feature_id);
+
+            if ($UserFeature != null) {
+                $user_ids = array_map('intval', explode(',', $UserFeature->user_ids));
+
+                if ($feature['is_checked'] == "false") {
+                    if (($key = array_search($user_id, $user_ids)) !== false) {
+                        unset($user_ids[$key]);
+                    }
+                } elseif ($feature['is_checked'] == "true") {
+                    if (($key = array_search($user_id, $user_ids)) !== false) {
+                        // do nothing
+                    } else {
+                        array_push($user_ids, $user_id);
+                    }
+                }
+
+                if (($key = array_search(0, $user_ids)) !== false) {
+                    unset($user_ids[$key]);
+                }
+
+                sort($user_ids);
+
+                $UserFeature->user_ids = implode(',', $user_ids);
+                $UserFeature->save();
+            }
+        }
     }
 
     /**
