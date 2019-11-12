@@ -10,4 +10,9 @@ class PatientDetail extends Model
     {
         return $this->belongsTo(Patient::class);
     }
+
+    public function attachment()
+    {
+    	return $this->hasMany('App\Model\Attachment','attachment_number','attachment_number');
+    }
 }

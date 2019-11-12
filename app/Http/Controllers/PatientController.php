@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 use App\Model\Patient;
 use App\Model\Clinic;
@@ -12,6 +13,7 @@ use App\Model\PatientDetail;
 use App\Model\PatientBillingCharge;
 use App\Model\PatientBillingPayment;
 use App\Model\DentalChart;
+use App\Model\Attachment;
 
 use DB;
 use Auth;
@@ -166,6 +168,7 @@ class PatientController extends Controller
         $patient_detail->doctor = $request->doctor;
         $patient_detail->service = $request->service;
         $patient_detail->notes = nl2br($request->notes);
+        $patient_detail->attachment_number = $request->attachment_number;
         $patient_detail->is_scheduled = $request->date_scheduled != '' ? true : false;
         $patient_detail->date_scheduled = $request->date_scheduled != '' ? date('Y-m-d', strtotime($request->date_scheduled)) : null;
         $patient_detail->time_scheduled = DateTime::createFromFormat('H:i a', $request->time_scheduled);
@@ -175,6 +178,23 @@ class PatientController extends Controller
         }
 
         $patient_detail->save();
+    }
+
+    public function upload_detail(Request $request)
+    {
+        $files = $request->file('attachment');
+
+        if(!empty($files)):
+            foreach ($files as $file):
+                Storage::disk('public')->put($file->getClientOriginalName(), file_get_contents($file));
+
+                $attachment = new Attachment;
+                $attachment->attachment_number = $request->attachment_number;
+                $attachment->filename = $file->getClientOriginalName();
+                $attachment->path = 'storage/app/public/';
+                $attachment->save();
+            endforeach;
+        endif;
     }
 
     public function update_patient_detail(Request $request, $id)

@@ -108,15 +108,6 @@
 
                 <div class="panel-body">
                     <div class="table-responsive">
-                    	<div class="col-md-6 text-center">
-                    		<button class="btn btn-primary btn-round">Missing</button>
-                    		<button class="btn btn-primary btn-round">For Extraction</button>
-                    		<button class="btn btn-primary btn-round">Fill Left</button>
-                    		<button class="btn btn-primary btn-round">Fill Right</button>
-                    		<button class="btn btn-primary btn-round">Fill Top</button>
-                    		<button class="btn btn-primary btn-round">Fill Bottom</button>
-                    		<button class="btn btn-primary btn-round">Fill Center</button>
-                    	</div>
 						<div class="chart">
 							<h3 class="text-center">Upper Jaw</h3>
 							<div class="upper-jaw-root">

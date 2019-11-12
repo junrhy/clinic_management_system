@@ -21,6 +21,7 @@ class CreatePatientDetailsTable extends Migration
             $table->string('doctor')->nullable();
             $table->string('service')->nullable();
             $table->text('notes')->nullable();
+            $table->string('attachment_number')->nullable();
             $table->boolean('is_scheduled');
             $table->date('date_scheduled')->nullable();
             $table->time('time_scheduled')->nullable();

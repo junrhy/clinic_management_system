@@ -18,6 +18,11 @@
     color: red;
     font-size:12pt;
   }
+
+  .attachment {
+    text-decoration: underline;
+    margin-right: 8px;
+  }
 </style>
 @endsection
 
@@ -94,7 +99,6 @@
                                   <th style="width:20%">Clinic</th>
                                   <th style="width:20%">Doctor</th>
                                   <th style="width:20%">Service Type</th>
-                                  <th>Notes</th>
                                   <th style="width:20%">Appointment</th>
                                   <th style="width:1%;text-align:center;">Action</th>
                                 </thead>
@@ -107,7 +111,6 @@
                                         <td>{{ $detail->clinic }}</td>
                                         <td>{{ $detail->doctor }}</td>
                                         <td>{{ $detail->service }}</td>
-                                        <td><?php echo $detail->notes ?></td>
                                         <td>
                                           @if($detail->date_scheduled != '')
                                             {{ date('M d, Y', strtotime($detail->date_scheduled)) }}&nbsp;&nbsp;
@@ -121,6 +124,24 @@
                                           <a class="archive-link archive-detail {{ App\Model\FeatureUser::is_feature_allowed('archive_patient_detail', Auth::user()->id) }}" data-id="{{ $detail->id }}"><i class="fa fa-archive" aria-hidden="true" title="Archive"></i></a>
                                         </td>
                                     </tr>
+
+                                    @if(!empty($detail->notes))
+                                    <tr>
+                                      <td colspan="7">
+                                        <?php echo $detail->notes ?>
+                                      </td>
+                                    </tr>
+                                    @endif
+
+                                    @if(!empty($detail->attachment_number))
+                                    <tr>
+                                      <td colspan="7">
+                                        @foreach($detail->attachment as $attachment)
+                                          <small class="attachment"><i class="fa fa-paperclip" aria-hidden="true"></i> {{ $attachment->filename }}</small>
+                                        @endforeach
+                                      </td>
+                                    </tr>
+                                    @endif
                                   @endforeach
                                 @else
                                   <tr>
@@ -140,7 +161,6 @@
                                     <th style="width:20%">Clinic</th>
                                     <th style="width:20%">Doctor</th> 
                                     <th style="width:20%">Service Type</th>
-                                    <th>Notes</th>
                                     <th style="width:20%">Appointment</th>
                                     <th style="width:1%;text-align:center;">Action</th>
                                   </thead>
@@ -153,7 +173,6 @@
                                           <td>{{ $archive_detail->clinic }}</td>
                                           <td>{{ $archive_detail->doctor }}</td>
                                           <td>{{ $archive_detail->service }}</td>
-                                          <td><?php echo $archive_detail->notes ?></td>
                                           <td>
                                             @if($archive_detail->date_scheduled != '')
                                               {{ date('M d, Y', strtotime($archive_detail->date_scheduled)) }}&nbsp;&nbsp;
@@ -168,6 +187,24 @@
                                           </td>
                                       </tr>
                                     @endforeach
+
+                                    @if(!empty($archive_detail->notes))
+                                    <tr>
+                                      <td colspan="7">
+                                        <?php echo $detail->notes ?>
+                                      </td>
+                                    </tr>
+                                    @endif
+
+                                    @if(!empty($archive_detail->attachment_number))
+                                    <tr>
+                                      <td colspan="7">
+                                        @foreach($archive_detail->attachment as $attachment)
+                                          <small class="attachment"><i class="fa fa-paperclip" aria-hidden="true"></i> {{ $attachment->filename }}</small>
+                                        @endforeach
+                                      </td>
+                                    </tr>
+                                    @endif
                                   @else
                                     <tr>
                                       <td class="text-center" colspan="7">No archived record.</td>
@@ -201,8 +238,19 @@
                       {{ Form::label('notes', 'Notes') }}
                       {{ Form::textarea('notes', null, ['id' => 'notes','class' => 'form-control', 'rows' => 4, 'cols' => 54, 'maxlength' => 300, 'placeholder' => 'Limit to 300 characters only', 'style' => 'resize:none']) }}
                     </div>
-                    
-                    <div class="form-group col-md-offset-8 col-md-4 {{ App\Model\FeatureUser::is_feature_allowed('add_appointment', Auth::user()->id) }}">
+                    <div class="form-group col-md-8">
+                      {{ Form::label('attachment', 'Attachment') }}
+                      <div class="row">
+                        <div class="col-md-12">
+                          <form id="form-patient-detail-upload" method="post" enctype="multipart/form-data">
+                              <input type="hidden" name="attachment_number" value="{{ Illuminate\Support\Str::random(40) }}">
+                              <input type="file" name="attachment[]" multiple>
+                              {{ csrf_field() }}
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-4 {{ App\Model\FeatureUser::is_feature_allowed('add_appointment', Auth::user()->id) }}">
                       {{ Form::checkbox('checkbox_visit', 'Yes') }}
                       {{ Form::label('checkbox_visit', 'Set Appointment') }}
                       <div class="row">
@@ -354,6 +402,13 @@ $(document).ready(function() {
       var date_scheduled = $("#date_scheduled").val();
       var time_scheduled = $("#time_scheduled").val();
 
+      if ($("input[name='attachment[]").get(0).files.length != 0) {
+        var attachment_number = $("input[name='attachment_number']").val();
+      } else {
+        var attachment_number = '';
+      }
+      
+
       $.ajax({
         method: "POST",
         url: "/patient/create_detail",
@@ -363,12 +418,15 @@ $(document).ready(function() {
           doctor: doctor, 
           service: service, 
           notes: notes, 
+          attachment_number: attachment_number,
           date_scheduled: date_scheduled, 
           time_scheduled: time_scheduled,
           _token: "{{ csrf_token() }}" 
         }
       })
       .done(function( msg ) {
+        $("#form-patient-detail-upload").submit();
+
         location.reload();
       });
   });
@@ -587,6 +645,26 @@ $(document).ready(function() {
       ).then((result) => {
         location.reload();
       });
+    });
+  });
+
+  $("#form-patient-detail-upload").submit(function(event){
+    event.preventDefault();
+    var formData = new FormData($("#form-patient-detail-upload")[0]);
+    $.ajax({
+        url: "{{ url('/patient/upload_detail') }}",
+        type: 'POST',              
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(result)
+        {
+            location.reload();
+        },
+        error: function(data)
+        {
+            console.log(data);
+        }
     });
   });
 });

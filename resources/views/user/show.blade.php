@@ -39,8 +39,10 @@
 
                 <div class="panel-body">
                     @foreach($features as $key => $feature)
-                        <input type="checkbox" id="{{ $feature->name }}" data-id="{{ $feature->id }}" name="user_features" {{ App\Model\FeatureUser::is_feature_checked($feature->name, Auth::user()->id) }}> <span id="txt_{{ $feature->name }}">{{ ucwords(str_replace('_', ' ', $feature->name)) }}</span>
-                        <br/>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="{{ $feature->name }}" data-id="{{ $feature->id }}" name="user_features" {{ App\Model\FeatureUser::is_feature_checked($feature->name, Auth::user()->id) }}>
+                            <span id="txt_{{ $feature->name }}">{{ ucwords(str_replace('_', ' ', $feature->name)) }}</span>
+                        </div>
                     @endforeach
 
                     <br>

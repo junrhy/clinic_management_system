@@ -51,6 +51,7 @@ Route::group(['middleware' => ['is_default']], function() {
 
 	Route::post('/patient/create_detail', 'PatientController@create_patient_detail');
 	Route::post('/patient/update_detail/{id}', 'PatientController@update_patient_detail');
+	Route::post('/patient/upload_detail', 'PatientController@upload_detail');
 	Route::delete('/patient/delete_detail/{id}', 'PatientController@delete_patient_detail');
 	Route::post('/patient/bulk_delete_detail', 'PatientController@bulk_delete_patient_detail');
 
