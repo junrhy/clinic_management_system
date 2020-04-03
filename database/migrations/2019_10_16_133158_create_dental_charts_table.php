@@ -17,8 +17,10 @@ class CreateDentalChartsTable extends Migration
             $table->increments('id');
             $table->integer('client_id');
             $table->integer('patient_id');
-            $table->json('upper_jaw');
-            $table->json('lower_jaw');
+            $table->integer('tooth_number');
+            $table->string('diagnosis');
+            $table->string('treatment');
+            $table->string('price');
             $table->timestamps();
         });
     }

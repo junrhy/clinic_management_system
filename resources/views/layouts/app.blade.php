@@ -46,6 +46,9 @@
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('calendar', Auth::user()->id) }}">
                     <a href="{{ url('calendar') }}"><i class="fa fa-calendar"></i> Calendar</a>
                 </li>
+                <li class="{{ App\Model\FeatureUser::is_feature_allowed('dental_chart', Auth::user()->id) }}">
+                    <a href="{{ url('/dental_chart') }}"><i class="fa fa-tooth"></i> Dental</a>
+                </li>
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('patients', Auth::user()->id) }}">
                     <a href="#patientSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fa fa-notes-medical">
@@ -57,9 +60,6 @@
                         </li>
                         <li class="{{ App\Model\FeatureUser::is_feature_allowed('add_patient', Auth::user()->id) }}">
                             <a href="{{ url('patient/create') }}">Add Patient</a>
-                        </li>
-                        <li class="{{ App\Model\FeatureUser::is_feature_allowed('dental_chart', Auth::user()->id) }}">
-                            <a href="{{ url('/dental_chart') }}">Dental Chart</a>
                         </li>
                     </ul>
                 </li>

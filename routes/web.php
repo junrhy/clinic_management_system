@@ -69,6 +69,8 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::post('/user/update_privilege/{id}', 'UserController@update_privilege');
 
 	Route::get('/dental_chart', 'DentalChartController@index');
+	Route::post('/dental_chart', 'DentalChartController@store');
+	Route::delete('/dental_chart/{id}', 'DentalChartController@destroy');
 
 	// Webhooks
 	Route::any('/paypal_subscription_activated', 'WebhookController@paypal_subscription_activated');
