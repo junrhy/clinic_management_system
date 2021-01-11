@@ -39,15 +39,21 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
+                    <div class="row">
+                        <div class="card col-md-2">
+                            <h2 class="number count-to m-t-0 m-b-5" data-from="0" data-to="501" data-speed="1000" data-fresh-interval="700">{{ $clinic_count }}</h2>
+                            <p class="text-muted">Clinics</p>
                         </div>
-                    @endif
+                        
+                        <div class="card col-md-2">
+                            <h2 class="number count-to m-t-0 m-b-5" data-from="0" data-to="501" data-speed="1000" data-fresh-interval="700">{{ $doctor_count }}</h2>
+                            <p class="text-muted">Doctors</p>
+                        </div>
 
-                    <div class="card">
-                        <h2 class="number count-to m-t-0 m-b-5" data-from="0" data-to="501" data-speed="1000" data-fresh-interval="700">{{ $patient_count }}</h2>
-                        <p class="text-muted">Number of Patients</p>
+                        <div class="card col-md-2">
+                            <h2 class="number count-to m-t-0 m-b-5" data-from="0" data-to="501" data-speed="1000" data-fresh-interval="700">{{ $patient_count }}</h2>
+                            <p class="text-muted">Patients</p>
+                        </div>
                     </div>
                 </div>
             </div>

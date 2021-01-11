@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('landing.register_with_video');
+    return view('landing.welcome');
 });
 
 Auth::routes();

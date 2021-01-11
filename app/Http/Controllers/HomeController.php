@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use Auth;
 
+use App\Model\Clinic;
+use App\Model\Doctor;
 use App\Model\Patient;
 
 class HomeController extends Controller
@@ -29,9 +31,13 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $patient_count = Patient::where('client_id', Auth::user()->client_id)->count();
+        $clinic_count = Clinic::where('client_id', Auth::user()->client_id)->count();
+        $doctor_count = Doctor::where('client_id', Auth::user()->client_id)->count();
 
         return view('home')
-                ->with('patient_count', $patient_count);
+                ->with('patient_count', $patient_count)
+                ->with('clinic_count', $clinic_count)
+                ->with('doctor_count', $doctor_count);
     }
 
 }

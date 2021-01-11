@@ -196,7 +196,7 @@
 
 	<section class="container" data-anchor="features">
 		<div class="spacer6"></div>
-			<h2 class='text-center xxh-Bold'>Why people choose GoDoktor Clinic System?</h2>
+			<h2 class='text-center xxh-Bold'>Why people choose Crodua Clinic Management System?</h2>
 			<h3 class='text-center xmedium-h'>Your main Features</h3>
 			<div class="row trainings" id='trainings'>
 				<div class="col-md-3 col-xs-6 hov1">

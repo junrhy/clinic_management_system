@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3 m-t-30">
             <div class="panel panel-default">
-                <div class="panel-heading"><h3 class="text-center" style="font-weight:bold;color:#01d8da;"><i class="fa fa-hand-holding-heart"></i> Patiently</h3></div>
+                <div class="panel-heading"><h3 class="text-center" style="font-weight:bold;color:#01d8da;"><i class="fa fa-clinic-medical"></i> Clinic Management System</h3></div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">

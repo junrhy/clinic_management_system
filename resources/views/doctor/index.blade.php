@@ -32,7 +32,7 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-12">
-                        <h2>All Doctors <small class="text-muted">List of all Doctors</small></h2>
+                        <h2>All Doctors <small class="text-muted">List of your clinic doctor's</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                         <a class="btn btn-white btn-icon btn-round float-right m-l-10 {{ App\Model\FeatureUser::is_feature_allowed('add_doctor', Auth::user()->id) }}" href="{{ url('doctor/create') }}" type="button">

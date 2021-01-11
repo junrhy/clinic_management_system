@@ -33,8 +33,12 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3 class="text-center"><i class="fa fa-hand-holding-heart"></i> {{ config('app.name', 'Laravel') }}</h3>
-                <strong>C</strong>
+                <h3 class="text-center">
+                    <i class="fa fa-clinic-medical"></i> 
+                    <br>
+                    <small style="color: #01d8da;">{{ Auth::user()->client->name }}</small>
+                </h3>
+                <strong><i class="fa fa-clinic-medical"></i> <br>{{ substr(Auth::user()->client->name, 0, 1) }}</strong>
             </div>
 
             <ul class="list-unstyled components">
@@ -106,6 +110,17 @@
                     </ul>
                 </li>
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('users', Auth::user()->id) }}">
+                    <a href="#accountingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fa fa-file-alt"></i> 
+                        Accounting</a>
+
+                    <ul class="collapse list-unstyled" id="accountingSubmenu">
+                        <li class="">
+                            <a href="">All Transactions</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="{{ App\Model\FeatureUser::is_feature_allowed('users', Auth::user()->id) }}">
                     <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fa fa-users"></i> 
                         Users</a>
@@ -128,7 +143,7 @@
                     </a>
                     <ul class="collapse list-unstyled" id="profileSubmenu">
                         <li class="{{ App\Model\FeatureUser::is_feature_allowed('edit_business_information', Auth::user()->id) }}">
-                            <a href="{{ url('business_information') }}">Business Information</a>
+                            <a href="{{ url('business_information') }}">Profile</a>
                         </li>
 
                         <li>
@@ -137,7 +152,7 @@
 
                         @if(Auth::user()->client->account_type == 'basic' && Auth::user()->client->is_active != 0 && Auth::user()->client->is_suspended != 1)
                         <li>
-                            <a style="cursor:pointer;" id="sidebar-menu-upgrade-account">Upgrade to Business Account</a>
+                            <a style="cursor:pointer;" id="sidebar-menu-upgrade-account">Upgrade</a>
                         </li>
                         @endif
 

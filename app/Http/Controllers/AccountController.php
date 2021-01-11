@@ -39,7 +39,7 @@ class AccountController extends Controller
         $client->contact = $request->contact;
         $client->save();
         
-        return back()->with('success','Business information successfully updated!');
+        return back()->with('success','Profile successfully updated!');
     }
 
     public function change_password()
