@@ -409,7 +409,7 @@
 										<td>{{ $dental_record->treatment }}</td>
 										<td>{{ $dental_record->price }}</td>
 										<td class="text-right">
-											<a class='delete-record' data-dental-id="{{ $dental_record->id }}">
+											<a class="delete-record {{ App\Model\FeatureUser::is_feature_allowed('delete_patient_charge', Auth::user()->id) }}" data-dental-id="{{ $dental_record->id }}">
 												<i class="fa fa-trash-o" aria-hidden="true"></i>
 											</a>
 										</td>

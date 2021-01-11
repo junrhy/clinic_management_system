@@ -34,7 +34,7 @@
         <nav id="sidebar">
             <div class="sidebar-header">
                 <h3 class="text-center"><i class="fa fa-hand-holding-heart"></i> {{ config('app.name', 'Laravel') }}</h3>
-                <strong>P</strong>
+                <strong>C</strong>
             </div>
 
             <ul class="list-unstyled components">
@@ -44,7 +44,7 @@
 
               @if(Auth::user()->client->is_active && Auth::user()->client->is_suspended == 0)
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('calendar', Auth::user()->id) }}">
-                    <a href="{{ url('calendar') }}"><i class="fa fa-calendar"></i> Calendar</a>
+                    <a href="{{ url('calendar') }}"><i class="fa fa-calendar"></i> Appointment</a>
                 </li>
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('dental_chart', Auth::user()->id) }}">
                     <a href="{{ url('/dental_chart') }}"><i class="fa fa-tooth"></i> Dental</a>
@@ -135,7 +135,7 @@
                             <a href="{{ url('change_password') }}">Change Password</a>
                         </li>
 
-                        @if(Auth::user()->client->account_type == 'basic')
+                        @if(Auth::user()->client->account_type == 'basic' && Auth::user()->client->is_active != 0 && Auth::user()->client->is_suspended != 1)
                         <li>
                             <a style="cursor:pointer;" id="sidebar-menu-upgrade-account">Upgrade to Business Account</a>
                         </li>

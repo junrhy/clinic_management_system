@@ -44,7 +44,7 @@
         
       </div>
       <div class="modal-footer">
-       <button type="button" id="btn-submit-appointment" data-id="" class="btn btn-primary btn-round" data-dismiss="modal">Submit</button>
+       <button type="button" id="btn-submit-appointment" data-id="" class="btn btn-primary btn-round" data-dismiss="modal">Add</button>
        <button type="button" class="btn btn-default btn-round" data-dismiss="modal">Close</button>
     </div>
     </div>

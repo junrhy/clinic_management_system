@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Model\Patient;
 use App\Model\DentalChart;
+use App\Model\PatientBillingCharge;
 
 use Auth;
 use DB;
@@ -50,6 +51,14 @@ class DentalChartController extends Controller
         $dentalchart->price = $request->price;
             
         $dentalchart->save();
+
+
+        $billing_charge = new PatientBillingCharge;
+        $billing_charge->client_id = Auth::user()->client_id;
+        $billing_charge->patient_id = $request->patient_id;
+        $billing_charge->description = "Dental Treatment: " . $request->treatment;
+        $billing_charge->amount = $request->price;
+        $billing_charge->save();
     }
 
     public function destroy($id)

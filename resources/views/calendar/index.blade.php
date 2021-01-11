@@ -31,7 +31,7 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-12">
-                        <h2>Calendar <small class="text-muted">Manage your Schedules and Appointments</small></h2>
+                        <h2>Appointment <small class="text-muted">Manage your Schedules and Appointments</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                         <a class="btn btn-white btn-icon btn-round float-right m-l-10 {{ App\Model\FeatureUser::is_feature_allowed('add_appointment', Auth::user()->id) }}" id="add-appointment" type="button">
@@ -40,8 +40,8 @@
 
                         <ul class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><a href="/home"><i class="fa fa-home"></i> {{ Auth::user()->client->name }}</a></li>
-                            <li class="breadcrumb-item">Calendar</li>
-                            <li class="breadcrumb-item active">Appointments</li>
+                            <li class="breadcrumb-item">Appointment</li>
+                            <li class="breadcrumb-item active">Calendar</li>
                         </ul>
                     </div>
                 </div>
