@@ -101,11 +101,6 @@ $(document).ready(function() {
         $("#delete_patient_detail").prop('checked', $(this).is(":checked"));
         $("#archive_patient_detail").prop('checked', $(this).is(":checked"));
         $("#unarchive_patient_detail").prop('checked', $(this).is(":checked"));
-        $("#add_patient_charge").prop('checked', $(this).is(":checked"));
-        $("#delete_patient_charge").prop('checked', $(this).is(":checked"));
-        $("#add_patient_payment").prop('checked', $(this).is(":checked"));
-        $("#delete_patient_payment").prop('checked', $(this).is(":checked"));
-        $("#dental_chart").prop('checked', $(this).is(":checked"));
     });
 
     $("#clinics").click(function(){
@@ -126,6 +121,13 @@ $(document).ready(function() {
         $("#delete_service").prop('checked', $(this).is(":checked"));
     });
 
+    $("#billing").click(function(){
+        $("#add_billing_invoice").prop('checked', $(this).is(":checked"));
+        $("#delete_billing_invoice").prop('checked', $(this).is(":checked"));
+        $("#add_billing_payment").prop('checked', $(this).is(":checked"));
+        $("#delete_billing_payment").prop('checked', $(this).is(":checked"));
+    });
+
     $("#users").click(function(){
         $("#add_user").prop('checked', $(this).is(":checked"));
         $("#edit_user").prop('checked', $(this).is(":checked"));
@@ -136,10 +138,12 @@ $(document).ready(function() {
     $(function(){
         $("#txt_dashboard").addClass('category');
         $("#txt_calendar").addClass('category');
+        $("#txt_dental").addClass('category');
         $("#txt_patients").addClass('category');
         $("#txt_clinics").addClass('category');
         $("#txt_doctors").addClass('category');
         $("#txt_services").addClass('category');
+        $("#txt_billing").addClass('category');
         $("#txt_users").addClass('category');
         $("#txt_settings").addClass('category');
     });

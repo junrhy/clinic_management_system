@@ -50,7 +50,7 @@
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('calendar', Auth::user()->id) }}">
                     <a href="{{ url('calendar') }}"><i class="fa fa-calendar"></i> Appointment</a>
                 </li>
-                <li class="{{ App\Model\FeatureUser::is_feature_allowed('dental_chart', Auth::user()->id) }}">
+                <li class="{{ App\Model\FeatureUser::is_feature_allowed('dental', Auth::user()->id) }}">
                     <a href="{{ url('/dental_chart') }}"><i class="fa fa-tooth"></i> Dental</a>
                 </li>
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('patients', Auth::user()->id) }}">
@@ -109,14 +109,17 @@
                         </li>
                     </ul>
                 </li>
-                <li class="{{ App\Model\FeatureUser::is_feature_allowed('users', Auth::user()->id) }}">
-                    <a href="#accountingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <li class="{{ App\Model\FeatureUser::is_feature_allowed('billing', Auth::user()->id) }}">
+                    <a href="#billingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fa fa-file-alt"></i> 
-                        Accounting</a>
+                        &nbsp;Billing</a>
 
-                    <ul class="collapse list-unstyled" id="accountingSubmenu">
-                        <li class="">
-                            <a href="">All Transactions</a>
+                    <ul class="collapse list-unstyled" id="billingSubmenu">
+                        <li class="{{ App\Model\FeatureUser::is_feature_allowed('view_billing_invoices', Auth::user()->id) }}">
+                            <a href="{{ url('invoice') }}">All Invoices</a>
+                        </li>
+                        <li class="{{ App\Model\FeatureUser::is_feature_allowed('view_billing_payments', Auth::user()->id) }}">
+                            <a href="{{ url('payment') }}">All Payments</a>
                         </li>
                     </ul>
                 </li>

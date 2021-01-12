@@ -19,7 +19,6 @@ use App\Model\Attachment;
 use DB;
 use Auth;
 use DateTime;
-use Carbon\Carbon;
 
 class PatientController extends Controller
 {
@@ -73,8 +72,6 @@ class PatientController extends Controller
         $services = Service::where('client_id', Auth::user()->client_id)->pluck('name', 'name');
         $patient_details = PatientDetail::where('patient_id', $patient->id)->where('is_archived', false)->get();
         $archived_details = PatientDetail::where('patient_id', $patient->id)->where('is_archived', true)->get();
-        $billing_charges = PatientBillingCharge::where('patient_id', $patient->id)->get();
-        $billing_payments = PatientBillingPayment::where('patient_id', $patient->id)->get();
 
         return view('patient.show')
                 ->with('patient', $patient)
@@ -82,9 +79,7 @@ class PatientController extends Controller
                 ->with('doctors', $doctors)
                 ->with('services', $services)
                 ->with('details', $patient_details)
-                ->with('archived_details', $archived_details)
-                ->with('billing_charges', $billing_charges)
-                ->with('billing_payments', $billing_payments);
+                ->with('archived_details', $archived_details);
     }
 
     public function edit($id)
@@ -226,42 +221,6 @@ class PatientController extends Controller
         $patient_detail = PatientDetail::find($id);
         $patient_detail->is_archived = false;
         $patient_detail->save();
-    }
-
-    public function create_billing_charge(Request $request)
-    {
-        $billing_charge = new PatientBillingCharge;
-        $billing_charge->client_id = Auth::user()->client_id;
-        $billing_charge->patient_id = $request->patient_id;
-        $billing_charge->description = $request->description;
-        $billing_charge->amount = $request->amount;
-        $billing_charge->save();
-    }
-
-    public function delete_patient_charge(Request $request, $id)
-    {
-        $billing_charge = PatientBillingCharge::find($id);
-        $patient_id = $billing_charge->patient_id;
-
-        $billing_charge->delete();
-    }
-
-    public function create_billing_payment(Request $request)
-    {
-        $billing_payment = new PatientBillingPayment;
-        $billing_payment->client_id = Auth::user()->client_id;
-        $billing_payment->patient_id = $request->patient_id;
-        $billing_payment->description = $request->description;
-        $billing_payment->amount = $request->amount;
-        $billing_payment->save();
-    }
-
-    public function delete_patient_payment(Request $request, $id)
-    {
-        $billing_payment = PatientBillingPayment::find($id);
-        $patient_id = $billing_payment->patient_id;
-
-        $billing_payment->delete();
     }
 
     public function patient_view()

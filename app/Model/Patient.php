@@ -20,4 +20,14 @@ class Patient extends Model
 
         return $patients;
     }
+
+    public function charges()
+    {
+        return $this->hasMany(PatientBillingCharge::class, 'patient_id');
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(PatientBillingPayment::class, 'patient_id');
+    }
 }
