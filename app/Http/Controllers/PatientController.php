@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Filesystem\Filesystem;
 
 use App\Model\Patient;
 use App\Model\Clinic;
@@ -18,6 +19,7 @@ use App\Model\Attachment;
 use DB;
 use Auth;
 use DateTime;
+use Carbon\Carbon;
 
 class PatientController extends Controller
 {
@@ -26,11 +28,6 @@ class PatientController extends Controller
         $this->middleware('auth');
      }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $patients = Patient::where('client_id', Auth::user()->client_id)
@@ -43,22 +40,11 @@ class PatientController extends Controller
               ->with('namelist', $request->namelist);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('patient.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $patient = new Patient;
@@ -74,12 +60,6 @@ class PatientController extends Controller
         return redirect('patient');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $patient = Patient::find($id);
@@ -107,12 +87,6 @@ class PatientController extends Controller
                 ->with('billing_payments', $billing_payments);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $patient = Patient::find($id);
@@ -121,13 +95,6 @@ class PatientController extends Controller
                 ->with('patient', $patient);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $patient = Patient::find($id);
@@ -142,12 +109,6 @@ class PatientController extends Controller
         return redirect('patient');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request, $id)
     {
         $patient = Patient::find($id);
@@ -185,13 +146,22 @@ class PatientController extends Controller
         $files = $request->file('attachment');
 
         if(!empty($files)):
+            $folder_name = $request->patient_id . '-' . date('m-d-Y-H-i-s');
+
+            Storage::disk('public')->makeDirectory($folder_name);
+
             foreach ($files as $file):
-                Storage::disk('public')->put($file->getClientOriginalName(), file_get_contents($file));
+                try {
+                    Storage::disk('public')->put($folder_name .'/'. $file->getClientOriginalName(), file_get_contents($file));
+                } catch (Exception $e) {
+                    dd($e);
+                }
+                
 
                 $attachment = new Attachment;
                 $attachment->attachment_number = $request->attachment_number;
                 $attachment->filename = $file->getClientOriginalName();
-                $attachment->path = 'storage/app/public/';
+                $attachment->path = $folder_name;
                 $attachment->save();
             endforeach;
         endif;
@@ -214,6 +184,28 @@ class PatientController extends Controller
     {
         $patient_detail = PatientDetail::find($id);
 
+        if ($patient_detail->attachment_number != "") {
+
+            $attachments = Attachment::where('attachment_number', $patient_detail->attachment_number)->get();
+
+            foreach ($attachments as $attachment):
+                $attachment->delete();
+
+                Storage::disk('public')->delete($attachment->path .'/'. $attachment->filename);
+
+                $FileSystem = new Filesystem();
+                $directory = 'storage/' . $attachment->path;
+
+                if ($FileSystem->exists($directory)) {
+                    $files = $FileSystem->files($directory);
+
+                    if (empty($files)) {
+                    $FileSystem->deleteDirectory($directory);
+                    }
+                }
+           endforeach;
+        }
+        
         $patient_detail->delete();
     }
 

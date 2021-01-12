@@ -23,6 +23,15 @@
     text-decoration: underline;
     margin-right: 8px;
   }
+
+  .delete-text {
+    color: red;
+  }
+
+  .delete-text:hover  {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 </style>
 @endsection
 
@@ -52,27 +61,27 @@
                     <table class="">
                       <tr>
                         <td class="col-md-2 text-right">First Name:</td>
-                        <td>{{ $patient->first_name }}</td>
+                        <td><span style="font-family: sans-serif;">{{ $patient->first_name }}</span></td>
                       </tr>
                       <tr>
                         <td class="col-md-2 text-right">Last Name:</td>
-                        <td>{{ $patient->last_name }}</td>
+                        <td><span style="font-family: sans-serif;">{{ $patient->last_name }}</span></td>
                       </tr>
                       <tr>
                         <td class="col-md-2 text-right">Date of Birth:</td>
-                        <td>{{ $patient->dob->format('M d, Y') }}</td>
+                        <td><span style="font-family: sans-serif;">{{ $patient->dob->format('M d, Y') }}</span></td>
                       </tr>
                       <tr>
                         <td class="col-md-2 text-right">Age:</td>
-                        <td>{{ $patient->dob->age }}</td>
+                        <td><span style="font-family: sans-serif;">{{ $patient->dob->age }}</span></td>
                       </tr>
                       <tr>
                         <td class="col-md-2 text-right">Gender:</td>
-                        <td>{{ $patient->gender }}</td>
+                        <td><span style="font-family: sans-serif;">{{ $patient->gender }}</span></td>
                       </tr>
                       <tr>
                         <td class="col-md-2 text-right">Email:</td>
-                        <td>{{ $patient->email }}</td>
+                        <td><span style="font-family: sans-serif;">{{ $patient->email }}</span></td>
                       </tr>
                       <tr>
                         <td class="col-md-2 text-right">Contact No.:</td>
@@ -85,7 +94,7 @@
                     <div class="row" style="margin-top:30px;">
                       <h4 class="row" style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</h4>
                         <ul class="nav nav-tabs">
-                          <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#home">Transactions</a></li>
+                          <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#home">Records</a></li>
                           <li><a data-toggle="tab" href="#menu1">Archived</a></li>
                         </ul>
 
@@ -93,13 +102,14 @@
                           <div id="home" class="tab-pane fade in active">
                             <br>
                             <div class="table-responsive">
-                              <table class="table">
+                              <table class="table table-striped">
                                 <thead>
                                   <th style="width:15%">Created</th>
-                                  <th style="width:20%">Clinic</th>
-                                  <th style="width:20%">Doctor</th>
-                                  <th style="width:20%">Service Type</th>
-                                  <th style="width:20%">Appointment</th>
+                                  <th style="width:15%">Clinic</th>
+                                  <th style="width:15%">Doctor</th>
+                                  <th style="width:15%">Service Type</th>
+                                  <th style="width:15%">Appointment</th>
+                                  <th style="width:15%">Attachments</th>
                                   <th style="width:1%;text-align:center;">Action</th>
                                 </thead>
 
@@ -116,7 +126,22 @@
                                             {{ date('M d, Y', strtotime($detail->date_scheduled)) }}&nbsp;&nbsp;
                                             {{ date('h:i a', strtotime($detail->time_scheduled)) }}
                                           @else
-                                            n/a
+                                            &nbsp;
+                                          @endif
+                                        </td>
+                                        <td>
+                                          @if(!empty($detail->attachment_number))
+        
+                                              @foreach($detail->attachment as $attachment)
+                                                <small class="attachment">
+                                                  <a href="{{ asset('storage/'. $attachment->path .'/'. $attachment->filename) }}" target="_blank">
+                                                     <i class="fa fa-paperclip" aria-hidden="true"></i> {{ $attachment->filename }}
+                                                  </a>
+                                                </small>
+                                                <small class="delete-text delete-attachment" data-id="{{ $attachment->id }}" data-filename="{{ $attachment->filename }}">delete</small>
+                                                <br>
+                                              @endforeach
+     
                                           @endif
                                         </td>
                                         <td class="text-center">
@@ -133,15 +158,7 @@
                                     </tr>
                                     @endif
 
-                                    @if(!empty($detail->attachment_number))
-                                    <tr>
-                                      <td colspan="7">
-                                        @foreach($detail->attachment as $attachment)
-                                          <small class="attachment"><i class="fa fa-paperclip" aria-hidden="true"></i> {{ $attachment->filename }}</small>
-                                        @endforeach
-                                      </td>
-                                    </tr>
-                                    @endif
+                                    
                                   @endforeach
                                 @else
                                   <tr>
@@ -158,10 +175,11 @@
                                 <table class="table">
                                   <thead>
                                     <th style="width:15%">Created</th>
-                                    <th style="width:20%">Clinic</th>
-                                    <th style="width:20%">Doctor</th> 
-                                    <th style="width:20%">Service Type</th>
-                                    <th style="width:20%">Appointment</th>
+                                    <th style="width:15%">Clinic</th>
+                                    <th style="width:15%">Doctor</th>
+                                    <th style="width:15%">Service Type</th>
+                                    <th style="width:15%">Appointment</th>
+                                    <th style="width:15%">Attachments</th>
                                     <th style="width:1%;text-align:center;">Action</th>
                                   </thead>
 
@@ -181,6 +199,21 @@
                                               n/a
                                             @endif
                                           </td>
+                                          <td>
+                                            @if(!empty($archive_detail->attachment_number))
+          
+                                                @foreach($archive_detail->attachment as $attachment)
+                                                  <small class="attachment">
+                                                    <a href="{{ asset('storage/'. $attachment->path .'/'. $attachment->filename) }}" target="_blank">
+                                                       <i class="fa fa-paperclip" aria-hidden="true"></i> {{ $attachment->filename }}
+                                                    </a>
+                                                  </small>
+                                                  <small class="delete-text delete-attachment" data-id="{{ $attachment->id }}" data-filename="{{ $attachment->filename }}">delete</small>
+                                                  <br>
+                                                @endforeach
+       
+                                            @endif
+                                          </td>
                                           <td class="text-center">
                                             <a class="delete-link delete-detail {{ App\Model\FeatureUser::is_feature_allowed('delete_patient_detail', Auth::user()->id) }}" data-id="{{ $archive_detail->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a> | 
                                             <a class="unarchive-link unarchive-detail {{ App\Model\FeatureUser::is_feature_allowed('unarchive_patient_detail', Auth::user()->id) }}" data-id="{{ $archive_detail->id }}"><i class="fa fa-undo" aria-hidden="true" title="Restore"></i></a>
@@ -192,16 +225,6 @@
                                     <tr>
                                       <td colspan="7">
                                         <?php echo $detail->notes ?>
-                                      </td>
-                                    </tr>
-                                    @endif
-
-                                    @if(!empty($archive_detail->attachment_number))
-                                    <tr>
-                                      <td colspan="7">
-                                        @foreach($archive_detail->attachment as $attachment)
-                                          <small class="attachment"><i class="fa fa-paperclip" aria-hidden="true"></i> {{ $attachment->filename }}</small>
-                                        @endforeach
                                       </td>
                                     </tr>
                                     @endif
@@ -218,7 +241,7 @@
                     </div>
                   </div>
 
-                  <div class="row {{ App\Model\FeatureUser::is_feature_allowed('add_patient_detail', Auth::user()->id) }}">
+                  <div class="row col-md-6 {{ App\Model\FeatureUser::is_feature_allowed('add_patient_detail', Auth::user()->id) }}">
                     <div class="form-group col-md-3">
                       {{ Form::label('clinic', 'Clinic') }}
                       {{ Form::select('clinic', $clinics, '', ['class' => 'form-control']) }}
@@ -238,19 +261,20 @@
                       {{ Form::label('notes', 'Notes') }}
                       {{ Form::textarea('notes', null, ['id' => 'notes','class' => 'form-control', 'rows' => 4, 'cols' => 54, 'maxlength' => 300, 'placeholder' => 'Limit to 300 characters only', 'style' => 'resize:none']) }}
                     </div>
-                    <div class="form-group col-md-8">
+                    <div class="form-group col-md-6">
                       {{ Form::label('attachment', 'Attachment') }}
                       <div class="row">
                         <div class="col-md-12">
                           <form id="form-patient-detail-upload" method="post" enctype="multipart/form-data">
-                              <input type="hidden" name="attachment_number" value="{{ Illuminate\Support\Str::random(40) }}">
+                              <input type="hidden" name="attachment_number" value="{{ \Illuminate\Support\Str::random(6) }}">
+                              <input type="hidden" name="patient_id" value="{{ $patient->id }}">
                               <input type="file" name="attachment[]" multiple>
                               {{ csrf_field() }}
                           </form>
                         </div>
                       </div>
                     </div>
-                    <div class="form-group col-md-4 {{ App\Model\FeatureUser::is_feature_allowed('add_appointment', Auth::user()->id) }}">
+                    <div class="form-group col-md-6 {{ App\Model\FeatureUser::is_feature_allowed('add_appointment', Auth::user()->id) }}">
                       {{ Form::checkbox('checkbox_visit', 'Yes') }}
                       {{ Form::label('checkbox_visit', 'Set Appointment') }}
                       <div class="row">
@@ -597,6 +621,41 @@ $(document).ready(function() {
           Swal.fire(
             'Deleted!',
             'Record has been deleted.',
+            'success'
+          ).then((result) => {
+            location.reload();
+          });
+        });
+      }
+    })
+  });
+
+  $(".delete-attachment").unbind().click(function(){
+    id = $(this).data('id');
+    filename = $(this).data('filename');
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.value) {
+        $.ajax({
+          method: "DELETE",
+          url: "/attachment/delete/" + id,
+          data: { 
+            filename: filename,
+            _token: "{{ csrf_token() }}" 
+          }
+        })
+        .done(function( msg ) {
+          Swal.fire(
+            'Deleted!',
+            'Attachment has been deleted.',
             'success'
           ).then((result) => {
             location.reload();
