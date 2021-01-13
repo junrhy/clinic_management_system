@@ -73,6 +73,9 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::get('/dental_chart', 'DentalChartController@index');
 	Route::post('/dental_chart', 'DentalChartController@store');
 	Route::delete('/dental_chart/{id}', 'DentalChartController@destroy');
+	Route::post('/dental_chart/get_attributes', 'DentalChartController@get_attributes');
+	Route::post('/dental_chart/update_attribute', 'DentalChartController@update_attribute');
+	Route::post('/dental_chart/get_patient_attributes', 'DentalChartController@get_patient_attributes');
 
 	Route::delete('/attachment/delete/{id}', 'AttachmentController@delete');
 

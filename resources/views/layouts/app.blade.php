@@ -208,7 +208,8 @@
                 </div>
             </nav>
 
-            <div style="height:200px;width:100%;position:absolute;left:0px;top:50px;z-index: -1;background-color: #01d8da;"></div>
+            <div id="below-nav-design" style="height:200px;position:absolute;left:0px;top:50px;z-index: -1;background-color: #01d8da;"></div>
+
             @yield('content')
         </div>
     </div>
@@ -223,9 +224,40 @@
 </body>
 <script type="text/javascript">
 $(document).ready(function () {
+    update_below_nav_width();
 
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
+
+        update_below_nav_width();
+    });
+
+    function update_below_nav_width() {
+        var width = $(window).width();
+
+        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            // ipad landscape
+            if ($(window).width() == 1024) {
+                if ($('#sidebar').hasClass('active')) {
+                    width = width + 74;
+                } else {
+                    width = width + 224;
+                }
+            }
+
+            // ipad landscape
+            if ($(window).width() == 768) {
+                if ($('#sidebar').hasClass('active')) {
+                    width = width + 100;
+                }
+            }
+        }
+
+        $("#below-nav-design").css("width", width);
+    }
+
+    $(window).resize(function() {
+        $("#below-nav-design").width("100%");
     });
 
 });

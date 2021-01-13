@@ -18,9 +18,7 @@ class CreateDentalChartsTable extends Migration
             $table->integer('client_id');
             $table->integer('patient_id');
             $table->integer('tooth_number');
-            $table->string('diagnosis');
-            $table->string('treatment');
-            $table->string('price');
+            $table->string('attribute');
             $table->timestamps();
         });
     }

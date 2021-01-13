@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Model\Patient;
 use App\Model\DentalChart;
-use App\Model\PatientBillingCharge;
 
 use Auth;
 use DB;
@@ -36,34 +35,51 @@ class DentalChartController extends Controller
                     ->with('dental_records', $dental_records)
                     ->with('tooth_numbers', $tooth_numbers)
                     ->with('patients', $patients)
+                    ->with('patient_id', $patient_id)
                     ->with('patient_name', $patient_name);
 	}
 
-    public function store(Request $request)
+    public function get_attributes(Request $request)
     {
-    	
-        $dentalchart = new DentalChart;
-        $dentalchart->client_id = Auth::user()->client_id;
-        $dentalchart->patient_id = $request->patient_id;
-        $dentalchart->tooth_number = $request->tooth_number;
-        $dentalchart->diagnosis = $request->diagnosis;
-        $dentalchart->treatment = $request->treatment;
-        $dentalchart->price = $request->price;
-            
-        $dentalchart->save();
+        $attributes = DentalChart::where('patient_id', $request->patient_id)
+                            ->where('tooth_number', $request->tooth_number)
+                            ->where('client_id', Auth::user()->client_id)
+                            ->get();
 
-
-        $billing_charge = new PatientBillingCharge;
-        $billing_charge->client_id = Auth::user()->client_id;
-        $billing_charge->patient_id = $request->patient_id;
-        $billing_charge->description = "Dental Treatment: " . $request->treatment;
-        $billing_charge->amount = $request->price;
-        $billing_charge->save();
+        return response()
+            ->json($attributes);
     }
 
-    public function destroy($id)
+    public function get_patient_attributes(Request $request)
     {
-        $dental_record = DentalChart::find($id);
-        $dental_record->delete();
+        $attributes = DentalChart::where('patient_id', $request->patient_id)
+                            ->where('client_id', Auth::user()->client_id)
+                            ->get();
+
+        return response()
+            ->json($attributes);
+    }
+
+    public function update_attribute(Request $request)
+    {
+        $isApply = $request->is_apply;
+
+        if ($isApply == "yes") {
+            $dentalchart = new DentalChart;
+            $dentalchart->client_id = Auth::user()->client_id;
+            $dentalchart->patient_id = $request->patient_id;
+            $dentalchart->tooth_number = $request->tooth_number;
+            $dentalchart->attribute = $request->attribute;
+                
+            $dentalchart->save();
+        } else {
+            $dentalchart = DentalChart::where('patient_id', $request->patient_id)
+                                ->where('tooth_number', $request->tooth_number)
+                                ->where('attribute', $request->attribute)
+                                ->where('client_id', Auth::user()->client_id)
+                                ->first();
+
+            $dentalchart->delete();        
+        }
     }
 }
