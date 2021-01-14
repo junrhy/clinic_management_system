@@ -20,16 +20,9 @@ class CreateClientsTable extends Migration
             $table->string('secondary_email', 150)->nullable();
             $table->string('contact')->nullable();
             $table->string('account_type')->default('basic');
+            $table->string('app_license_no')->nullable();
             $table->boolean('is_active')->default(1);
             $table->boolean('is_suspended')->default(0);
-            $table->string('paypal_subscr_id')->nullable();
-            $table->string('payer_first_name')->nullable();
-            $table->string('payer_last_name')->nullable();
-            $table->string('payer_email')->nullable();
-            $table->string('payment_receiver_email')->nullable();
-            $table->string('paypal_subscr_date')->nullable();
-            $table->string('payment_fee')->nullable();
-            $table->string('paypal_payment_date')->nullable();
             $table->timestamps();
         });
     }

@@ -206,20 +206,15 @@
                 <div class="panel-heading">Dental Record</div>
 
                 <div class="panel-body">
-                	<h4 class="col-md-12 section">Patient Information</h4>
-	            	<div class="row">
-	            		<div class="col-md-12">
-		            		<div class="col-md-2">
-				        		<select name="patient_id" class='form-control'>
-				        			<option value='' disabled>Select Patient</option>
-				        			@foreach($patients as $patient)
-				        			<option value="{{ $patient->id }}">{{ $patient->fullname }}</option>
-				        			@endforeach
-				        		</select>
-		            		</div>
-		            		<div class="col-md-1">
-		            			<button id="select-patient" class="btn btn-primary btn-block"><i class="fa fa-search"></i> View</button>
-		            		</div>
+                	<h4 class="col-md-12 section">Patient Name</h4>
+	            	<div class="row col-md-12">
+	            		<div class="col-md-2">
+			        		<select name="patient_id" class='form-control'>
+			        			<option value='' disabled>Select Patient</option>
+			        			@foreach($patients as $patient)
+			        			<option value="{{ $patient->id }}">{{ $patient->fullname }}</option>
+			        			@endforeach
+			        		</select>
 	            		</div>
 		        	</div>
 		        	<h4 class="col-md-12 section">Dental Chart</h4>
@@ -229,42 +224,42 @@
                     	<td>
 							<div class="chart">
 								<div class="upper-jaw-root">
-									<img class="root" src="/img/dental-chart/18_root.gif">
-									<img class="root" src="/img/dental-chart/17_root.gif">
-									<img class="root" src="/img/dental-chart/16_root.gif">
-									<img class="root" src="/img/dental-chart/15_root.gif">
-									<img class="root" src="/img/dental-chart/14_root.gif">
-									<img class="root" src="/img/dental-chart/13_root.gif">
-									<img class="root" src="/img/dental-chart/12_root.gif">
-									<img class="root" src="/img/dental-chart/11_root.gif">
+									<img class="root" id="tooth-root-18" src="/img/dental-chart/18_root.gif">
+									<img class="root" id="tooth-root-17" src="/img/dental-chart/17_root.gif">
+									<img class="root" id="tooth-root-16" src="/img/dental-chart/16_root.gif">
+									<img class="root" id="tooth-root-15" src="/img/dental-chart/15_root.gif">
+									<img class="root" id="tooth-root-14" src="/img/dental-chart/14_root.gif">
+									<img class="root" id="tooth-root-13" src="/img/dental-chart/13_root.gif">
+									<img class="root" id="tooth-root-12" src="/img/dental-chart/12_root.gif">
+									<img class="root" id="tooth-root-11" src="/img/dental-chart/11_root.gif">
 									
-									<img class="root vl" src="/img/dental-chart/21_root.gif">
-									<img class="root" src="/img/dental-chart/22_root.gif">
-									<img class="root" src="/img/dental-chart/23_root.gif">
-									<img class="root" src="/img/dental-chart/24_root.gif">
-									<img class="root" src="/img/dental-chart/25_root.gif">
-									<img class="root" src="/img/dental-chart/26_root.gif">
-									<img class="root" src="/img/dental-chart/27_root.gif">
-									<img class="root" src="/img/dental-chart/28_root.gif">
+									<img class="root vl" id="tooth-root-21" src="/img/dental-chart/21_root.gif">
+									<img class="root" id="tooth-root-22" src="/img/dental-chart/22_root.gif">
+									<img class="root" id="tooth-root-23" src="/img/dental-chart/23_root.gif">
+									<img class="root" id="tooth-root-24" src="/img/dental-chart/24_root.gif">
+									<img class="root" id="tooth-root-25" src="/img/dental-chart/25_root.gif">
+									<img class="root" id="tooth-root-26" src="/img/dental-chart/26_root.gif">
+									<img class="root" id="tooth-root-27" src="/img/dental-chart/27_root.gif">
+									<img class="root" id="tooth-root-28" src="/img/dental-chart/28_root.gif">
 								</div>
 								<div class="upper-jaw-crown">
-									<img class="crown" src="/img/dental-chart/18_crown.gif">
-									<img class="crown" src="/img/dental-chart/17_crown.gif">
-									<img class="crown" src="/img/dental-chart/16_crown.gif">
-									<img class="crown" src="/img/dental-chart/15_crown.gif">
-									<img class="crown" src="/img/dental-chart/14_crown.gif">
-									<img class="crown" src="/img/dental-chart/13_crown.gif">
-									<img class="crown" src="/img/dental-chart/12_crown.gif">
-									<img class="crown" src="/img/dental-chart/11_crown.gif">
+									<img class="crown" id="tooth-crown-18" src="/img/dental-chart/18_crown.gif">
+									<img class="crown" id="tooth-crown-17" src="/img/dental-chart/17_crown.gif">
+									<img class="crown" id="tooth-crown-16" src="/img/dental-chart/16_crown.gif">
+									<img class="crown" id="tooth-crown-15" src="/img/dental-chart/15_crown.gif">
+									<img class="crown" id="tooth-crown-14" src="/img/dental-chart/14_crown.gif">
+									<img class="crown" id="tooth-crown-13" src="/img/dental-chart/13_crown.gif">
+									<img class="crown" id="tooth-crown-12" src="/img/dental-chart/12_crown.gif">
+									<img class="crown" id="tooth-crown-11" src="/img/dental-chart/11_crown.gif">
 									
-									<img class="crown vl" src="/img/dental-chart/21_crown.gif">
-									<img class="crown" src="/img/dental-chart/22_crown.gif">
-									<img class="crown" src="/img/dental-chart/23_crown.gif">
-									<img class="crown" src="/img/dental-chart/24_crown.gif">
-									<img class="crown" src="/img/dental-chart/25_crown.gif">
-									<img class="crown" src="/img/dental-chart/26_crown.gif">
-									<img class="crown" src="/img/dental-chart/27_crown.gif">
-									<img class="crown" src="/img/dental-chart/28_crown.gif">
+									<img class="crown vl" id="tooth-crown-21" src="/img/dental-chart/21_crown.gif">
+									<img class="crown" id="tooth-crown-22" src="/img/dental-chart/22_crown.gif">
+									<img class="crown" id="tooth-crown-23" src="/img/dental-chart/23_crown.gif">
+									<img class="crown" id="tooth-crown-24" src="/img/dental-chart/24_crown.gif">
+									<img class="crown" id="tooth-crown-25" src="/img/dental-chart/25_crown.gif">
+									<img class="crown" id="tooth-crown-26" src="/img/dental-chart/26_crown.gif">
+									<img class="crown" id="tooth-crown-27" src="/img/dental-chart/27_crown.gif">
+									<img class="crown" id="tooth-crown-28" src="/img/dental-chart/28_crown.gif">
 								</div>
 
 								<div class="upper-jaw-filling">
@@ -409,42 +404,42 @@
 									</div>
 								</div>
 								<div class="lower-jaw-crown">
-									<img class="crown" src="/img/dental-chart/48_crown.gif">
-									<img class="crown" src="/img/dental-chart/47_crown.gif">
-									<img class="crown" src="/img/dental-chart/46_crown.gif">
-									<img class="crown" src="/img/dental-chart/45_crown.gif">
-									<img class="crown" src="/img/dental-chart/44_crown.gif">
-									<img class="crown" src="/img/dental-chart/43_crown.gif">
-									<img class="crown" src="/img/dental-chart/42_crown.gif">
-									<img class="crown" src="/img/dental-chart/41_crown.gif">
+									<img class="crown"  id="tooth-crown-48" src="/img/dental-chart/48_crown.gif">
+									<img class="crown"  id="tooth-crown-47" src="/img/dental-chart/47_crown.gif">
+									<img class="crown"  id="tooth-crown-46" src="/img/dental-chart/46_crown.gif">
+									<img class="crown"  id="tooth-crown-45" src="/img/dental-chart/45_crown.gif">
+									<img class="crown"  id="tooth-crown-44" src="/img/dental-chart/44_crown.gif">
+									<img class="crown"  id="tooth-crown-43" src="/img/dental-chart/43_crown.gif">
+									<img class="crown"  id="tooth-crown-42" src="/img/dental-chart/42_crown.gif">
+									<img class="crown"  id="tooth-crown-41" src="/img/dental-chart/41_crown.gif">
 									
-									<img class="crown vl" src="/img/dental-chart/31_crown.gif">
-									<img class="crown" src="/img/dental-chart/32_crown.gif">
-									<img class="crown" src="/img/dental-chart/33_crown.gif">
-									<img class="crown" src="/img/dental-chart/34_crown.gif">
-									<img class="crown" src="/img/dental-chart/35_crown.gif">
-									<img class="crown" src="/img/dental-chart/36_crown.gif">
-									<img class="crown" src="/img/dental-chart/37_crown.gif">
-									<img class="crown" src="/img/dental-chart/38_crown.gif">
+									<img class="crown vl" id="tooth-crown-31" src="/img/dental-chart/31_crown.gif">
+									<img class="crown" id="tooth-crown-32" src="/img/dental-chart/32_crown.gif">
+									<img class="crown" id="tooth-crown-33" src="/img/dental-chart/33_crown.gif">
+									<img class="crown" id="tooth-crown-34" src="/img/dental-chart/34_crown.gif">
+									<img class="crown" id="tooth-crown-35" src="/img/dental-chart/35_crown.gif">
+									<img class="crown" id="tooth-crown-36" src="/img/dental-chart/36_crown.gif">
+									<img class="crown" id="tooth-crown-37" src="/img/dental-chart/37_crown.gif">
+									<img class="crown" id="tooth-crown-38" src="/img/dental-chart/38_crown.gif">
 								</div>
 								<div class="lower-jaw-root">
-									<img class="root" src="/img/dental-chart/48_root.gif">
-									<img class="root" src="/img/dental-chart/47_root.gif">
-									<img class="root" src="/img/dental-chart/46_root.gif">
-									<img class="root" src="/img/dental-chart/45_root.gif">
-									<img class="root" src="/img/dental-chart/44_root.gif">
-									<img class="root" src="/img/dental-chart/43_root.gif">
-									<img class="root" src="/img/dental-chart/42_root.gif">
-									<img class="root" src="/img/dental-chart/41_root.gif">
+									<img class="root" id="tooth-root-48" src="/img/dental-chart/48_root.gif">
+									<img class="root" id="tooth-root-47" src="/img/dental-chart/47_root.gif">
+									<img class="root" id="tooth-root-46" src="/img/dental-chart/46_root.gif">
+									<img class="root" id="tooth-root-45" src="/img/dental-chart/45_root.gif">
+									<img class="root" id="tooth-root-44" src="/img/dental-chart/44_root.gif">
+									<img class="root" id="tooth-root-43" src="/img/dental-chart/43_root.gif">
+									<img class="root" id="tooth-root-42" src="/img/dental-chart/42_root.gif">
+									<img class="root" id="tooth-root-41" src="/img/dental-chart/41_root.gif">
 									
-									<img class="root vl" src="/img/dental-chart/31_root.gif">
-									<img class="root" src="/img/dental-chart/32_root.gif">
-									<img class="root" src="/img/dental-chart/33_root.gif">
-									<img class="root" src="/img/dental-chart/34_root.gif">
-									<img class="root" src="/img/dental-chart/35_root.gif">
-									<img class="root" src="/img/dental-chart/36_root.gif">
-									<img class="root" src="/img/dental-chart/37_root.gif">
-									<img class="root" src="/img/dental-chart/38_root.gif">
+									<img class="root vl" id="tooth-root-31" src="/img/dental-chart/31_root.gif">
+									<img class="root" id="tooth-root-32" src="/img/dental-chart/32_root.gif">
+									<img class="root" id="tooth-root-33" src="/img/dental-chart/33_root.gif">
+									<img class="root" id="tooth-root-34" src="/img/dental-chart/34_root.gif">
+									<img class="root" id="tooth-root-35" src="/img/dental-chart/35_root.gif">
+									<img class="root" id="tooth-root-36" src="/img/dental-chart/36_root.gif">
+									<img class="root" id="tooth-root-37" src="/img/dental-chart/37_root.gif">
+									<img class="root" id="tooth-root-38" src="/img/dental-chart/38_root.gif">
 								</div>
 							</div>
 						</td>
@@ -545,124 +540,8 @@
 $(document).ready(function() {
 	$('select[name=patient_id]').val("{{ isset($_GET['patient_id']) ? $_GET['patient_id'] : '' }}");
 
-	$("#select-patient").click(function(){
-		location.href = '/dental_chart?patient_id=' + $("select[name='patient_id']").val();
-	});
-
-	$("#create-record").click(function(){
-		$("#record-list").append("<tr id='new-record'> \
-			<td> \
-			<select name='tooth-number' class='form-control'> \
-				<option value='18'>18</option> \
-				<option value='17'>17</option> \
-				<option value='16'>16</option> \
-				<option value='15'>15</option> \
-				<option value='14'>14</option> \
-				<option value='13'>13</option> \
-				<option value='12'>12</option> \
-				<option value='11'>11</option> \
-				<option value='21'>21</option> \
-				<option value='22'>22</option> \
-				<option value='23'>23</option> \
-				<option value='24'>24</option> \
-				<option value='25'>25</option> \
-				<option value='26'>26</option> \
-				<option value='27'>27</option> \
-				<option value='28'>28</option> \
-				<option value='48'>48</option> \
-				<option value='47'>47</option> \
-				<option value='46'>46</option> \
-				<option value='45'>45</option> \
-				<option value='44'>44</option> \
-				<option value='43'>43</option> \
-				<option value='42'>42</option> \
-				<option value='41'>41</option> \
-				<option value='31'>31</option> \
-				<option value='32'>32</option> \
-				<option value='33'>33</option> \
-				<option value='34'>34</option> \
-				<option value='35'>35</option> \
-				<option value='36'>36</option> \
-				<option value='37'>37</option> \
-				<option value='38'>38</option> \
-			</select> \
-			</td> \
-			<td><textarea name='diagnosis' rows='4' class='form-control'></textarea></td> \
-			<td><textarea name='treatment' rows='4' class='form-control'></textarea></td> \
-			<td><input name='price' type='text' class='form-control'></input></td> \
-			<td class='text-right'> \
-				<a class='save-record'>Save</a> | <a class='cancel-record'>Cancel</a> \
-			</td> \
-		</tr>");
-	});
-
-	$(document).on('click', '.save-record', function(){ 
-		var patient_id = $("select[name='patient_id']").val();
-	    var tooth_number = $("select[name='tooth-number']").val();
-	    var diagnosis = $("textarea[name='diagnosis']").val();
-	    var treatment = $("textarea[name='treatment']").val();
-	    var price = $("input[name='price']").val();
-
-	    if (tooth_number != '' && diagnosis != '' && treatment != '' && price != '') {
-	    	$.ajax({
-	          method: "POST",
-	          url: "/dental_chart",
-	          data: { 
-	          	patient_id: patient_id,
-	          	tooth_number: tooth_number,
-	          	diagnosis: diagnosis,
-	          	treatment: treatment,
-	          	price: price,
-	            _token: "{{ csrf_token() }}" 
-	          }
-	        })
-	        .done(function( msg ) {
-	          Swal.fire(
-	            'Saved!',
-	            'Record has been saved.',
-	            'success'
-	          ).then((result) => {
-	            location.reload();
-	          });
-	        });
-	    }
-	});
-
-	$(document).on('click', '.cancel-record', function(){ 
-	    $("#new-record").remove();
-	});
-
-	$('.delete-record').unbind().click(function(){
-		var id = $(this).data('dental-id');
-
-	    Swal.fire({
-	      title: 'Are you sure?',
-	      text: "You won't be able to revert this!",
-	      type: 'warning',
-	      showCancelButton: true,
-	      confirmButtonColor: '#3085d6',
-	      cancelButtonColor: '#d33',
-	      confirmButtonText: 'Yes, delete it!'
-	    }).then((result) => {
-	      if (result.value) {
-	        $.ajax({
-	          method: "DELETE",
-	          url: "/dental_chart/" + id,
-	          data: { 
-	            _token: "{{ csrf_token() }}" 
-	          }
-	        })
-	        .done(function( msg ) {
-	          Swal.fire(
-	            'Deleted!',
-	            'Record has been deleted.',
-	            'success'
-	          ).then((result) => {
-	            location.reload();
-	          });
-	        });
-	      }
-	    })
+	$("select[name=patient_id]").on('change', function(){
+		location.href = '/dental_chart?patient_id=' + $(this).val();
 	});
 
 	$('.tooth-number').unbind().click(function(e){
@@ -720,14 +599,51 @@ $(document).ready(function() {
 		var attribute = $(this).data('attribute');
 		var is_apply = "no";
 
-		if ($("#filling-tooth-"+tooth_number).hasClass(attribute)) {
-			$("#filling-tooth-"+tooth_number).removeClass(attribute);
-			$(this).removeClass('sign-selected');
-			is_apply = "no";
-		} else {
-			$("#filling-tooth-"+tooth_number).addClass(attribute);
-			$(this).addClass('sign-selected');
-			is_apply = "yes";
+		// filling
+		if (attribute.substring(0, 7) == "filling") {
+			if ($("#filling-tooth-"+tooth_number).hasClass(attribute)) {
+				$("#filling-tooth-"+tooth_number).removeClass(attribute);
+				$(this).removeClass('sign-selected');
+				is_apply = "no";
+			} else {
+				$("#filling-tooth-"+tooth_number).addClass(attribute);
+				$(this).addClass('sign-selected');
+				is_apply = "yes";
+			}
+		}
+
+		// x sign
+		if (attribute.substring(0, 5) == "add-x") {
+			$('.sign-option[data-attribute="add-vline"]').removeClass('sign-selected');
+
+			if ($("#tooth-root-"+tooth_number).attr('src') == "/img/dental-chart/"+tooth_number+"_root_missing.gif") {
+				$("#tooth-root-"+tooth_number).attr('src', "/img/dental-chart/"+tooth_number+"_root.gif");
+				$("#tooth-crown-"+tooth_number).attr('src', "/img/dental-chart/"+tooth_number+"_crown.gif");
+				$(this).removeClass('sign-selected');
+				is_apply = "no";
+			} else {
+				$("#tooth-root-"+tooth_number).attr('src', "/img/dental-chart/"+tooth_number+"_root_missing.gif");
+				$("#tooth-crown-"+tooth_number).attr('src', "/img/dental-chart/"+tooth_number+"_crown.gif");
+				$(this).addClass('sign-selected');
+				is_apply = "yes";
+			}
+		}
+
+		// vline
+		if (attribute.substring(0, 9) == "add-vline") {
+			$('.sign-option[data-attribute="add-x"]').removeClass('sign-selected');
+
+			if ($("#tooth-root-"+tooth_number).attr('src') == "/img/dental-chart/"+tooth_number+"_root_remove.png") {
+				$("#tooth-root-"+tooth_number).attr('src', "/img/dental-chart/"+tooth_number+"_root.gif");
+				$("#tooth-crown-"+tooth_number).attr('src', "/img/dental-chart/"+tooth_number+"_crown.gif");
+				$(this).removeClass('sign-selected');
+				is_apply = "no";
+			} else {
+				$("#tooth-root-"+tooth_number).attr('src', "/img/dental-chart/"+tooth_number+"_root_remove.png");
+				$("#tooth-crown-"+tooth_number).attr('src', "/img/dental-chart/"+tooth_number+"_crown_remove.png");
+				$(this).addClass('sign-selected');
+				is_apply = "yes";
+			}
 		}
 		
 		$.ajax({
@@ -760,6 +676,15 @@ $(document).ready(function() {
         	$.each(data, function(i, item) {
 				if (data[i].attribute.substring(0, 7) == "filling") {
 					$('#filling-tooth-'+data[i].tooth_number).addClass(data[i].attribute);
+				}
+
+				if (data[i].attribute.substring(0, 5) == "add-x") {
+					$("#tooth-root-"+data[i].tooth_number).attr('src', "/img/dental-chart/"+data[i].tooth_number+"_root_missing.gif");
+				}
+
+				if (data[i].attribute.substring(0, 9) == "add-vline") {
+					$("#tooth-root-"+data[i].tooth_number).attr('src', "/img/dental-chart/"+data[i].tooth_number+"_root_remove.png");
+					$("#tooth-crown-"+data[i].tooth_number).attr('src', "/img/dental-chart/"+data[i].tooth_number+"_crown_remove.png");
 				}
 			});
         });

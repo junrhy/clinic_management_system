@@ -62,6 +62,22 @@ class DentalChartController extends Controller
 
     public function update_attribute(Request $request)
     {
+        if (in_array($request->attribute, ['add-x', 'add-vline', 'add-circle'])) {
+            $attributes = DentalChart::where('patient_id', $request->patient_id)
+                                ->where('tooth_number', $request->tooth_number)
+                                ->whereIn('attribute', ['add-x', 'add-vline', 'add-circle'])
+                                ->where('client_id', Auth::user()->client_id)
+                                ->get();
+
+            if (count($attributes) > 0) {
+                DentalChart::where('patient_id', $request->patient_id)
+                                ->where('tooth_number', $request->tooth_number)
+                                ->whereIn('attribute', ['add-x', 'add-vline', 'add-circle'])
+                                ->where('client_id', Auth::user()->client_id)
+                                ->delete();
+            }
+        }
+
         $isApply = $request->is_apply;
 
         if ($isApply == "yes") {
@@ -73,13 +89,15 @@ class DentalChartController extends Controller
                 
             $dentalchart->save();
         } else {
-            $dentalchart = DentalChart::where('patient_id', $request->patient_id)
-                                ->where('tooth_number', $request->tooth_number)
-                                ->where('attribute', $request->attribute)
-                                ->where('client_id', Auth::user()->client_id)
-                                ->first();
+            if (in_array($request->attribute, ['filling-top', 'filling-left', 'filling-bottom', 'filling-right', 'filling-center'])) {
+                $dentalchart = DentalChart::where('patient_id', $request->patient_id)
+                                    ->where('tooth_number', $request->tooth_number)
+                                    ->where('attribute', $request->attribute)
+                                    ->where('client_id', Auth::user()->client_id)
+                                    ->first();
 
-            $dentalchart->delete();        
+                $dentalchart->delete();
+            }
         }
     }
 }
