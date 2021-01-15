@@ -181,6 +181,26 @@
 	.no-display {
 		display: none;
 	}
+
+	.crown-container {
+		position: relative;
+		height: 40px; 
+		width: 45px;
+		display: inline-block;
+	}
+
+	.root-container {
+		position: relative;
+		height: 62px; 
+		width: 45px;
+		display: inline-block;
+	}
+
+	.sign-overlay {
+		position: absolute;
+		left: 0px;
+		top: 0px;
+	}
 </style>
 @endsection
 
@@ -224,222 +244,111 @@
                     	<td>
 							<div class="chart">
 								<div class="upper-jaw-root">
-									<img class="root" id="tooth-root-18" src="/img/dental-chart/18_root.gif">
-									<img class="root" id="tooth-root-17" src="/img/dental-chart/17_root.gif">
-									<img class="root" id="tooth-root-16" src="/img/dental-chart/16_root.gif">
-									<img class="root" id="tooth-root-15" src="/img/dental-chart/15_root.gif">
-									<img class="root" id="tooth-root-14" src="/img/dental-chart/14_root.gif">
-									<img class="root" id="tooth-root-13" src="/img/dental-chart/13_root.gif">
-									<img class="root" id="tooth-root-12" src="/img/dental-chart/12_root.gif">
-									<img class="root" id="tooth-root-11" src="/img/dental-chart/11_root.gif">
-									
-									<img class="root vl" id="tooth-root-21" src="/img/dental-chart/21_root.gif">
-									<img class="root" id="tooth-root-22" src="/img/dental-chart/22_root.gif">
-									<img class="root" id="tooth-root-23" src="/img/dental-chart/23_root.gif">
-									<img class="root" id="tooth-root-24" src="/img/dental-chart/24_root.gif">
-									<img class="root" id="tooth-root-25" src="/img/dental-chart/25_root.gif">
-									<img class="root" id="tooth-root-26" src="/img/dental-chart/26_root.gif">
-									<img class="root" id="tooth-root-27" src="/img/dental-chart/27_root.gif">
-									<img class="root" id="tooth-root-28" src="/img/dental-chart/28_root.gif">
+									@for ($i = 18; $i >= 11; $i--)
+										<div class="root-container">
+									   		<img class="root" id="tooth-root-{{ $i }}" src="/img/dental-chart/{{ $i }}_root.gif">
+									   		<img class="root sign-overlay" id="tooth-root-{{ $i }}-sign" src="/img/dental-chart/default_root.gif">
+										</div>
+									@endfor
+
+									@for ($i = 21; $i <= 28; $i++)
+										<div class="root-container">
+									    	<img class="root {{ $i == '21' ? 'vl' : '' }}" id="tooth-root-{{ $i }}" src="/img/dental-chart/{{ $i }}_root.gif">
+									    	<img class="root sign-overlay" id="tooth-root-{{ $i }}-sign" src="/img/dental-chart/default_root.gif">
+								    	</div>
+									@endfor
 								</div>
 								<div class="upper-jaw-crown">
-									<img class="crown" id="tooth-crown-18" src="/img/dental-chart/18_crown.gif">
-									<img class="crown" id="tooth-crown-17" src="/img/dental-chart/17_crown.gif">
-									<img class="crown" id="tooth-crown-16" src="/img/dental-chart/16_crown.gif">
-									<img class="crown" id="tooth-crown-15" src="/img/dental-chart/15_crown.gif">
-									<img class="crown" id="tooth-crown-14" src="/img/dental-chart/14_crown.gif">
-									<img class="crown" id="tooth-crown-13" src="/img/dental-chart/13_crown.gif">
-									<img class="crown" id="tooth-crown-12" src="/img/dental-chart/12_crown.gif">
-									<img class="crown" id="tooth-crown-11" src="/img/dental-chart/11_crown.gif">
-									
-									<img class="crown vl" id="tooth-crown-21" src="/img/dental-chart/21_crown.gif">
-									<img class="crown" id="tooth-crown-22" src="/img/dental-chart/22_crown.gif">
-									<img class="crown" id="tooth-crown-23" src="/img/dental-chart/23_crown.gif">
-									<img class="crown" id="tooth-crown-24" src="/img/dental-chart/24_crown.gif">
-									<img class="crown" id="tooth-crown-25" src="/img/dental-chart/25_crown.gif">
-									<img class="crown" id="tooth-crown-26" src="/img/dental-chart/26_crown.gif">
-									<img class="crown" id="tooth-crown-27" src="/img/dental-chart/27_crown.gif">
-									<img class="crown" id="tooth-crown-28" src="/img/dental-chart/28_crown.gif">
+									@for ($i = 18; $i >= 11; $i--)
+										<div class="crown-container">
+									   		<img class="crown" id="tooth-crown-{{ $i }}" src="/img/dental-chart/{{ $i }}_crown.gif">
+									   		<img class="crown sign-overlay" id="tooth-crown-{{ $i }}-sign" src="/img/dental-chart/default_crown.gif">
+										</div>
+									@endfor
+
+									@for ($i = 21; $i <= 28; $i++)
+										<div class="crown-container">
+									    	<img class="crown {{ $i == '21' ? 'vl' : '' }}" id="tooth-crown-{{ $i }}" src="/img/dental-chart/{{ $i }}_crown.gif">
+									    	<img class="crown sign-overlay" id="tooth-crown-{{ $i }}-sign" src="/img/dental-chart/default_crown.gif">
+								    	</div>
+									@endfor
 								</div>
 
 								<div class="upper-jaw-filling">
-									<div class="filling" id="filling-tooth-18">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-17">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-16">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-15">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-14">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-13">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-12">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-11">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									
-									<div class="filling" id="filling-tooth-21">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-22">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-23">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-24">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-25">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-26">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-27">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-28">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
+									@for ($i = 18; $i >= 11; $i--)
+										<div class="filling" id="filling-tooth-{{ $i }}">
+											<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+										</div>
+									@endfor
+
+									@for ($i = 21; $i <= 28; $i++)
+										<div class="filling" id="filling-tooth-{{ $i }}">
+											<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+										</div>
+									@endfor
 								</div>
 								<div class="upper-jaw-tooth-no">
-									<div class="tooth-number" data-tooth-no="18">18</div>
-									<div class="tooth-number" data-tooth-no="17">17</div>
-									<div class="tooth-number" data-tooth-no="16">16</div>
-									<div class="tooth-number" data-tooth-no="15">15</div>
-									<div class="tooth-number" data-tooth-no="14">14</div>
-									<div class="tooth-number" data-tooth-no="13">13</div>
-									<div class="tooth-number" data-tooth-no="12">12</div>
-									<div class="tooth-number" data-tooth-no="11">11</div>
+									@for ($i = 18; $i >= 11; $i--)
+										<div class="tooth-number" data-tooth-no="{{ $i }}">{{ $i }}</div>
+									@endfor
 
-									<div class="tooth-number" data-tooth-no="21">21</div>
-									<div class="tooth-number" data-tooth-no="22">22</div>
-									<div class="tooth-number" data-tooth-no="23">23</div>
-									<div class="tooth-number" data-tooth-no="24">24</div>
-									<div class="tooth-number" data-tooth-no="25">25</div>
-									<div class="tooth-number" data-tooth-no="26">26</div>
-									<div class="tooth-number" data-tooth-no="27">27</div>
-									<div class="tooth-number" data-tooth-no="28">28</div>
+									@for ($i = 21; $i <= 28; $i++)
+										<div class="tooth-number" data-tooth-no="{{ $i }}">{{ $i }}</div>
+									@endfor
 								</div>
 								<div class="hl"></div>
 								<div class="lower-jaw-tooth-no">
-									<div class="tooth-number" data-tooth-no="48">48</div>
-									<div class="tooth-number" data-tooth-no="47">47</div>
-									<div class="tooth-number" data-tooth-no="46">46</div>
-									<div class="tooth-number" data-tooth-no="45">45</div>
-									<div class="tooth-number" data-tooth-no="44">44</div>
-									<div class="tooth-number" data-tooth-no="43">43</div>
-									<div class="tooth-number" data-tooth-no="42">42</div>
-									<div class="tooth-number" data-tooth-no="41">41</div>
-
-									<div class="tooth-number" data-tooth-no="31">31</div>
-									<div class="tooth-number" data-tooth-no="32">32</div>
-									<div class="tooth-number" data-tooth-no="33">33</div>
-									<div class="tooth-number" data-tooth-no="34">34</div>
-									<div class="tooth-number" data-tooth-no="35">35</div>
-									<div class="tooth-number" data-tooth-no="36">36</div>
-									<div class="tooth-number" data-tooth-no="37">37</div>
-									<div class="tooth-number" data-tooth-no="38">38</div>
+									@for ($i = 48; $i >= 41; $i--)
+										<div class="tooth-number" data-tooth-no="{{ $i }}">{{ $i }}</div>
+									@endfor
+									
+									@for ($i = 31; $i <= 38; $i++)
+										<div class="tooth-number" data-tooth-no="{{ $i }}">{{ $i }}</div>
+									@endfor
 								</div>
 								<div class="lower-jaw-filling">
-									<div class="filling" id="filling-tooth-48">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-47">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-46">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-45">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-44">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-43">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-42">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-41">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
+									@for ($i = 48; $i >= 41; $i--)
+										<div class="filling" id="filling-tooth-{{ $i }}">
+											<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+										</div>
+									@endfor
 									
-									<div class="filling" id="filling-tooth-31">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-32">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-33">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-34">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-35">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-36">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-37">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
-									<div class="filling" id="filling-tooth-38">
-										<img class="filling-none" src="/img/dental-chart/filling_none.gif">
-									</div>
+									@for ($i = 31; $i <= 38; $i++)
+										<div class="filling" id="filling-tooth-{{ $i }}">
+											<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+										</div>
+									@endfor
 								</div>
+
 								<div class="lower-jaw-crown">
-									<img class="crown"  id="tooth-crown-48" src="/img/dental-chart/48_crown.gif">
-									<img class="crown"  id="tooth-crown-47" src="/img/dental-chart/47_crown.gif">
-									<img class="crown"  id="tooth-crown-46" src="/img/dental-chart/46_crown.gif">
-									<img class="crown"  id="tooth-crown-45" src="/img/dental-chart/45_crown.gif">
-									<img class="crown"  id="tooth-crown-44" src="/img/dental-chart/44_crown.gif">
-									<img class="crown"  id="tooth-crown-43" src="/img/dental-chart/43_crown.gif">
-									<img class="crown"  id="tooth-crown-42" src="/img/dental-chart/42_crown.gif">
-									<img class="crown"  id="tooth-crown-41" src="/img/dental-chart/41_crown.gif">
-									
-									<img class="crown vl" id="tooth-crown-31" src="/img/dental-chart/31_crown.gif">
-									<img class="crown" id="tooth-crown-32" src="/img/dental-chart/32_crown.gif">
-									<img class="crown" id="tooth-crown-33" src="/img/dental-chart/33_crown.gif">
-									<img class="crown" id="tooth-crown-34" src="/img/dental-chart/34_crown.gif">
-									<img class="crown" id="tooth-crown-35" src="/img/dental-chart/35_crown.gif">
-									<img class="crown" id="tooth-crown-36" src="/img/dental-chart/36_crown.gif">
-									<img class="crown" id="tooth-crown-37" src="/img/dental-chart/37_crown.gif">
-									<img class="crown" id="tooth-crown-38" src="/img/dental-chart/38_crown.gif">
+									@for ($i = 48; $i >= 41; $i--)
+										<div class="crown-container">
+											<img class="crown" id="tooth-crown-{{ $i }}" src="/img/dental-chart/{{ $i }}_crown.gif">
+											<img class="crown sign-overlay" id="tooth-crown-{{ $i }}-sign" src="/img/dental-chart/default_crown.gif">
+										</div>
+									@endfor
+
+									@for ($i = 31; $i <= 38; $i++)
+										<div class="crown-container">
+										    <img class="crown {{ $i == '31' ? 'vl' : '' }}" id="tooth-crown-{{ $i }}" src="/img/dental-chart/{{ $i }}_crown.gif">
+										    <img class="crown sign-overlay" id="tooth-crown-{{ $i }}-sign" src="/img/dental-chart/default_crown.gif">
+									    </div>
+									@endfor
 								</div>
 								<div class="lower-jaw-root">
-									<img class="root" id="tooth-root-48" src="/img/dental-chart/48_root.gif">
-									<img class="root" id="tooth-root-47" src="/img/dental-chart/47_root.gif">
-									<img class="root" id="tooth-root-46" src="/img/dental-chart/46_root.gif">
-									<img class="root" id="tooth-root-45" src="/img/dental-chart/45_root.gif">
-									<img class="root" id="tooth-root-44" src="/img/dental-chart/44_root.gif">
-									<img class="root" id="tooth-root-43" src="/img/dental-chart/43_root.gif">
-									<img class="root" id="tooth-root-42" src="/img/dental-chart/42_root.gif">
-									<img class="root" id="tooth-root-41" src="/img/dental-chart/41_root.gif">
-									
-									<img class="root vl" id="tooth-root-31" src="/img/dental-chart/31_root.gif">
-									<img class="root" id="tooth-root-32" src="/img/dental-chart/32_root.gif">
-									<img class="root" id="tooth-root-33" src="/img/dental-chart/33_root.gif">
-									<img class="root" id="tooth-root-34" src="/img/dental-chart/34_root.gif">
-									<img class="root" id="tooth-root-35" src="/img/dental-chart/35_root.gif">
-									<img class="root" id="tooth-root-36" src="/img/dental-chart/36_root.gif">
-									<img class="root" id="tooth-root-37" src="/img/dental-chart/37_root.gif">
-									<img class="root" id="tooth-root-38" src="/img/dental-chart/38_root.gif">
+									@for ($i = 48; $i >= 41; $i--)
+										<div class="root-container">
+									   		<img class="root" id="tooth-root-{{ $i }}" src="/img/dental-chart/{{ $i }}_root.gif">
+									   		<img class="root sign-overlay" id="tooth-root-{{ $i }}-sign" src="/img/dental-chart/default_root.gif">
+										</div>
+									@endfor
+
+									@for ($i = 31; $i <= 38; $i++)
+										<div class="root-container">
+									    	<img class="root {{ $i == '31' ? 'vl' : '' }}" id="tooth-root-{{ $i }}" src="/img/dental-chart/{{ $i }}_root.gif">
+									    	<img class="root sign-overlay" id="tooth-root-{{ $i }}-sign" src="/img/dental-chart/default_root.gif">
+								    	</div>
+									@endfor
 								</div>
 							</div>
 						</td>
@@ -506,7 +415,7 @@
 
 								<div class="sign-option" data-attribute="add-vline" style="position: relative;top: -15px;">
 									<div class="sign-holder">
-									  	<img class="sign" src="/img/dental-chart/vline.png">
+									  	<img class="sign" src="/img/dental-chart/slash.png">
 									</div>
 								</div>
 
@@ -595,9 +504,15 @@ $(document).ready(function() {
 	$(".sign-option").unbind().click(function(e){
 		e.stopPropagation();
 
+		var element = $(this);
 		var tooth_number = $('input[name=current-tooth-no-selected]').val();
 		var attribute = $(this).data('attribute');
 		var is_apply = "no";
+
+		var option_x = $('.sign-option[data-attribute="add-x"]');
+		var option_vline = $('.sign-option[data-attribute="add-vline"]');
+		var option_circle = $('.sign-option[data-attribute="add-circle"]');
+
 
 		// filling
 		if (attribute.substring(0, 7) == "filling") {
@@ -613,37 +528,27 @@ $(document).ready(function() {
 		}
 
 		// x sign
-		if (attribute.substring(0, 5) == "add-x") {
-			$('.sign-option[data-attribute="add-vline"]').removeClass('sign-selected');
+		if (attribute.indexOf("add-x") >= 0) {
+			option_vline.removeClass('sign-selected');
+			option_circle.removeClass('sign-selected');
 
-			if ($("#tooth-root-"+tooth_number).attr('src') == "/img/dental-chart/"+tooth_number+"_root_missing.gif") {
-				$("#tooth-root-"+tooth_number).attr('src', "/img/dental-chart/"+tooth_number+"_root.gif");
-				$("#tooth-crown-"+tooth_number).attr('src', "/img/dental-chart/"+tooth_number+"_crown.gif");
-				$(this).removeClass('sign-selected');
-				is_apply = "no";
-			} else {
-				$("#tooth-root-"+tooth_number).attr('src', "/img/dental-chart/"+tooth_number+"_root_missing.gif");
-				$("#tooth-crown-"+tooth_number).attr('src', "/img/dental-chart/"+tooth_number+"_crown.gif");
-				$(this).addClass('sign-selected');
-				is_apply = "yes";
-			}
+			is_apply = apply_tooth_attribute(element, tooth_number, "x");
 		}
 
 		// vline
-		if (attribute.substring(0, 9) == "add-vline") {
-			$('.sign-option[data-attribute="add-x"]').removeClass('sign-selected');
+		if (attribute.indexOf("add-vline") >= 0) {
+			option_x.removeClass('sign-selected');
+			option_circle.removeClass('sign-selected');
 
-			if ($("#tooth-root-"+tooth_number).attr('src') == "/img/dental-chart/"+tooth_number+"_root_remove.png") {
-				$("#tooth-root-"+tooth_number).attr('src', "/img/dental-chart/"+tooth_number+"_root.gif");
-				$("#tooth-crown-"+tooth_number).attr('src', "/img/dental-chart/"+tooth_number+"_crown.gif");
-				$(this).removeClass('sign-selected');
-				is_apply = "no";
-			} else {
-				$("#tooth-root-"+tooth_number).attr('src', "/img/dental-chart/"+tooth_number+"_root_remove.png");
-				$("#tooth-crown-"+tooth_number).attr('src', "/img/dental-chart/"+tooth_number+"_crown_remove.png");
-				$(this).addClass('sign-selected');
-				is_apply = "yes";
-			}
+			is_apply = apply_tooth_attribute(element, tooth_number, "vline");
+		}
+
+		// circle
+		if (attribute.indexOf("add-circle") >= 0) {
+			option_x.removeClass('sign-selected');
+			option_vline.removeClass('sign-selected');
+
+			is_apply = apply_tooth_attribute(element, tooth_number, "circle");
 		}
 		
 		$.ajax({
@@ -663,6 +568,41 @@ $(document).ready(function() {
 		get_patient_attributes();
 	});
 
+	function apply_tooth_attribute(element, tooth_number, attr, root_filename = "root.png", crown_filename = "crown.png", img_folder = "/img/dental-chart/"){
+		var is_apply = "no";
+		var default_root_img = "/img/dental-chart/default_root.gif";
+		var default_crown_img = "/img/dental-chart/default_crown.gif";
+		var root_sign_element = $("#tooth-root-"+tooth_number+"-sign");
+		var crown_sign_element = $("#tooth-crown-"+tooth_number+"-sign");
+		var root_src = $("#tooth-root-"+tooth_number+"-sign").attr('src');
+		var crown_src = $("#tooth-crown-"+tooth_number+"-sign").attr('src');
+		var upper_teeth_no = new Array(18, 17, 16, 15, 14, 13, 12, 11, 21, 22, 23, 24, 25, 26, 27, 28);
+		var lower_teeth_no = new Array(48, 47, 46, 45, 44, 43, 42, 41, 31, 32, 33, 34, 35, 36, 37, 38);
+		var jaw = "";
+
+		if (upper_teeth_no.indexOf(parseInt(tooth_number)) != -1) { jaw = "_upper_"; }
+		if(lower_teeth_no.indexOf(parseInt(tooth_number)) != -1) { jaw = "_lower_"; }
+
+		if (root_src.indexOf(attr) >= 0) {
+			root_src = default_root_img;
+			crown_src = default_crown_img;
+
+			element.removeClass('sign-selected');
+			is_apply = "no";
+		} else {
+			root_src = img_folder + attr + jaw + root_filename;
+			crown_src = img_folder + attr + jaw + crown_filename;
+
+			element.addClass('sign-selected');
+			is_apply = "yes";
+		}
+
+		root_sign_element.attr('src', root_src);
+		crown_sign_element.attr('src', crown_src);
+
+		return is_apply;
+	}
+
 	function get_patient_attributes() {
 		$.ajax({
 			method: "POST",
@@ -674,17 +614,46 @@ $(document).ready(function() {
         })
         .done(function( data ) {
         	$.each(data, function(i, item) {
-				if (data[i].attribute.substring(0, 7) == "filling") {
-					$('#filling-tooth-'+data[i].tooth_number).addClass(data[i].attribute);
+        		var tooth_number = data[i].tooth_number;
+        		var upper_teeth_no = new Array(18, 17, 16, 15, 14, 13, 12, 11, 21, 22, 23, 24, 25, 26, 27, 28);
+				var lower_teeth_no = new Array(48, 47, 46, 45, 44, 43, 42, 41, 31, 32, 33, 34, 35, 36, 37, 38);
+				var root_sign_element = $("#tooth-root-"+tooth_number+"-sign");
+				var crown_sign_element = $("#tooth-crown-"+tooth_number+"-sign");
+				var root_filename = "root.png";
+				var crown_filename = "crown.png";
+				var img_folder = "/img/dental-chart/";
+				var jaw = "";
+
+				if (upper_teeth_no.indexOf(parseInt(tooth_number)) != -1) { jaw = "_upper_"; }
+				if(lower_teeth_no.indexOf(parseInt(tooth_number)) != -1) { jaw = "_lower_"; }
+
+				// conditions
+				if (data[i].attribute.indexOf("filling") != -1) {
+					$('#filling-tooth-'+tooth_number).addClass(data[i].attribute);
 				}
 
-				if (data[i].attribute.substring(0, 5) == "add-x") {
-					$("#tooth-root-"+data[i].tooth_number).attr('src', "/img/dental-chart/"+data[i].tooth_number+"_root_missing.gif");
+				if (data[i].attribute.indexOf("add-x") != -1) {
+					var root_src = img_folder + "x" + jaw + root_filename;
+					var crown_src = img_folder + "x" + jaw + crown_filename;
+
+					root_sign_element.attr('src', root_src);
+					crown_sign_element.attr('src', crown_src);
 				}
 
-				if (data[i].attribute.substring(0, 9) == "add-vline") {
-					$("#tooth-root-"+data[i].tooth_number).attr('src', "/img/dental-chart/"+data[i].tooth_number+"_root_remove.png");
-					$("#tooth-crown-"+data[i].tooth_number).attr('src', "/img/dental-chart/"+data[i].tooth_number+"_crown_remove.png");
+				if (data[i].attribute.indexOf("add-vline") != -1) {
+					var root_src = img_folder + "vline" + jaw + root_filename;
+					var crown_src = img_folder + "vline" + jaw + crown_filename;
+
+					root_sign_element.attr('src', root_src);
+					crown_sign_element.attr('src', crown_src);
+				}
+
+				if (data[i].attribute.indexOf("add-circle") != -1) {
+					var root_src = img_folder + "circle" + jaw + root_filename;
+					var crown_src = img_folder + "circle" + jaw + crown_filename;
+
+					root_sign_element.attr('src', root_src);
+					crown_sign_element.attr('src', crown_src);
 				}
 			});
         });

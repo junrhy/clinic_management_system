@@ -25,39 +25,41 @@
                   {{ Html::ul($errors->all()) }}
 
                   {{ Form::open(array('url' => 'patient', 'id' => 'form-add-patient')) }}
-                    <h3 class="row col-md-12">Personal</h3>
-                    <div class="form-group col-md-12">
-                      {{ Form::label('first_name', 'First Name') }}
-                      {{ Form::text('first_name', Input::old('first_name'), array('class' => 'form-control', 'required')) }}
-                    </div>
+                    <div class="row col-md-3">
+                      <h3 class="col-md-12">Personal</h3>
+                      <div class="form-group col-md-12">
+                        {{ Form::label('first_name', 'First Name') }}
+                        {{ Form::text('first_name', Input::old('first_name'), array('class' => 'form-control', 'required')) }}
+                      </div>
 
-                    <div class="form-group col-md-12">
-                      {{ Form::label('last_name', 'Last Name') }}
-                      {{ Form::text('last_name', Input::old('last_name'), array('class' => 'form-control', 'required')) }}
-                    </div>
+                      <div class="form-group col-md-12">
+                        {{ Form::label('last_name', 'Last Name') }}
+                        {{ Form::text('last_name', Input::old('last_name'), array('class' => 'form-control', 'required')) }}
+                      </div>
 
-                    <div class="form-group col-md-12">
-                      {{ Form::label('dob', 'Date of birth') }}
-                      {{ Form::text('dob', Input::old('dob'), array('class' => 'form-control', 'required', 'placeholder' => 'mm/dd/yyyy')) }}
-                    </div>
+                      <div class="form-group col-md-12">
+                        {{ Form::label('dob', 'Date of birth') }}
+                        {{ Form::text('dob', Input::old('dob'), array('class' => 'form-control', 'required', 'placeholder' => 'mm/dd/yyyy')) }}
+                      </div>
 
-                    <div class="form-group col-md-12">
-                      {{ Form::label('gender', 'Gender') }}
-                      {{ Form::select('gender', ['' => '', 'Male' => 'Male', 'Female' => 'Female'], null, array('class' => 'form-control')) }}
-                    </div>
-        
-                     <div class="form-group col-md-12">
-                      {{ Form::label('email', 'Email') }}
-                      {{ Form::email('email', Input::old('email'), array('class' => 'form-control')) }}
-                    </div>
+                      <div class="form-group col-md-12">
+                        {{ Form::label('gender', 'Gender') }}
+                        {{ Form::select('gender', ['' => '', 'Male' => 'Male', 'Female' => 'Female'], null, array('class' => 'form-control')) }}
+                      </div>
+          
+                       <div class="form-group col-md-12">
+                        {{ Form::label('email', 'Email') }}
+                        {{ Form::email('email', Input::old('email'), array('class' => 'form-control')) }}
+                      </div>
 
-                    <div class="form-group col-md-12">
-                      {{ Form::label('contact_number', 'Contact Number') }}
-                      {{ Form::text('contact_number', Input::old('contact_number'), array('class' => 'form-control')) }}
-                    </div>
+                      <div class="form-group col-md-12">
+                        {{ Form::label('contact_number', 'Contact Number') }}
+                        {{ Form::text('contact_number', Input::old('contact_number'), array('class' => 'form-control')) }}
+                      </div>
 
-                    <div class="col-md-4">
-                      {{ Form::submit('Submit', array('class' => 'btn btn-round btn-primary')) }}
+                      <div class="col-md-4">
+                        {{ Form::submit('Submit', array('class' => 'btn btn-round btn-primary')) }}
+                      </div>
                     </div>
                   {{ Form::close() }}
                 </div>

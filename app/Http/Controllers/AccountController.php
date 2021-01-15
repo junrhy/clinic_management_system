@@ -77,8 +77,8 @@ class AccountController extends Controller
         return view('account.success');
     }
 
-    public function cancel()
+    public function failed()
     {
-        return view('account.cancel');
+        return view('account.failed');
     }
 }

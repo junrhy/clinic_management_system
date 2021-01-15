@@ -25,7 +25,8 @@
                   {{ Form::model($patient, array('route' => array('patient.update', $patient->id), 'method' => 'PUT')) }}
                   {{ Html::ul($errors->all()) }}
 
-                    <h3 class="row col-md-12">Personal</h3>
+                  <div class="row col-md-4">
+                    <h3 class="col-md-12">Personal</h3>
                     <div class="form-group col-md-12">
                       {{ Form::label('first_name', 'First Name') }}
                       {{ Form::text('first_name', Input::old('first_name'), array('class' => 'form-control', 'required')) }}
@@ -59,6 +60,7 @@
                     <div class="col-md-12">
                       {{ Form::submit('Save Changes', array('class' => 'btn btn-primary btn-round')) }}
                     </div>
+                  </div>
                   {{ Form::close() }}
                 </div>
             </div>

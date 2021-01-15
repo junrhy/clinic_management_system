@@ -28,7 +28,7 @@
                 <div class="navbar-header">
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        <i class="fa fa-clinic-medical"></i> {{ config('app.name', 'Laravel') }}
+                        <i class="fa fa-clinic-medical"></i> Clinic Management System
                     </a>
                 </div>
 

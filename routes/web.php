@@ -35,7 +35,7 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::post('/update_business_information', 'AccountController@update_business_information');
 
 	Route::get('/success', 'AccountController@success');
-	Route::get('/cancel', 'AccountController@cancel');
+	Route::get('/failed', 'AccountController@failed');
 
 	Route::get('/change_password', 'AccountController@change_password');
 	Route::post('/update_password', 'AccountController@update_password');

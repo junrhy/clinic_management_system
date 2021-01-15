@@ -111,7 +111,7 @@
       <div class="modal-footer">
        <button type="button" class="btn btn-default btn-round" data-dismiss="modal">Close</button>
 <!--        <a href="https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7B7DXYEA9FKLA&notify_url={{ url('/paypal_subscription_activated') }}&custom=clientid_{{  Auth::user()->client->id }}" type="button" id="btn-upgrade-account" data-id="" class="btn btn-upgrade btn-round">Upgrade to Business Account</a> -->
-       <a href="" type="button" id="btn-upgrade-account" data-id="" class="btn btn-upgrade btn-round">Contact Developer</a>
+       <a href="" type="button" id="btn-upgrade-account" data-id="" class="btn btn-upgrade btn-round">Contact Sales</a>
     </div>
     </div>
   </div>
