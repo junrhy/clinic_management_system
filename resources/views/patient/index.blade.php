@@ -92,17 +92,17 @@
                     </div>
                     <br>
                     <div class="table-responsive">
-                        <table class="table">
-                          <tr>
+                        <table class="table table-striped">
+                          <thead>
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Gender</th>
                             <th>Date of Birth</th>
                             <th>Age</th>
                             <th>Contact</th>
-                            <th>Clinical Records</th>
+                            <th>Clinical Record</th>
                             <th>Action</th>
-                          </tr>
+                          </thead>
                         @if($patients->count() > 0)
                           <?php foreach ($patients as $patient_key => $patient_item): ?>
                           <tr>

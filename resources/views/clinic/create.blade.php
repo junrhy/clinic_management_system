@@ -22,21 +22,23 @@
                 <div class="panel-heading">New Clinic</div>
 
                 <div class="panel-body">
-                  {{ Html::ul($errors->all()) }}
+                  <div class="row col-md-3">
+                      {{ Html::ul($errors->all()) }}
 
-                  {{ Form::open(array('url' => 'clinic', 'id' => 'form-add-clinic')) }}
-                    <div class="form-group">
-                      {{ Form::label('name', 'Name') }}
-                      {{ Form::text('name', Input::old('name'), array('class' => 'form-control')) }}
-                    </div>
+                      {{ Form::open(array('url' => 'clinic', 'id' => 'form-add-clinic')) }}
+                        <div class="form-group">
+                          {{ Form::label('name', 'Name') }}
+                          {{ Form::text('name', Input::old('name'), array('class' => 'form-control')) }}
+                        </div>
 
-                    <div class="form-group">
-                      {{ Form::label('address', 'Address') }}
-                      {{ Form::text('address', Input::old('address'), array('class' => 'form-control')) }}
-                    </div>
+                        <div class="form-group">
+                          {{ Form::label('address', 'Address') }}
+                          {{ Form::text('address', Input::old('address'), array('class' => 'form-control')) }}
+                        </div>
 
-                    {{ Form::submit('Submit', array('class' => 'btn btn-primary btn-round')) }}
-                  {{ Form::close() }}
+                        {{ Form::submit('Submit', array('class' => 'btn btn-primary btn-round')) }}
+                      {{ Form::close() }}
+                  </div>
                 </div>
             </div>
         </div>

@@ -51,13 +51,12 @@
                 <div class="panel-heading"><i class="fa fa-user-md"></i> Services</div>
 
                 <div class="panel-body">
-                  Listing: {{ $services->count() }}
-                  <div class="table-responsive">
-                    <table class="table">
-                      <tr>
+                  <div class="row col-md-3 table-responsive">
+                    <table class="table table-striped">
+                      <thead>
                         <th>Name</th>
                         <th class="text-right">Action</th>
-                      </tr>
+                      </thead>
                       <?php foreach ($services as $service_key => $service_item): ?>
                       <tr>
                         <td>{{ $service_item->name }}</td>

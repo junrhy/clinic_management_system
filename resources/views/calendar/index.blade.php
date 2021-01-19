@@ -31,7 +31,7 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-12">
-                        <h2>Appointment <small class="text-muted">Manage your Schedules and Appointments</small></h2>
+                        <h2>Appointment <small class="text-muted">Manage your patient appointments</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                         <a class="btn btn-white btn-icon btn-round float-right m-l-10 {{ App\Model\FeatureUser::is_feature_allowed('add_appointment', Auth::user()->id) }}" id="add-appointment" type="button">
@@ -60,9 +60,15 @@
                             <div class="pull-right"><i class="bulk-delete-appointment fa fa-trash hidden"></i></div>
 
                             <ul class="nav nav-tabs">
-                                <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#open">Open</a></li>
-                                <li><a data-toggle="tab" href="#in_progress">In Progress</a></li>
-                                <li><a data-toggle="tab" href="#done">Done</a></li>
+                                <li class="nav-item active" data-status="open">
+                                    <a data-toggle="tab" id="open_tab" href="#open">Open</a>
+                                </li>
+                                <li class="nav-item" data-status="in_progress">
+                                    <a data-toggle="tab" id="in_progress_tab" href="#in_progress">In Progress</a>
+                                </li>
+                                <li class="nav-item" data-status="done">
+                                    <a data-toggle="tab" id="done_tab" href="#done">Done</a>
+                                </li>
                             </ul>
 
                             <div class="tab-content">
@@ -176,6 +182,13 @@ $(document).ready(function() {
       }
   });
 
+  $(".nav-item").click(function(){
+      status = $(this).data('status');
+
+      var refresh = window.location.protocol + "//" + window.location.host + window.location.pathname + '?status='+status;    
+      window.history.pushState({ path: refresh }, '', refresh);
+  });
+
   $(function(){
     var d = new Date();
 
@@ -186,6 +199,8 @@ $(document).ready(function() {
         (month<10 ? '0' : '') + month + '/' +
         (day<10 ? '0' : '') + day;
 
+
+    $("#{{ Request::get('status') }}_tab").click();
 
     // open appointments
     $.ajax({

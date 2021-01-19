@@ -22,47 +22,45 @@
                 <div class="panel-heading">Add Patient</div>
 
                 <div class="panel-body">
+                  <div class="row col-md-3">
                   {{ Html::ul($errors->all()) }}
 
                   {{ Form::open(array('url' => 'patient', 'id' => 'form-add-patient')) }}
-                    <div class="row col-md-3">
-                      <h3 class="col-md-12">Personal</h3>
-                      <div class="form-group col-md-12">
+                      <div class="form-group">
                         {{ Form::label('first_name', 'First Name') }}
                         {{ Form::text('first_name', Input::old('first_name'), array('class' => 'form-control', 'required')) }}
                       </div>
 
-                      <div class="form-group col-md-12">
+                      <div class="form-group">
                         {{ Form::label('last_name', 'Last Name') }}
                         {{ Form::text('last_name', Input::old('last_name'), array('class' => 'form-control', 'required')) }}
                       </div>
 
-                      <div class="form-group col-md-12">
+                      <div class="form-group">
                         {{ Form::label('dob', 'Date of birth') }}
                         {{ Form::text('dob', Input::old('dob'), array('class' => 'form-control', 'required', 'placeholder' => 'mm/dd/yyyy')) }}
                       </div>
 
-                      <div class="form-group col-md-12">
+                      <div class="form-group ">
                         {{ Form::label('gender', 'Gender') }}
                         {{ Form::select('gender', ['' => '', 'Male' => 'Male', 'Female' => 'Female'], null, array('class' => 'form-control')) }}
                       </div>
           
-                       <div class="form-group col-md-12">
+                       <div class="form-group">
                         {{ Form::label('email', 'Email') }}
                         {{ Form::email('email', Input::old('email'), array('class' => 'form-control')) }}
                       </div>
 
-                      <div class="form-group col-md-12">
+                      <div class="form-group">
                         {{ Form::label('contact_number', 'Contact Number') }}
                         {{ Form::text('contact_number', Input::old('contact_number'), array('class' => 'form-control')) }}
                       </div>
 
-                      <div class="col-md-4">
+                      <div>
                         {{ Form::submit('Submit', array('class' => 'btn btn-round btn-primary')) }}
                       </div>
-                    </div>
                   {{ Form::close() }}
-                </div>
+                  </div>
             </div>
         </div>
     </div>

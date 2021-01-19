@@ -92,7 +92,12 @@
 
                   <div class="form-group col-md-12">
                     <div class="row" style="margin-top:30px;">
-                      <h4 class="row" style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</h4>
+                      <h4 class="row" style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;">
+                        <i class="fa fa-user-md" aria-hidden="true"></i> Medical
+                        <span id="add_patient_record" style="cursor: pointer;">
+                            <i class="fa fa-plus"></i>
+                        </span>
+                      </h4>
                         <ul class="nav nav-tabs">
                           <li class="nav-item active"><a class="nav-link" data-toggle="tab" href="#home">Records</a></li>
                           <li><a data-toggle="tab" href="#menu1">Archived</a></li>
@@ -104,10 +109,11 @@
                             <div class="table-responsive">
                               <table class="table table-striped">
                                 <thead>
-                                  <th style="width:15%">Created</th>
-                                  <th style="width:15%">Clinic</th>
-                                  <th style="width:15%">Doctor</th>
-                                  <th style="width:15%">Service Type</th>
+                                  <th style="width:10%">Created</th>
+                                  <th style="width:10%">Clinic</th>
+                                  <th style="width:10%">Doctor</th>
+                                  <th style="width:10%">Service Type</th>
+                                  <th style="width:20%">Notes</th>
                                   <th style="width:15%">Appointment</th>
                                   <th style="width:15%">Attachments</th>
                                   <th style="width:1%;text-align:center;">Action</th>
@@ -121,6 +127,7 @@
                                         <td>{{ $detail->clinic }}</td>
                                         <td>{{ $detail->doctor }}</td>
                                         <td>{{ $detail->service }}</td>
+                                        <td>{{ $detail->notes }}</td>
                                         <td>
                                           @if($detail->date_scheduled != '')
                                             {{ date('M d, Y', strtotime($detail->date_scheduled)) }}&nbsp;&nbsp;
@@ -149,20 +156,10 @@
                                           <a class="archive-link archive-detail {{ App\Model\FeatureUser::is_feature_allowed('archive_patient_detail', Auth::user()->id) }}" data-id="{{ $detail->id }}"><i class="fa fa-archive" aria-hidden="true" title="Archive"></i></a>
                                         </td>
                                     </tr>
-
-                                    @if(!empty($detail->notes))
-                                    <tr>
-                                      <td colspan="7">
-                                        <?php echo $detail->notes ?>
-                                      </td>
-                                    </tr>
-                                    @endif
-
-                                    
                                   @endforeach
                                 @else
                                   <tr>
-                                    <td class="text-center" colspan="7">Use the form below to add new record.</td>
+                                    <td class="text-center" colspan="8">No medical record.</td>
                                   </tr>
                                 @endif
                                 </tbody>
@@ -172,12 +169,13 @@
                           <div id="menu1" class="tab-pane fade">
                             <br>
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table table-striped">
                                   <thead>
-                                    <th style="width:15%">Created</th>
-                                    <th style="width:15%">Clinic</th>
-                                    <th style="width:15%">Doctor</th>
-                                    <th style="width:15%">Service Type</th>
+                                    <th style="width:10%">Created</th>
+                                    <th style="width:10%">Clinic</th>
+                                    <th style="width:10%">Doctor</th>
+                                    <th style="width:10%">Service Type</th>
+                                    <th style="width:20%">Notes</th>
                                     <th style="width:15%">Appointment</th>
                                     <th style="width:15%">Attachments</th>
                                     <th style="width:1%;text-align:center;">Action</th>
@@ -191,6 +189,7 @@
                                           <td>{{ $archive_detail->clinic }}</td>
                                           <td>{{ $archive_detail->doctor }}</td>
                                           <td>{{ $archive_detail->service }}</td>
+                                          <td>{{ $archive_detail->notes }}</td>
                                           <td>
                                             @if($archive_detail->date_scheduled != '')
                                               {{ date('M d, Y', strtotime($archive_detail->date_scheduled)) }}&nbsp;&nbsp;
@@ -220,17 +219,9 @@
                                           </td>
                                       </tr>
                                     @endforeach
-
-                                    @if(!empty($archive_detail->notes))
-                                    <tr>
-                                      <td colspan="7">
-                                        <?php echo $detail->notes ?>
-                                      </td>
-                                    </tr>
-                                    @endif
                                   @else
                                     <tr>
-                                      <td class="text-center" colspan="7">No archived record.</td>
+                                      <td class="text-center" colspan="8">No archived record.</td>
                                     </tr>
                                   @endif
                                   </tbody>
@@ -241,56 +232,7 @@
                     </div>
                   </div>
 
-                  <div class="row col-md-6 {{ App\Model\FeatureUser::is_feature_allowed('add_patient_detail', Auth::user()->id) }}">
-                    <div class="form-group col-md-3">
-                      {{ Form::label('clinic', 'Clinic') }}
-                      {{ Form::select('clinic', $clinics, '', ['class' => 'form-control']) }}
-                    </div>
-
-                    <div class="form-group col-md-3">
-                      {{ Form::label('doctor', 'Doctor') }}
-                      {{ Form::select('doctor', $doctors, '', ['class' => 'form-control']) }}
-                    </div>
-
-                    <div class="form-group col-md-3">
-                      {{ Form::label('service', 'Service Type') }}
-                      {{ Form::select('service', $services, '', ['class' => 'form-control']) }}
-                    </div>
-
-                    <div class="form-group col-md-12">
-                      {{ Form::label('notes', 'Notes') }}
-                      {{ Form::textarea('notes', null, ['id' => 'notes','class' => 'form-control', 'rows' => 4, 'cols' => 54, 'maxlength' => 300, 'placeholder' => 'Limit to 300 characters only', 'style' => 'resize:none']) }}
-                    </div>
-                    <div class="form-group col-md-6">
-                      {{ Form::label('attachment', 'Attachment') }}
-                      <div class="row">
-                        <div class="col-md-12">
-                          <form id="form-patient-detail-upload" method="post" enctype="multipart/form-data">
-                              <input type="hidden" name="attachment_number" value="{{ \Illuminate\Support\Str::random(6) }}">
-                              <input type="hidden" name="patient_id" value="{{ $patient->id }}">
-                              <input type="file" name="attachment[]" multiple>
-                              {{ csrf_field() }}
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group col-md-6 {{ App\Model\FeatureUser::is_feature_allowed('add_appointment', Auth::user()->id) }}">
-                      {{ Form::checkbox('checkbox_visit', 'Yes') }}
-                      {{ Form::label('checkbox_visit', 'Set Appointment') }}
-                      <div class="row">
-                        <div class="col-md-6">
-                          {{ Form::text('schedule', null, array('id' => 'date_scheduled', 'class' => 'form-control', 'placeholder' => 'mm/dd/yyyy', 'disabled')) }}
-                        </div>
-                        <div class="col-md-6">
-                          {{ Form::text('schedule_time', null, array('id' => 'time_scheduled', 'class' => 'form-control', 'placeholder' => '2:00 pm', 'disabled')) }}
-                        </div>
-                      </div>
-                    </div>
-       
-                    <div class="col-md-offset-9 col-md-3">
-                      <a class="btn btn-primary btn-round btn-block" id="record_detail"><i class="fa fa-plus" aria-hidden="true"></i> Add</a>
-                    </div>
-                  </div>
+                  @include('patient._add_patient_record_modal')
                   
                 </div>
             </div>

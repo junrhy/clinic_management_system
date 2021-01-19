@@ -1,3 +1,8 @@
+<style type="text/css">
+  .custom-text-input {
+      height: 35px;
+  }
+</style>
 <!-- Modal -->
 <div class="modal fade" id="add_appointment_modal" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
   <div class="modal-dialog" role="document">

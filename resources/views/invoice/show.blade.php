@@ -42,7 +42,7 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-12">
-                        <h2>Billing <small class="text-muted">View Invoices</small></h2>
+                        <h2>Invoices <small class="text-muted">View Invoices</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                         <ul class="breadcrumb float-md-right">
@@ -58,8 +58,6 @@
                   <div class="form-group col-md-12">
                     <div class="row">
                       <h4 class="row" style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;"><i class="fa fa-money" aria-hidden="true"></i> Patient Name: {{ $patient->first_name }} {{ $patient->last_name }}</h4>
-
-                      <h5 class="row col-md-12" style="margin-top: 30px;color:#45a29e;"><strong>Invoices</strong></h5>
 
                       <table class="table table-striped">
                         <thead>

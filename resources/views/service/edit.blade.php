@@ -22,18 +22,20 @@
                 <div class="panel-heading"><i class="fa fa-user-md"></i> Edit Service</div>
 
                 <div class="panel-body">
-                  {{ Form::model($service, array('route' => array('service.update', $service->id), 'method' => 'PUT')) }}
-                    {{ Html::ul($errors->all()) }}
+                    <div class="row col-md-3">
+                        {{ Form::model($service, array('route' => array('service.update', $service->id), 'method' => 'PUT')) }}
+                        {{ Html::ul($errors->all()) }}
 
-                    <div class="form-group col-md-12">
-                      {{ Form::label('name', 'Name') }}
-                      {{ Form::text('name', Input::old('name'), array('class' => 'form-control', 'required')) }}
-                    </div>
+                        <div class="form-group">
+                          {{ Form::label('name', 'Name') }}
+                          {{ Form::text('name', Input::old('name'), array('class' => 'form-control', 'required')) }}
+                        </div>
 
-                    <div class="col-md-12">
-                      {{ Form::submit('Save Changes', array('class' => 'btn btn-primary btn-round')) }}
+                        <div>
+                          {{ Form::submit('Save Changes', array('class' => 'btn btn-primary btn-round')) }}
+                        </div>
+                      {{ Form::close() }}
                     </div>
-                  {{ Form::close() }}
                 </div>
             </div>
         </div>

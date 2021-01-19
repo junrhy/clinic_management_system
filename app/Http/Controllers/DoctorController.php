@@ -93,7 +93,8 @@ class DoctorController extends Controller
     public function update(Request $request, $id)
     {
         $doctor = Doctor::find($id);
-        $doctor->name = $request->name;
+        $doctor->first_name = $request->first_name;
+        $doctor->last_name = $request->last_name;
         $doctor->save();
 
         return redirect('doctor');

@@ -18,6 +18,12 @@
     border-right:1px solid #ccc;
   }
 
+  .free {
+    color: #63B5FF;
+    font-weight: bold;
+    font-family: 'arial';
+  }
+
   .basic-plan-foot {
     padding:3px;
   } 
@@ -27,6 +33,7 @@
     border:1px solid #ccc;
     font-size:13pt;
     color:#FF6065;
+    font-family: 'arial';
   }
 
   .text-upgrade {
@@ -73,17 +80,17 @@
           </tr>
           <tr>
             <td>Number of Patients</td>
-            <td class="basic-plan text-center">100</td>
+            <td class="basic-plan text-center">300</td>
             <td class="business-plan text-center">Unlimited</td>
           </tr>
           <tr>
             <td>Number of Clinics</td>
-            <td class="basic-plan text-center">2</td>
+            <td class="basic-plan text-center">Unlimited</td>
             <td class="business-plan text-center">Unlimited</td>
           </tr>
           <tr>
-            <td>Secretary User Access</td>
-            <td class="basic-plan text-center">1</td>
+            <td>Additional User Access</td>
+            <td class="basic-plan text-center">Unlimited</td>
             <td class="business-plan text-center">Unlimited</td>
           </tr>
           <tr>
@@ -97,9 +104,14 @@
             <td class="business-plan text-center">Unlimited</td>
           </tr>
           <tr>
+            <td>Dental Chart Feature</td>
+            <td class="basic-plan text-center">Yes</td>
+            <td class="business-plan text-center">Yes</td>
+          </tr>
+          <tr>
             <td>Subscription Rate</td>
-            <td class="basic-plan text-center">Free</td>
-            <td rowspan=2 class="business-plan-foot text-center">&#8369;1,000 / month</td>
+            <td class="basic-plan text-center free">FREE</td>
+            <td rowspan=2 class="business-plan-foot text-center">&#8369;1,500 / month</td>
           </tr>
           <tr>
             <td>&nbsp;</td>
@@ -110,7 +122,6 @@
       </div>
       <div class="modal-footer">
        <button type="button" class="btn btn-default btn-round" data-dismiss="modal">Close</button>
-<!--        <a href="https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7B7DXYEA9FKLA&notify_url={{ url('/paypal_subscription_activated') }}&custom=clientid_{{  Auth::user()->client->id }}" type="button" id="btn-upgrade-account" data-id="" class="btn btn-upgrade btn-round">Upgrade to Business Account</a> -->
        <a href="" type="button" id="btn-upgrade-account" data-id="" class="btn btn-upgrade btn-round">Contact Sales</a>
     </div>
     </div>
@@ -120,33 +131,9 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(document).ready(function () {
-  $("#form-add-clinic").submit(function() {
-    if ($("#check-account-type").data('account-type') == "basic") {
-      if ($("#check-clinic-count").data('clinic-count') >= 2) {
-        $('#upgrade-message').html('You have reach the limitation of your account.');
-        $('#upgrade_account_modal').modal('show');
-        return false;
-      } else {
-        return true;
-      }
-    }
-  });
-
   $("#form-add-patient").submit(function() {
     if ($("#check-account-type").data('account-type') == "basic") {
-      if ($("#check-patient-count").data('patient-count') >= 100) {
-        $('#upgrade-message').html('You have reach the limitation of your account.');
-        $('#upgrade_account_modal').modal('show');
-        return false;
-      } else {
-        return true;
-      }
-    }
-  });
-
-  $("#form-add-user").submit(function() {
-    if ($("#check-account-type").data('account-type') == "basic") {
-      if ($("#check-user-count").data('user-count') >= 2) {
+      if ($("#check-patient-count").data('patient-count') >= 300) {
         $('#upgrade-message').html('You have reach the limitation of your account.');
         $('#upgrade_account_modal').modal('show');
         return false;

@@ -51,14 +51,13 @@
                 <div class="panel-heading">All Doctors</div>
 
                 <div class="panel-body">
-                  Listing: {{ $doctors->count() }}
-                  <div class="table-responsive">
-                    <table class="table">
-                      <tr>
+                  <div class="row col-md-4 table-responsive">
+                    <table class="table table-striped">
+                      <thead>
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th class="text-right">Action</th>
-                      </tr>
+                      </thead>
                       <?php foreach ($doctors as $doctor_key => $doctor_item): ?>
                       <tr>
                         <td>{{ $doctor_item->first_name }}</td>

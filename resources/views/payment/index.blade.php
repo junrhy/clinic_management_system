@@ -19,11 +19,11 @@
     font-size:14pt;
   }
 
-  .show-patient, .delete-patient, .update-patient {
+  .show-payment, .delete-payment, .update-payment {
     color: gray;
   }
 
-  .delete-patient:hover {
+  .delete-payment:hover {
     color: red;
     text-decoration: none;
   }
@@ -88,17 +88,17 @@
                     </div>
                     <br>
                     <div class="table-responsive">
-                        <table class="table">
-                          <tr>
+                        <table class="table table-striped">
+                          <thead>
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Gender</th>
                             <th>Date of Birth</th>
                             <th>Age</th>
                             <th>Contact</th>
-                            <th>Total Payments Amount</th>
+                            <th>Total Paid</th>
                             <th>Action</th>
-                          </tr>
+                          </thead>
                         @if($patients->count() > 0)
                           <?php foreach ($patients as $patient_key => $patient_item): ?>
                           <tr>

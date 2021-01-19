@@ -22,19 +22,21 @@
                 <div class="panel-heading">Edit Clinic</div>
 
                 <div class="panel-body">
-                  {{ Form::model($clinic, array('route' => array('clinic.update', $clinic->id), 'method' => 'PUT')) }}
-                    <div class="form-group">
-                      {{ Form::label('name', 'Name') }}
-                      {{ Form::text('name', Input::old('name'), array('class' => 'form-control')) }}
-                    </div>
+                  <div class="row col-md-3">
+                      {{ Form::model($clinic, array('route' => array('clinic.update', $clinic->id), 'method' => 'PUT')) }}
+                        <div class="form-group">
+                          {{ Form::label('name', 'Name') }}
+                          {{ Form::text('name', Input::old('name'), array('class' => 'form-control')) }}
+                        </div>
 
-                    <div class="form-group">
-                      {{ Form::label('address', 'Address') }}
-                      {{ Form::text('address', Input::old('address'), array('class' => 'form-control')) }}
-                    </div>
-                    
-                    {{ Form::submit('Save Changes', array('class' => 'btn btn-primary btn-round')) }}
-                  {{ Form::close() }}
+                        <div class="form-group">
+                          {{ Form::label('address', 'Address') }}
+                          {{ Form::text('address', Input::old('address'), array('class' => 'form-control')) }}
+                        </div>
+                        
+                        {{ Form::submit('Save Changes', array('class' => 'btn btn-primary btn-round')) }}
+                      {{ Form::close() }}
+                  </div>
                 </div>
             </div>
         </div>

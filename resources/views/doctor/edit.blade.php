@@ -22,23 +22,25 @@
                 <div class="panel-heading">Edit Doctor</div>
 
                 <div class="panel-body">
-                  {{ Form::model($doctor, array('route' => array('doctor.update', $doctor->id), 'method' => 'PUT')) }}
-                    {{ Html::ul($errors->all()) }}
+                    <div class="row col-md-3">
+                        {{ Form::model($doctor, array('route' => array('doctor.update', $doctor->id), 'method' => 'PUT')) }}
+                        {{ Html::ul($errors->all()) }}
 
-                    <div class="form-group col-md-12">
-                      {{ Form::label('first_name', 'First Name') }}
-                      {{ Form::text('first_name', Input::old('first_name'), array('class' => 'form-control', 'required')) }}
-                    </div>
+                        <div class="form-group">
+                          {{ Form::label('first_name', 'First Name') }}
+                          {{ Form::text('first_name', Input::old('first_name'), array('class' => 'form-control', 'required')) }}
+                        </div>
 
-                    <div class="form-group col-md-12">
-                      {{ Form::label('last_name', 'Last Name') }}
-                      {{ Form::text('last_name', Input::old('last_name'), array('class' => 'form-control', 'required')) }}
-                    </div>
+                        <div class="form-group">
+                          {{ Form::label('last_name', 'Last Name') }}
+                          {{ Form::text('last_name', Input::old('last_name'), array('class' => 'form-control', 'required')) }}
+                        </div>
 
-                    <div class="col-md-12">
-                      {{ Form::submit('Save Changes', array('class' => 'btn btn-primary btn-round')) }}
+                        <div>
+                          {{ Form::submit('Save Changes', array('class' => 'btn btn-primary btn-round')) }}
+                        </div>
+                      {{ Form::close() }}
                     </div>
-                  {{ Form::close() }}
                 </div>
             </div>
         </div>

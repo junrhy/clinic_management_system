@@ -22,23 +22,25 @@
                 <div class="panel-heading">New Doctor</div>
 
                 <div class="panel-body">
-                  {{ Html::ul($errors->all()) }}
+                  <div class="row col-md-3">
+                    {{ Html::ul($errors->all()) }}
 
-                  {{ Form::open(array('url' => 'doctor')) }}
-                    <div class="form-group col-md-12">
-                      {{ Form::label('first_name', 'First Name') }}
-                      {{ Form::text('first_name', Input::old('first_name'), array('class' => 'form-control', 'required')) }}
-                    </div>
+                    {{ Form::open(array('url' => 'doctor')) }}
+                      <div class="form-group">
+                        {{ Form::label('first_name', 'First Name') }}
+                        {{ Form::text('first_name', Input::old('first_name'), array('class' => 'form-control', 'required')) }}
+                      </div>
 
-                    <div class="form-group col-md-12">
-                      {{ Form::label('last_name', 'Last Name') }}
-                      {{ Form::text('last_name', Input::old('last_name'), array('class' => 'form-control', 'required')) }}
-                    </div>
+                      <div class="form-group">
+                        {{ Form::label('last_name', 'Last Name') }}
+                        {{ Form::text('last_name', Input::old('last_name'), array('class' => 'form-control', 'required')) }}
+                      </div>
 
-                    <div class="col-md-12">
-                      {{ Form::submit('Submit', array('class' => 'btn btn-primary btn-round')) }}
-                    </div>
-                  {{ Form::close() }}
+                      <div>
+                        {{ Form::submit('Submit', array('class' => 'btn btn-primary btn-round')) }}
+                      </div>
+                    {{ Form::close() }}
+                  </div>
                 </div>
             </div>
         </div>
