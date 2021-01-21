@@ -12,6 +12,7 @@
 <style type="text/css">
   .category {
     font-weight: bold;
+    color: #109d9e!important;
   }
 </style>
 @endsection
@@ -40,13 +41,13 @@
                 <div class="panel-body">
                     @foreach($features as $key => $feature)
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="{{ $feature->name }}" data-id="{{ $feature->id }}" name="user_features" {{ App\Model\FeatureUser::is_feature_checked($feature->name, Auth::user()->id) }}>
+                            <input class="form-check-input" type="checkbox" id="{{ $feature->name }}" data-id="{{ $feature->id }}" name="user_features"  {{ $user->is_client == 1 && in_array($feature->name, ['users', 'add_user', 'edit_user', 'delete_user', 'set_privileges']) ? 'disabled' : '' }} {{ App\Model\FeatureUser::is_feature_checked($feature->name, $user->id) }}>
                             <span id="txt_{{ $feature->name }}">{{ ucwords(str_replace('_', ' ', $feature->name)) }}</span>
                         </div>
                     @endforeach
 
                     <br>
-                    <button id="btn-save" data-user-id="{{ Auth::user()->id }}" class="btn btn-primary btn-round">Save Changes</button>
+                    <button id="btn-save" data-user-id="{{ $user->id }}" class="btn btn-primary btn-round">Save Changes</button>
                 </div>
             </div>
         </div>
@@ -101,6 +102,9 @@ $(document).ready(function() {
         $("#delete_patient_detail").prop('checked', $(this).is(":checked"));
         $("#archive_patient_detail").prop('checked', $(this).is(":checked"));
         $("#unarchive_patient_detail").prop('checked', $(this).is(":checked"));
+        $("#add_patient_prescription").prop('checked', $(this).is(":checked"));
+        $("#edit_patient_prescription").prop('checked', $(this).is(":checked"));
+        $("#delete_patient_prescription").prop('checked', $(this).is(":checked"));
     });
 
     $("#clinics").click(function(){
@@ -133,6 +137,10 @@ $(document).ready(function() {
         $("#edit_user").prop('checked', $(this).is(":checked"));
         $("#delete_user").prop('checked', $(this).is(":checked"));
         $("#set_privileges").prop('checked', $(this).is(":checked"));
+    });
+
+    $("#settings").click(function(){
+        $("#edit_business_information").prop('checked', $(this).is(":checked"));
     });
 
     $(function(){

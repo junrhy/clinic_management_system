@@ -1,3 +1,27 @@
+<style type="text/css">
+  .text-center {
+    text-align: center;
+  }
+
+  .bg-light {
+    background-color: #f8f9fa!important;
+    border: 1px solid #fff;
+    cursor: pointer;
+    border-radius: 30px;
+  }
+
+  .bg-selected {
+    background-color: #01d8da!important;
+    color: #fff;
+  }
+
+  .services-holder {
+    height: 100px;
+    overflow-y: scroll;
+    border: 1px solid #eee;
+    padding: 3px 2px;
+  }
+</style>
 <!-- Modal -->
 <div class="modal fade" id="add_patient_record_modal" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -10,24 +34,28 @@
       </div>
       <div class="modal-body">
          <div class="col-md-12 {{ App\Model\FeatureUser::is_feature_allowed('add_patient_detail', Auth::user()->id) }}">
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-7">
                 {{ Form::label('clinic', 'Clinic') }}
                 {{ Form::select('clinic', $clinics, '', ['class' => 'form-control']) }}
               </div>
 
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-5">
                 {{ Form::label('doctor', 'Doctor') }}
                 {{ Form::select('doctor', $doctors, '', ['class' => 'form-control']) }}
               </div>
 
-              <div class="form-group col-md-4">
-                {{ Form::label('service', 'Service Type') }}
-                {{ Form::select('service', $services, '', ['class' => 'form-control']) }}
+              <div class="form-group col-md-12">
+                {{ Form::label('service', 'Services') }}
+                <div class="services-holder">
+                  @foreach ($services as $key => $service)  
+                    <div class="col-md-3 text-center bg-light services">{{ $service->name }}</div>
+                  @endforeach
+                </div>
               </div>
 
               <div class="form-group col-md-12">
                 {{ Form::label('notes', 'Notes') }}
-                {{ Form::textarea('notes', null, ['id' => 'notes','class' => 'form-control', 'rows' => 4, 'cols' => 54, 'maxlength' => 300, 'placeholder' => 'Limit to 300 characters only', 'style' => 'resize:none']) }}
+                {{ Form::textarea('notes', null, ['id' => 'notes','class' => 'form-control', 'rows' => 4, 'cols' => 54, 'placeholder' => 'Limit to 300 characters only', 'style' => 'resize:none']) }}
               </div>
 
               <div class="form-group col-md-6">
@@ -61,6 +89,8 @@
           <br><br><br>
           <br><br><br>
           <br><br><br>
+          <br><br><br>
+          <br><br><br>
           <br><br>
       </div>
       <div class="modal-footer">
@@ -74,6 +104,16 @@
 $(document).ready(function () {
   $("#add_patient_record").click(function(){
     $('#add_patient_record_modal').modal('show');
+  });
+
+  $(".services").unbind().click(function(){
+    if ($(this).hasClass('bg-selected')) {
+      $(this).removeClass('bg-selected');
+      $(this).removeClass('service-selected');
+    } else {
+      $(this).addClass('bg-selected');
+      $(this).addClass('service-selected');
+    }
   });
 });
 </script>

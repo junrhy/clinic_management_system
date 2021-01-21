@@ -87,6 +87,10 @@
                         <td class="col-md-2 text-right">Contact No.:</td>
                         <td><span style="font-family: sans-serif;">{{ $patient->contact_number }}</span></td>
                       </tr>
+                      <tr>
+                        <td class="col-md-2 text-right">Address:</td>
+                        <td><span style="font-family: sans-serif;">{{ $patient->address }}</span></td>
+                      </tr>
                     </table>
                   </div>
 
@@ -109,12 +113,12 @@
                             <div class="table-responsive">
                               <table class="table table-striped">
                                 <thead>
-                                  <th style="width:10%">Created</th>
-                                  <th style="width:10%">Clinic</th>
+                                  <th style="width:7%">Created</th>
+                                  <th style="width:20%">Clinic</th>
                                   <th style="width:10%">Doctor</th>
-                                  <th style="width:10%">Service Type</th>
+                                  <th style="width:15%">Service</th>
                                   <th style="width:20%">Notes</th>
-                                  <th style="width:15%">Appointment</th>
+                                  <th style="width:10%">Appointment</th>
                                   <th style="width:15%">Attachments</th>
                                   <th style="width:1%;text-align:center;">Action</th>
                                 </thead>
@@ -133,7 +137,7 @@
                                             {{ date('M d, Y', strtotime($detail->date_scheduled)) }}&nbsp;&nbsp;
                                             {{ date('h:i a', strtotime($detail->time_scheduled)) }}
                                           @else
-                                            &nbsp;
+                                            N/A
                                           @endif
                                         </td>
                                         <td>
@@ -148,7 +152,7 @@
                                                 <small class="delete-text delete-attachment" data-id="{{ $attachment->id }}" data-filename="{{ $attachment->filename }}">delete</small>
                                                 <br>
                                               @endforeach
-     
+                                          
                                           @endif
                                         </td>
                                         <td class="text-center">
@@ -159,7 +163,7 @@
                                   @endforeach
                                 @else
                                   <tr>
-                                    <td class="text-center" colspan="8">No medical record.</td>
+                                    <td class="text-center" colspan="8">No record found.</td>
                                   </tr>
                                 @endif
                                 </tbody>
@@ -171,12 +175,12 @@
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                   <thead>
-                                    <th style="width:10%">Created</th>
-                                    <th style="width:10%">Clinic</th>
+                                    <th style="width:7%">Created</th>
+                                    <th style="width:20%">Clinic</th>
                                     <th style="width:10%">Doctor</th>
-                                    <th style="width:10%">Service Type</th>
+                                    <th style="width:15%">Service</th>
                                     <th style="width:20%">Notes</th>
-                                    <th style="width:15%">Appointment</th>
+                                    <th style="width:10%">Appointment</th>
                                     <th style="width:15%">Attachments</th>
                                     <th style="width:1%;text-align:center;">Action</th>
                                   </thead>
@@ -195,7 +199,7 @@
                                               {{ date('M d, Y', strtotime($archive_detail->date_scheduled)) }}&nbsp;&nbsp;
                                               {{ date('h:i a', strtotime($archive_detail->time_scheduled)) }}
                                             @else
-                                              n/a
+                                              N/A
                                             @endif
                                           </td>
                                           <td>
@@ -221,7 +225,7 @@
                                     @endforeach
                                   @else
                                     <tr>
-                                      <td class="text-center" colspan="8">No archived record.</td>
+                                      <td class="text-center" colspan="8">No record found.</td>
                                     </tr>
                                   @endif
                                   </tbody>
@@ -234,6 +238,39 @@
 
                   @include('patient._add_patient_record_modal')
                   
+                  <div class="form-group col-md-12">
+                    <div class="row">
+                      <h4 class="row" style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;">
+                        <i class="fa fa-file-text" aria-hidden="true"></i> Prescriptions
+                        <span id="add_patient_prescription" style="cursor: pointer;">
+                            <i class="fa fa-plus"></i>
+                        </span>
+                      </h4>
+                      <div class="row col-md-8">
+                        <div class="table-responsive">
+                          <table class="table table-striped">
+                            <thead>
+                              <th style="width:7%">Created</th>
+                              <th style="width:20%">Clinic</th>
+                              <th style="width:20%">Doctor</th>
+                              <th style="width:5%">Prescription</th>
+                              <th style="width:1%;text-align:center;">Action</th>
+                            </thead>
+
+                            <tbody>
+                            @if(count($archived_details) > 0)
+
+                            @else
+                              <tr>
+                                <td class="text-center" colspan="8">No record found.</td>
+                              </tr>
+                            @endif
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                  </div>
+
                 </div>
             </div>
         </div>
@@ -261,10 +298,18 @@ $(document).ready(function() {
   $("#record_detail").click(function(){
       var clinic = $("#clinic").val();
       var doctor = $("#doctor").val();
-      var service = $("#service").val();
       var notes = $("#notes").val();
       var date_scheduled = $("#date_scheduled").val();
       var time_scheduled = $("#time_scheduled").val();
+
+      var service = "";
+      $(".service-selected").map(function() {
+          if (service == "") {
+            service = this.innerHTML;
+          } else {
+            service = service + ", " + this.innerHTML;
+          }
+      }).get();
 
       if ($("input[name='attachment[]").get(0).files.length != 0) {
         var attachment_number = $("input[name='attachment_number']").val();
@@ -272,7 +317,6 @@ $(document).ready(function() {
         var attachment_number = '';
       }
       
-
       $.ajax({
         method: "POST",
         url: "/patient/create_detail",

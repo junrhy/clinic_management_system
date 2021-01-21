@@ -61,17 +61,16 @@
                 <div class="panel-heading">All Users</div>
 
                 <div class="panel-body">
-                  Listing: {{ $users->count() }}
                   <div class="table-responsive">
-                    <table class="table">
-                      <tr>
+                    <table class="table table-striped">
+                      <thead>
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Username</th>
                         <th>Email</th>
                         <th>Privileges</th>
                         <th class="text-right">Action</th>
-                      </tr>
+                      </thead>
                       <?php foreach ($users as $user_key => $user_item): ?>
                       <tr>
                         <td>{{ $user_item->first_name }}</td>
@@ -84,8 +83,11 @@
                         <td>
                             <div class="pull-right">
                               @if($user_item->username != auth()->user()->username)
-                                <a class="update-user {{ App\Model\FeatureUser::is_feature_allowed('edit_user', Auth::user()->id) }}" href="{{ route('user.edit',$user_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a> | 
-                                <a class="delete-user {{ App\Model\FeatureUser::is_feature_allowed('delete_user', Auth::user()->id) }}" data-id="{{ $user_item->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                <a class="update-user {{ App\Model\FeatureUser::is_feature_allowed('edit_user', Auth::user()->id) }}" href="{{ route('user.edit',$user_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+                                @if(!$user_item->is_client == 1)
+                                 | <a class="delete-user {{ App\Model\FeatureUser::is_feature_allowed('delete_user', Auth::user()->id) }}" data-id="{{ $user_item->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                @endif
                               @else
                                 <a class="update-user {{ App\Model\FeatureUser::is_feature_allowed('edit_user', Auth::user()->id) }}" href="{{ route('user.edit',$user_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                               @endif

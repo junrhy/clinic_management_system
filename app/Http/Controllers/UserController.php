@@ -130,7 +130,7 @@ class UserController extends Controller
 
     public function update_privilege(Request $request, $id)
     {
-        $user_id = Auth::user()->id;
+        $user_id = $id;
 
 
         foreach($request->user_features as $key => $feature){

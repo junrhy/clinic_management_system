@@ -14,8 +14,8 @@ class PaymentController extends Controller
     public function index(Request $request)
     {
         $patients = Patient::where('client_id', Auth::user()->client_id)
-                            ->where('first_name', 'like', $request->namelist . '%')
-                            ->orderBy('first_name', 'asc')
+                            ->where('last_name', 'like', '%' . $request->namelist . '%')
+                            ->orderBy('last_name', 'asc')
                             ->paginate(30);
 
         return view('payment.index')
@@ -23,6 +23,25 @@ class PaymentController extends Controller
               ->with('namelist', $request->namelist);
     }
 
+    public function search(Request $request)
+    {
+        $keyword = $request->keyword;
+
+        $multiple_keyword = explode(' ', $request->keyword);
+
+        $patients = Patient::where('client_id', Auth::user()->client_id)
+                            ->whereIn('first_name', $multiple_keyword)
+                            ->orWhereIn('last_name', $multiple_keyword)
+                            ->orWhereIn('contact_number', $multiple_keyword)
+                            ->orWhere('first_name', 'like', '%' . $keyword . '%')
+                            ->orWhere('last_name', 'like', '%' . $keyword . '%')
+                            ->orWhere('contact_number', 'like', '%' . $keyword . '%')
+                            ->paginate(30);
+
+        return view('payment._table_data')
+              ->with('patients', $patients);
+    }
+    
     public function show($id)
     {
         $patient = Patient::find($id);

@@ -41,7 +41,7 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::post('/update_password', 'AccountController@update_password');
 
 	Route::get('patients_list', 'CalendarController@patients_list');
-
+	
 	Route::resource('user', 'UserController');
 	Route::resource('patient', 'PatientController');
 	Route::resource('clinic', 'ClinicController');
@@ -50,6 +50,8 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::resource('service', 'ServiceController');
 	Route::resource('invoice', 'InvoiceController');
 	Route::resource('payment', 'PaymentController');
+
+	Route::post('patient/search', 'PatientController@search');
 
 	Route::post('/patient/create_detail', 'PatientController@create_patient_detail');
 	Route::post('/patient/update_detail/{id}', 'PatientController@update_patient_detail');
@@ -62,9 +64,11 @@ Route::group(['middleware' => ['is_default']], function() {
 
 	Route::post('/invoice/create_billing_charge', 'InvoiceController@create_billing_charge');
 	Route::delete('/invoice/delete_charge/{id}', 'InvoiceController@delete_patient_charge');
+	Route::post('invoice/search', 'InvoiceController@search');
 
 	Route::post('/payment/create_billing_payment', 'PaymentController@create_billing_payment');
 	Route::delete('/payment/delete_payment/{id}', 'PaymentController@delete_patient_payment');
+	Route::post('payment/search', 'PaymentController@search');
 
 	Route::post('/calendar/scheduled_patients', 'CalendarController@scheduled_patients');
 
@@ -78,8 +82,5 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::post('/dental_chart/get_patient_attributes', 'DentalChartController@get_patient_attributes');
 
 	Route::delete('/attachment/delete/{id}', 'AttachmentController@delete');
-
-	// Webhooks
-	Route::any('/paypal_subscription_activated', 'WebhookController@paypal_subscription_activated');
 });
 

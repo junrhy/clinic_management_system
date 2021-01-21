@@ -56,12 +56,16 @@
                       <thead>
                         <th>First Name</th>
                         <th>Last Name</th>
+                        <th>License No.</th>
+                        <th>PTR No.</th>
                         <th class="text-right">Action</th>
                       </thead>
                       <?php foreach ($doctors as $doctor_key => $doctor_item): ?>
                       <tr>
                         <td>{{ $doctor_item->first_name }}</td>
                         <td>{{ $doctor_item->last_name }}</td>
+                        <td>{{ $doctor_item->license_no }}</td>
+                        <td>{{ $doctor_item->ptr_no }}</td>
                         <td>
                             <div class="pull-right">
                               <a class="update-doctor {{ App\Model\FeatureUser::is_feature_allowed('edit_doctor', Auth::user()->id) }}" href="{{ route('doctor.edit',$doctor_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a> | 

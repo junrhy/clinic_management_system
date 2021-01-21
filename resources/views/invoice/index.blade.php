@@ -27,6 +27,15 @@
     color: red;
     text-decoration: none;
   }
+
+  #txt-search {
+    border: 1px solid #00cfd1;
+  }
+
+  #btn-search {
+    padding: 5px 10px;
+    border-radius: 0;
+  }
 </style>
 @endsection
 
@@ -37,12 +46,12 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-12">
-                        <h2>All Invoices <small class="text-muted">View Invoices</small></h2>
+                        <h2>All Patient Invoices <small class="text-muted">View patient's invoices</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                         <ul class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><a href="/home"><i class="fa fa-home"></i> {{ Auth::user()->client->name }}</a></li>
-                            <li class="breadcrumb-item">Invoices</li>
+                            <li class="breadcrumb-item">Patient</li>
                             <li class="breadcrumb-item active">All Invoices</li>
                         </ul>
                     </div>
@@ -53,6 +62,11 @@
 
                 <div class="panel-body">
                     <div class="table-responsive">
+                      <div>
+                        <input type="text" name="search" class="col-md-2" id="txt-search" placeholder="Search">
+                        <input type="submit" class="btn btn-primary" id="btn-search" value="Go!">
+                        <br><br>
+                      </div>
                       <table width="100%">
                         <tr>
                           <td width="3.7%" class="namelist text-center" data-list="all">All</td>
@@ -87,41 +101,8 @@
                       </table>
                     </div>  
                     <br>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                          <thead>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Gender</th>
-                            <th>Date of Birth</th>
-                            <th>Age</th>
-                            <th>Contact</th>
-                            <th>Total Invoices Amount</th>
-                            <th>Action</th>
-                          </thead>
-                        @if($patients->count() > 0)
-                          <?php foreach ($patients as $patient_key => $patient_item): ?>
-                          <tr>
-                            <td>{{ $patient_item->first_name }}</td>
-                            <td>{{ $patient_item->last_name }}</td>
-                            <td>{{ $patient_item->gender }}</td>
-                            <td>{{ $patient_item->dob->format('M d, Y') }}</td>
-                            <td>{{ $patient_item->dob->age }}</td>
-                            <td><span style="font-family: sans-serif;">{{ $patient_item->contact_number }}</span></td>
-                            <td>&#8369; {{ number_format($patient_item->charges->sum('amount'), 2) }}</td>
-                            <td>
-                              <div>
-                                <a class="show-invoice {{ App\Model\FeatureUser::is_feature_allowed('view_patient_invoice', Auth::user()->id) }}" href="{{ route('invoice.show',$patient_item->id) }}"><i class="fa fa-file-alt" aria-hidden="true"></i> View</a>
-                              </div>
-                           </td>
-                          </tr>
-                          <?php endforeach; ?>
-                        @else
-                          <tr>
-                            <td colspan="8" class="text-center">No record on this list</td>
-                          </tr>
-                        @endif
-                        </table>
+                    <div class="table-responsive" id="tableData">
+                        @include('invoice._table_data')
                     </div>
                     <div align="center">{{ $patients->appends(['namelist' => $namelist])->links() }}</div>
                 </div>
@@ -143,6 +124,22 @@ $(document).ready(function() {
     } else {
       location.href = '{{ Request::url() }}';
     }
+  });
+
+  $("#btn-search").click(function(){
+    keyword = $("#txt-search").val();
+
+    $.ajax({
+      method: "POST",
+      url: "/invoice/search",
+      data: { 
+        keyword: keyword,
+        _token: "{{ csrf_token() }}" 
+      }
+    })
+    .done(function( data ) {
+      $("#tableData").html(data);
+    });
   });
 
   $(function(){

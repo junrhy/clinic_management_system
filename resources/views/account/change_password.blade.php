@@ -22,7 +22,7 @@
                 <div class="panel-heading">Change Password</div>
 
                 <div class="panel-body">
- 	              <div class="row col-md-4">
+ 	              <div class="row col-md-3">
                       @if (count($errors) > 0)
                          <span style="color:red">
                             {{ Html::ul($errors->all()) }}

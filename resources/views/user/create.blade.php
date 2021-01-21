@@ -28,34 +28,36 @@
                      </span>
                   @endif
 
-                  {{ Form::open(array('url' => 'user', 'id' => 'form-add-user')) }}
-                    <div class="form-group">
-                      {{ Form::label('first_name', 'First Name') }}
-                      {{ Form::text('first_name', Input::old('first_name'), array('class' => 'form-control')) }}
-                    </div>
+                  <div class="row col-md-3">
+                    {{ Form::open(array('url' => 'user', 'id' => 'form-add-user')) }}
+                      <div class="form-group">
+                        {{ Form::label('first_name', 'First Name') }}
+                        {{ Form::text('first_name', Input::old('first_name'), array('class' => 'form-control', 'required')) }}
+                      </div>
 
-                    <div class="form-group">
-                      {{ Form::label('last_name', 'Last Name') }}
-                      {{ Form::text('last_name', Input::old('last_name'), array('class' => 'form-control')) }}
-                    </div>
+                      <div class="form-group">
+                        {{ Form::label('last_name', 'Last Name') }}
+                        {{ Form::text('last_name', Input::old('last_name'), array('class' => 'form-control', 'required')) }}
+                      </div>
 
-                    <div class="form-group">
-                      {{ Form::label('username', 'Username') }}
-                      {{ Form::text('username', Input::old('username'), array('class' => 'form-control')) }}
-                    </div>
+                      <div class="form-group">
+                        {{ Form::label('username', 'Username') }}
+                        {{ Form::text('username', Input::old('username'), array('class' => 'form-control', 'required')) }}
+                      </div>
 
-                    <div class="form-group">
-                      {{ Form::label('email', 'Email') }}
-                      {{ Form::email('email', Input::old('email'), array('class' => 'form-control')) }}
-                    </div>
+                      <div class="form-group">
+                        {{ Form::label('email', 'Email') }}
+                        {{ Form::email('email', Input::old('email'), array('class' => 'form-control', 'required')) }}
+                      </div>
 
-                    <div class="form-group">
-                      {{ Form::label('password', 'Password') }}
-                      {{ Form::password('password', array('class' => 'form-control')) }}
-                    </div>
+                      <div class="form-group">
+                        {{ Form::label('password', 'Password') }}
+                        {{ Form::password('password', array('class' => 'form-control', 'required')) }}
+                      </div>
 
-                    {{ Form::submit('Submit', array('class' => 'btn btn-primary btn-round')) }}
-                  {{ Form::close() }}
+                      {{ Form::submit('Submit', array('class' => 'btn btn-primary btn-round')) }}
+                    {{ Form::close() }}
+                  </div>
                 </div>
             </div>
         </div>

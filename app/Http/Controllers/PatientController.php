@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Str;
 
 use App\Model\Patient;
 use App\Model\Clinic;
@@ -30,13 +31,32 @@ class PatientController extends Controller
     public function index(Request $request)
     {
         $patients = Patient::where('client_id', Auth::user()->client_id)
-                            ->where('first_name', 'like', $request->namelist . '%')
-                            ->orderBy('first_name', 'asc')
+                            ->where('last_name', 'like', '%' . $request->namelist . '%')
+                            ->orderBy('last_name', 'asc')
                             ->paginate(30);
 
         return view('patient.index')
               ->with('patients', $patients)
               ->with('namelist', $request->namelist);
+    }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->keyword;
+        
+        $multiple_keyword = explode(' ', $request->keyword);
+
+        $patients = Patient::where('client_id', Auth::user()->client_id)
+                            ->whereIn('first_name', $multiple_keyword)
+                            ->orWhereIn('last_name', $multiple_keyword)
+                            ->orWhereIn('contact_number', $multiple_keyword)
+                            ->orWhere('first_name', 'like', '%' . $keyword . '%')
+                            ->orWhere('last_name', 'like', '%' . $keyword . '%')
+                            ->orWhere('contact_number', 'like', '%' . $keyword . '%')
+                            ->paginate(30);
+
+        return view('patient._table_data')
+              ->with('patients', $patients);
     }
 
     public function create()
@@ -54,6 +74,7 @@ class PatientController extends Controller
         $patient->gender = $request->gender;
         $patient->email = $request->email;
         $patient->contact_number = $request->contact_number;
+        $patient->address = $request->address;
         $patient->save();
 
         return redirect('patient');
@@ -69,7 +90,7 @@ class PatientController extends Controller
                             ->where('client_id', Auth::user()->client_id)
                             ->pluck('fullname', 'fullname');
 
-        $services = Service::where('client_id', Auth::user()->client_id)->pluck('name', 'name');
+        $services = Service::where('client_id', Auth::user()->client_id)->get();
         $patient_details = PatientDetail::where('patient_id', $patient->id)->where('is_archived', false)->get();
         $archived_details = PatientDetail::where('patient_id', $patient->id)->where('is_archived', true)->get();
 
@@ -99,6 +120,7 @@ class PatientController extends Controller
         $patient->gender = $request->gender;
         $patient->email = $request->email;
         $patient->contact_number = $request->contact_number;
+        $patient->address = $request->address;
         $patient->save();
 
         return redirect('patient');

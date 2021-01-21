@@ -27,6 +27,9 @@ class FeatureUsersTableSeeder extends Seeder
             'delete_patient_detail', 
             'archive_patient_detail', 
             'unarchive_patient_detail', 
+            'add_patient_prescription', 
+            'edit_patient_prescription', 
+            'delete_patient_prescription',
             'clinics', 
             'add_clinic', 
             'edit_clinic', 
@@ -49,6 +52,7 @@ class FeatureUsersTableSeeder extends Seeder
             'edit_user', 
             'delete_user', 
             'set_privileges', 
+            'settings',
             'edit_business_information'])->each(function ($item, $key) {
             
 	        $feature = FeatureUser::create(['name' => $item]);

@@ -36,6 +36,16 @@
                           {{ Form::text('last_name', Input::old('last_name'), array('class' => 'form-control', 'required')) }}
                         </div>
 
+                        <div class="form-group">
+                          {{ Form::label('license_no', 'License Number') }}
+                          {{ Form::text('license_no', Input::old('license_no'), array('class' => 'form-control')) }}
+                        </div>
+
+                        <div class="form-group">
+                          {{ Form::label('ptr_no', 'PTR Number') }}
+                          {{ Form::text('ptr_no', Input::old('ptr_no'), array('class' => 'form-control')) }}
+                        </div>
+
                         <div>
                           {{ Form::submit('Save Changes', array('class' => 'btn btn-primary btn-round')) }}
                         </div>

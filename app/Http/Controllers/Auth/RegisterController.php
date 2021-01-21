@@ -86,13 +86,14 @@ class RegisterController extends Controller
         $client->save();
 
         $user = User::create([
-            'client_id'=> $client->id,
+            'client_id' => $client->id,
             'first_name'=> $data['first_name'],
             'last_name' => $data['last_name'],
             'username'  => $data['username'],
-            'email'    => $data['email'],
-            'password' => bcrypt($data['password']),
-            'type'     => User::DEFAULT_TYPE,
+            'email'     => $data['email'],
+            'password'  => bcrypt($data['password']),
+            'type'      => User::DEFAULT_TYPE,
+            'is_client' => true,
         ]);
 
         $features = FeatureUser::all();

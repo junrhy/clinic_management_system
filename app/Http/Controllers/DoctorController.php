@@ -50,6 +50,8 @@ class DoctorController extends Controller
         $doctor->client_id = Auth::user()->client_id;
         $doctor->first_name = $request->first_name;
         $doctor->last_name = $request->last_name;
+        $doctor->license_no = $request->license_no;
+        $doctor->ptr_no = $request->license_no;
         $doctor->save();
 
         return redirect('doctor');

@@ -7,18 +7,18 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-12">
-                        <h2>Profile <small class="text-muted">Your profile information</small></h2>
+                        <h2>Business Profile <small class="text-muted">Your business profile information</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                         <ul class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><a href="/home"><i class="fa fa-home"></i> {{ Auth::user()->client->name }}</a></li>
-                            <li class="breadcrumb-item active">Profile</li>
+                            <li class="breadcrumb-item active">Business Profile</li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading">Profile</div>
+                <div class="panel-heading">Business Profile</div>
 
                 <div class="panel-body">
  	               <div class="row col-md-4">

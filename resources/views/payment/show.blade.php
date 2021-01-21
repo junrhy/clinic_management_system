@@ -42,13 +42,13 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-12">
-                        <h2>Payments <small class="text-muted">View Payments</small></h2>
+                        <h2>Patient Payments <small class="text-muted">View patient payments</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                         <ul class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><a href="/home"><i class="fa fa-home"></i> {{ Auth::user()->client->name }}</a></li>
                             <li class="breadcrumb-item">Patient</li>
-                            <li class="breadcrumb-item active">Patient Information</li>
+                            <li class="breadcrumb-item active">Patient Payments</li>
                         </ul>
                     </div>
                 </div>
@@ -140,7 +140,7 @@ $(document).ready(function() {
         .done(function( msg ) {
           Swal.fire(
             'Saved!',
-            'New charge successfully added.',
+            'New payment successfully added.',
             'success'
           ).then((result) => {
             location.reload();

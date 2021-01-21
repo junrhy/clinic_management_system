@@ -24,7 +24,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'client_id', 'username', 'first_name', 'last_name', 'email', 'password',
+        'client_id', 'username', 'first_name', 'last_name', 'email', 'password', 'is_client',
     ];
 
     /**
@@ -36,10 +36,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    const DEFAULT_TYPE = 'default';
     const ADMIN_TYPE = 'admin';
     const PATIENT_TYPE = 'patient';
-    const DEFAULT_TYPE = 'default';
-
+    const DOCTOR_TYPE = 'doctor';
+    
     public function isDefault()    {        
         return $this->type === self::DEFAULT_TYPE;    
     }
@@ -50,6 +51,10 @@ class User extends Authenticatable
 
     public function isPatient()    {        
         return $this->type === self::PATIENT_TYPE;    
+    }
+
+    public function isDoctor()    {        
+        return $this->type === self::DOCTOR_TYPE;    
     }
 
     public function client()
