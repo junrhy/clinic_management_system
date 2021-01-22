@@ -12,6 +12,7 @@ use App\Model\Clinic;
 use App\Model\Doctor;
 use App\Model\Service;
 use App\Model\PatientDetail;
+use App\Model\Prescription;
 use App\Model\PatientBillingCharge;
 use App\Model\PatientBillingPayment;
 use App\Model\DentalChart;
@@ -94,13 +95,16 @@ class PatientController extends Controller
         $patient_details = PatientDetail::where('patient_id', $patient->id)->where('is_archived', false)->get();
         $archived_details = PatientDetail::where('patient_id', $patient->id)->where('is_archived', true)->get();
 
+        $prescriptions = Prescription::where('patient_id', $patient->id)->get();
+
         return view('patient.show')
                 ->with('patient', $patient)
                 ->with('clinics', $clinics)
                 ->with('doctors', $doctors)
                 ->with('services', $services)
                 ->with('details', $patient_details)
-                ->with('archived_details', $archived_details);
+                ->with('archived_details', $archived_details)
+                ->with('prescriptions', $prescriptions);
     }
 
     public function edit($id)
@@ -243,6 +247,36 @@ class PatientController extends Controller
         $patient_detail = PatientDetail::find($id);
         $patient_detail->is_archived = false;
         $patient_detail->save();
+    }
+
+    public function store_prescription(Request $request)
+    {
+        $clinic = Clinic::where('name', $request->clinic)->first();
+
+        $prescription = new Prescription;
+        $prescription->client_id = Auth::user()->client_id;
+        $prescription->patient_id = $request->patient_id;
+        $prescription->clinic_id = $clinic->id;
+        $prescription->doctor_id = 0;
+        $prescription->clinic = $request->clinic;
+        $prescription->doctor = $request->doctor;
+        $prescription->prescription = nl2br($request->prescription);
+
+        $prescription->save();
+    }
+
+    public function print_prescription(Request $request)
+    {
+        $prescription = Prescription::find($request->id);
+
+        return view('patient._prescription_print')
+                    ->with('prescription', $prescription);
+    }
+
+    public function delete_prescription($id)
+    {
+        $prescription = Prescription::find($id);
+        $prescription->delete();
     }
 
     public function patient_view()

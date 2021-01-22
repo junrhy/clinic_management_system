@@ -28,7 +28,6 @@ class FeatureUsersTableSeeder extends Seeder
             'archive_patient_detail', 
             'unarchive_patient_detail', 
             'add_patient_prescription', 
-            'edit_patient_prescription', 
             'delete_patient_prescription',
             'clinics', 
             'add_clinic', 

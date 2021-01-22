@@ -51,6 +51,7 @@ class ClinicController extends Controller
         $clinic->client_id = Auth::user()->client_id;
         $clinic->name = $request->name;
         $clinic->address = $request->address;
+        $clinic->contact_number = $request->contact_number;
         $clinic->save();
 
         return redirect('clinic');
@@ -96,6 +97,7 @@ class ClinicController extends Controller
       $clinic = Clinic::find($id);
       $clinic->name = $request->name;
       $clinic->address = $request->address;
+      $clinic->contact_number = $request->contact_number;
       $clinic->save();
 
       return redirect('clinic');

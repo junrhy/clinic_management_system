@@ -56,12 +56,14 @@
                         <thead>
                           <th>Name</th>
                           <th>Address</th>
+                          <th>Contact No.</th>
                           <th class="text-right">Action</th>
                         </thead>
                         <?php foreach ($clinics as $clinic_key => $clinic_item): ?>
                         <tr>
                           <td width="40%">{{ $clinic_item->name }}</td>
                           <td>{{ $clinic_item->address }}</td>
+                          <td>{{ $clinic_item->contact_number }}</td>
                           <td>
                               <div class="pull-right">
                                 <a class="update-clinic {{ App\Model\FeatureUser::is_feature_allowed('edit_clinic', Auth::user()->id) }}" href="{{ route('clinic.edit',$clinic_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a> | 

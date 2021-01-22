@@ -9,9 +9,10 @@
 @section('page_level_css')
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
 <style type="text/css">
-  .delete-link, .archive-detail , .unarchive-link{
+  .delete-link, .archive-detail , .unarchive-link, .edit-link {
     color: gray;
     font-size:12pt;
+    cursor: pointer;
   }
 
   .delete-link:hover {
@@ -31,6 +32,16 @@
   .delete-text:hover  {
     cursor: pointer;
     text-decoration: underline;
+  }
+
+  .show_link, .print-link {
+    font-size: 9pt;
+    color: #008385;
+    cursor: pointer;
+  }
+
+  .nodisplay {
+    display: none;
   }
 </style>
 @endsection
@@ -98,7 +109,7 @@
                     <div class="row" style="margin-top:30px;">
                       <h4 class="row" style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;">
                         <i class="fa fa-user-md" aria-hidden="true"></i> Medical
-                        <span id="add_patient_record" style="cursor: pointer;">
+                        <span id="add_patient_record" class="{{ App\Model\FeatureUser::is_feature_allowed('add_patient_detail', Auth::user()->id) }}" style="cursor: pointer;">
                             <i class="fa fa-plus"></i>
                         </span>
                       </h4>
@@ -131,7 +142,7 @@
                                         <td>{{ $detail->clinic }}</td>
                                         <td>{{ $detail->doctor }}</td>
                                         <td>{{ $detail->service }}</td>
-                                        <td>{{ $detail->notes }}</td>
+                                        <td>{!! $detail->notes !!}</td>
                                         <td>
                                           @if($detail->date_scheduled != '')
                                             {{ date('M d, Y', strtotime($detail->date_scheduled)) }}&nbsp;&nbsp;
@@ -193,7 +204,7 @@
                                           <td>{{ $archive_detail->clinic }}</td>
                                           <td>{{ $archive_detail->doctor }}</td>
                                           <td>{{ $archive_detail->service }}</td>
-                                          <td>{{ $archive_detail->notes }}</td>
+                                          <td>{!! $archive_detail->notes !!}</td>
                                           <td>
                                             @if($archive_detail->date_scheduled != '')
                                               {{ date('M d, Y', strtotime($archive_detail->date_scheduled)) }}&nbsp;&nbsp;
@@ -242,7 +253,7 @@
                     <div class="row">
                       <h4 class="row" style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;">
                         <i class="fa fa-file-text" aria-hidden="true"></i> Prescriptions
-                        <span id="add_patient_prescription" style="cursor: pointer;">
+                        <span id="add_prescription" class="{{ App\Model\FeatureUser::is_feature_allowed('add_patient_prescription', Auth::user()->id) }}" style="cursor: pointer;">
                             <i class="fa fa-plus"></i>
                         </span>
                       </h4>
@@ -251,15 +262,31 @@
                           <table class="table table-striped">
                             <thead>
                               <th style="width:7%">Created</th>
-                              <th style="width:20%">Clinic</th>
-                              <th style="width:20%">Doctor</th>
-                              <th style="width:5%">Prescription</th>
+                              <th style="width:13%">Clinic</th>
+                              <th style="width:13%">Doctor</th>
+                              <th style="width:25%">Prescription</th>
                               <th style="width:1%;text-align:center;">Action</th>
                             </thead>
 
                             <tbody>
-                            @if(count($archived_details) > 0)
-
+                            @if(count($prescriptions) > 0)
+                              @foreach ($prescriptions as $prescription)
+                              <tr>
+                                <td>{{ $prescription->created_at->format('M d, Y') }}</td>
+                                <td>{{ $prescription->clinic }}</td>
+                                <td>{{ $prescription->doctor }}</td>
+                                <td>
+                                  <a data-id="{{ $prescription->id }}" class="show_link">Show</a>
+                                  <a class="print-link print-prescription" data-id="{{ $prescription->id }}"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
+                                  <div id="show_prescription{{ $prescription->id }}" class="nodisplay">
+                                    {!! $prescription->prescription !!}
+                                  </div>
+                                </td>
+                                <td class="text-center">
+                                  <a class="delete-link delete-prescription {{ App\Model\FeatureUser::is_feature_allowed('delete_patient_prescription', Auth::user()->id) }}" data-id="{{ $prescription->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                </td>
+                              </tr>
+                              @endforeach
                             @else
                               <tr>
                                 <td class="text-center" colspan="8">No record found.</td>
@@ -270,8 +297,10 @@
                         </div>
                       </div>
                   </div>
-
                 </div>
+
+                @include('patient._add_prescription_modal')
+                @include('patient._print_preview')
             </div>
         </div>
     </div>
@@ -476,6 +505,37 @@ $(document).ready(function() {
         {
             console.log(data);
         }
+    });
+  });
+
+  $(".show_link").unbind().click(function(){
+    id = $(this).data('id');
+
+    if ($(this).html() == "Show") {
+      $(this).html('Hide');
+
+      $("#show_prescription"+id).removeClass("nodisplay");
+    } else {
+      $(this).html('Show')
+
+      $("#show_prescription"+id).addClass("nodisplay");
+    }
+  });
+
+  $(".print-prescription").unbind().click(function(){
+    id = $(this).data('id');
+
+    $.ajax({
+      method: "POST",
+      url: "/patient/print_prescription",
+      data: { 
+        id: id,
+        _token: "{{ csrf_token() }}" 
+      }
+    })
+    .done(function( html ) {
+        $("#print_preview_content").html(html);
+        $("#print_preview_modal").modal('show');
     });
   });
 });

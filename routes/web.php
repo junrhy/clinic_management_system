@@ -60,6 +60,10 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::post('/patient/archive_detail/{id}', 'PatientController@archive_patient_detail');
 	Route::post('/patient/unarchive_detail/{id}', 'PatientController@unarchive_patient_detail');
 
+	Route::post('/patient/store_prescription', 'PatientController@store_prescription');
+	Route::delete('/patient/delete_prescription/{id}', 'PatientController@delete_prescription');
+	Route::post('/patient/print_prescription', 'PatientController@print_prescription');
+
 	Route::post('/invoice/create_billing_charge', 'InvoiceController@create_billing_charge');
 	Route::delete('/invoice/delete_charge/{id}', 'InvoiceController@delete_patient_charge');
 	Route::post('invoice/search', 'InvoiceController@search');

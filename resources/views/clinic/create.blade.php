@@ -36,6 +36,11 @@
                           {{ Form::text('address', Input::old('address'), array('class' => 'form-control')) }}
                         </div>
 
+                        <div class="form-group">
+                          {{ Form::label('contact_number', 'Contact No.') }}
+                          {{ Form::text('contact_number', Input::old('contact_number'), array('class' => 'form-control')) }}
+                        </div>
+
                         {{ Form::submit('Submit', array('class' => 'btn btn-primary btn-round')) }}
                       {{ Form::close() }}
                   </div>

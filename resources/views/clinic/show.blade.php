@@ -10,6 +10,7 @@
                 <div class="panel-body">
                   Name: {{ $clinic->name }}<br>
                   Address: {{ $clinic->address }}<br>
+                  Contact No.: {{ $clinic->contact_number }}<br>
                 </div>
             </div>
         </div>
