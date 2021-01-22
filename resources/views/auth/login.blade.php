@@ -5,7 +5,14 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3 m-t-200">
             <div class="panel panel-default">
-                <div class="panel-heading"><h3 class="text-center" style="font-weight:bold;color:#01d8da;"><i class="fa fa-clinic-medical"></i> Clinic Management System</h3></div>
+                <div class="panel-heading">
+                    @if ($domain && $domain->client->logo != "")
+                        <a href="/"><img src="{{ $domain->client->logo }}" class="col-md-10 col-sm-10 col-xs-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1"></a>
+                        <br><br><br><br><br>
+                    @else
+                        <h3 class="text-center" style="font-weight:bold;color:#01d8da;"><i class="fa fa-clinic-medical"></i> Clinic Management System</h3>
+                    @endif
+                </div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
@@ -67,15 +74,15 @@
                                 </div>
                             </div>
                             
-                            <div class="col-md-8 col-md-offset-4">
+                            <div class="col-md-8 col-md-offset-1">
                                 <br>
                                 <br>
                                 <a class="btn btn-link btn-forgot-password" href="{{ route('password.request') }}">
                                     Forgot Your Password?
-                                </a> | 
+                                </a><!--  | 
                                 <a class="btn btn-link btn-register" href="{{ route('register') }}">
                                     Register
-                                </a>
+                                </a> -->
                             </div>
                         </div>
                     </form>

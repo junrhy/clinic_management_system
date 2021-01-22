@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Model\Patient;
 use App\Model\DentalChart;
+use App\Model\Domain;
 
 use Auth;
 use DB;

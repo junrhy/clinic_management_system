@@ -59,20 +59,20 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h5 class="modal-title">Upgrade to Business Account</h5>
+        <h5 class="modal-title">Upgrade to Basic Account</h5>
       </div>
       <div class="modal-body">
-        <span id="upgrade-message">You have reach the limitation of your account.</span> <span class="text-upgrade">Upgrade to Business Account</span> to enjoy unlimited features.
+        <span id="upgrade-message">You have reach the limitation of your account.</span> <span class="text-upgrade">Upgrade to Basic Account</span> to enjoy unlimited features.
         <br><br>
         <table width="100%">
           <tr>
             <td width="30%">&nbsp;</td>
             <td class="text-center" width="25%">&nbsp;</td>
-            <td rowspan=2 class="business-plan-head text-center" width="25%">Business</td>
+            <td rowspan=2 class="business-plan-head text-center" width="25%">Basic</td>
           </tr>
           <tr>
             <td></td>
-            <td class="basic-plan-head text-center" width="25%">Basic</td>
+            <td class="basic-plan-head text-center" width="25%">Free</td>
           <tr>
             <td>Number of Appointments</td>
             <td class="basic-plan text-center">Unlimited</td>
@@ -132,7 +132,7 @@
 <script type="text/javascript">
 $(document).ready(function () {
   $("#form-add-patient").submit(function() {
-    if ($("#check-account-type").data('account-type') == "basic") {
+    if ($("#check-account-type").data('account-type') == "free") {
       if ($("#check-patient-count").data('patient-count') >= 300) {
         $('#upgrade-message').html('You have reach the limitation of your account.');
         $('#upgrade_account_modal').modal('show');

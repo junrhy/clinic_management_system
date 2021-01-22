@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Foundation\Auth\RegistersUsers;
+
 use App\Model\Client;
 use App\Model\Clinic;
 use App\Model\Doctor;
@@ -10,11 +15,6 @@ use App\Model\FeatureUser;
 use App\User;
 
 use App\Mail\NewClient;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {

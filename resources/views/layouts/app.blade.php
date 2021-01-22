@@ -32,14 +32,27 @@
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
+            
+            @if ($domain && $domain->client->logo != "")
+            <div class="sidebar-header" style="padding: 0px;">
+                <h3 class="row" style="margin: 0px;">
+                    <a href="/"><img src="{{ $domain->client->logo }}" id="logo" class="" style="margin: 3px;width: 97%;"></a>
+                </h3>
+            
+                <strong style="padding-top:20px;"><i class="fa fa-clinic-medical"></i> <br>{{ substr(Auth::user()->client->name, 0, 1) }}</strong>
+            </div>
+            @else
             <div class="sidebar-header">
                 <h3 class="text-center">
                     <i class="fa fa-clinic-medical"></i> 
                     <br>
                     <small style="color: #01d8da;">{{ Auth::user()->client->name }}</small>
                 </h3>
+
                 <strong><i class="fa fa-clinic-medical"></i> <br>{{ substr(Auth::user()->client->name, 0, 1) }}</strong>
             </div>
+            @endif
+                               
 
             <ul class="list-unstyled components">
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('dashboard', Auth::user()->id) }}">
@@ -146,20 +159,20 @@
                     </a>
                     <ul class="collapse list-unstyled" id="profileSubmenu">
                         <li class="{{ App\Model\FeatureUser::is_feature_allowed('edit_business_information', Auth::user()->id) }}">
-                            <a href="{{ url('business_information') }}">Profile</a>
+                            <a href="{{ url('business_information') }}">Company Profile</a>
                         </li>
 
                         <li>
                             <a href="{{ url('change_password') }}">Change Password</a>
                         </li>
 
-                        @if(Auth::user()->client->account_type == 'basic' && Auth::user()->client->is_active != 0 && Auth::user()->client->is_suspended != 1)
+                        @if(Auth::user()->client->account_type == 'free' && Auth::user()->client->is_active != 0 && Auth::user()->client->is_suspended != 1)
                         <li>
                             <a style="cursor:pointer;" id="sidebar-menu-upgrade-account">Upgrade</a>
                         </li>
                         @endif
 
-                        @if(Auth::user()->client->is_active == 0 && Auth::user()->client->account_type == 'business')
+                        @if(Auth::user()->client->is_active == 0 && Auth::user()->client->account_type == 'basic')
                         <li>
                             <a style="cursor:pointer;" id="sidebar-menu-activate-account">Activate my Account</a>
                         </li>

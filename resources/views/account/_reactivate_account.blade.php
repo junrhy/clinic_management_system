@@ -59,7 +59,7 @@
         <br>
         Your Contact Details:<br>
         <br>
-        Business Name: {{ Auth::user()->client->name }}<br>
+        Company Name: {{ Auth::user()->client->name }}<br>
         Primary Email: {{ Auth::user()->client->email }}<br>
         Secondary Email: {{ Auth::user()->client->secondary_email != '' ? Auth::user()->client->secondary_email : 'not provided' }}<br>
         Contact No.: {{ Auth::user()->client->contact != '' ? Auth::user()->client->contact : 'not provided' }}<br>

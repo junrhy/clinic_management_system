@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Model\Clinic;
+use App\Model\Domain;
 
 use Auth;
 

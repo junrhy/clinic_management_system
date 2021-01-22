@@ -5,7 +5,13 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3 m-t-30">
             <div class="panel panel-default">
-                <div class="panel-heading"><h3 class="text-center" style="font-weight:bold;color:#01d8da;"><i class="fa fa-clinic-medical"></i> Clinic Management System</h3></div>
+                <div class="panel-heading">
+                    @if ($domain && $domain->client->logo != "")
+                        <a href="/"><img src="{{ $domain->client->logo }}" class="col-md-10 col-sm-10 col-xs-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1"></a>
+                    @else
+                        <h3 class="text-center" style="font-weight:bold;color:#01d8da;"><i class="fa fa-clinic-medical"></i> Clinic Management System</h3>
+                    @endif
+                </div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
@@ -14,7 +20,7 @@
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <div class="col-md-10 col-md-offset-1">
                                 <div class="input-group input-lg">
-                                    <input id="name" type="text" class="form-control" name="name" placeholder="Business Name" value="{{ old('name') }}" required autofocus>
+                                    <input id="name" type="text" class="form-control" name="name" placeholder="Company Name" value="{{ old('name') }}" required autofocus>
                                     <span class="input-group-addon">
                                         <i class="fa fa-clinic-medical"></i>
                                     </span>

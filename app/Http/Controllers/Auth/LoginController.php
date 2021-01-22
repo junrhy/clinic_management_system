@@ -30,6 +30,9 @@ class LoginController extends Controller
             case 'admin':
                 return '/admin';
                 break; 
+            case 'doctor':
+                return '/doctor';
+                break; 
             case 'patient':
                 return '/patient_view';
                 break; 
