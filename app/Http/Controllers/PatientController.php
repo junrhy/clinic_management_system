@@ -32,7 +32,7 @@ class PatientController extends Controller
     public function index(Request $request)
     {
         $patients = Patient::where('client_id', Auth::user()->client_id)
-                            ->where('last_name', 'like', '%' . $request->namelist . '%')
+                            ->where('last_name', 'like', $request->namelist . '%')
                             ->orderBy('last_name', 'asc')
                             ->paginate(30);
 

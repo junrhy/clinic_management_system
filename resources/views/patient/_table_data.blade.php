@@ -15,8 +15,8 @@
     <td>{{ $patient_item->first_name }}</td>
     <td>{{ $patient_item->last_name }}</td>
     <td>{{ $patient_item->gender }}</td>
-    <td>{{ $patient_item->dob->format('M d, Y') }}</td>
-    <td>{{ $patient_item->dob->age }}</td>
+    <td><span style="font-family: sans-serif;">{{ $patient_item->dob->format('M d, Y') }}</span></td>
+    <td><span style="font-family: sans-serif;">{{ $patient_item->dob->age }}</span></td>
     <td><span style="font-family: sans-serif;">{{ $patient_item->contact_number }}</span></td>
     <td><a class="show-patient {{ App\Model\FeatureUser::is_feature_allowed('view_patient_record', Auth::user()->id) }}" href="{{ route('patient.show',$patient_item->id) }}"><i class="fa fa-notes-medical" aria-hidden="true"></i> View Record</a></td>
     <td>

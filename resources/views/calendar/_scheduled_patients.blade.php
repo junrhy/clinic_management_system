@@ -37,7 +37,7 @@
 				@foreach($scheduled as $key => $schedule)
 				<tr style="cursor:pointer;" 
 						data-id="{{ $schedule->id }}" 
-						data-patient="{{ $schedule->patient->first_name }} {{ $schedule->patient->last_name }}" 
+						data-patient="{{ $schedule->patient->last_name }}, {{ $schedule->patient->first_name }}" 
 						data-clinic="{{ $schedule->clinic }}" 
 						data-doctor="{{ $schedule->doctor }}" 
 						data-service="{{ $schedule->service }}" 
@@ -49,7 +49,7 @@
 					<td class="appointment"><input type="checkbox" name="appointment-action" data-id="{{ $schedule->id }}"></td>
 					<td class="appointment">{{ $key + 1 }}</td>
 					<td class="appointment"><span style="font-family: sans-serif;color: green">{{ date('g:i a', strtotime($schedule->time_scheduled)) }}</span></td>
-					<td class="appointment">{{ $schedule->patient->first_name }} {{ $schedule->patient->last_name }}</td>
+					<td class="appointment">{{ $schedule->patient->last_name }}, {{ $schedule->patient->first_name }}</td>
 					<td class="appointment">{{ $schedule->clinic }}</td>
 					<td class="appointment">{{ $schedule->doctor }}</td>
 					<td class="appointment">{{ $schedule->service }}</td>

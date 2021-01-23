@@ -25,6 +25,7 @@ class CreateDoctorsTable extends Migration
             $table->string('address')->nullable();
             $table->string('email')->nullable();
             $table->string('contact_number')->nullable();
+            $table->date('dob')->nullable();
             $table->string('profile_picture')->nullable();
             $table->timestamps();
             $table->softDeletes();

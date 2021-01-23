@@ -22,8 +22,9 @@ class DentalChartController extends Controller
 	{
         $patient_id = isset($request->patient_id) ? $request->patient_id : 0;
 
-        $patients = Patient::select(DB::raw("CONCAT(first_name,' ',last_name) AS fullname"),'id')
+        $patients = Patient::select(DB::raw("CONCAT(last_name,', ',first_name) AS fullname"),'id')
                         ->where('client_id', Auth::user()->client_id)
+                        ->orderBy('last_name', 'asc')
                         ->get();
 
         $dental_records = DentalChart::where('patient_id', $patient_id)->get();

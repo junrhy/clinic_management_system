@@ -125,10 +125,10 @@
                               <table class="table table-striped">
                                 <thead>
                                   <th style="width:7%">Created</th>
-                                  <th style="width:20%">Clinic</th>
+                                  <th style="width:12%">Clinic</th>
                                   <th style="width:10%">Doctor</th>
                                   <th style="width:15%">Service</th>
-                                  <th style="width:20%">Notes</th>
+                                  <th style="width:15%">Notes</th>
                                   <th style="width:10%">Appointment</th>
                                   <th style="width:15%">Attachments</th>
                                   <th style="width:1%;text-align:center;">Action</th>

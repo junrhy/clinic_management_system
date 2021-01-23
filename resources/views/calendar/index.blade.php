@@ -40,8 +40,8 @@
 
                         <ul class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><a href="/home"><i class="fa fa-home"></i> {{ Auth::user()->client->name }}</a></li>
-                            <li class="breadcrumb-item">Appointment</li>
-                            <li class="breadcrumb-item active">Calendar</li>
+                            <li class="breadcrumb-item">Patients</li>
+                            <li class="breadcrumb-item active">Appointment</li>
                         </ul>
                     </div>
                 </div>

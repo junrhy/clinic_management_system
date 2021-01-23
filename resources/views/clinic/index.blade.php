@@ -54,14 +54,14 @@
                     <div class="row col-md-6 responsive">
                       <table class="table table-striped">
                         <thead>
-                          <th>Name</th>
-                          <th>Address</th>
-                          <th>Contact No.</th>
+                          <th width="30%">Name</th>
+                          <th width="50%">Address</th>
+                          <th width="20%">Contact No.</th>
                           <th class="text-right">Action</th>
                         </thead>
                         <?php foreach ($clinics as $clinic_key => $clinic_item): ?>
                         <tr>
-                          <td width="40%">{{ $clinic_item->name }}</td>
+                          <td>{{ $clinic_item->name }}</td>
                           <td>{{ $clinic_item->address }}</td>
                           <td>{{ $clinic_item->contact_number }}</td>
                           <td>
