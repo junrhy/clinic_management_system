@@ -13,6 +13,8 @@ class CreatePatientsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('patients');
+        
         Schema::create('patients', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('client_id');

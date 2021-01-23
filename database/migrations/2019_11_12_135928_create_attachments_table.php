@@ -13,6 +13,8 @@ class CreateAttachmentsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('attachments');
+        
         Schema::create('attachments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('attachment_number');

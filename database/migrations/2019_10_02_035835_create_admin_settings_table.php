@@ -13,6 +13,8 @@ class CreateAdminSettingsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('admin_settings');
+        
         Schema::create('admin_settings', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');

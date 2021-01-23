@@ -13,6 +13,8 @@ class CreateDentalChartsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('dental_charts');
+        
         Schema::create('dental_charts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('client_id');

@@ -13,6 +13,8 @@ class CreatePatientBillingPaymentsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('patient_billing_payments');
+    
         Schema::create('patient_billing_payments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('client_id');

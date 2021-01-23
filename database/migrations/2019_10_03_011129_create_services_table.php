@@ -13,6 +13,8 @@ class CreateServicesTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('services');
+        
         Schema::create('services', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('client_id');
