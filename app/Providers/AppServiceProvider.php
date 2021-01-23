@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 
 use App\Model\Domain;
 
@@ -16,11 +17,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Request $request)
     {
-        $domain_name = $request->gethost();
+        if (Schema::hasTable('domains'))
+        {
+            $domain_name = $request->gethost();
 
-        $domain = Domain::where('domain_name', $domain_name)->first();
+            $domain = Domain::where('domain_name', $domain_name)->first();
 
-        view()->share('domain', $domain);
+            view()->share('domain', $domain);
+        }
     }
 
     /**
