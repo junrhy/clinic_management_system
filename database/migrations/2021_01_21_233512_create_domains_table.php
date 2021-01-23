@@ -13,6 +13,8 @@ class CreateDomainsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('domains');
+        
         Schema::create('domains', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('client_id');
