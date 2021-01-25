@@ -257,14 +257,14 @@
                             <i class="fa fa-plus"></i>
                         </span>
                       </h4>
-                      <div class="row col-md-8">
+                      <div class="row col-md-6">
                         <div class="table-responsive">
                           <table class="table table-striped">
                             <thead>
                               <th style="width:7%">Created</th>
                               <th style="width:13%">Clinic</th>
                               <th style="width:13%">Doctor</th>
-                              <th style="width:25%">Prescription</th>
+                              <th style="width:5%">Prescription</th>
                               <th style="width:1%;text-align:center;">Action</th>
                             </thead>
 
@@ -276,11 +276,7 @@
                                 <td>{{ $prescription->clinic }}</td>
                                 <td>{{ $prescription->doctor }}</td>
                                 <td>
-                                  <a data-id="{{ $prescription->id }}" class="show_link">Show</a>
-                                  <a class="print-link print-prescription" data-id="{{ $prescription->id }}"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
-                                  <div id="show_prescription{{ $prescription->id }}" class="nodisplay">
-                                    {!! $prescription->prescription !!}
-                                  </div>
+                                  <a class="print-link print-prescription" data-id="{{ $prescription->id }}"><i class="fa fa-file-prescription" aria-hidden="true"></i> Preview</a>
                                 </td>
                                 <td class="text-center">
                                   <a class="delete-link delete-prescription {{ App\Model\FeatureUser::is_feature_allowed('delete_patient_prescription', Auth::user()->id) }}" data-id="{{ $prescription->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
@@ -506,20 +502,6 @@ $(document).ready(function() {
             console.log(data);
         }
     });
-  });
-
-  $(".show_link").unbind().click(function(){
-    id = $(this).data('id');
-
-    if ($(this).html() == "Show") {
-      $(this).html('Hide');
-
-      $("#show_prescription"+id).removeClass("nodisplay");
-    } else {
-      $(this).html('Show')
-
-      $("#show_prescription"+id).addClass("nodisplay");
-    }
   });
 
   $(".print-prescription").unbind().click(function(){

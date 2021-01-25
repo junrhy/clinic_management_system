@@ -9,7 +9,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h5 class="modal-title">Print Preview</h5>
+          <h5 class="modal-title">Preview</h5>
       </div>
       <div class="modal-body">
           <div id="print_preview_content">
@@ -22,18 +22,34 @@
       </div>
   </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
   $('#print_now').click(function() {
-    var newWin=window.open('','Print-Window');
+     html2canvas(document.getElementById("print_preview_content"), {
+          onrendered: function(canvas) {
 
-    newWin.document.open();
+              var imgData = canvas.toDataURL('image/png');
+              console.log('Report Image URL: '+imgData);
+              var doc = new jsPDF('p', 'mm', [101.6, 139.7]); //101.6mm wide and 139.7mm high
+              
+              var width = doc.internal.pageSize.width - 6;
+              var height = doc.internal.pageSize.height - 6;
 
-    newWin.document.write('<html><body onload="window.print()">'+$("#print_preview_content").html()+'</body></html>');
+              doc.addImage(imgData, 'PNG', 3, 3, width, height);
+              // doc.save('prescription.pdf'); -- do not download
 
-    newWin.document.close();
-
-    setTimeout(function(){newWin.close();},10);
+              var string = doc.output('datauristring');
+              var embed = "<embed width='100%' height='100%' src='" + string + "'/>"
+              var x = window.open();
+              x.document.open();
+              x.document.write(embed);
+              x.document.close();
+          }
+      });
   });
+
 });
 </script>

@@ -1,17 +1,17 @@
 <style type="text/css">
-  .basic-plan, .business-plan {
+  .free-plan, .basic-plan {
     padding:10px;
     border:1px solid #ccc;
     font-size:10pt;
   }
 
-  .basic-plan-head {
+  .free-plan-head {
     background:#63B5FF;
     color:#FFFFFF;
     border:1px solid #ccc;
   } 
 
-  .business-plan-head {
+  .basic-plan-head {
     background:#FF6065;
     color:#FFFFFF;
     border-left:1px solid #ccc;
@@ -24,11 +24,11 @@
     font-family: 'arial';
   }
 
-  .basic-plan-foot {
+  .free-plan-foot {
     padding:3px;
   } 
 
-  .business-plan-foot {
+  .basic-plan-foot {
     padding:3px;
     border:1px solid #ccc;
     font-size:13pt;
@@ -68,54 +68,54 @@
           <tr>
             <td width="30%">&nbsp;</td>
             <td class="text-center" width="25%">&nbsp;</td>
-            <td rowspan=2 class="business-plan-head text-center" width="25%">Basic</td>
+            <td rowspan=2 class="basic-plan-head text-center" width="25%">Basic</td>
           </tr>
           <tr>
             <td></td>
-            <td class="basic-plan-head text-center" width="25%">Free</td>
+            <td class="free-plan-head text-center" width="25%">Free</td>
           <tr>
             <td>Number of Appointments</td>
+            <td class="free-plan text-center">Unlimited</td>
             <td class="basic-plan text-center">Unlimited</td>
-            <td class="business-plan text-center">Unlimited</td>
           </tr>
           <tr>
             <td>Number of Patients</td>
-            <td class="basic-plan text-center">300</td>
-            <td class="business-plan text-center">Unlimited</td>
+            <td class="free-plan text-center">300</td>
+            <td class="basic-plan text-center">Unlimited</td>
           </tr>
           <tr>
             <td>Number of Clinics</td>
+            <td class="free-plan text-center">Unlimited</td>
             <td class="basic-plan text-center">Unlimited</td>
-            <td class="business-plan text-center">Unlimited</td>
           </tr>
           <tr>
             <td>Additional User Access</td>
+            <td class="free-plan text-center">Unlimited</td>
             <td class="basic-plan text-center">Unlimited</td>
-            <td class="business-plan text-center">Unlimited</td>
           </tr>
           <tr>
             <td>Number of Services</td>
+            <td class="free-plan text-center">Unlimited</td>
             <td class="basic-plan text-center">Unlimited</td>
-            <td class="business-plan text-center">Unlimited</td>
           </tr>
           <tr>
             <td>Number of Doctors</td>
+            <td class="free-plan text-center">Unlimited</td>
             <td class="basic-plan text-center">Unlimited</td>
-            <td class="business-plan text-center">Unlimited</td>
           </tr>
           <tr>
             <td>Dental Chart Feature</td>
+            <td class="free-plan text-center">Yes</td>
             <td class="basic-plan text-center">Yes</td>
-            <td class="business-plan text-center">Yes</td>
           </tr>
           <tr>
             <td>Subscription Rate</td>
-            <td class="basic-plan text-center free">FREE</td>
-            <td rowspan=2 class="business-plan-foot text-center">&#8369;1,500 / month</td>
+            <td class="free-plan text-center free">FREE</td>
+            <td rowspan=2 class="basic-plan-foot text-center">&#8369;1,500 / month</td>
           </tr>
           <tr>
             <td>&nbsp;</td>
-            <td class="basic-plan-foot text-center"></td>
+            <td class="free-plan-foot text-center"></td>
           </tr>
         </table>
         <br>
@@ -128,7 +128,6 @@
   </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(document).ready(function () {
   $("#form-add-patient").submit(function() {
