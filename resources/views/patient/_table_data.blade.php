@@ -6,6 +6,7 @@
     <th>Date of Birth</th>
     <th>Age</th>
     <th>Contact</th>
+    <th>Username</th>
     <th>Clinical Record</th>
     <th>Action</th>
   </thead>
@@ -18,6 +19,7 @@
     <td><span style="font-family: sans-serif;">{{ $patient_item->dob->format('M d, Y') }}</span></td>
     <td><span style="font-family: sans-serif;">{{ $patient_item->dob->age }}</span></td>
     <td><span style="font-family: sans-serif;">{{ $patient_item->contact_number }}</span></td>
+    <td><span style="font-family: sans-serif;">{{ $patient_item->user->username }}</span></td>
     <td><a class="show-patient {{ App\Model\FeatureUser::is_feature_allowed('view_patient_record', Auth::user()->id) }}" href="{{ route('patient.show',$patient_item->id) }}"><i class="fa fa-notes-medical" aria-hidden="true"></i> View Record</a></td>
     <td>
       <div>
@@ -30,7 +32,7 @@
   <?php endforeach; ?>
 @else
   <tr>
-    <td colspan="8" class="text-center">No record found</td>
+    <td colspan="9" class="text-center">No record found</td>
   </tr>
 @endif
 </table>

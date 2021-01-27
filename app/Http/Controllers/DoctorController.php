@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Model\Doctor;
+use App\User;
 
 use Auth;
 
@@ -51,7 +52,7 @@ class DoctorController extends Controller
         $doctor->first_name = $request->first_name;
         $doctor->last_name = $request->last_name;
         $doctor->license_no = $request->license_no;
-        $doctor->ptr_no = $request->license_no;
+        $doctor->ptr_no = $request->ptr_no;
         $doctor->save();
 
         return redirect('doctor');
@@ -98,7 +99,7 @@ class DoctorController extends Controller
         $doctor->first_name = $request->first_name;
         $doctor->last_name = $request->last_name;
         $doctor->license_no = $request->license_no;
-        $doctor->ptr_no = $request->license_no;
+        $doctor->ptr_no = $request->ptr_no;
         $doctor->save();
 
         return redirect('doctor');

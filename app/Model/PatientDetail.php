@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class PatientDetail extends Model
 {
+	protected $dates = ['date_scheduled'];
+
     public function patient()
     {
         return $this->belongsTo(Patient::class);

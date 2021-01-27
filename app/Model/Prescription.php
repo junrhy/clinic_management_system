@@ -21,7 +21,7 @@ class Prescription extends Model
         return $this->belongsTo(Clinic::class, 'clinic_id');
     }
 
-    public function doctor()
+    public function doctorObject()
     {
         return $this->belongsTo(Doctor::class, 'doctor_id');
     }

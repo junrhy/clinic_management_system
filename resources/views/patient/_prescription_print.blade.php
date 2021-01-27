@@ -20,7 +20,7 @@
 	</tr>
 	</table>
 	<div style="height: 350px;">
-		<span style="font-size: 100pt;font-weight: bold;position: relative;top: -40px;left: -10px;color: #ccc;">℞</span>
+		<span style="font-size: 100pt;font-weight: bold;position: relative;top: -40px;left: -10px;color: #eee;">℞</span>
 		
 	</div>
 	<div style="height: 350px;position: absolute;top: 190px;overflow-y: auto;">
@@ -32,12 +32,12 @@
 	<tr>
 		<td>&nbsp;</td>
 		<td align="right">Physician's Signature:&nbsp;&nbsp;</td>
-		<td width="30%" style="border-bottom: 1px solid #000;"></td>
+		<td width="30%" style="border-bottom: 1px solid #000;text-align: center;">{{ $prescription->doctor }}</td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
 		<td align="right">License No.:&nbsp;&nbsp;</td>
-		<td width="30%" style="border-bottom: 1px solid #000;"></td>
+		<td width="30%" style="border-bottom: 1px solid #000;text-align: center;">{{ $prescription->doctorObject->license_no }}</td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>

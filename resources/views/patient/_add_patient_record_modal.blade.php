@@ -36,12 +36,22 @@
          <div class="col-md-12 {{ App\Model\FeatureUser::is_feature_allowed('add_patient_detail', Auth::user()->id) }}">
               <div class="form-group col-md-7">
                 {{ Form::label('clinic', 'Clinic') }}
-                {{ Form::select('clinic', $clinics, '', ['class' => 'form-control']) }}
+                <select name="clinic" class='form-control'>
+                  <option value='' disabled>Select Clinic</option>
+                  @foreach($clinics as $clinic)
+                  <option value="{{ $clinic->name }}">{{ $clinic->name }}</option>
+                  @endforeach
+                </select>
               </div>
 
               <div class="form-group col-md-5">
                 {{ Form::label('doctor', 'Doctor') }}
-                {{ Form::select('doctor', $doctors, '', ['class' => 'form-control']) }}
+                <select name="doctor" class='form-control'>
+                  <option value='' disabled>Select Doctor</option>
+                  @foreach($doctors as $doctor)
+                  <option value="{{ $doctor->fullname }}">{{ $doctor->fullname }}</option>
+                  @endforeach
+                </select>
               </div>
 
               <div class="form-group col-md-12">
@@ -103,6 +113,9 @@
 <script type="text/javascript">
 $(document).ready(function () {
   $("#add_patient_record").click(function(){
+    $('select[name=clinic]').val(null);
+    $('select[name=doctor]').val(null);
+
     $('#add_patient_record_modal').modal('show');
   });
 

@@ -23,6 +23,8 @@ Route::group(['middleware' => ['is_admin']], function() {
 Route::group(['middleware' => ['is_patient']], function() {
 	Route::get('/patient_view', 'PatientController@patient_view') 
 	    ->name('patient_view');
+
+    Route::post('/patient_view/print_prescription', 'PatientController@print_prescription');
 });
 
 Route::group(['middleware' => ['is_default']], function() {

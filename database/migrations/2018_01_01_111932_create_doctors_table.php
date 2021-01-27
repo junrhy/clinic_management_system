@@ -27,6 +27,7 @@ class CreateDoctorsTable extends Migration
             $table->string('contact_number')->nullable();
             $table->date('dob')->nullable();
             $table->string('profile_picture')->nullable();
+            $table->integer('user_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -148,7 +148,7 @@
                                             {{ date('M d, Y', strtotime($detail->date_scheduled)) }}&nbsp;&nbsp;
                                             {{ date('h:i a', strtotime($detail->time_scheduled)) }}
                                           @else
-                                            N/A
+                                            
                                           @endif
                                         </td>
                                         <td>
@@ -210,7 +210,7 @@
                                               {{ date('M d, Y', strtotime($archive_detail->date_scheduled)) }}&nbsp;&nbsp;
                                               {{ date('h:i a', strtotime($archive_detail->time_scheduled)) }}
                                             @else
-                                              N/A
+                                              
                                             @endif
                                           </td>
                                           <td>
@@ -321,11 +321,27 @@ $(document).ready(function() {
   });
 
   $("#record_detail").click(function(){
-      var clinic = $("#clinic").val();
-      var doctor = $("#doctor").val();
+      var clinic = $('select[name=clinic]').val();
+      var doctor = $('select[name=doctor]').val();
       var notes = $("#notes").val();
       var date_scheduled = $("#date_scheduled").val();
       var time_scheduled = $("#time_scheduled").val();
+
+
+      if (clinic == null) {
+        $('select[name=clinic]').addClass('required-textfield');
+        return false;
+      } else {
+        $('select[name=clinic]').removeClass('required-textfield');
+      }
+
+      if (doctor == null) {
+        $('select[name=doctor]').addClass('required-textfield');
+        return false;
+      } else {
+        $('select[name=doctor]').removeClass('required-textfield');
+      }
+
 
       var service = "";
       $(".service-selected").map(function() {

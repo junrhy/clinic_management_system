@@ -8,6 +8,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 
 use App\Model\Patient;
+use App\User;
 use App\Model\Clinic;
 use App\Model\Doctor;
 use App\Model\Service;
@@ -67,6 +68,19 @@ class PatientController extends Controller
 
     public function store(Request $request)
     {
+        $user_max_id = User::whereRaw('id = (select max(`id`) from users)')->first();
+        $unique_id = $user_max_id->id + 1;
+
+        $user = new User;
+        $user->client_id = Auth::user()->client_id;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->username = strtolower(substr($request->first_name, 0, 1) . $request->last_name . $unique_id);
+        $user->email = $request->email;
+        $user->password = bcrypt("123456");
+        $user->type = 'patient';
+        $user->save();
+
         $patient = new Patient;
         $patient->client_id = Auth::user()->client_id;
         $patient->first_name = $request->first_name;
@@ -76,6 +90,7 @@ class PatientController extends Controller
         $patient->email = $request->email;
         $patient->contact_number = $request->contact_number;
         $patient->address = $request->address;
+        $patient->user_id = $user->id;
         $patient->save();
 
         return redirect('patient');
@@ -85,11 +100,11 @@ class PatientController extends Controller
     {
         $patient = Patient::find($id);
 
-        $clinics = Clinic::where('client_id', Auth::user()->client_id)->pluck('name', 'name');
+        $clinics = Clinic::where('client_id', Auth::user()->client_id)->get();
 
         $doctors = Doctor::select(DB::raw("CONCAT(first_name,' ',last_name) AS fullname"),'id')
                             ->where('client_id', Auth::user()->client_id)
-                            ->pluck('fullname', 'fullname');
+                            ->get();
 
         $services = Service::where('client_id', Auth::user()->client_id)->get();
         $patient_details = PatientDetail::where('patient_id', $patient->id)->where('is_archived', false)->get();
@@ -134,11 +149,14 @@ class PatientController extends Controller
     {
         $patient = Patient::find($id);
         $patient_id = $patient->id;
+        $user_id = $patient->user_id;
 
         $patient->delete();
+
         PatientDetail::where('patient_id', $patient_id)->delete();
         PatientBillingCharge::where('patient_id', $patient_id)->delete();
         PatientBillingPayment::where('patient_id', $patient_id)->delete();
+        User::where('id', $user_id)->forceDelete();
     }
 
     public function create_patient_detail(Request $request)
@@ -252,14 +270,18 @@ class PatientController extends Controller
     public function store_prescription(Request $request)
     {
         $clinic = Clinic::where('name', $request->clinic)->first();
+        
+        $doctor = Doctor::select(DB::raw("CONCAT(first_name,' ',last_name) AS fullname"),'id')
+                            ->where('id', $request->doctor)
+                            ->first();
 
         $prescription = new Prescription;
         $prescription->client_id = Auth::user()->client_id;
         $prescription->patient_id = $request->patient_id;
         $prescription->clinic_id = $clinic->id;
-        $prescription->doctor_id = 0;
+        $prescription->doctor_id = $doctor->id;
         $prescription->clinic = $request->clinic;
-        $prescription->doctor = $request->doctor;
+        $prescription->doctor = $doctor->fullname;
         $prescription->prescription = nl2br($request->prescription);
 
         $prescription->save();
@@ -281,6 +303,19 @@ class PatientController extends Controller
 
     public function patient_view()
     {
-        return view('patient.patient_view');
+        $patient = Patient::where('user_id', Auth::user()->id)->first();
+
+        $appointments = PatientDetail::where('client_id', Auth::user()->client_id)
+                                ->where('patient_id', $patient->id)
+                                ->whereIn('status', ['Open', 'In Progress'])
+                                ->orderBy('time_scheduled', 'asc')
+                                ->get();
+
+        $prescriptions = Prescription::where('patient_id', $patient->id)->get();
+
+        return view('patient.patient_view')
+                    ->with('patient', $patient)
+                    ->with('appointments', $appointments)
+                    ->with('prescriptions', $prescriptions);
     }
 }

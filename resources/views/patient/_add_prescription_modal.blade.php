@@ -1,5 +1,7 @@
 <style type="text/css">
-
+  .required-textfield {
+    border: 1px solid red;
+  }
 </style>
 <!-- Modal -->
 <div class="modal fade" id="add_prescription_modal" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
@@ -15,12 +17,22 @@
           <div class="col-md-12 {{ App\Model\FeatureUser::is_feature_allowed('add_prescription', Auth::user()->id) }}">
               <div class="form-group col-md-7">
                 {{ Form::label('clinic', 'Clinic') }}
-                {{ Form::select('clinic', $clinics, '', ['class' => 'form-control']) }}
+                <select name="prescription_clinic" class='form-control'>
+                  <option value='' disabled>Select Clinic</option>
+                  @foreach($clinics as $clinic)
+                  <option value="{{ $clinic->name }}">{{ $clinic->name }}</option>
+                  @endforeach
+                </select>
               </div>
 
               <div class="form-group col-md-5">
                 {{ Form::label('doctor', 'Doctor') }}
-                {{ Form::select('doctor', $doctors, '', ['class' => 'form-control']) }}
+                <select name="prescription_doctor" class='form-control'>
+                  <option value='' disabled>Select Doctor</option>
+                  @foreach($doctors as $doctor)
+                  <option value="{{ $doctor->id }}">{{ $doctor->fullname }}</option>
+                  @endforeach
+                </select>
               </div>
 
               <div class="form-group col-md-12">
@@ -45,6 +57,9 @@
 <script type="text/javascript">
 $(document).ready(function () {
   $("#add_prescription").click(function(){
+    $('select[name=prescription_clinic]').val(null);
+    $('select[name=prescription_doctor]').val(null);
+    
     $('#add_prescription_modal').modal('show');
   });
 
@@ -54,9 +69,30 @@ $(document).ready(function () {
   });
 
   $("#store_prescription").click(function(){
-      var clinic = $("#clinic").val();
-      var doctor = $("#doctor").val();
-      var prescription = $("#prescription").val();
+      var clinic = $('select[name=prescription_clinic]').val();
+      var doctor = $('select[name=prescription_doctor]').val();
+      var prescription = $('textarea[name=prescription]').val();
+
+      if (clinic == null) {
+        $('select[name=prescription_clinic]').addClass('required-textfield');
+        return false;
+      } else {
+        $('select[name=prescription_clinic]').removeClass('required-textfield');
+      }
+
+      if (doctor == null) {
+        $('select[name=prescription_doctor]').addClass('required-textfield');
+        return false;
+      } else {
+        $('select[name=prescription_doctor]').removeClass('required-textfield');
+      }
+
+      if (prescription == "") {
+        $('textarea[name=prescription]').addClass('required-textfield');
+        return false;
+      } else {
+        $('textarea[name=prescription]').removeClass('required-textfield');
+      }
 
       $.ajax({
         method: "POST",

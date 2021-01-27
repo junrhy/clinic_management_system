@@ -25,4 +25,9 @@ class Patient extends Model
     {
         return $this->hasMany(PatientBillingPayment::class, 'patient_id');
     }
+
+    public function user()
+    {
+        return $this->hasOne(\App\User::class, 'id', 'user_id');
+    }
 }

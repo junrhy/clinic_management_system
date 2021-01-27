@@ -11,6 +11,11 @@ use Auth;
 
 class InvoiceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index(Request $request)
     {
         $patients = Patient::where('client_id', Auth::user()->client_id)

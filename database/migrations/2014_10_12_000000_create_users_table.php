@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('first_name', 150);
             $table->string('last_name', 150);
             $table->string('username')->unique();
-            $table->string('email', 150);
+            $table->string('email', 150)->nullable();
             $table->string('password');
             $table->string('type')->default('default');
             $table->boolean('is_client')->default(0);
