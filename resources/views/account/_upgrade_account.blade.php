@@ -80,7 +80,7 @@
           </tr>
           <tr>
             <td>Number of Patients</td>
-            <td class="free-plan text-center">300</td>
+            <td class="free-plan text-center">100</td>
             <td class="basic-plan text-center">Unlimited</td>
           </tr>
           <tr>
@@ -132,7 +132,7 @@
 $(document).ready(function () {
   $("#form-add-patient").submit(function() {
     if ($("#check-account-type").data('account-type') == "free") {
-      if ($("#check-patient-count").data('patient-count') >= 300) {
+      if ($("#check-patient-count").data('patient-count') >= 100) {
         $('#upgrade-message').html('You have reach the limitation of your account.');
         $('#upgrade_account_modal').modal('show');
         return false;

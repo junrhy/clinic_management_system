@@ -34,7 +34,7 @@
     text-decoration: underline;
   }
 
-  .show_link, .print-link {
+  .show_link, .print-link, .download-link {
     font-size: 9pt;
     color: #008385;
     cursor: pointer;
@@ -120,16 +120,20 @@
 
                         <div class="tab-content">
                           <div id="home" class="tab-pane fade in active">
-                            <br>
-                            <div class="table-responsive">
+                            <div class="" align="right">
+                              <a id="download-medical-records" href="/patient/download_medical_record/{{ $patient->id }}" class="download-link">
+                                <i class="fa fa-download" aria-hidden="true"></i> Download
+                              </a>
+                            </div>
+                            <div class="table-responsive" id="medical-record-table">
                               <table class="table table-striped">
                                 <thead>
                                   <th style="width:7%">Created</th>
                                   <th style="width:12%">Clinic</th>
                                   <th style="width:10%">Doctor</th>
                                   <th style="width:15%">Service</th>
-                                  <th style="width:15%">Notes</th>
-                                  <th style="width:10%">Appointment</th>
+                                  <th style="width:15%">Remarks</th>
+                                  <th style="width:10%">Next Visit</th>
                                   <th style="width:15%">Attachments</th>
                                   <th style="width:1%;text-align:center;">Action</th>
                                 </thead>
@@ -183,15 +187,15 @@
                           </div>
                           <div id="menu1" class="tab-pane fade">
                             <br>
-                            <div class="table-responsive">
+                            <div class="table-responsive" id="medical-record-archived-table">
                                 <table class="table table-striped">
                                   <thead>
                                     <th style="width:7%">Created</th>
                                     <th style="width:20%">Clinic</th>
                                     <th style="width:10%">Doctor</th>
                                     <th style="width:15%">Service</th>
-                                    <th style="width:20%">Notes</th>
-                                    <th style="width:10%">Appointment</th>
+                                    <th style="width:20%">Remarks</th>
+                                    <th style="width:10%">Next Visit</th>
                                     <th style="width:15%">Attachments</th>
                                     <th style="width:1%;text-align:center;">Action</th>
                                   </thead>
@@ -536,6 +540,12 @@ $(document).ready(function() {
         $("#print_preview_modal").modal('show');
     });
   });
+
+  function downloadFile(response) {
+      var blob = new Blob([response], {type: 'application/pdf'})
+      var url = URL.createObjectURL(blob);
+      location.assign(url);
+  } 
 });
 </script>
 @endsection

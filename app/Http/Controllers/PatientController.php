@@ -22,6 +22,7 @@ use App\Model\Attachment;
 use DB;
 use Auth;
 use DateTime;
+use PDF;
 
 class PatientController extends Controller
 {
@@ -100,17 +101,18 @@ class PatientController extends Controller
     {
         $patient = Patient::find($id);
 
-        $clinics = Clinic::where('client_id', Auth::user()->client_id)->get();
+        $clinics = Clinic::where('client_id', Auth::user()->client_id)->orderBy('name', 'asc')->get();
 
         $doctors = Doctor::select(DB::raw("CONCAT(first_name,' ',last_name) AS fullname"),'id')
                             ->where('client_id', Auth::user()->client_id)
+                            ->orderBy('first_name', 'asc')
                             ->get();
 
-        $services = Service::where('client_id', Auth::user()->client_id)->get();
-        $patient_details = PatientDetail::where('patient_id', $patient->id)->where('is_archived', false)->get();
-        $archived_details = PatientDetail::where('patient_id', $patient->id)->where('is_archived', true)->get();
+        $services = Service::where('client_id', Auth::user()->client_id)->orderBy('name', 'asc')->get();
+        $patient_details = PatientDetail::where('patient_id', $patient->id)->where('is_archived', false)->orderBy('created_at', 'asc')->get();
+        $archived_details = PatientDetail::where('patient_id', $patient->id)->where('is_archived', true)->orderBy('created_at', 'asc')->get();
 
-        $prescriptions = Prescription::where('patient_id', $patient->id)->get();
+        $prescriptions = Prescription::where('patient_id', $patient->id)->orderBy('created_at', 'asc')->get();
 
         return view('patient.show')
                 ->with('patient', $patient)
@@ -171,7 +173,7 @@ class PatientController extends Controller
         $patient_detail->attachment_number = $request->attachment_number;
         $patient_detail->is_scheduled = $request->date_scheduled != '' ? true : false;
         $patient_detail->date_scheduled = $request->date_scheduled != '' ? date('Y-m-d', strtotime($request->date_scheduled)) : null;
-        $patient_detail->time_scheduled = DateTime::createFromFormat('H:i a', $request->time_scheduled);
+        $patient_detail->time_scheduled = $request->time_scheduled != '' ? DateTime::createFromFormat('H:i a', $request->time_scheduled) : null;
 
         if ($request->date_scheduled != '') {
           $patient_detail->status = 'Open';
@@ -213,8 +215,16 @@ class PatientController extends Controller
         $patient_detail->doctor = $request->doctor;
         $patient_detail->service = $request->service;
         $patient_detail->notes = nl2br($request->notes);
-        $patient_detail->date_scheduled = $request->date_scheduled != '' ? date('Y-m-d', strtotime($request->date_scheduled)) : null;
-        $patient_detail->time_scheduled = DateTime::createFromFormat('H:i a', $request->time_scheduled);
+
+        if ($request->status == 'Done') {
+            $patient_detail->date_scheduled = null;
+            $patient_detail->time_scheduled = null;
+            $patient_detail->created_at = $request->date_scheduled != '' ? date('Y-m-d', strtotime($request->date_scheduled)) : date('Y-m-d');
+        } else {
+            $patient_detail->date_scheduled = $request->date_scheduled != '' ? date('Y-m-d', strtotime($request->date_scheduled)) : null;
+            $patient_detail->time_scheduled = DateTime::createFromFormat('H:i a', $request->time_scheduled);
+        }
+        
         $patient_detail->status = $request->status;
         $patient_detail->save();
     }
@@ -317,5 +327,19 @@ class PatientController extends Controller
                     ->with('patient', $patient)
                     ->with('appointments', $appointments)
                     ->with('prescriptions', $prescriptions);
+    }
+
+    public function download_medical_record(Request $request)
+    {
+        $patient = Patient::find($request->patient_id);
+
+        $medical_records = PatientDetail::where('patient_id', $patient->id)->orderBy('created_at', 'asc')->get();
+
+        $data = ['patient' => $patient, 'medical_records' => $medical_records];
+
+        $pdf = PDF::loadView('patient._download_medical_record', $data);
+        $pdf->setPaper('a4', 'portrait');
+
+        return $pdf->download($patient->first_name . '_' . $patient->last_name . '_medical_record.pdf');
     }
 }

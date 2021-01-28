@@ -64,7 +64,7 @@
               </div>
 
               <div class="form-group col-md-12">
-                {{ Form::label('notes', 'Notes') }}
+                {{ Form::label('notes', 'Remarks') }}
                 {{ Form::textarea('notes', null, ['id' => 'notes','class' => 'form-control', 'rows' => 4, 'cols' => 54, 'placeholder' => 'Limit to 300 characters only', 'style' => 'resize:none']) }}
               </div>
 

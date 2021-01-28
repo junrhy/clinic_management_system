@@ -44,7 +44,7 @@
           </tr>
         </table>
         <br>
-        <h5>Notes</h5>
+        <h5>Remarks</h5>
         {{ Form::textarea('notes', null, ['id' => 'notes','class' => 'form-control', 'rows' => 4, 'cols' => 54, 'maxlength' => 300, 'placeholder' => 'Limit to 300 characters only', 'style' => 'resize:none']) }}
         
       </div>
