@@ -17,6 +17,14 @@
     width: 100%;
   }
 
+  .fc-past {
+    background: #fff2f4;
+  }
+
+  .fc-today {
+    background: none !important;
+  }
+
   .fc-state-highlight {
     background:#fcf8e3;
     color:#fff;
@@ -90,6 +98,7 @@
         </div>
     </div>
 </div>
+<input type="hidden" name="status" value="{{ Request::get('status') }}">
 
 @include('calendar._edit_modal')
 @include('calendar._add_modal')
@@ -106,7 +115,12 @@ $(document).ready(function() {
 
   $('#calendar').fullCalendar({
       firstDay: 1,
-      minDate:0,
+      minDate: 0,
+      header: {
+          left:   'title',
+          center: '',
+          right:  'prev,next'
+      },
       viewRender: function(currentView){
           $('.fc-past').filter(
             function(index){
@@ -114,8 +128,8 @@ $(document).ready(function() {
           }).addClass('fc-other-month');
       },
       dayClick: function(calEvent, jsEvent, view) {
-          $(".fc-unthemed td.fc-today").css('background-color', 'transparent');
-          $(".fc-state-highlight").removeClass("fc-state-highlight");
+          $(".fc-day").removeClass("fc-state-highlight");
+          $(".fc-day").removeClass("fc-today");
 
           $("#progress").removeClass("done");
           $({property: 0}).animate({property: 105}, {
@@ -130,54 +144,54 @@ $(document).ready(function() {
           });
 
           if ($(jsEvent.target).hasClass('fc-day')) {
-            $(jsEvent.target).addClass("fc-state-highlight");
+                $(jsEvent.target).addClass("fc-state-highlight");
 
-            if ($(jsEvent.target).hasClass('fc-today')) {
-              $(jsEvent.target).removeClass("fc-state-highlight");
-              $(".fc-unthemed td.fc-today").attr('style', '');
-            }
+                status = $("input[name='status']").val();
 
-            // open appointments
-            $.ajax({
-              method: "POST",
-              url: "/calendar/scheduled_patients",
-              data: { 
-                date: $(this).data('date'),
-                status: 'Open',
-                _token: "{{ csrf_token() }}" 
-              }
-            })
-            .done(function( response ) {
-              $("#patient_list_open").html(response);
-            });
+                var refresh = window.location.protocol + "//" + window.location.host + window.location.pathname + "?status=" + status + "&calendar_date="+$(this).data('date');    
+                window.history.pushState({ path: refresh }, '', refresh);
 
-            // in progress appointments
-            $.ajax({
-              method: "POST",
-              url: "/calendar/scheduled_patients",
-              data: { 
-                date: $(this).data('date'),
-                status: 'In Progress',
-                _token: "{{ csrf_token() }}" 
-              }
-            })
-            .done(function( response ) {
-              $("#patient_list_in_progress").html(response);
-            });
+                // open appointments
+                $.ajax({
+                  method: "POST",
+                  url: "/calendar/scheduled_patients",
+                  data: { 
+                    date: $(this).data('date'),
+                    status: 'Open',
+                    _token: "{{ csrf_token() }}" 
+                  }
+                })
+                .done(function( response ) {
+                  $("#patient_list_open").html(response);
+                });
 
-            // done appointments
-            $.ajax({
-              method: "POST",
-              url: "/calendar/scheduled_patients",
-              data: { 
-                date: $(this).data('date'),
-                status: 'Done',
-                _token: "{{ csrf_token() }}" 
-              }
-            })
-            .done(function( response ) {
-              $("#patient_list_done").html(response);
-            });
+                // in progress appointments
+                $.ajax({
+                  method: "POST",
+                  url: "/calendar/scheduled_patients",
+                  data: { 
+                    date: $(this).data('date'),
+                    status: 'In Progress',
+                    _token: "{{ csrf_token() }}" 
+                  }
+                })
+                .done(function( response ) {
+                  $("#patient_list_in_progress").html(response);
+                });
+
+                // done appointments
+                $.ajax({
+                  method: "POST",
+                  url: "/calendar/scheduled_patients",
+                  data: { 
+                    date: $(this).data('date'),
+                    status: 'Done',
+                    _token: "{{ csrf_token() }}" 
+                  }
+                })
+                .done(function( response ) {
+                  $("#patient_list_done").html(response);
+                });
           }
       }
   });
@@ -185,8 +199,12 @@ $(document).ready(function() {
   $(".nav-item").click(function(){
       status = $(this).data('status');
 
-      var refresh = window.location.protocol + "//" + window.location.host + window.location.pathname + '?status='+status;    
+      var calendar_date = $(".fc-state-highlight").data("date");
+
+      var refresh = window.location.protocol + "//" + window.location.host + window.location.pathname + '?status='+ status + '&calendar_date='+calendar_date;    
       window.history.pushState({ path: refresh }, '', refresh);
+
+      $("input[name='status']").val(status);
   });
 
   $(function(){
@@ -195,10 +213,16 @@ $(document).ready(function() {
     var month = d.getMonth()+1;
     var day = d.getDate();
 
-    var today = d.getFullYear() + '/' +
-        (month<10 ? '0' : '') + month + '/' +
+    var today = d.getFullYear() + '-' +
+        (month<10 ? '0' : '') + month + '-' +
         (day<10 ? '0' : '') + day;
 
+
+    var calendar_date = "{{ Request::get('calendar_date') }}";
+
+    if (calendar_date == "") {
+        calendar_date = today;
+    }
 
     $("#{{ Request::get('status') }}_tab").click();
 
@@ -207,7 +231,7 @@ $(document).ready(function() {
       method: "POST",
       url: "/calendar/scheduled_patients",
       data: { 
-        date: today,
+        date: calendar_date,
         status: 'Open',
         _token: "{{ csrf_token() }}" 
       }
@@ -221,7 +245,7 @@ $(document).ready(function() {
       method: "POST",
       url: "/calendar/scheduled_patients",
       data: { 
-        date: today,
+        date: calendar_date,
         status: 'In Progress',
         _token: "{{ csrf_token() }}" 
       }
@@ -236,7 +260,7 @@ $(document).ready(function() {
       method: "POST",
       url: "/calendar/scheduled_patients",
       data: { 
-        date: today,
+        date: calendar_date,
         status: 'Done',
         _token: "{{ csrf_token() }}" 
       }
@@ -244,6 +268,22 @@ $(document).ready(function() {
     .done(function( response ) {
       $("#patient_list_done").html(response);
     });
+
+    status = $("input[name='status']").val();
+
+    if (status == '') { status = 'open'}
+
+    var refresh = window.location.protocol + "//" + window.location.host + window.location.pathname + '?status=' + status + '&calendar_date='+calendar_date;    
+    window.history.pushState({ path: refresh }, '', refresh);
+
+    $("input[name='status']").val(status);
+
+    $('#calendar').fullCalendar('gotoDate', moment(calendar_date) );
+    $('.fc-day[data-date="' + calendar_date + '"]').addClass('fc-state-highlight');
+
+    if ($('.fc-day[data-date="' + calendar_date + '"]').hasClass('fc-today')) {
+      $('.fc-day[data-date="' + calendar_date + '"]').removeClass('fc-today');
+    }
   });
 
   $("#add-appointment").click(function(){
