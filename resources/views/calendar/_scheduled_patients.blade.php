@@ -28,7 +28,7 @@
 				<th>Name</th>
 				<th>Clinic</th>
 				<th>Doctor</th>
-				<th>Service Type</th>
+				<th>Service</th>
 				<th>Status</th>
 			</tr>
 		</thead>
@@ -58,7 +58,7 @@
 				@endforeach
 			@else
 				<tr>
-					<td colspan="8" class="text-center">No appointment on this date.</td>
+					<td colspan="8" class="text-center">No appointment</td>
 				</tr>
 			@endif
 		</tbody>

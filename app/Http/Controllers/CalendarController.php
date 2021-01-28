@@ -63,4 +63,15 @@ class CalendarController extends Controller
 
         return $client_id;
     }
+
+    public function get_all_appointments()
+    {
+        $appointments = PatientDetail::select('date_scheduled', DB::raw('count(*) as total'))
+                                ->where('client_id', Auth::user()->client_id)
+                                ->whereIn('status', ['Open', 'In Progress'])
+                                ->groupBy('date_scheduled')
+                                ->get();
+
+        return response()->json($appointments);
+    }
 }

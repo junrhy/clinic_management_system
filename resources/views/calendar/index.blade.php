@@ -29,6 +29,14 @@
     background:#fcf8e3;
     color:#fff;
   }
+
+  .fc-content {
+    text-align: center;
+  }
+
+  .fc-title {
+    font-size: 10pt;
+  }
 </style>
 @endsection
 
@@ -60,10 +68,11 @@
                 <div class="panel-body">
                     <div class="row">
                         
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <div id='calendar'></div>
+                            <br>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-7">
                           <div>
                             <div class="pull-right"><i class="bulk-delete-appointment fa fa-trash hidden"></i></div>
 
@@ -74,9 +83,6 @@
                                 <li class="nav-item" data-status="in_progress">
                                     <a data-toggle="tab" id="in_progress_tab" href="#in_progress">In Progress</a>
                                 </li>
-                                <li class="nav-item" data-status="done">
-                                    <a data-toggle="tab" id="done_tab" href="#done">Done</a>
-                                </li>
                             </ul>
 
                             <div class="tab-content">
@@ -85,9 +91,6 @@
                                 </div>
                                 <div id="in_progress" class="tab-pane fade in">
                                     <div id="patient_list_in_progress"></div>
-                                </div>
-                                <div id="done" class="tab-pane fade in">
-                                    <div id="patient_list_done"></div>
                                 </div>
                             </div>
                           </div>
@@ -121,6 +124,11 @@ $(document).ready(function() {
           center: '',
           right:  'prev,next'
       },
+      views: {
+          month: {
+            titleFormat: 'MMMM YYYY',
+          }
+      }, 
       viewRender: function(currentView){
           $('.fc-past').filter(
             function(index){
@@ -179,19 +187,6 @@ $(document).ready(function() {
                   $("#patient_list_in_progress").html(response);
                 });
 
-                // done appointments
-                $.ajax({
-                  method: "POST",
-                  url: "/calendar/scheduled_patients",
-                  data: { 
-                    date: $(this).data('date'),
-                    status: 'Done',
-                    _token: "{{ csrf_token() }}" 
-                  }
-                })
-                .done(function( response ) {
-                  $("#patient_list_done").html(response);
-                });
           }
       }
   });
@@ -206,6 +201,40 @@ $(document).ready(function() {
 
       $("input[name='status']").val(status);
   });
+
+  function show_all_appointments() {
+      var eventSources = $('#calendar').fullCalendar('clientEvents');
+      var len = eventSources.length;
+      for (var i = 0; i < len; i++) { 
+          eventSources[i].remove(); 
+      } 
+
+      $.ajax({
+          method: "POST",
+          url: "/calendar/get_all_appointments",
+          data: { 
+            _token: "{{ csrf_token() }}" 
+          }
+      })
+      .done(function( data ) {
+          console.log(data);
+          $.each(data, function(i, item) {
+
+              var event_name = 'patient';
+              if (item.total > 1) {
+                event_name = 'patients';
+              }
+
+              $('#calendar').fullCalendar('renderEvent', {
+                  title: item.total + ' ' + event_name,
+                  start: item.date_scheduled,
+                  allDay: true,
+                  color: '#00cfd1',
+                  textColor: '#fff'
+              });
+          });
+      });
+  }
 
   $(function(){
     var d = new Date();
@@ -254,21 +283,7 @@ $(document).ready(function() {
       $("#patient_list_in_progress").html(response);
     });
 
-
-    // done appointments
-    $.ajax({
-      method: "POST",
-      url: "/calendar/scheduled_patients",
-      data: { 
-        date: calendar_date,
-        status: 'Done',
-        _token: "{{ csrf_token() }}" 
-      }
-    })
-    .done(function( response ) {
-      $("#patient_list_done").html(response);
-    });
-
+    // status
     status = $("input[name='status']").val();
 
     if (status == '') { status = 'open'}
@@ -278,12 +293,16 @@ $(document).ready(function() {
 
     $("input[name='status']").val(status);
 
+    // highlighting
     $('#calendar').fullCalendar('gotoDate', moment(calendar_date) );
     $('.fc-day[data-date="' + calendar_date + '"]').addClass('fc-state-highlight');
 
     if ($('.fc-day[data-date="' + calendar_date + '"]').hasClass('fc-today')) {
       $('.fc-day[data-date="' + calendar_date + '"]').removeClass('fc-today');
     }
+
+    // show all appointments
+    show_all_appointments();
   });
 
   $("#add-appointment").click(function(){
