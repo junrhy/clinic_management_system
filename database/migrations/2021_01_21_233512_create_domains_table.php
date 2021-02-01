@@ -24,6 +24,7 @@ class CreateDomainsTable extends Migration
             $table->string('provider')->nullable();
             $table->string('provider_user')->nullable();
             $table->string('provider_pass')->nullable();
+            $table->string('distibutor_code')->nullable();
             $table->timestamps();
         });
     }

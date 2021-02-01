@@ -45,10 +45,6 @@
                         {{ Form::text('email', Input::old('email'), array('class' => 'form-control')) }}
                       </div>
 
-                      <div class="form-group">
-                        {{ Form::label('password', 'Password') }}
-                        {{ Form::password('password', array('class' => 'form-control')) }}
-                      </div>
                       {{ Form::submit('Save Changes', array('class' => 'btn btn-primary btn-round')) }}
                     {{ Form::close() }}
                   </div>

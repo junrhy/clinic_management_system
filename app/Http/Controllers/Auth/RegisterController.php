@@ -15,6 +15,7 @@ use App\Model\FeatureUser;
 use App\User;
 
 use App\Mail\NewClient;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -83,6 +84,15 @@ class RegisterController extends Controller
         $client->name  = $data['name'];
         $client->email = $data['email'];
         $client->contact = $data['contact'];
+
+        $client_max_id = Client::whereRaw('id = (select max(`id`) from clients)')->first();
+        if ($client_max_id) {
+            $unique_id = $client_max_id->id + 1;
+        } else {
+            $unique_id = 1;
+        }
+
+        $client->account_number = $data['distributor_code'].Carbon::now()->format('md').$unique_id;
         $client->save();
 
         $user = User::create([

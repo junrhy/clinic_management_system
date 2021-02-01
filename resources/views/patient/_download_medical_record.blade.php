@@ -79,7 +79,7 @@ Downloaded by: {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}<br>
         @endforeach
     @else
       <tr>
-        <td colspan="6">No record found.</td>
+        <td colspan="6" align="center">No record found.</td>
       </tr>
     @endif
     </tbody>

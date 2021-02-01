@@ -9,6 +9,7 @@ use Auth;
 use App\Model\Clinic;
 use App\Model\Doctor;
 use App\Model\Patient;
+use App\Model\FeatureUser;
 
 class HomeController extends Controller
 {

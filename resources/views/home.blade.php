@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('page_level_script')
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+@endsection
+
 @section('page_level_css')
 <style type="text/css">
     .m-t-0 {
@@ -60,4 +64,7 @@
         </div>
     </div>
 </div>
+@if( App\Model\FeatureUser::is_feature_allowed('dashboard', Auth::user()->id) == 'hidden' )
+<div class="modalOverlay">
+@endif
 @endsection

@@ -76,7 +76,7 @@ class PatientController extends Controller
         $user->client_id = Auth::user()->client_id;
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
-        $user->username = strtolower(substr($request->first_name, 0, 1) . $request->last_name . $unique_id);
+        $user->username = strtolower(substr($request->first_name, 0, 1) . str_replace(" ", "_", $request->last_name) . $unique_id);
         $user->email = $request->email;
         $user->password = bcrypt("123456");
         $user->type = 'patient';
@@ -184,16 +184,18 @@ class PatientController extends Controller
 
     public function upload_detail(Request $request)
     {
+        $FILESYSTEM_DRIVER = env('FILESYSTEM_DRIVER', 'local');
+
         $files = $request->file('attachment');
 
         if(!empty($files)):
             $folder_name = $request->patient_id . '-' . date('m-d-Y-H-i-s');
 
-            Storage::disk('public')->makeDirectory($folder_name);
+            Storage::disk($FILESYSTEM_DRIVER)->makeDirectory($folder_name);
 
             foreach ($files as $file):
                 try {
-                    Storage::disk('public')->put($folder_name .'/'. $file->getClientOriginalName(), file_get_contents($file));
+                    Storage::disk($FILESYSTEM_DRIVER)->put($folder_name .'/'. $file->getClientOriginalName(), file_get_contents($file));
                 } catch (Exception $e) {
                     dd($e);
                 }
@@ -237,14 +239,21 @@ class PatientController extends Controller
 
             $attachments = Attachment::where('attachment_number', $patient_detail->attachment_number)->get();
 
+            $FILESYSTEM_DRIVER = env('FILESYSTEM_DRIVER', 'local');
+
             foreach ($attachments as $attachment):
                 $attachment->delete();
 
-                Storage::disk('public')->delete($attachment->path .'/'. $attachment->filename);
+                Storage::disk($FILESYSTEM_DRIVER)->delete($attachment->path .'/'. $attachment->filename);
 
                 $FileSystem = new Filesystem();
-                $directory = 'storage/' . $attachment->path;
 
+                if ($FILESYSTEM_DRIVER == "public") {
+                    $directory = 'storage/' . $attachment->path;
+                } else {
+                    $directory = $attachment->path;
+                }
+                
                 if ($FileSystem->exists($directory)) {
                     $files = $FileSystem->files($directory);
 

@@ -41,7 +41,7 @@
                 <div class="panel-body">
                     @foreach($features as $key => $feature)
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="{{ $feature->name }}" data-id="{{ $feature->id }}" name="user_features"  {{ $user->is_client == 1 && in_array($feature->name, ['users', 'add_user', 'edit_user', 'delete_user', 'set_privileges']) ? 'disabled' : '' }} {{ App\Model\FeatureUser::is_feature_checked($feature->name, $user->id) }}>
+                            <input class="form-check-input" type="checkbox" id="{{ $feature->name }}" data-id="{{ $feature->id }}" name="user_features"  {{ $user->is_client == 1 && in_array($feature->name, ['staffs', 'add_staff', 'edit_staff', 'delete_staff', 'set_privileges']) ? 'disabled' : '' }} {{ App\Model\FeatureUser::is_feature_checked($feature->name, $user->id) }}>
                             <span id="txt_{{ $feature->name }}">{{ ucwords(str_replace('_', ' ', $feature->name)) }}</span>
                         </div>
                     @endforeach
@@ -88,7 +88,7 @@ $(document).ready(function() {
         });
     });
 
-    $("#calendar").click(function(){
+    $("#appointment").click(function(){
         $("#add_appointment").prop('checked', $(this).is(":checked"));
         $("#edit_appointment").prop('checked', $(this).is(":checked"));
     });
@@ -132,28 +132,28 @@ $(document).ready(function() {
         $("#delete_billing_payment").prop('checked', $(this).is(":checked"));
     });
 
-    $("#users").click(function(){
-        $("#add_user").prop('checked', $(this).is(":checked"));
-        $("#edit_user").prop('checked', $(this).is(":checked"));
-        $("#delete_user").prop('checked', $(this).is(":checked"));
+    $("#staffs").click(function(){
+        $("#add_staff").prop('checked', $(this).is(":checked"));
+        $("#edit_staff").prop('checked', $(this).is(":checked"));
+        $("#delete_staff").prop('checked', $(this).is(":checked"));
         $("#set_privileges").prop('checked', $(this).is(":checked"));
     });
 
-    $("#settings").click(function(){
+    $("#account").click(function(){
         $("#edit_business_information").prop('checked', $(this).is(":checked"));
     });
 
     $(function(){
         $("#txt_dashboard").addClass('category');
-        $("#txt_calendar").addClass('category');
+        $("#txt_appointment").addClass('category');
         $("#txt_dental").addClass('category');
         $("#txt_patients").addClass('category');
         $("#txt_clinics").addClass('category');
         $("#txt_doctors").addClass('category');
         $("#txt_services").addClass('category');
         $("#txt_billing").addClass('category');
-        $("#txt_users").addClass('category');
-        $("#txt_settings").addClass('category');
+        $("#txt_staffs").addClass('category');
+        $("#txt_account").addClass('category');
     });
 });
 </script>

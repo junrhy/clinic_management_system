@@ -14,38 +14,52 @@
         <h5 class="modal-title">New Appointment</h5>
       </div>
       <div class="modal-body">
-        <table width="100%">
+        <table class="table">
           <tr>
-            <td width="19%" align="right" style="padding-right: 15px;">Patient Name: </td>
-            <td>{{ Form::select('new_appointment_patient', $patients, null, array('class' => 'custom-text-input')) }}</td>
+            <td width="20%" align="right"><div style="margin-top: 7px;font-weight: bold;">Patient Name: </div></td>
+            <td>
+              <div class="row col-md-8">
+                {{ Form::select('new_appointment_patient', $patients, null, array('class' => 'form-control')) }}
+              </div>
+            </td>
           </tr>
           <tr>
-            <td width="19%" align="right" style="padding-right: 15px;">Clinic: </td>
-            <td>{{ Form::select('new_appointment_clinic', $clinics, null, array('class' => 'custom-text-input')) }}</td>
+            <td align="right"><div style="margin-top: 7px;font-weight: bold;">Clinic: </div></td>
+            <td>
+              <div class="row col-md-8">
+                {{ Form::select('new_appointment_clinic', $clinics, null, array('class' => 'form-control')) }}
+              </div>
+            </td>
           </tr>
           <tr>
-            <td width="19%" align="right" style="padding-right: 15px;">Doctor: </td>
-            <td>{{ Form::select('new_appointment_doctor', $doctors, null, array('class' => 'custom-text-input')) }}</td>
+            <td align="right"><div style="margin-top: 7px;font-weight: bold;">Doctor: </div></td>
+            <td>
+              <div class="row col-md-8">
+                {{ Form::select('new_appointment_doctor', $doctors, null, array('class' => 'form-control')) }}
+              </div>
+            </td>
           </tr>
         <tr>
-            <td width="19%" align="right" style="padding-right: 15px;">Service Type: </td>
-            <td>{{ Form::select('new_appointment_service_type', $services, null, array('class' => 'custom-text-input')) }}</td>
+            <td align="right"><div style="margin-top: 7px;font-weight: bold;">Service: </div></td>
+            <td>
+              <div class="row col-md-8">
+                {{ Form::select('new_appointment_service_type', $services, null, array('class' => 'form-control')) }}
+              </div>
+            </td>
           </tr>
         <tr>
-            <td width="19%" align="right" style="padding-right: 15px;">Schedule: </td>
+            <td align="right"><div style="margin-top: 11px;font-weight: bold;">Schedule: </div></td>
             <td>
               {{ Form::text('new_appointment_schedule_date', date("m/d/Y"), array('class' => 'custom-text-input', 'style' => 'width:103px', 'readonly')) }}
               {{ Form::text('new_appointment_schedule_time', '8:00 am', array('class' => 'custom-text-input', 'style' => 'width:85px')) }}
             </td>
           </tr>
           <tr>
-            <td width="19%" align="right" style="padding-right: 15px;">Status: </td>
+            <td align="right"><div style="margin-top: 11px;font-weight: bold;">Status: </div></td>
             <td>{{ Form::select('new_appointment_status', array('Open' => 'Open', 'In Progress' => 'In Progress', 'Done' => 'Done'), null, array('class' => 'custom-text-input')) }}</td>
           </tr>
         </table>
-        <br>
-        <h5>Remarks</h5>
-        {{ Form::textarea('new_notes', null, ['id' => 'notes','class' => 'form-control', 'rows' => 4, 'cols' => 54, 'maxlength' => 300, 'placeholder' => 'Limit to 300 characters only', 'style' => 'resize:none']) }}
+        {{ Form::textarea('new_notes', null, ['id' => 'notes','class' => 'form-control', 'rows' => 4, 'cols' => 54, 'maxlength' => 300, 'placeholder' => 'Remarks', 'style' => 'resize:none']) }}
         
       </div>
       <div class="modal-footer">

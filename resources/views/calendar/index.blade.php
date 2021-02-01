@@ -37,6 +37,12 @@
   .fc-title {
     font-size: 10pt;
   }
+
+  .bulk-delete-appointment:hover {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+  }
 </style>
 @endsection
 
@@ -67,14 +73,15 @@
 
                 <div class="panel-body">
                     <div class="row">
-                        
                         <div class="col-md-5">
                             <div id='calendar'></div>
                             <br>
                         </div>
                         <div class="col-md-7">
                           <div>
-                            <div class="pull-right"><i class="bulk-delete-appointment fa fa-trash hidden"></i></div>
+                            <div class="pull-right">
+                              <span class="bulk-delete-appointment hidden"><i class="fa fa-trash"></i> Remove</span>
+                            </div>
 
                             <ul class="nav nav-tabs">
                                 <li class="nav-item active" data-status="open">
@@ -106,6 +113,9 @@
 @include('calendar._edit_modal')
 @include('calendar._add_modal')
 
+@if( App\Model\FeatureUser::is_feature_allowed('appointment', Auth::user()->id) == 'hidden' )
+<div class="modalOverlay"></div>
+@endif
 @endsection
 
 @section('page_level_footer_script')

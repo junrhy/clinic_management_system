@@ -76,6 +76,9 @@
         </div>
     </div>
 </div>
+@if( App\Model\FeatureUser::is_feature_allowed('services', Auth::user()->id) == 'hidden' )
+<div class="modalOverlay"></div>
+@endif
 @endsection
 
 @section('page_level_footer_script')

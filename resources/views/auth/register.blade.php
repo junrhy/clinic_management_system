@@ -154,6 +154,12 @@
                             </div>
                         </div>
 
+                        @if ($domain != "")
+                            <input type="hidden" name="distributor_code" value="{{ $domain->distributor_code != '' ? $domain->distributor_code : '0000' }}">
+                        @else
+                            <input type="hidden" name="distributor_code" value="0000">
+                        @endif
+                        
                         <div class="form-group">
                             <div class="col-md-10 col-md-offset-1">
                                 <div class="col-md-12">

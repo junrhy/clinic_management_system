@@ -14,7 +14,7 @@ class FeatureUsersTableSeeder extends Seeder
     public function run()
     {
         collect(['dashboard', 
-            'calendar', 
+            'appointment', 
             'add_appointment', 
             'edit_appointment', 
             'dental', 
@@ -46,12 +46,12 @@ class FeatureUsersTableSeeder extends Seeder
             'delete_billing_invoice', 
             'add_billing_payment', 
             'delete_billing_payment', 
-            'users', 
-            'add_user', 
-            'edit_user', 
-            'delete_user', 
+            'staffs', 
+            'add_staff', 
+            'edit_staff', 
+            'delete_staff', 
             'set_privileges', 
-            'settings',
+            'account',
             'edit_business_information'])->each(function ($item, $key) {
             
 	        $feature = FeatureUser::create(['name' => $item]);

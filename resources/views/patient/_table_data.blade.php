@@ -7,7 +7,7 @@
     <th>Age</th>
     <th>Contact</th>
     <th>Username</th>
-    <th>Clinical Record</th>
+    <th>Medical Record</th>
     <th>Action</th>
   </thead>
 @if($patients->count() > 0)

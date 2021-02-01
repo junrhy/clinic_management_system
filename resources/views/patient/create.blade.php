@@ -90,7 +90,11 @@
                       <div class="form-group row">
                         <div class="col-md-6">
                           {{ Form::label('gender', 'Gender') }}
-                          {{ Form::select('gender', ['' => '', 'Male' => 'Male', 'Female' => 'Female'], null, array('class' => 'form-control')) }}
+                          <select name="gender" class='form-control'>
+                              <option value='' disabled>Select Gender</option>
+                              <option value="Male">Male</option>
+                              <option value="Female">Female</option>
+                          </select>
                         </div>
                       </div>
           
@@ -134,6 +138,7 @@ $(document).ready(function() {
     // isRTL: true
   });
 
+  $('select[name=gender]').val(null);
 });
 </script>
 @endsection

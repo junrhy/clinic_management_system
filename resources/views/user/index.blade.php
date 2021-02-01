@@ -32,6 +32,11 @@
     color: #01d8da;
     text-decoration: none;
   }
+
+  .current-user {
+    font-family: sans-serif;
+    color: #01d8da;
+  }
 </style>
 @endsection
 
@@ -42,7 +47,7 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-12">
-                        <h2>All Users <small class="text-muted">Users who can access this system</small></h2>
+                        <h2>All Staffs <small class="text-muted">Staffs who can access this system</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                         <a class="btn btn-white btn-icon btn-round float-right m-l-10 {{ App\Model\FeatureUser::is_feature_allowed('add_user', Auth::user()->id) }}" href="{{ url('user/create') }}" type="button">
@@ -51,14 +56,14 @@
 
                         <ul class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><a href="/home"><i class="fa fa-home"></i> {{ Auth::user()->client->name }}</a></li>
-                            <li class="breadcrumb-item">Users</li>
-                            <li class="breadcrumb-item active">All Users</li>
+                            <li class="breadcrumb-item">Staffs</li>
+                            <li class="breadcrumb-item active">All Staffs</li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading">All Users</div>
+                <div class="panel-heading">All Staffs</div>
 
                 <div class="panel-body">
                   <div class="table-responsive">
@@ -75,7 +80,12 @@
                       <tr>
                         <td>{{ $user_item->first_name }}</td>
                         <td>{{ $user_item->last_name }}</td>
-                        <td>{{ $user_item->username }}</td>
+                        <td>
+                          {{ $user_item->username }}&nbsp;
+                          @if($user_item->username == auth()->user()->username)
+                            <span class="current-user">(You)</span>
+                          @endif
+                        </td>
                         <td>{{ $user_item->email }}</td>
                         <td>
                           <a class="show-privileges" href="{{ route('user.show',$user_item->id) }}">Show Privileges</a>
@@ -102,6 +112,9 @@
         </div>
     </div>
 </div>
+@if( App\Model\FeatureUser::is_feature_allowed('staffs', Auth::user()->id) == 'hidden' )
+<div class="modalOverlay"></div>
+@endif
 @endsection
 
 @section('page_level_footer_script')

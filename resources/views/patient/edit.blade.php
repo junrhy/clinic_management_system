@@ -1,5 +1,49 @@
 @extends('layouts.app')
 
+@section('page_level_css')
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+
+<style type="text/css">
+  .ui-datepicker {
+    background-color: #fff;
+  }
+
+  .ui-datepicker-header {
+    background-color: #00cfd1;
+  }
+
+  .ui-datepicker-title {
+    color: #636b6f;
+  }
+
+  .ui-widget-content .ui-state-default {
+    border: 0px;
+    text-align: center;
+    background: #fff;
+    font-weight: normal;
+    color: #636b6f;
+  }
+
+  .ui-widget-content .ui-state-default:hover {
+    border: 0px;
+    text-align: center;
+    background: #00cfd1;
+    font-weight: normal;
+    color: #fff;
+  }
+
+  .ui-widget-content .ui-state-active {
+  border: 0px;
+  background: #00cfd1;
+  color: #fff;
+  }
+
+  .ui-datepicker-today {
+    background: #00cfd1 !important;
+  }
+</style>
+@endsection
+
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -36,14 +80,22 @@
                           {{ Form::text('last_name', Input::old('last_name'), array('class' => 'form-control')) }}
                         </div>
 
-                        <div class="form-group">
-                          {{ Form::label('dob', 'Date of birth') }}
-                          {{ Form::text('dob', $patient->dob->format('m/d/Y'), array('class' => 'form-control', 'placeholder' => 'mm/dd/yyyy')) }}
+                        <div class="form-group row">
+                          <div class="col-md-6">
+                            {{ Form::label('dob', 'Date of birth') }}
+                            {{ Form::text('dob', $patient->dob->format('m/d/Y'), array('class' => 'form-control', 'required', 'placeholder' => 'mm/dd/yyyy')) }}
+                          </div>
                         </div>
-                        
-                        <div class="form-group">
-                          {{ Form::label('gender', 'Gender') }}
-                          {{ Form::select('gender', ['' => '', 'Male' => 'Male', 'Female' => 'Female'], null, array('class' => 'form-control')) }}
+
+                        <div class="form-group row">
+                          <div class="col-md-6">
+                            {{ Form::label('gender', 'Gender') }}
+                            <select name="gender" class='form-control'>
+                                <option value='' disabled>Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                          </div>
                         </div>
 
                         <div class="form-group">
@@ -73,3 +125,23 @@
     </div>
 </div>
 @endsection
+
+@section('page_level_footer_script')
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#dob").datepicker({  
+    maxDate: '0',
+    format: 'mm/dd/yyyy',
+    changeMonth: true,
+    changeYear: true,
+    // isRTL: true
+  });
+
+  $('select[name=gender]').val("{{ $patient->gender }}");
+});
+</script>
+@endsection
+

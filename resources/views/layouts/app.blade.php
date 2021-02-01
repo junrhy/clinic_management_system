@@ -12,6 +12,16 @@
     <title>{{ Auth::user()->client->name }}</title>
 
     <!-- Styles -->
+    <style type="text/css">
+        .modalOverlay {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0px;
+            left: 0px;
+            background-color: rgba(0,0,0,0.3); /* black semi-transparent */
+        }
+    </style>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/layout.css') }}" rel="stylesheet">
 
@@ -62,7 +72,7 @@
                 </li>
 
               @if(Auth::user()->client->is_active && Auth::user()->client->is_suspended == 0)
-                <li class="{{ App\Model\FeatureUser::is_feature_allowed('calendar', Auth::user()->id) }}">
+                <li class="{{ App\Model\FeatureUser::is_feature_allowed('appointment', Auth::user()->id) }}">
                     <a href="{{ url('calendar') }}"><i class="fa fa-calendar"></i> Appointment</a>
                 </li>
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('dental', Auth::user()->id) }}">
@@ -138,26 +148,26 @@
                         </li>
                     </ul>
                 </li>
-                <li class="{{ App\Model\FeatureUser::is_feature_allowed('users', Auth::user()->id) }}">
+                <li class="{{ App\Model\FeatureUser::is_feature_allowed('staffs', Auth::user()->id) }}">
                     <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fa fa-users"></i> 
-                        Users</a>
+                        Staffs</a>
 
                     <ul class="collapse list-unstyled" id="userSubmenu">
-                        <li class="{{ App\Model\FeatureUser::is_feature_allowed('users', Auth::user()->id) }}">
-                            <a href="{{ url('user') }}">All Users</a>
+                        <li class="{{ App\Model\FeatureUser::is_feature_allowed('staffs', Auth::user()->id) }}">
+                            <a href="{{ url('user') }}">All Staffs</a>
                         </li>
-                        <li class="{{ App\Model\FeatureUser::is_feature_allowed('add_user', Auth::user()->id) }}">
-                            <a href="{{ url('user/create') }}">Add User</a>
+                        <li class="{{ App\Model\FeatureUser::is_feature_allowed('add_staff', Auth::user()->id) }}">
+                            <a href="{{ url('user/create') }}">Add Staff</a>
                         </li>
                     </ul>
                 </li>
               @endif
                 
-                <li class="{{ App\Model\FeatureUser::is_feature_allowed('settings', Auth::user()->id) }}">
+                <li class="{{ App\Model\FeatureUser::is_feature_allowed('account', Auth::user()->id) }}">
                     <a href="#profileSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fas fa-user-cog"></i>
-                        Settings
+                        Account
                     </a>
                     <ul class="collapse list-unstyled" id="profileSubmenu">
                         <li class="{{ App\Model\FeatureUser::is_feature_allowed('edit_business_information', Auth::user()->id) }}">
@@ -171,6 +181,12 @@
                         @if(Auth::user()->client->account_type == 'free' && Auth::user()->client->is_active != 0 && Auth::user()->client->is_suspended != 1)
                         <li>
                             <a style="cursor:pointer;" id="sidebar-menu-upgrade-account">Upgrade</a>
+                        </li>
+                        @endif
+
+                        @if(Auth::user()->client->account_type != 'free')
+                        <li>
+                            <a href="{{ url('subscription') }}">Subscription</a>
                         </li>
                         @endif
 
@@ -209,7 +225,7 @@
                         </form>
 
                         <div class="float-right" style="margin: 8px;font-size: 11pt;color:#fff;">
-                            Account Type: <strong>{{ ucfirst(Auth::user()->client->account_type) }}</strong> 
+                            <strong>{{ strtoupper(Auth::user()->client->account_type) }}</strong> Plan
 
                             @if(Auth::user()->client->is_active == 0)
                                 <strong style="color:#000;">( This account is not active )</strong>
