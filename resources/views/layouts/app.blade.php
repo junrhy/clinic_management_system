@@ -188,6 +188,12 @@
                         <li>
                             <a href="{{ url('subscription') }}">Subscription</a>
                         </li>
+                        <li>
+                            <a href="{{ url('balance_and_usage') }}">Balance</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('view_estatements') }}">eStatements</a>
+                        </li>
                         @endif
 
                         @if(Auth::user()->client->is_active == 0 && Auth::user()->client->account_type == 'basic')

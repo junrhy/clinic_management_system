@@ -22,7 +22,7 @@
   }
 
   .subscribed {
-    color: #FF6065;
+    color: green;
     font-weight: bold;
   }
 </style>
@@ -50,19 +50,50 @@
 
                 <div class="panel-body">
                   <div class="row">
-                    <h4 style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;"><i class="fa fa-gear"></i> Subscription Details</h4>
+                    <h4 style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;"><i class="fa fa-gear"></i> Active Subscriptions</h4>
                   </div>
-                  You are currently subscribed to: <strong>{{ strtoupper(Auth::user()->client->account_type) }} Plan</strong><br>
-                  You're service is active from: <strong>[date subscription started]</strong> to <strong>[subscription ended]</strong> <br>
-                  You're next bill will be on: <strong>[subscription ended]</strong>
-                  <br><br>
+                  <br>
+                  You are currently subscribed to: <strong>{{ ucfirst(Auth::user()->client->account_type) }} Plan</strong><br>
+                  <br>
+                  <small style="color: green;">This services is active during this period and will be renewed every time the bill is paid.</small>
+                  <div class="table-responsive row">
+                    <div class="col-md-4">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th>Plan</th>
+                            <th>Active from</th>
+                            <th>Until</th>
+                            <th>Billed</th>
+                          </tr>
+                        </thead>
+                        @foreach($subscriptions as $subscription)
+                        <tr>
+                          <td>{{ ucfirst($subscription->plan) }} Plan</td>
+                          <td>{{ $subscription->start->format('M d, Y') }}</td>
+                          <td>{{ $subscription->end->format('M d, Y') }}</td>
+                          <td>Every {{ $subscription->bill_day }} of the month</td>
+                        </tr>
+                        @endforeach
+                      </table>
+                    </div>
+                  </div>
+
+                   <div class="row">
+                    <h4 style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;"><i class="fa fa-gear"></i> Upgrade your plan</h4>
+                  </div>
                   <div class="table-responsive">
                       <table class="table table-striped">
                         <thead>
                           <tr>
-                            <th>Plan Name</th>
-                            <th>Plan Features</th>
-                            <th>Pricing</th>
+                            <th width="20%">Plan Name</th>
+                            <th width="30%">Plan Features</th>
+                            <th>Pricing 
+                              <select id="frequency">
+                                <option value="monthly">Monthly</option>
+                                <option value="yearly">Yearly</option>
+                              </select>
+                            </th>
                             <th></th>
                           </tr>
                         </thead>
@@ -79,14 +110,23 @@
                               Dental Chart
                             </td>
                             <td>
-                              <span class="pricing">&#8369;1,500 / month</span><br>
+                              @if(request()->frequency == 'yearly')
+                              <span class="pricing"><span style="text-decoration: line-through;">&#8369;21,600 / year</span> &#8369;18,899 / year</span><br>
+                              <small style="color: red;">12% discount</small>
+                              @else
+                              <span class="pricing">&#8369;1,800 / month</span><br>
                               <small>Pay yearly to enjoy discount</small>
+                              @endif
                             </td>
                             <td>
                               @if(Auth::user()->client->account_type == "basic")
                                 <span class="subscribed">Subscribed</span>
                               @else
-                                <button class="btn btn-subscribe">Subscribe</button>
+                                @if(request()->frequency == 'yearly')
+                                <button data-plan="Basic" data-plan-amount="18899" data-plan-currency="&#8369" class="btn btn-primary subscribe">Subscribe</button>
+                                @else
+                                <button data-plan="Basic" data-plan-amount="1800" data-plan-currency="&#8369" class="btn btn-primary subscribe">Subscribe</button>
+                                @endif
                               @endif
                             </td>
                           </tr>
@@ -109,30 +149,6 @@
                       </table>
                   </div>
 
-                  <div class="row">
-                    <h4 style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;"><i class="fa fa-file"></i> Billing Statements</h4>
-                    <div class="col-md-12">
-                      <small>Statements beyond 12 months is archived.</small>
-                    </div>
-                  </div>
-                  <div class="table-responsive row col-md-3">
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>Statement</th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td></td>
-                          <td align="center">
-                            <a href="">View</a>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
                 </div>
             </div>
         </div>
@@ -145,7 +161,52 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-  
+    $(".subscribe").unbind().click(function() {
+        var plan = $(this).data('plan');
+        var currency = $(this).data('plan-currency');
+        var planAmount = $(this).data('plan-amount');
+        var frequency = $("#frequency").val();
+
+        Swal.fire({
+            title: 'Confirming...',
+            text: "You are about to subscribe to our " + plan + " Plan. By subscribing to this plan, You agreed that your mode of payment will be billed the amount of " + currency+planAmount + " "+ frequency + " until you end your subscription. This payment is non-refundable. Do you wish to continue?",
+            type: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, subscribe now!'
+        }).then((result) => {
+            if (result.value) {
+              $.ajax({
+                method: "POST",
+                url: "/subscription/subscribe",
+                data: { 
+                  plan: plan.toLowerCase(),
+                  amount: planAmount,
+                  frequency: frequency,
+                  _token: "{{ csrf_token() }}" 
+                }
+              })
+              .done(function( msg ) {
+                Swal.fire(
+                  'Subscribed!',
+                  'You have successfully subscribe to ' + plan + " Plan.",
+                  'success'
+                ).then((result) => {
+                  location.reload();
+                });
+              });
+            }
+        });
+    });
+
+    $("#frequency").change(function(){
+      var frequency = $(this).val();
+      location.href="?frequency="+frequency;
+    });
+
+    $("#frequency").val("{{ isset($_GET['frequency']) ? $_GET['frequency'] : 'monthly' }}");
+   
 });
 </script>
 @endsection

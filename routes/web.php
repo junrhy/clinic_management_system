@@ -15,9 +15,17 @@ Route::get('/', 'LandingController@index');
 
 Auth::routes();
 
+Route::get('/register-admin', 'AdminController@register');
+Route::post('/create_admin_user', 'AdminController@create_admin_user')->name('create_admin_user');
+
 Route::group(['middleware' => ['is_admin']], function() {
 	Route::get('/admin', 'AdminController@index')    
    		->name('admin');
+
+	Route::get('/admin/change_password', 'AdminController@change_password');
+	Route::post('/admin/update_password', 'AdminController@update_password');
+
+	Route::get('/admin/clients', 'AdminClientController@index');
 });
 
 Route::group(['middleware' => ['is_patient']], function() {
@@ -91,5 +99,9 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::delete('/attachment/delete/{id}', 'AttachmentController@delete');
 
 	Route::get('/subscription', 'SubscriptionController@index');
+	Route::get('/view_estatements', 'SubscriptionController@view_estatements');
+	Route::get('/balance_and_usage', 'SubscriptionController@balance_and_usage');
+	Route::get('/pay_bills', 'SubscriptionController@pay_bills');
+	Route::post('/subscription/subscribe', 'SubscriptionController@subscribe');
 });
 

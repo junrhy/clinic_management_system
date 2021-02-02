@@ -21,8 +21,11 @@ class CreateSubscriptionsTable extends Migration
             $table->string('plan');
             $table->string('currency');
             $table->integer('amount');
+            $table->string('frequency');
             $table->datetime('start');
             $table->datetime('end');
+            $table->integer('bill_day');
+            $table->boolean('is_active');
             $table->timestamps();
         });
     }
