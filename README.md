@@ -1,1 +1,2 @@
-# clinic_management_system
+Developer: Jun Rhy Crodua 
+Project name: CLINIC
