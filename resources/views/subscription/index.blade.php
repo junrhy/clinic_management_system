@@ -21,9 +21,11 @@
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.15);
   }
 
-  .subscribed {
-    color: green;
+  .btn-success {
+    border: 2px solid green;
+    background-color: transparent;
     font-weight: bold;
+    color: green;
   }
 </style>
 @endsection
@@ -120,7 +122,7 @@
                             </td>
                             <td>
                               @if(Auth::user()->client->account_type == "basic")
-                                <span class="subscribed">Subscribed</span>
+                                <button class="btn btn-success"><i class="fa fa-check"></i> Subscribed</button>
                               @else
                                 @if(request()->frequency == 'yearly')
                                 <button data-plan="Basic" data-plan-amount="18899" data-plan-currency="&#8369" class="btn btn-primary subscribe">Subscribe</button>
