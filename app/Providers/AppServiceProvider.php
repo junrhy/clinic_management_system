@@ -17,6 +17,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Request $request)
     {
+        if(env('FORCE_HTTPS',false)) { // Default value should be false for local server
+            URL::forceScheme('https');
+        }
+
         if (Schema::hasTable('domains'))
         {
             $domain_name = $request->gethost();
