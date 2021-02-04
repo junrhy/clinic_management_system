@@ -27,6 +27,7 @@ class CreateClientsTable extends Migration
             $table->string('app_license_no')->nullable();
             $table->boolean('is_active')->default(1);
             $table->boolean('is_suspended')->default(0);
+            $table->boolean('is_vip')->default(0);
             $table->timestamps();
         });
     }

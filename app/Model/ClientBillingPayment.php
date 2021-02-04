@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BillingStatement extends Model
+class ClientBillingPayment extends Model
 {
     public function client()
     {

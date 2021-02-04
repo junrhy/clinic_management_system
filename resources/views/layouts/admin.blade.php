@@ -50,7 +50,26 @@
                     <a href="{{ url('admin/clients') }}"><i class="fa fa-users"></i> Clients</a>
                 </li>
 
-                  
+                <li class="">
+                    <a href="{{ url('admin/subscriptions') }}"><i class="fa fa-gear"></i> Subscriptions</a>
+                </li>
+
+                <li class="">
+                    <a href="{{ url('admin/billings') }}">&nbsp;<i class="fa fa-file"></i> Billings</a>
+                </li>
+
+                <li class="">
+                    <a href="{{ url('admin/payments') }}">&nbsp;<i class="fa fa-file"></i> Payments</a>
+                </li>
+
+                <li class="">
+                    <a href="{{ url('admin/domains') }}">&nbsp;<i class="fa fa-globe"></i> Domains</a>
+                </li>
+
+                <li class="">
+                    <a href="{{ url('admin/settings') }}">&nbsp;<i class="fa fa-gear"></i> Settings</a>
+                </li>
+
                 <li class="">
                     <a href="#profileSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fas fa-user-cog"></i>
