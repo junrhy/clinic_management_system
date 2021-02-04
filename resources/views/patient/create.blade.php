@@ -108,11 +108,6 @@
                         {{ Form::text('contact_number', Input::old('contact_number'), array('class' => 'form-control')) }}
                       </div>
 
-                      <div class="form-group">
-                        {{ Form::label('address', 'Address') }}
-                        {{ Form::text('address', Input::old('address'), array('class' => 'form-control')) }}
-                      </div>
-
                       <div>
                         {{ Form::submit('Submit', array('class' => 'btn btn-round btn-primary')) }}
                       </div>

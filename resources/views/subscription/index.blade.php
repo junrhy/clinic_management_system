@@ -171,7 +171,7 @@ $(document).ready(function() {
 
         Swal.fire({
             title: 'Confirming...',
-            text: "You are about to subscribe to our " + plan + " Plan. By subscribing to this plan, You agreed that your mode of payment will be billed the amount of " + currency+planAmount + " "+ frequency + " until you end your subscription. This payment is non-refundable. Do you wish to continue?",
+            text: "You are about to subscribe to our " + plan + " Plan. By subscribing to this plan, You agreed that your mode of payment will be charge the amount of " + currency+planAmount + " "+ frequency + " until you end your subscription. This payment is non-refundable. Do you wish to continue?",
             type: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

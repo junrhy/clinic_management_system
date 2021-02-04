@@ -22,7 +22,6 @@ class CreateDoctorsTable extends Migration
             $table->string('last_name', 150);
             $table->string('license_no')->nullable();
             $table->string('ptr_no')->nullable();
-            $table->string('address')->nullable();
             $table->string('email')->nullable();
             $table->string('contact_number')->nullable();
             $table->date('dob')->nullable();

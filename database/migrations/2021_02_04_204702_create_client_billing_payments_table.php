@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDomainsTable extends Migration
+class CreateClientBillingPaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateDomainsTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('domains');
-        
-        Schema::create('domains', function (Blueprint $table) {
+        Schema::create('client_billing_payments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('client_id');
-            $table->string('domain_name');
-            $table->string('params')->nullable();
-            $table->string('distibutor_code')->nullable();
+            $table->double('amount');
+            $table->string('currency');
+            $table->string('payment_reference_no');
+            $table->string('payment_transaction_no');
+            $table->string('mode_of_payment');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateDomainsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('domains');
+        Schema::dropIfExists('client_billing_payments');
     }
 }
