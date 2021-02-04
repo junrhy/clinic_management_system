@@ -160,9 +160,17 @@
         
                                               @foreach($detail->attachment as $attachment)
                                                 <small class="attachment">
-                                                  <a href="{{ asset('storage/'. $attachment->path .'/'. $attachment->filename) }}" target="_blank">
-                                                     <i class="fa fa-paperclip" aria-hidden="true"></i> {{ $attachment->filename }}
-                                                  </a>
+                                                  @if(env('FILESYSTEM_DRIVER') == 'spaces')
+                                                      <a href="{{ asset('https://file-server1.sfo2.digitaloceanspaces.com/'. $attachment->path .'/'. $attachment->filename) }}" target="_blank">
+                                                         <i class="fa fa-paperclip" aria-hidden="true"></i> {{ $attachment->filename }}
+                                                      </a>
+                                                  @else
+                                                      <a href="{{ asset('storage/'. $attachment->path .'/'. $attachment->filename) }}" target="_blank">
+                                                         <i class="fa fa-paperclip" aria-hidden="true"></i> {{ $attachment->filename }}
+                                                      </a>
+                                                  @endif
+
+                                                  
                                                 </small>
                                                 <small class="delete-text delete-attachment" data-id="{{ $attachment->id }}" data-filename="{{ $attachment->filename }}">delete</small>
                                                 <br>

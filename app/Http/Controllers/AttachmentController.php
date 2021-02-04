@@ -14,19 +14,34 @@ class AttachmentController extends Controller
     {
         $attachment = Attachment::find($id);
 
-        $attachment->delete();
+        $FILESYSTEM_DRIVER = env('FILESYSTEM_DRIVER', 'local');
 
-        Storage::disk('public')->delete($attachment->path .'/'. $attachment->filename);
+        Storage::disk($FILESYSTEM_DRIVER)->delete($attachment->path .'/'. $attachment->filename);
 
-        $FileSystem = new Filesystem();
-		$directory = 'storage/' . $attachment->path;
+  		if ($FILESYSTEM_DRIVER == "public") {
+  			$FileSystem = new Filesystem();
 
-		if ($FileSystem->exists($directory)) {
-		  $files = $FileSystem->files($directory);
-	
-		  if (empty($files)) {
-		    $FileSystem->deleteDirectory($directory);
-		  }
+            $directory = 'storage/'. $attachment->path;
+        
+            if ($FileSystem->exists($directory)) {
+				$files = $FileSystem->files($directory);
+
+				if (empty($files)) {
+					$FileSystem->deleteDirectory($directory);
+				}
+			}
+        }
+		
+
+		if ($FILESYSTEM_DRIVER == "spaces") {
+			if ( in_array( $attachment->path, Storage::disk($FILESYSTEM_DRIVER)->directories() ) ) {
+				
+				if ( empty( Storage::disk($FILESYSTEM_DRIVER)->files($attachment->path) ) ) {
+					Storage::disk($FILESYSTEM_DRIVER)->deleteDirectory($attachment->path);
+				}
+			}
 		}
+
+		$attachment->delete();
     }
 }
