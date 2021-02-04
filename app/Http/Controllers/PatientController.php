@@ -194,7 +194,7 @@ class PatientController extends Controller
 
             foreach ($files as $file):
                 try {
-                    Storage::disk($FILESYSTEM_DRIVER)->put($folder_name .'/'. $file->getClientOriginalName(), file_get_contents($file));
+                    Storage::disk($FILESYSTEM_DRIVER)->put($folder_name .'/'. $file->getClientOriginalName(), file_get_contents($file), 'public');
                 } catch (Exception $e) {
                     dd($e);
                 }
@@ -244,20 +244,28 @@ class PatientController extends Controller
                 $attachment->delete();
 
                 Storage::disk($FILESYSTEM_DRIVER)->delete($attachment->path .'/'. $attachment->filename);
-
-                $FileSystem = new Filesystem();
-
+               
                 if ($FILESYSTEM_DRIVER == "public") {
-                    $directory = 'storage/' . $attachment->path;
-                } else {
-                    $directory = $attachment->path;
+                    $FileSystem = new Filesystem();
+
+                    $directory = 'storage/'. $attachment->path;
+                
+                    if ($FileSystem->exists($directory)) {
+                        $files = $FileSystem->files($directory);
+
+                        if (empty($files)) {
+                            $FileSystem->deleteDirectory($directory);
+                        }
+                    }
                 }
                 
-                if ($FileSystem->exists($directory)) {
-                    $files = $FileSystem->files($directory);
 
-                    if (empty($files)) {
-                    $FileSystem->deleteDirectory($directory);
+                if ($FILESYSTEM_DRIVER == "spaces") {
+                    if ( in_array( $attachment->path, Storage::disk($FILESYSTEM_DRIVER)->directories() ) ) {
+                        
+                        if ( empty( Storage::disk($FILESYSTEM_DRIVER)->files($attachment->path) ) ) {
+                            Storage::disk($FILESYSTEM_DRIVER)->deleteDirectory($attachment->path);
+                        }
                     }
                 }
            endforeach;
