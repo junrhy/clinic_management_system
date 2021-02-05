@@ -161,7 +161,7 @@
                                               @foreach($detail->attachment as $attachment)
                                                 <small class="attachment">
                                                   @if(env('FILESYSTEM_DRIVER') == 'spaces')
-                                                      <a href="{{ asset('https://file-server1.sfo2.digitaloceanspaces.com/'. $attachment->path .'/'. $attachment->filename) }}" target="_blank">
+                                                      <a href="{{ asset('https://file-server1.sfo2.digitaloceanspaces.com/client'. auth()->user()->client_id .'/'. $attachment->path .'/'. $attachment->filename) }}" target="_blank">
                                                          <i class="fa fa-paperclip" aria-hidden="true"></i> {{ $attachment->filename }}
                                                       </a>
                                                   @else

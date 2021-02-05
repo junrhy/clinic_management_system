@@ -67,7 +67,13 @@ Downloaded by: {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}<br>
 
                     @foreach($medical_record->attachment as $attachment)
                       <small class="attachment">
-                        {{ asset('storage/'. $attachment->path .'/'. str_replace(' ', '%20', $attachment->filename) ) }}
+                        @if(env('FILESYSTEM_DRIVER') == 'public')
+                          {{ asset('storage/'. $attachment->path .'/'. str_replace(' ', '%20', $attachment->filename) ) }}
+                        @endif
+
+                        @if(env('FILESYSTEM_DRIVER') == 'spaces')
+                          {{ asset('https://file-server1.sfo2.digitaloceanspaces.com/client'. auth()->user()->client_id .'/'. $attachment->path .'/'. str_replace(' ', '%20', $attachment->filename) ) }}
+                        @endif
                       </small>
                       <br>
                     @endforeach
