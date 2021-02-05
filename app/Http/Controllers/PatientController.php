@@ -190,11 +190,11 @@ class PatientController extends Controller
         if(!empty($files)):
             $folder_name = $request->patient_id . '-' . date('m-d-Y-H-i-s');
 
-            Storage::disk($FILESYSTEM_DRIVER)->makeDirectory($folder_name);
+            Storage::disk($FILESYSTEM_DRIVER)->makeDirectory('client' . Auth::user()->client_id .'/'. $folder_name);
 
             foreach ($files as $file):
                 try {
-                    Storage::disk($FILESYSTEM_DRIVER)->put($folder_name .'/'. $file->getClientOriginalName(), file_get_contents($file), 'public');
+                    Storage::disk($FILESYSTEM_DRIVER)->put('client' . Auth::user()->client_id .'/'. $folder_name .'/'. $file->getClientOriginalName(), file_get_contents($file), 'public');
                 } catch (Exception $e) {
                     dd($e);
                 }
@@ -243,7 +243,7 @@ class PatientController extends Controller
             foreach ($attachments as $attachment):
                 $attachment->delete();
 
-                Storage::disk($FILESYSTEM_DRIVER)->delete($attachment->path .'/'. $attachment->filename);
+                Storage::disk($FILESYSTEM_DRIVER)->delete('client' . Auth::user()->client_id .'/'. $attachment->path .'/'. $attachment->filename);
                
                 if ($FILESYSTEM_DRIVER == "public") {
                     $FileSystem = new Filesystem();
@@ -261,10 +261,10 @@ class PatientController extends Controller
                 
 
                 if ($FILESYSTEM_DRIVER == "spaces") {
-                    if ( in_array( $attachment->path, Storage::disk($FILESYSTEM_DRIVER)->directories() ) ) {
+                    if ( in_array( 'client' . Auth::user()->client_id .'/'. $attachment->path, Storage::disk($FILESYSTEM_DRIVER)->directories('client' . Auth::user()->client_id) ) ) {
                         
-                        if ( empty( Storage::disk($FILESYSTEM_DRIVER)->files($attachment->path) ) ) {
-                            Storage::disk($FILESYSTEM_DRIVER)->deleteDirectory($attachment->path);
+                        if ( empty( Storage::disk($FILESYSTEM_DRIVER)->files('client' . Auth::user()->client_id .'/'. $attachment->path) ) ) {
+                            Storage::disk($FILESYSTEM_DRIVER)->deleteDirectory('client' . Auth::user()->client_id .'/'. $attachment->path);
                         }
                     }
                 }
