@@ -3,7 +3,7 @@
 @section('page_level_script')
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/e3497de5a4.js" crossorigin="anonymous"></script>
-<script src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
+<script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 @endsection
 

@@ -43,6 +43,16 @@
   .nodisplay {
     display: none;
   }
+
+  .btn-round-custom {
+    border-width: 1px;
+    border-radius: 30px !important;
+    padding: 5px 8px;
+  }
+
+  .btn-round-custom:hover {
+    background-color: #00cfd1;
+  }
 </style>
 @endsection
 
@@ -98,10 +108,6 @@
                         <td class="col-md-2 text-right">Contact No.:</td>
                         <td><span style="font-family: sans-serif;">{{ $patient->contact_number }}</span></td>
                       </tr>
-                      <tr>
-                        <td class="col-md-2 text-right">Address:</td>
-                        <td><span style="font-family: sans-serif;">{{ $patient->address }}</span></td>
-                      </tr>
                     </table>
                   </div>
 
@@ -109,7 +115,7 @@
                     <div class="row" style="margin-top:30px;">
                       <h4 class="row" style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;">
                         <i class="fa fa-user-md" aria-hidden="true"></i> Medical
-                        <span id="add_patient_record" class="{{ App\Model\FeatureUser::is_feature_allowed('add_patient_detail', Auth::user()->id) }}" style="cursor: pointer;">
+                        <span id="add_patient_record" class="{{ App\Model\FeatureUser::is_feature_allowed('add_patient_detail', Auth::user()->id) }} btn-white btn-icon btn-round-custom" style="cursor: pointer;">
                             <i class="fa fa-plus"></i>
                         </span>
                       </h4>
@@ -265,7 +271,7 @@
                     <div class="row">
                       <h4 class="row" style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;">
                         <i class="fa fa-file-text" aria-hidden="true"></i> Prescriptions
-                        <span id="add_prescription" class="{{ App\Model\FeatureUser::is_feature_allowed('add_patient_prescription', Auth::user()->id) }}" style="cursor: pointer;">
+                        <span id="add_prescription" class="{{ App\Model\FeatureUser::is_feature_allowed('add_patient_prescription', Auth::user()->id) }} btn-white btn-icon btn-round-custom" style="cursor: pointer;">
                             <i class="fa fa-plus"></i>
                         </span>
                       </h4>
