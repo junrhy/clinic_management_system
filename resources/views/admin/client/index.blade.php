@@ -35,6 +35,7 @@
                                     <th>License No.</th>
                                     <th>Is Active?</th>
                                     <th>Is Suspended?</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -50,6 +51,9 @@
                                     <td>{{ $client->app_license_no }}</td>
                                     <td>{{ $client->is_active }}</td>
                                     <td>{{ $client->is_suspended }}</td>
+                                    <td>
+                                        <a href="/admin/client/{{ $client->id }}"><i class="fa fa-pencil"></i> Edit</a>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
