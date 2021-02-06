@@ -26,7 +26,9 @@ Route::group(['middleware' => ['is_admin']], function() {
 	Route::post('/admin/update_password', 'AdminController@update_password');
 
 	Route::get('/admin/clients', 'AdminClientController@index');
-	
+	Route::get('/admin/client/{id}', 'AdminClientController@edit');
+	Route::put('/admin/client/update/{id}', 'AdminClientController@update')->name('admin.client.update');
+
 	Route::get('/admin/subscriptions', 'AdminSubscriptionController@index');
 	
 	Route::get('/admin/billings', 'AdminBillingController@index');
@@ -37,7 +39,7 @@ Route::group(['middleware' => ['is_admin']], function() {
 	
 	Route::get('/admin/settings', 'AdminSettingController@index');
 	Route::get('/admin/setting/{id}', 'AdminSettingController@edit');
-	Route::put('/admin/setting/update/{id}', 'AdminSettingController@update')->name('setting.update');
+	Route::put('/admin/setting/update/{id}', 'AdminSettingController@update')->name('admin.setting.update');
 });
 
 Route::group(['middleware' => ['is_patient']], function() {
