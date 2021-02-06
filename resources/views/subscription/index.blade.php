@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading">Choose your Plan</div>
+                <div class="panel-heading">Choose the best plan for you.</div>
 
                 <div class="panel-body">
                   <div class="row">

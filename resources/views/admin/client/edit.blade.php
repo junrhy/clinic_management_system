@@ -21,21 +21,31 @@
                 <div class="panel-heading">Clients</div>
 
                 <div class="panel-body">
-                    <div class="row col-md-3">
+                    <div class="row col-md-2">
                           {{ Form::model($client, array('route' => array('admin.client.update', $client->id), 'method' => 'PUT')) }}
                             <div class="form-group">
                               {{ Form::label('app_license_no', 'App License Number') }}
                               {{ Form::text('app_license_no', Input::old('app_license_no'), array('class' => 'form-control')) }}
                             </div>
 
+                             <div class="form-group">
+                              {{ Form::label('is_vip', 'Is VIP?') }}
+                              {{ Form::select('is_vip', ['0' => 'No', '1' => 'Yes'], Input::old('is_vip'), array('class' => 'form-control')) }}
+                            </div>
+
                             <div class="form-group">
                               {{ Form::label('is_active', 'Is Active?') }}
-                              {{ Form::text('is_active', Input::old('is_active'), array('class' => 'form-control')) }}
+                              {{ Form::select('is_active', ['0' => 'No', '1' => 'Yes'], Input::old('is_active'), array('class' => 'form-control')) }}
                             </div>
 
                             <div class="form-group">
                               {{ Form::label('is_suspended', 'Is Suspended?') }}
-                              {{ Form::text('is_suspended', Input::old('is_suspended'), array('class' => 'form-control')) }}
+                              {{ Form::select('is_suspended', ['0' => 'No', '1' => 'Yes'], Input::old('is_suspended'), array('class' => 'form-control')) }}
+                            </div>
+
+                            <div class="form-group">
+                              {{ Form::label('is_disconnected', 'Is Disconnected?') }}
+                              {{ Form::select('is_disconnected', ['0' => 'No', '1' => 'Yes'], Input::old('is_disconnected'), array('class' => 'form-control')) }}
                             </div>
                             
                             {{ Form::submit('Save Changes', array('class' => 'btn btn-primary btn-round')) }}

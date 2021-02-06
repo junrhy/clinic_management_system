@@ -28,6 +28,10 @@ Route::group(['middleware' => ['is_admin']], function() {
 	Route::get('/admin/clients', 'AdminClientController@index');
 	Route::get('/admin/client/{id}', 'AdminClientController@edit');
 	Route::put('/admin/client/update/{id}', 'AdminClientController@update')->name('admin.client.update');
+	Route::get('/admin/client/disconnection_reasons/{id}', 'AdminClientController@show_disconnection_reasons');
+	Route::get('/admin/client/disconnection_reason/create/{id}', 'AdminClientController@create_disconnection_reason');
+	Route::post('/admin/client/disconnection_reason/store', 'AdminClientController@store_disconnection_reason');
+	Route::delete('/admin/client/delete_disconnection_status/{id}', 'AdminClientController@delete_disconnection_reason');
 
 	Route::get('/admin/subscriptions', 'AdminSubscriptionController@index');
 	

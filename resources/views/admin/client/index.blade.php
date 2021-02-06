@@ -33,8 +33,10 @@
                                     <th>Account No.</th>
                                     <th>Account Type</th>
                                     <th>License No.</th>
+                                    <th>Is VIP?</th>
                                     <th>Is Active?</th>
                                     <th>Is Suspended?</th>
+                                    <th>Is Disconnected?</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -49,8 +51,16 @@
                                     <td>{{ $client->account_number }}</td>
                                     <td>{{ $client->account_type }}</td>
                                     <td>{{ $client->app_license_no }}</td>
-                                    <td>{{ $client->is_active }}</td>
-                                    <td>{{ $client->is_suspended }}</td>
+                                    <td>{{ $client->is_vip == 1 ? 'Yes' : 'No' }}</td>
+                                    <td>{{ $client->is_active == 1 ? 'Yes' : 'No' }}</td>
+                                    <td>{{ $client->is_suspended == 1 ? 'Yes' : 'No' }}</td>
+                                    <td>
+                                        {{ $client->is_disconnected == 1 ? 'Yes' : 'No' }}
+
+                                        @if($client->is_disconnected)
+                                            | <a href="/admin/client/disconnection_reasons/{{ $client->id }}">Why?</a>
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="/admin/client/{{ $client->id }}"><i class="fa fa-pencil"></i> Edit</a>
                                     </td>
