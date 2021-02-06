@@ -31,17 +31,19 @@
                                     <th>Frequency</th>
                                     <th>Start</th>
                                     <th>End</th>
+                                    <th>Remaining</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($subscriptions as $subscription)
                                 <tr>
-                                    <td>{{ $subscription->client->name }} ({{ $payment->client->account_number }})</td>
+                                    <td>{{ $subscription->client->name }} ( #{{ $subscription->client->account_number }} )</td>
                                     <td>{{ $subscription->plan }}</td>
                                     <td>{{ $subscription->amount }}</td>
                                     <td>{{ $subscription->frequency }}</td>
-                                    <td>{{ $subscription->start }}</td>
-                                    <td>{{ $subscription->end }}</td>
+                                    <td>{{ $subscription->start->format('M d, Y') }}</td>
+                                    <td>{{ $subscription->end->format('M d, Y') }}</td>
+                                    <td>{{ $subscription->end->diffInDays($subscription->start) }} Days</td>
                                 </tr>
                                 @endforeach
                             </tbody>

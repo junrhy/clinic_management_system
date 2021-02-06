@@ -25,9 +25,11 @@ class CreateClientsTable extends Migration
             $table->string('account_number')->nullable();
             $table->string('account_type')->default('free');
             $table->string('app_license_no')->nullable();
+            $table->boolean('is_vip')->default(0);
             $table->boolean('is_active')->default(1);
             $table->boolean('is_suspended')->default(0);
-            $table->boolean('is_vip')->default(0);
+            $table->boolean('is_disconnected')->default(0);
+            $table->text('disconnection_reason')->nullable();
             $table->timestamps();
         });
     }
