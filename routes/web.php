@@ -36,7 +36,14 @@ Route::group(['middleware' => ['is_admin']], function() {
 	Route::get('/admin/subscriptions', 'AdminSubscriptionController@index');
 	
 	Route::get('/admin/billings', 'AdminBillingController@index');
-	
+	Route::get('/admin/billing/view_estatements/{id}', 'AdminBillingController@view_estatements');
+	Route::get('/admin/billing/create/{id}', 'AdminBillingController@create_estatement');
+	Route::post('/admin/billing/store', 'AdminBillingController@store_estatement');
+	Route::get('/admin/billing/edit/{id}', 'AdminBillingController@edit_estatement');
+	Route::put('/admin/billing/update/{id}', 'AdminBillingController@update_estatement')->name('admin.billing.update');
+	Route::delete('/admin/billing/delete/{id}', 'AdminBillingController@delete_estatement');
+	Route::put('/admin/billing/publish/{id}', 'AdminBillingController@publish_estatement');
+
 	Route::get('/admin/payments', 'AdminPaymentController@index');
 	
 	Route::get('/admin/domains', 'AdminDomainController@index');

@@ -7,7 +7,7 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-12">
-                        <h2>Settings <small class="text-muted">Manage web app domains</small></h2>
+                        <h2>Settings <small class="text-muted">Manage web app settings</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                         <ul class="breadcrumb float-md-right">

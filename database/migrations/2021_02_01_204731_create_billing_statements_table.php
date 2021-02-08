@@ -20,22 +20,21 @@ class CreateBillingStatementsTable extends Migration
             $table->integer('client_id');
             $table->datetime('billed_at');
             $table->datetime('due_at');
-            $table->datetime('final_due_at');
             $table->string('currency');
             $table->double('amount_due');
             $table->double('tax')->nullable();
             $table->double('discount')->nullable();
-            $table->double('unpaid_subscription')->nullable();
+            $table->double('unpaid')->nullable();
             $table->double('penalties')->nullable();
             $table->double('interest')->nullable();
             $table->string('payment_reference_no')->nullable();
             $table->datetime('last_payment_date')->nullable();
             $table->string('last_payment_transaction_no')->nullable();
-            $table->string('last_payment_applicable_months')->nullable();
             $table->double('last_payment_amount')->nullable();
             $table->double('outstanding_balance')->nullable();
             $table->double('advance_payment')->nullable();
             $table->boolean('is_latest')->nullable();
+            $table->boolean('is_publish')->default(0);
             $table->timestamps();
         });
     }
