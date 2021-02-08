@@ -25,6 +25,11 @@
     color: #FF6065;
     font-weight: bold;
   }
+
+  .balance_value {
+    font-size: 14pt;
+    font-family: sans-serif;
+  }
 </style>
 @endsection
 
@@ -59,24 +64,40 @@
                       <div class="table-responsive col-md-5">
                         <table class="table">
                             <tr>
+                              <td>Account Number</td>
+                              <td><span class="balance_value">{{ auth()->user()->client->account_number }}</span></td>
+                            </tr>
+                            <tr>
                               <td>Previous bill balance</td>
-                              <td></td>
+                              <td><span class="balance_value">{{ number_format($billing_statement->unpaid, 2) }}</span></td>
                             </tr>
                             <tr>
                               <td>Current bill charges</td>
-                              <td></td>
+                              <td><span class="balance_value">{{ number_format($billing_statement->amount_due, 2) }}</span></td>
+                            </tr>
+                            <tr>
+                              <td>Additional</td>
+                              <td>
+                                
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Deductions</td>
+                              <td>
+                                
+                              </td>
                             </tr>
                             <tr>
                               <td>Total amount due</td>
-                              <td></td>
+                              <td><span class="balance_value">{{ number_format($billing_statement->outstanding_balance, 2) }}</span></td>
                             </tr>
                             <tr>
                               <td>Payment due date</td>
-                              <td></td>
+                              <td><span class="balance_value">{{ $billing_statement->due_at->format('M d, Y') }}</span></td>
                             </tr>
                             <tr>
                               <td align="center">
-                                <a href="{{ url('view_estatements') }}" class="btn btn-primary">View eStatements</a>
+                                <a href="{{ url('view_estatements') }}" class="btn btn-primary">View Statements</a>
                               </td>
                               <td align="center">
                                 <a href="{{ url('pay_bills') }}" class="btn btn-primary">Pay bills now</a>

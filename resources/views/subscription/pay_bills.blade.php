@@ -60,11 +60,11 @@
                         <table class="table">
                             <tr>
                               <td>Account Number: </td>
-                              <td><span style="">{{ Auth::user()->client->account_number }}</span></td>
+                              <td><span style="" id="account_number" data-account-number="{{ Auth::user()->client->account_number }}">{{ Auth::user()->client->account_number }}</span></td>
                             </tr>
                             <tr>
                               <td width="37%">Amount to be paid: </td>
-                              <td><input type="text" name="amount" class="form-control"></td>
+                              <td><input type="number" name="amount" min="200" value="{{ $billing_statement != null ? $billing_statement->outstanding_balance : null }}" class="form-control"></td>
                             </tr>
                         </table>
 
