@@ -19,7 +19,9 @@ class CreateClientsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email', 150);
+            $table->boolean('is_email_verified')->default(0);
             $table->string('secondary_email', 150)->nullable();
+            $table->boolean('is_email2_verified')->default(0);
             $table->string('contact')->nullable();
             $table->string('logo')->nullable();
             $table->string('account_number')->nullable();

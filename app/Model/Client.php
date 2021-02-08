@@ -27,4 +27,14 @@ class Client extends Model
     {
         return $this->belongsTo(User::class, 'id', 'client_id');
     }
+
+    public function billing_statements()
+    {
+        return $this->hasMany(BillingStatement::class);
+    }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
 }
