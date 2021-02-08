@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Model\Client;
 use App\Model\Subscription;
+use App\Model\BillingStatement;
 
 use Auth;
 use Carbon\Carbon;
@@ -29,17 +30,30 @@ class SubscriptionController extends Controller
 
     public function view_estatements()
     {
-    	return view('subscription.view_estatements');
+        $billing_statements = BillingStatement::where('is_publish', true)->orderBy('billed_at', 'DESC')->get();
+
+    	return view('subscription.view_estatements')
+                    ->with('billing_statements', $billing_statements);
     }
 
     public function balance_and_usage()
     {
-    	return view('subscription.balance_and_usage');
+        $billing_statement = BillingStatement::where('is_latest', true)
+                                    ->where('is_publish', true)
+                                    ->first();
+
+    	return view('subscription.balance_and_usage')
+                    ->with('billing_statement', $billing_statement);
     }
 
     public function pay_bills()
     {
-    	return view('subscription.pay_bills');
+        $billing_statement = BillingStatement::where('is_latest', true)
+                                    ->where('is_publish', true)
+                                    ->first();
+
+    	return view('subscription.pay_bills')
+                    ->with('billing_statement', $billing_statement);
     }
 
     public function subscribe(Request $request)

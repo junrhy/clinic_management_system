@@ -192,7 +192,7 @@
                             <a href="{{ url('balance_and_usage') }}">Balance</a>
                         </li>
                         <li>
-                            <a href="{{ url('view_estatements') }}">eStatements</a>
+                            <a href="{{ url('view_estatements') }}">Statements</a>
                         </li>
                         @endif
 
@@ -231,8 +231,8 @@
                         </form>
 
                         <div class="float-right" style="margin: 8px;font-size: 11pt;color:#fff;">
-                            <strong>{{ strtoupper(Auth::user()->client->account_type) }}</strong> Plan
-
+                            <strong><i class="fa fa-user-circle"></i>  {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</strong>
+                            
                             @if(Auth::user()->client->is_active == 0)
                                 <strong style="color:#000;">( This account is not active )</strong>
                             @endif
