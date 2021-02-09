@@ -1,5 +1,11 @@
 @extends('layouts.admin')
 
+@section('page_level_script')
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<script src="https://kit.fontawesome.com/e3497de5a4.js" crossorigin="anonymous"></script>
+@endsection
+
 @section('page_level_css')
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
 
@@ -34,7 +40,7 @@
 
                 <div class="panel-body">
                     <div class="row col-md-3">
-                          {{ Form::model($billing_statement, array('route' => array('admin.billing.update', $client->id), 'method' => 'PUT')) }}
+                          {{ Form::model($billing_statement, array('route' => array('admin.billing.update', $billing_statement->id), 'method' => 'PUT')) }}
                             <div class="form-group">
                               {{ Form::label('billed_at', 'Bill Date') }}
                               {{ Form::text('billed_at', $billing_statement->billed_at->format('m/d/Y'), array('class' => 'form-control')) }}
@@ -47,66 +53,30 @@
 
                             <div class="form-group">
                               {{ Form::label('amount_due', 'Amount Due') }}
-                              {{ Form::number('amount_due', Input::old('amount_due'), array('class' => 'form-control', 'required')) }}
+                              {{ Form::number('amount_due', Input::old('amount_due'), array('class' => 'form-control', 'required',  'step' => '.01')) }}
                             </div>
 
                             <h3 style="color: #018d8e; font-family: 'arial';">Additional</h3>
                             <div class="form-group">
-                              {{ Form::label('tax', 'Tax') }}
-                              {{ Form::number('tax', Input::old('tax'), array('class' => 'form-control', 'required')) }}
-                            </div>
-
-                            <div class="form-group">
-                              {{ Form::label('unpaid', 'Unpaid') }}
-                              {{ Form::number('unpaid', Input::old('unpaid'), array('class' => 'form-control', 'required')) }}
+                              {{ Form::label('amount_past_due', 'Amount Past Due') }}
+                              {{ Form::number('amount_past_due', Input::old('amount_past_due'), array('class' => 'form-control', 'required',  'step' => '.01')) }}
                             </div>
 
                             <div class="form-group">
                               {{ Form::label('penalties', 'Penalties') }}
-                              {{ Form::number('penalties', Input::old('penalties'), array('class' => 'form-control', 'required')) }}
+                              {{ Form::number('penalties', Input::old('penalties'), array('class' => 'form-control', 'required',  'step' => '.01')) }}
                             </div>
 
                             <h3 style="color: #018d8e; font-family: 'arial';">Deductions</h3>
-                            <div class="form-group">
-                              {{ Form::label('interest', 'Interest') }}
-                              {{ Form::number('interest', Input::old('interest'), array('class' => 'form-control', 'required')) }}
-                            </div>
 
                             <div class="form-group">
                               {{ Form::label('discount', 'Discount') }}
-                              {{ Form::number('discount', Input::old('discount'), array('class' => 'form-control', 'required')) }}
+                              {{ Form::number('discount', Input::old('discount'), array('class' => 'form-control', 'required',  'step' => '.01')) }}
                             </div>
 
                             <div class="form-group">
                               {{ Form::label('advance_payment', 'Advance Payment') }}
-                              {{ Form::number('advance_payment', Input::old('advance_payment'), array('class' => 'form-control', 'required')) }}
-                            </div>
-
-                            <h3 style="color: #018d8e; font-family: 'arial';">Last Payment</h3>
-                            <div class="form-group">
-                              {{ Form::label('last_payment_date', 'Last Payment Date') }}
-                              {{ Form::text('last_payment_date', Input::old('last_payment_date'), array('class' => 'form-control', 'readonly')) }}
-                            </div>
-
-                            <div class="form-group">
-                              {{ Form::label('last_payment_transaction_no', 'Last Payment Transaction Number') }}
-                              {{ Form::text('last_payment_transaction_no', Input::old('last_payment_transaction_no'), array('class' => 'form-control', 'readonly')) }}
-                            </div>
-
-                            <div class="form-group">
-                              {{ Form::label('last_payment_amount', 'Last Payment Amount') }}
-                              {{ Form::text('last_payment_amount', Input::old('last_payment_amount'), array('class' => 'form-control', 'readonly')) }}
-                            </div>
-
-                            <h3 style="color: #018d8e; font-family: 'arial';">Total</h3>
-                            <div class="form-group">
-                              {{ Form::label('outstanding_balance', 'Outstanding balance') }} <small>(auto-calculated)</small>
-                              {{ Form::text('outstanding_balance', Input::old('outstanding_balance'), array('class' => 'form-control', 'readonly')) }}
-                            </div>
-
-                            <div class="form-group">
-                              {{ Form::label('payment_reference_no', 'Payment Reference No.') }} <small>(auto-generated)</small>
-                              {{ Form::text('payment_reference_no', Input::old('payment_reference_no'), array('class' => 'form-control', 'readonly')) }}
+                              {{ Form::number('advance_payment', Input::old('advance_payment'), array('class' => 'form-control', 'required',  'step' => '.01')) }}
                             </div>
 
                             <input type="hidden" name="client_id" value="{{ $client->id }}">
@@ -143,27 +113,21 @@ $(document).ready(function() {
     // isRTL: true
   });
 
-  function calculate_balance() {
-    amount_due = parseFloat($("#amount_due").val());
+  $("#billed_at").on("keyup change", function(e) {
+    $("#due_at").val($("#billed_at").val());
+  });
 
-    tax = parseFloat($("#tax").val());
-    unpaid = parseFloat($("#unpaid").val());
-    penalties = parseFloat($("#penalties").val());
+  $("#due_at").on("keyup change", function(e) {
+    if (new Date($("#due_at").val()) < new Date($("#billed_at").val())) {
+      
+      Swal.fire({
+        title: 'Not Allowed!',
+        text: "Due date must be later or equal the Bill date.",
+        type: 'error'
+      });
 
-    interest = parseFloat($("#interest").val());
-    discount = parseFloat($("#discount").val());
-    advance_payment = parseFloat($("#advance_payment").val());
-
-    additional = tax + unpaid + penalties;
-    deductions = interest + discount + advance_payment;
-
-    outstanding_balance = parseFloat( (amount_due + additional) - deductions );
-
-    $("#outstanding_balance").val(outstanding_balance);
-  }
-
-  $("#amount_due, #tax, #unpaid, #penalties, #interest, #discount, #advance_payment").on("keyup change", function(e) {
-    calculate_balance();
+      $("#due_at").val($("#billed_at").val());
+    }
   });
 });
 </script>

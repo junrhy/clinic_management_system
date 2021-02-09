@@ -34,6 +34,7 @@ Route::group(['middleware' => ['is_admin']], function() {
 	Route::delete('/admin/client/delete_disconnection_status/{id}', 'AdminClientController@delete_disconnection_reason');
 
 	Route::get('/admin/subscriptions', 'AdminSubscriptionController@index');
+	Route::get('/admin/subscription/renew/{id}', 'AdminSubscriptionController@renew');
 	
 	Route::get('/admin/billings', 'AdminBillingController@index');
 	Route::get('/admin/billing/view_estatements/{id}', 'AdminBillingController@view_estatements');
@@ -43,6 +44,7 @@ Route::group(['middleware' => ['is_admin']], function() {
 	Route::put('/admin/billing/update/{id}', 'AdminBillingController@update_estatement')->name('admin.billing.update');
 	Route::delete('/admin/billing/delete/{id}', 'AdminBillingController@delete_estatement');
 	Route::put('/admin/billing/publish/{id}', 'AdminBillingController@publish_estatement');
+	Route::get('/admin/billing/view/{id}', 'AdminBillingController@pdf_estatement');
 
 	Route::get('/admin/payments', 'AdminPaymentController@index');
 	

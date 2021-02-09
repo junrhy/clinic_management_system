@@ -18,6 +18,31 @@ class AdminSettingTableSeeder extends Seeder
         $AdminSetting->value = '1';
         $AdminSetting->save();
 
+        $AdminSetting = new AdminSetting();
+        $AdminSetting->name = 'app_currency';
+        $AdminSetting->value = 'PHP';
+        $AdminSetting->save();
+
+        $AdminSetting = new AdminSetting();
+        $AdminSetting->name = 'app_currency_html_code';
+        $AdminSetting->value = '&#8369;';
+        $AdminSetting->save();
+
+        $AdminSetting = new AdminSetting();
+        $AdminSetting->name = 'bill_contact_numbers';
+        $AdminSetting->value = '09260049848';
+        $AdminSetting->save();
+
+        $AdminSetting = new AdminSetting();
+        $AdminSetting->name = 'bill_contact_email';
+        $AdminSetting->value = 'jrcrodua@gmail.com';
+        $AdminSetting->save();
+
+        $AdminSetting = new AdminSetting();
+        $AdminSetting->name = 'bill_contact_persons';
+        $AdminSetting->value = 'Jun Rhy Crodua';
+        $AdminSetting->save();
+
         $this->command->info('Admin settings list seeded.');
     }
 }

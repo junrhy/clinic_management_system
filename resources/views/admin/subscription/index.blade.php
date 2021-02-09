@@ -1,5 +1,19 @@
 @extends('layouts.admin')
 
+@section('page_level_script')
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<script src="https://kit.fontawesome.com/e3497de5a4.js" crossorigin="anonymous"></script>
+@endsection
+
+@section('page_level_css')
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+
+<style type="text/css">
+
+</style>
+@endsection
+
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -32,6 +46,7 @@
                                     <th>Start</th>
                                     <th>End</th>
                                     <th>Remaining</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,7 +58,10 @@
                                     <td>{{ $subscription->frequency }}</td>
                                     <td>{{ $subscription->start->format('M d, Y') }}</td>
                                     <td>{{ $subscription->end->format('M d, Y') }}</td>
-                                    <td>{{ $subscription->end->diffInDays($subscription->start) }} Days</td>
+                                    <td>{{ \Carbon\Carbon::now()->diffInDays($subscription->end, false) }} Days</td>
+                                    <td>
+                                        <a href="/admin/subscription/renew/{{ $subscription->id }}">Renew</a>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -54,4 +72,16 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('page_level_footer_script')
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+    
+});
+</script>
 @endsection

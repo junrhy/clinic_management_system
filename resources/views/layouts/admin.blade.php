@@ -55,11 +55,11 @@
                 </li>
 
                 <li class="">
-                    <a href="{{ url('admin/billings') }}">&nbsp;<i class="fa fa-file"></i> Billings</a>
+                    <a href="{{ url('admin/billings') }}">&nbsp;<i class="fa fa-file-alt"></i> Billings</a>
                 </li>
 
                 <li class="">
-                    <a href="{{ url('admin/payments') }}">&nbsp;<i class="fa fa-file"></i> Payments</a>
+                    <a href="{{ url('admin/payments') }}">&nbsp;<i class="fa fa-file-alt"></i> Payments</a>
                 </li>
 
                 <li class="">

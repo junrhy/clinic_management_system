@@ -55,7 +55,7 @@
         <h5 class="modal-title">Activate your Business Account</h5>
       </div>
       <div class="modal-body">
-        <h3 class="text-center" id="upgrade-message">Aloha! We are so happy to see you here!</h3><br> As you notice that your account has been inactive, You need to <span class="text-upgrade">Activate your account</span> for us to continue serving you and your company. We are so committed to be your best medical software partner in the world as you run and grow your business. We will never disappoints you. So let's do it!
+        <h3 class="text-center" id="upgrade-message">Greetings! We are so happy to see you here.</h3><br> As you notice that your account has been inactive, You need to <span class="text-upgrade">Activate your account</span> for us to continue serving you and your company. We are so committed to be your best medical software partner in the world as you run and grow your company. We will never disappoints you. So let's do it!
         
       </div>
       <div class="modal-footer">
