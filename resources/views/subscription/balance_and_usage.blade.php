@@ -62,47 +62,47 @@
 
                   <div class="row">
                       <div class="table-responsive col-md-5">
-                        <table class="table">
-                            <tr>
-                              <td>Account Number</td>
-                              <td><span class="balance_value">{{ auth()->user()->client->account_number }}</span></td>
-                            </tr>
-                            <tr>
-                              <td>Previous bill balance</td>
-                              <td><span class="balance_value">{{ number_format($billing_statement->unpaid, 2) }}</span></td>
-                            </tr>
-                            <tr>
-                              <td>Current bill charges</td>
-                              <td><span class="balance_value">{{ number_format($billing_statement->amount_due, 2) }}</span></td>
-                            </tr>
-                            <tr>
-                              <td>Additional</td>
-                              <td>
-                                
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Deductions</td>
-                              <td>
-                                
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Total amount due</td>
-                              <td><span class="balance_value">{{ number_format($billing_statement->outstanding_balance, 2) }}</span></td>
-                            </tr>
-                            <tr>
-                              <td>Payment due date</td>
-                              <td><span class="balance_value">{{ $billing_statement->due_at->format('M d, Y') }}</span></td>
-                            </tr>
-                            <tr>
-                              <td align="center">
-                                <a href="{{ url('view_estatements') }}" class="btn btn-primary">View Statements</a>
-                              </td>
-                              <td align="center">
-                                <a href="{{ url('pay_bills') }}" class="btn btn-primary">Pay bills now</a>
-                              </td>
-                            </tr>
+                        <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>Account Number</th>
+                                <th><span class="balance_value">{{ auth()->user()->client->account_number }}</span></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Bill Period</td>
+                                <td><span class="balance_value">{{ $bill_period }}</span></td>
+                              </tr>
+                              <tr>
+                                <td>Previous bill balance</td>
+                                <td><span class="balance_value">{{ number_format($prev_bill_balance, 2) }}</span></td>
+                              </tr>
+                              <tr>
+                                <td>Current bill charges</td>
+                                <td><span class="balance_value">{{ number_format($current_bill_charges, 2) }}</span></td>
+                              </tr>
+                              <tr>
+                                <td>Adjustments</td>
+                                <td><span class="balance_value">{{ number_format($adjustments, 2) }}</span></td>
+                              </tr>
+                              <tr>
+                                <td>Total amount due</td>
+                                <td><span class="balance_value">{{ number_format($total_amount_due, 2) }}</span></td>
+                              </tr>
+                              <tr>
+                                <td>Payment due date</td>
+                                <td><span class="balance_value">{{ $payment_due_date }}</span></td>
+                              </tr>
+                              <tr>
+                                <td align="center">
+                                  <a href="{{ url('view_estatements') }}" class="btn btn-primary">View Statements</a>
+                                </td>
+                                <td align="center">
+                                  <a href="{{ url('pay_bills') }}" class="btn btn-primary">Pay bills now</a>
+                                </td>
+                              </tr>
+                            </tbody>
                         </table>
                       </div>
                   </div>

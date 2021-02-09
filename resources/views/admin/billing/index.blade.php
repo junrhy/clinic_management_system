@@ -1,5 +1,17 @@
 @extends('layouts.admin')
 
+@section('page_level_css')
+<style type="text/css">
+  .latest_bill_status_published {
+    color: green;
+  }
+
+  .latest_bill_status_on_hold {
+    color: #c19302;
+  }
+</style>
+@endsection
+
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -26,14 +38,13 @@
                             <thead>
                                 <tr>
                                     <th>Client Name</th>
-                                    <th>Account Type</th>
                                     <th>Subscriptions</th>
-                                    <th>Outstanding Balance</th>
-                                    <th>Latest Bill Date</th>
-                                    <th>Latest Due Date</th>
-                                    <th>Latest Final Due Date</th>
-                                    <th>Is Latest Bill Published?</th>
-                                    <th>Action</th>
+                                    <th>Latest Bill</th>
+                                    
+                                    <th>Bills Created</th>
+                                    <th>Bills On Hold</th>
+                                    <th>Bills Published</th>
+                                    <th style="text-align: center;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,29 +53,43 @@
                                     <td>
                                         {{ $client->name }} (#{{ $client->account_number }})<br>
                                         <small style="color: #018d8e; font-family: 'arial';">Date Joined: {{ $client->created_at->format('M d, Y') }}</small><br>
+                                        <small style="font-family: 'arial';">Account Type: {{ ucfirst($client->account_type) }}</small>
                                     </td>
-                                    <td>{{ ucfirst($client->account_type) }}</td>
                                     <td>
                                         @foreach($client->subscriptions as $subscription)
                                             <small style="color: #018d8e; font-family: 'arial';"><strong>{{ $subscription->plan }}</strong> {{ number_format($subscription->amount, 2) }} {{ $subscription->frequency }}</small><br>
                                         @endforeach
                                     </td>
 
+                                    <td>
+                                        <small style="font-family: 'arial';">
+                                        @if($client->billing_statements->count() > 0)
+                                            Total Amount Due: <strong style="color: #018d8e;">{{ number_format($client->billing_statements->where('is_latest', true)->first()->outstanding_balance, 2) }}</strong> <br>
+                                            Bill Date: <strong>{{ $client->billing_statements->where('is_latest', true)->first()->billed_at->format('M d, Y') }}</strong><br>
+                                            Due Date: <strong>{{ $client->billing_statements->where('is_latest', true)->first()->due_at->format('M d, Y') }}</strong><br>
+                                            Status: <strong class="latest_bill_status_{{ $client->billing_statements->where('is_latest', true)->first()->is_publish == true ? 'published' : 'on_hold' }}">
+                                                {{ $client->billing_statements->where('is_latest', true)->first()->is_publish == true ? 'Published' : 'On Hold' }}</strong><br>
+                                        @else
+                                            Total Amount Due: 0 <br>
+                                            Bill Date: N/A <br>
+                                            Due Date: N/A <br>
+                                            Status: N/A
+                                        @endif
+                                        </small>
+                                    </td>
+
                                     @if($client->billing_statements->count() > 0)
-                                        <td>{{ $client->billing_statements->where('is_latest', true)->first()->outstanding_balance }}</td>
-                                        <td>{{ $client->billing_statements->where('is_latest', true)->first()->billed_at }}</td>
-                                        <td>{{ $client->billing_statements->where('is_latest', true)->first()->due_at }}</td>
-                                        <td>{{ $client->billing_statements->where('is_latest', true)->first()->final_due_at }}</td>
-                                        <td>{{ $client->billing_statements->where('is_latest', true)->first()->is_publish }}</td>
+                                        <td>{{ $client->billing_statements->count() }}</td>
+                                        <td>{{ $client->billing_statements_unpublish->count() }}</td>
+                                        <td>{{ $client->billing_statements_published->count() }}</td>
                                     @else
-                                        <td>0</td>
-                                        <td>N/A</td>
                                         <td>N/A</td>
                                         <td>N/A</td>
                                         <td>N/A</td>
                                     @endif
-                                    <td>
-                                        <a href="/admin/billing/view_estatements/{{ $client->id }}"><i class="fa fa-file"></i> View eStatements</a>
+
+                                    <td align="center">
+                                        <a href="/admin/billing/view_estatements/{{ $client->id }}"><i class="fa fa-file-alt"></i> View Statements</a>
                                     </td>
                                 </tr>
                                 @endforeach

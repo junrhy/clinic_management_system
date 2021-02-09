@@ -93,6 +93,7 @@ class RegisterController extends Controller
         }
 
         $client->account_number = $data['distributor_code'].Carbon::now()->format('md').$unique_id;
+        $client->currency = 'PHP';
         $client->save();
 
         $user = User::create([

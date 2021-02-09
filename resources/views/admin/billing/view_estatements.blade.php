@@ -23,14 +23,23 @@
     color: red;
   }
 
+  .latest {
+    font-weight: bold;
+    color: #01a2da;
+    text-align: center;
+    width: 100px;
+    display: inline-block;
+  }
+
   .published {
     border: 2px solid green;
     background-color: transparent;
     font-weight: bold;
     color: green;
     text-align: center;
-    width: 130px;
-    padding: 10px 0;
+    width: 110px;
+    padding: 5px 0;
+    display: inline-block;
   }
 </style>
 @endsection
@@ -51,7 +60,7 @@
 
                         <ul class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><a href="/admin"><i class="fa fa-home"></i> Admin Panel</a></li>
-                            <li class="breadcrumb-item"><a href="/admin/billing/view_estatements/{{ $client->id }}"><i class="fa fa-user"></i> {{ $client->name }}</a></li>
+                            <li class="breadcrumb-item"><a href="/admin/billings"><i class="fa fa-file-alt"></i> Billings</a></li>
                             <li class="breadcrumb-item active">eStatements</li>
                         </ul>
                     </div>
@@ -71,46 +80,64 @@
                                         <th>Amount Due</th>
                                         <th>Additional</th>
                                         <th>Deductions</th>
-                                        <th>Outstanding Balance</th>
+                                        <th>Total Amount Due</th>
                                         <th>Payment ref #</th>
                                         <th>Due Date</th>
-                                        <th>Action</th>
+                                        <th style="text-align: center;">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody style="font-family: sans-serif;">
                                     @foreach($billing_statements as $billing_statement)
                                     <tr>
                                         <td>{{ $billing_statement->billed_at->format('M Y') }}</td>
                                         <td>{{ $billing_statement->billed_at->format('M d, Y') }}</td>
                                         <td>{{ number_format($billing_statement->amount_due, 2) }}</td>
                                         <td>
-                                            <small>Tax: <span style="color: blue;">{{ number_format($billing_statement->tax, 2) }}</span></small><br>
-                                            <small>Unpaid: <span style="color: blue;">{{ number_format($billing_statement->unpaid, 2) }}</span></small><br>
+                                            <small>Amount Past Due: <span style="color: blue;">{{ number_format($billing_statement->amount_past_due, 2) }}</span></small><br>
                                             <small>Penalties: <span style="color: blue;">{{ number_format($billing_statement->penalties, 2) }}</span></small>
                                         </td>
                                         <td>
                                             <small>Discount: <span style="color: red;">{{ number_format($billing_statement->discount, 2) }}</span></small><br>
-                                            <small>Interest: <span style="color: red;">{{ number_format($billing_statement->interest, 2) }}</span></small><br>
                                             <small>Advance: <span style="color: red;">{{ number_format($billing_statement->advance_payment, 2) }}</span></small>
                                         </td>
-                                        <td>{{ number_format($billing_statement->outstanding_balance, 2) }}</td>
+                                        <td>
+                                        <?php 
+                                          $prev_bill_balance = $billing_statement->amount_past_due;
+                                          $current_bill_charges = $billing_statement->amount_due;
+                                          $adjustments = ($billing_statement->penalties) + -$billing_statement->advance_payment + -$billing_statement->discount;
+                                          $total_amount_due = $prev_bill_balance + $current_bill_charges + $adjustments;
+                                        ?>
+                                        {{ number_format($total_amount_due, 2) }}
+                                        </td>
                                         <td>{{ $billing_statement->payment_reference_no }}</td>
                                         <td>{{ $billing_statement->due_at->format('M d, Y') }}</td>
-                                        <td>
+                                        <td align="center">
+                                            @if($billing_statement->is_latest == true)
+                                              <div class="latest"><i class="fa fa-check"></i> Latest</div>
+                                            @endif
+
                                             @if($billing_statement->is_publish == false)
                                                 <a class="publish_billing_statement" data-id="{{ $billing_statement->id }}"><i class="fa fa-globe"></i> Publish</a>
-                                                | <a class="view_billing_statement"><i class="fa fa-file"></i> View</a>
+                                                | <a class="view_billing_statement" href="/admin/billing/view/{{ $billing_statement->id }}"><i class="fa fa-file-alt"></i> View</a>
                                                 | <a class="edit_billing_statement" href="/admin/billing/edit/{{ $billing_statement->id }}"><i class="fa fa-pencil"></i> Edit</a>
                                                 | <a class="delete_billing_statement" data-id="{{ $billing_statement->id }}"><i class="fa fa-trash-o"></i> Delete</a>
 
                                             @else
                                                 <div class="published"><i class="fa fa-check"></i> Published</div>
+
+                                                @if($billing_statement->billed_at->diffInYears(\Carbon\Carbon::now()) >= 1)
+                                                  | <a class="delete_billing_statement" data-id="{{ $billing_statement->id }}"><i class="fa fa-trash-o"></i> Delete</a>
+                                                @endif
                                             @endif
                                         </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
+
+                            <div style="display: none" id="html_holder">
+                              
+                            </div>
                         </div>
                     </div>
                 </div>

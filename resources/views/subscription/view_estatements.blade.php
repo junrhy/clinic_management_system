@@ -69,7 +69,8 @@
                           <tr>
                             <td>{{ $billing_statement->billed_at->format('F Y') }}</td>
                             <td align="center">
-                              <a href="/view/{{ $billing_statement->id }}">Download</a>
+                             <!--  <a href="/view/{{ $billing_statement->id }}">Download</a> -->
+                             Download
                             </td>
                           </tr>
                           @endforeach

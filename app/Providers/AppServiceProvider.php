@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
 
 use App\Model\Domain;
+use App\Model\AdminSetting;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,6 +31,18 @@ class AppServiceProvider extends ServiceProvider
 
             view()->share('domain', $domain);
         }
+
+        $app_currency = AdminSetting::where('name', 'app_currency')->first();
+        view()->share('app_currency', $app_currency->value);
+
+        $bill_contact_numbers = AdminSetting::where('name', 'bill_contact_numbers')->first();
+        view()->share('bill_contact_numbers', $bill_contact_numbers->value);
+
+        $bill_contact_email = AdminSetting::where('name', 'bill_contact_email')->first();
+        view()->share('bill_contact_email', $bill_contact_email->value);
+
+        $bill_contact_persons = AdminSetting::where('name', 'bill_contact_persons')->first();
+        view()->share('bill_contact_persons', $bill_contact_persons->value);
     }
 
     /**

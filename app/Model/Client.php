@@ -33,6 +33,16 @@ class Client extends Model
         return $this->hasMany(BillingStatement::class);
     }
 
+    public function billing_statements_unpublish()
+    {
+        return $this->hasMany(BillingStatement::class)->where('is_publish', false);
+    }
+
+    public function billing_statements_published()
+    {
+        return $this->hasMany(BillingStatement::class)->where('is_publish', true);
+    }
+
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class);

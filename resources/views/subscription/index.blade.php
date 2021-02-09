@@ -55,18 +55,16 @@
                     <h4 style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;"><i class="fa fa-gear"></i> Active Subscriptions</h4>
                   </div>
                   <br>
-                  You are currently subscribed to: <strong>{{ ucfirst(Auth::user()->client->account_type) }} Plan</strong><br>
-                  <br>
                   <small style="color: green;">This services is active during this period and will be renewed every time the bill is paid.</small>
                   <div class="table-responsive row">
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                       <table class="table table-striped">
                         <thead>
                           <tr>
                             <th>Plan</th>
                             <th>Active from</th>
                             <th>Until</th>
-                            <th>Billed</th>
+                            <th>Status</th>
                           </tr>
                         </thead>
                         @foreach($subscriptions as $subscription)
@@ -74,7 +72,13 @@
                           <td>{{ ucfirst($subscription->plan) }} Plan</td>
                           <td>{{ $subscription->start->format('M d, Y') }}</td>
                           <td>{{ $subscription->end->format('M d, Y') }}</td>
-                          <td>Every {{ $subscription->bill_day }} of the month</td>
+                          <td>
+                            @if(\Carbon\Carbon::now()->diffInDays($subscription->end, false) > 0)
+                              Will expire in {{ \Carbon\Carbon::now()->diffInDays($subscription->end, false) }} days from now
+                            @else
+                              This subscription is expired. <a href="/balance_and_usage">Renew Now</a>
+                            @endif
+                          </td>
                         </tr>
                         @endforeach
                       </table>

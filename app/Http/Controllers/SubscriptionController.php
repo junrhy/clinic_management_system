@@ -42,8 +42,29 @@ class SubscriptionController extends Controller
                                     ->where('is_publish', true)
                                     ->first();
 
+        if ($billing_statement != null) {
+            $bill_period = $billing_statement->billed_at->format('F Y');
+            $prev_bill_balance = $billing_statement->amount_past_due;
+            $current_bill_charges = $billing_statement->amount_due;
+            $adjustments = ($billing_statement->penalties) + -$billing_statement->advance_payment + -$billing_statement->discount;
+            $total_amount_due = $prev_bill_balance + $current_bill_charges + $adjustments;
+            $payment_due_date = $billing_statement->due_at->format('M d, Y');
+        } else {
+            $bill_period = 'N/A';
+            $prev_bill_balance = 0;
+            $current_bill_charges = 0;
+            $adjustments = 0;
+            $total_amount_due = 0;
+            $payment_due_date = 'N/A';
+        }
+
     	return view('subscription.balance_and_usage')
-                    ->with('billing_statement', $billing_statement);
+                    ->with('bill_period', $bill_period)
+                    ->with('prev_bill_balance', $prev_bill_balance)
+                    ->with('current_bill_charges', $current_bill_charges)
+                    ->with('adjustments', $adjustments)
+                    ->with('total_amount_due', $total_amount_due)
+                    ->with('payment_due_date', $payment_due_date);
     }
 
     public function pay_bills()
