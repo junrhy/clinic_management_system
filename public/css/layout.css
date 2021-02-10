@@ -103,7 +103,7 @@
     background: #fff;
     color: #888;
     transition: all 0.3s;
-    z-index: 1000;
+    /*z-index: 1000;*/
 }
 
 #sidebar.active {

@@ -67,8 +67,6 @@ class AdminBillingController extends Controller
 
     public function store_estatement(Request $request)
     {
-        BillingStatement::where('client_id', $request->client_id)->update(['is_latest' => false]);
-
         $billing_statement = new BillingStatement;
         $billing_statement->client_id = $request->client_id;
         $billing_statement->billed_at = Carbon::createFromFormat('m/d/Y', $request->billed_at);
@@ -79,7 +77,6 @@ class AdminBillingController extends Controller
         $billing_statement->penalties = $request->penalties;
         $billing_statement->advance_payment = $request->advance_payment;
         $billing_statement->payment_reference_no = $request->payment_reference_no;
-        $billing_statement->is_latest = true;
         $billing_statement->save();
 
         return redirect('/admin/billing/view_estatements/'.$request->client_id);
@@ -126,14 +123,9 @@ class AdminBillingController extends Controller
 
         $data = ['client' => $client, 'billing_statement' => $billing_statement, 'total_amount_due' => $total_amount_due];
 
-        return view('admin.billing.pdf_estatement')
-                    ->with('client', $client)
-                    ->with('billing_statement', $billing_statement)
-                    ->with('total_amount_due', $total_amount_due);
-        // $pdf = PDF::loadView('admin.billing.pdf_estatement', $data);
-        // $pdf->setPaper('a4', 'portrait');
-
-        // return $pdf->download($client->name . '_billing_statement.pdf');
+        $pdf = PDF::loadView('admin.billing.pdf_estatement', $data);
+        $pdf->setPaper('a4', 'portrait');
+        return $pdf->stream();
     }
 
     public function delete_estatement($id)
@@ -158,6 +150,10 @@ class AdminBillingController extends Controller
     public function publish_estatement($id)
     {
         $billing_statement = BillingStatement::find($id);
+
+        BillingStatement::where('client_id', $billing_statement->client_id)->update(['is_latest' => false]);
+                
+        $billing_statement->is_latest = true;
         $billing_statement->is_publish = true;
         $billing_statement->save();
     }

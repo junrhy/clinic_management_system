@@ -24,10 +24,12 @@
   }
 
   .latest {
+    border: 2px solid #01a2da;
     font-weight: bold;
     color: #01a2da;
     text-align: center;
-    width: 100px;
+    width: 110px;
+    padding: 5px 0;
     display: inline-block;
   }
 
@@ -51,7 +53,7 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-12">
-                        <h2>Billing eStatements <small class="text-muted">Manage web app client billing estatements</small></h2>
+                        <h2>Billing Statements <small class="text-muted">Manage web app client billing statements</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                         <a class="btn btn-white btn-icon btn-round float-right m-l-10" href="/admin/billing/create/{{ $client->id }}" type="button">
@@ -61,7 +63,7 @@
                         <ul class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><a href="/admin"><i class="fa fa-home"></i> Admin Panel</a></li>
                             <li class="breadcrumb-item"><a href="/admin/billings"><i class="fa fa-file-alt"></i> Billings</a></li>
-                            <li class="breadcrumb-item active">eStatements</li>
+                            <li class="breadcrumb-item active">Statements</li>
                         </ul>
                     </div>
                 </div>
@@ -111,9 +113,9 @@
                                         </td>
                                         <td>{{ $billing_statement->payment_reference_no }}</td>
                                         <td>{{ $billing_statement->due_at->format('M d, Y') }}</td>
-                                        <td align="center">
+                                        <td align="right">
                                             @if($billing_statement->is_latest == true)
-                                              <div class="latest"><i class="fa fa-check"></i> Latest</div>
+                                              <div class="latest"><i class="fa fa-arrow-left"></i> Latest Bill</div>
                                             @endif
 
                                             @if($billing_statement->is_publish == false)
@@ -124,6 +126,8 @@
 
                                             @else
                                                 <div class="published"><i class="fa fa-check"></i> Published</div>
+                                                &nbsp;
+                                                <a class="view_billing_statement" href="/admin/billing/view/{{ $billing_statement->id }}" target="_BLANK"><i class="fa fa-file-alt"></i> View</a>
 
                                                 @if($billing_statement->billed_at->diffInYears(\Carbon\Carbon::now()) >= 1)
                                                   | <a class="delete_billing_statement" data-id="{{ $billing_statement->id }}"><i class="fa fa-trash-o"></i> Delete</a>

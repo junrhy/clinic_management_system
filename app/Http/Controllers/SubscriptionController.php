@@ -10,6 +10,7 @@ use App\Model\BillingStatement;
 
 use Auth;
 use Carbon\Carbon;
+use PDF;
 
 class SubscriptionController extends Controller
 {
@@ -104,5 +105,24 @@ class SubscriptionController extends Controller
         $client = Client::find(Auth::user()->client_id);
         $client->account_type = $subscription->plan;
         $client->save();
+    }
+
+    public function view_billing_statement($id)
+    {
+        $billing_statement = BillingStatement::find($id);
+        
+        $client = Client::find($billing_statement->client_id);
+
+        $prev_bill_balance = $billing_statement->amount_past_due;
+        $current_bill_charges = $billing_statement->amount_due;
+        $adjustments = ($billing_statement->penalties) - ($billing_statement->advance_payment - $billing_statement->discount);
+
+        $total_amount_due = $prev_bill_balance + $current_bill_charges + $adjustments;
+
+        $data = ['client' => $client, 'billing_statement' => $billing_statement, 'total_amount_due' => $total_amount_due];
+
+        $pdf = PDF::loadView('admin.billing.pdf_estatement', $data);
+        $pdf->setPaper('a4', 'portrait');
+        return $pdf->stream();
     }
 }

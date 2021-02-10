@@ -1,46 +1,6 @@
 <style type="text/css">
-  .basic-plan, .business-plan {
-    padding:10px;
-    border:1px solid #ccc;
-    font-size:10pt;
-  }
-
-  .basic-plan-head {
-    background:#63B5FF;
-    color:#FFFFFF;
-    border:1px solid #ccc;
-  } 
-
-  .business-plan-head {
-    background:#FF6065;
-    color:#FFFFFF;
-    border-left:1px solid #ccc;
-    border-right:1px solid #ccc;
-  }
-
-  .basic-plan-foot {
-    padding:3px;
-  } 
-
-  .business-plan-foot {
-    padding:3px;
-    border:1px solid #ccc;
-    font-size:13pt;
+  .text-red {
     color:#FF6065;
-  }
-
-  .text-upgrade {
-    color:#FF6065;
-  }
-
-  .btn-upgrade {
-    background:#FF6065;
-    color:#FFFFFF;
-  }
-
-  .btn-upgrade:hover {
-    color:#FFFFFF;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.15);
   }
 </style>
 
@@ -55,22 +15,37 @@
         <h5 class="modal-title">Request to Reactivate Account</h5>
       </div>
       <div class="modal-body">
-        <span class="text-center" id="upgrade-message">This account has been suspended due to some concerns from our office.</span> Our customer service will contact you at your provided contact details to discuss about your account status. We are looking forward to continue serving you soon. <br>
+        <span class="text-red">This account has been suspended due to some concerns from our office.</span> Our customer service will contact you at your provided contact details to discuss about your account status. We are looking forward to continue serving you soon. <br>
         <br>
-        Your Contact Details:<br>
+        <strong>YOUR CONTACT DETAILS</strong><br>
         <br>
-        Company Name: {{ Auth::user()->client->name }}<br>
-        Primary Email: {{ Auth::user()->client->email }}<br>
-        Secondary Email: {{ Auth::user()->client->secondary_email != '' ? Auth::user()->client->secondary_email : 'not provided' }}<br>
-        Contact No.: {{ Auth::user()->client->contact != '' ? Auth::user()->client->contact : 'not provided' }}<br>
+        <table>
+          <tr>
+            <td width="40%">Company Name:</td>
+            <td>{{ Auth::user()->client->name }}</td>
+          </tr>
+          <tr>
+            <td>Primary Email:</td>
+            <td>{{ Auth::user()->client->email }}</td>
+          </tr>
+          <tr>
+            <td>Secondary Email:</td>
+            <td>{{ Auth::user()->client->secondary_email != '' ? Auth::user()->client->secondary_email : 'not provided' }}</td>
+          </tr>
+          <tr>
+            <td>Contact No.:</td>
+            <td>{{ Auth::user()->client->contact != '' ? Auth::user()->client->contact : 'not provided' }}</td>
+          </tr>
+        </table>
         <br>
         <br>
-        For immediate action please call our office. <br>
+        For immediate action please contact our customer service. 
         <br>
-        Office: +63 (32) 411-1111 
+        <br>
       </div>
       <div class="modal-footer">
        <button type="button" class="btn btn-default btn-round" data-dismiss="modal">Close</button>
+       <a href="" type="button" id="btn-upgrade-account" data-id="" class="btn btn-upgrade btn-round">Contact Customer Service</a>
     </div>
     </div>
   </div>

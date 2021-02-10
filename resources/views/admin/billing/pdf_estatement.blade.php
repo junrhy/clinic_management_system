@@ -1,10 +1,13 @@
+<head>
+	<title>{{ $billing_statement->billed_at->format('F d, Y') }} Billing Statement</title>
+</head>
 <style type="text/css">
 	body {
 		font-family: sans-serif;
 	}
 
 	th {
-		background-color: #cccccc;
+		background-color: #eee;
 	}	
 
 	#account_info {
@@ -17,29 +20,39 @@
 	}
 </style>
 
-Account No.: {{ $client->account_number }}<br>
-Address: <br>
-<br>
+<table  width="100%" cellpadding="0" cellspacing="0" border="0">
+	<tr>
+		<td>Account Name: {{ $client->name }}</td>
+		<td width="25%">Bill Date: {{ $billing_statement->billed_at->format('m/d/Y') }}</td>
+	</tr>
+	<tr>
+		<td>Account No.: {{ $client->account_number }}</td>
+		<td>Due Date: {{ $billing_statement->due_at->format('m/d/Y') }}</td>
+	</tr>
+	<tr>
+		<td colspan="2">Address:</td>
+	</tr>
+</table>
 <h3 align="center">Account Information</h3>
 <div id="account_info">
 	<div align="center"><small>Note: You may cut this portion, or simply take a photo of it and present it to any of our Collecting Partners every time you pay your subscription.</small></div>
 	<br>
-	<table class="center" width="80%" cellpadding="5" cellspacing="0" border="1">
+	<table class="center" width="60%" cellpadding="5" cellspacing="0" border="1">
 		<tr>
-			<td align="left" style="background-color: #cccccc;" width="60%">Account Number: </td>
+			<td align="left" style="background-color: #eee;" width="55%">Account Number: </td>
 			<td>{{ $client->account_number }}</td>
 		</tr>
 		<tr>
-			<td align="left" style="background-color: #cccccc;">Due Date: </td>
+			<td align="left" style="background-color: #eee;">Due Date: </td>
 			<td>{{ $billing_statement->due_at->format('m/d/Y') }}</td>
 		</tr>
 		<tr>
-			<td align="left" style="background-color: #cccccc;">Total Amount Due: </td>
+			<td align="left" style="background-color: #eee;">Total Amount Due: </td>
 			<td>{{ number_format($total_amount_due, 2) }}</td>
 		</tr>
 
 		<tr>
-			<td align="left" style="background-color: #cccccc;">Payment Reference No.: </td>
+			<td align="left" style="background-color: #eee;">Payment Reference No.: </td>
 			<td>{{ $billing_statement->payment_reference_no }}</td>
 		</tr>
 	</table>
@@ -77,7 +90,6 @@ Address: <br>
 	</tbody>
 </table>
 <br>
-<br>
 <h3 align="center">Last Payment Details</h3>
 
 <table class="table table-striped" width="100%" cellpadding="5" cellspacing="0" border="1">
@@ -91,10 +103,10 @@ Address: <br>
 	</thead>
 	<tbody>
 		<tr>
-			<td align="center">0</td>
-			<td align="center">0</td>
-			<td align="center">0</td>
-			<td align="center">{{ number_format($billing_statement->advance_payment, 2)  }}</td>
+			<td align="center">{{ $app_currency }} {{ number_format(0, 2)  }}</td>
+			<td align="center">{{ $app_currency }} {{ number_format(0, 2)  }}</td>
+			<td align="center">{{ $app_currency }} {{ number_format(0, 2)  }}</td>
+			<td align="center">{{ $app_currency }} {{ number_format($billing_statement->advance_payment, 2)  }}</td>
 		</tr>
 	</tbody>
 </table>
@@ -107,27 +119,30 @@ Address: <br>
 	<li>This bill is considered accurate if no advice is received within 10 days from receipt.</li>
 </ol>
 <br>
-<br>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
 	<tr>
 		<td width="70%" colspan="2"><strong>Connect with Us</strong></td>
+		<td>&nbsp;</td>
 		<td width="30%" colspan="2"><strong>Contact Us</strong></td>
 	</tr>
 	<tr>
-		<td>Website: </td>
-		<td>www.default.com</td>
-		<td>Tel. Nos.:</td>
+		<td width="10%">Website: </td>
+		<td>{{ $bill_website_url }}</td>
+		<td width="5%">&nbsp;</td>
+		<td width="14%">Tel. Nos.:</td>
 		<td>{{ $bill_contact_numbers }}</td>
 	</tr>
 	<tr>
 		<td>Facebook: </td>
-		<td>fb.com/test</td>
+		<td>{{ $bill_facebook_page }}</td>
+		<td>&nbsp;</td>
 		<td>Email:</td>
 		<td>{{ $bill_contact_email }}</td>
 	</tr>
 	<tr>
-		<td></td>
-		<td></td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
 		<td>Look for:</td>
 		<td>{{ $bill_contact_persons }}</td>
 	</tr>
