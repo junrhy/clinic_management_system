@@ -127,6 +127,7 @@ Route::group(['middleware' => ['is_default']], function() {
 
 	Route::get('/subscription', 'SubscriptionController@index');
 	Route::get('/view_estatements', 'SubscriptionController@view_estatements');
+	Route::get('/view_billing_statement/{id}', 'SubscriptionController@view_billing_statement');
 	Route::get('/balance_and_usage', 'SubscriptionController@balance_and_usage');
 	Route::get('/pay_bills', 'SubscriptionController@pay_bills');
 	Route::post('/subscription/subscribe', 'SubscriptionController@subscribe');

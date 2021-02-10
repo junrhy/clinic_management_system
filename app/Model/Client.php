@@ -47,4 +47,9 @@ class Client extends Model
     {
         return $this->hasMany(Subscription::class);
     }
+
+    public function disconnection_reasons()
+    {
+        return $this->hasMany(DisconnectionReason::class);
+    }
 }

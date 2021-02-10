@@ -3,13 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 use App\User;
 
 use Hash;
+use Auth;
 
 class AdminController extends Controller
 {
+    use RegistersUsers;
+
+    protected $redirectTo = '/admin';
+
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['register', 'create_admin_user'] ]);
@@ -39,7 +45,11 @@ class AdminController extends Controller
             'is_client' => false,
         ]);
 
-        return redirect('/admin');
+        $this->guard()->login($user);
+
+        // return redirect('/admin');
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
     }
 
     public function index()

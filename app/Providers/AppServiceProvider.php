@@ -35,6 +35,12 @@ class AppServiceProvider extends ServiceProvider
         $app_currency = AdminSetting::where('name', 'app_currency')->first();
         view()->share('app_currency', $app_currency->value);
 
+        $bill_website_url = AdminSetting::where('name', 'bill_website_url')->first();
+        view()->share('bill_website_url', $bill_website_url->value);
+
+        $bill_facebook_page = AdminSetting::where('name', 'bill_facebook_page')->first();
+        view()->share('bill_facebook_page', $bill_facebook_page->value);
+
         $bill_contact_numbers = AdminSetting::where('name', 'bill_contact_numbers')->first();
         view()->share('bill_contact_numbers', $bill_contact_numbers->value);
 

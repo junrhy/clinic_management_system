@@ -52,11 +52,10 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h5 class="modal-title">Activate your Business Account</h5>
+        <h5 class="modal-title">Activate your Account</h5>
       </div>
       <div class="modal-body">
-        <h3 class="text-center" id="upgrade-message">Greetings! We are so happy to see you here.</h3><br> As you notice that your account has been inactive, You need to <span class="text-upgrade">Activate your account</span> for us to continue serving you and your company. We are so committed to be your best medical software partner in the world as you run and grow your company. We will never disappoints you. So let's do it!
-        
+        You need to provide us all the requirements for us to activate your account. Please contact our customer service and request for activation.
       </div>
       <div class="modal-footer">
        <button type="button" class="btn btn-default btn-round" data-dismiss="modal">Close</button>

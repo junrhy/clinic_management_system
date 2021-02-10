@@ -20,6 +20,18 @@
             top: 0px;
             left: 0px;
             background-color: rgba(0,0,0,0.3); /* black semi-transparent */
+            z-index: 800;
+        }
+
+        .account_status_message {
+            font-family: sans-serif;
+            margin: 5px;
+            font-weight: bold;
+            color: #ff0000;
+            display: inline-block;
+            text-align: right;
+            background-color: #FFFFFF;
+            padding: 3px;
         }
     </style>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -78,6 +90,9 @@
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('dental', Auth::user()->id) }}">
                     <a href="{{ url('/dental_chart') }}"><i class="fa fa-tooth"></i> Dental</a>
                 </li>
+              @endif
+
+              
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('patients', Auth::user()->id) }}">
                     <a href="#patientSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fa fa-notes-medical">
@@ -92,6 +107,8 @@
                         </li>
                     </ul>
                 </li>
+
+               @if(Auth::user()->client->is_active && Auth::user()->client->is_connected == 0 && Auth::user()->client->is_suspended == 0)
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('clinics', Auth::user()->id) }}">
                     <a href="#clinicSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fa fa-clinic-medical"></i> 
@@ -198,12 +215,12 @@
 
                         @if(Auth::user()->client->is_active == 0 && Auth::user()->client->account_type == 'basic')
                         <li>
-                            <a style="cursor:pointer;" id="sidebar-menu-activate-account">Activate my Account</a>
+                            <a style="cursor:pointer;color:#FF6065;" id="sidebar-menu-activate-account">Activate Account</a>
                         </li>
                         @endif
 
                         @if(Auth::user()->client->is_active != 0 && Auth::user()->client->is_suspended == 1)
-                            <a style="cursor:pointer;" id="sidebar-menu-reactivate-account">Request to Reactivate Account</a>
+                            <a style="cursor:pointer;color:#FF6065;" id="sidebar-menu-reactivate-account">Request to Reactivate Account</a>
                         @endif
                     </ul>
                 </li>
@@ -230,20 +247,55 @@
                             {{ csrf_field() }}
                         </form>
 
+                        
+                        @if(Auth::user()->client->is_active == 0)
+                            <span class="account_status_message">ACCOUNT IS NOT ACTIVE</span>
+                        @endif
+
+                        @if(Auth::user()->client->is_suspended == 1)
+                            <span class="account_status_message">ACCOUNT IS SUSPENDED</span>
+                        @endif
+
+                        @if(Auth::user()->client->is_disconnected == 1)
+                            <span class="account_status_message">ACCOUNT SERVICE IS ON HOLD</span>
+                        @endif
+                        
+
                         <div class="float-right" style="margin: 8px;font-size: 11pt;color:#fff;">
                             <strong><i class="fa fa-user-circle"></i>  {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</strong>
-                            
-                            @if(Auth::user()->client->is_active == 0)
-                                <strong style="color:#000;">( This account is not active )</strong>
-                            @endif
-
-                            @if(Auth::user()->client->is_suspended == 1)
-                                <strong style="color:#000;">( This account is suspended )</strong>
-                            @endif
                         </div>
                     </div>
                 </div>
             </nav>
+
+            @if(Auth::user()->client->is_disconnected == 1)
+                <div class="modalOverlay">
+                    
+                    <div class="container" style="margin-top: 10em;">
+                        <div class="col-md-12">
+                            <div class="col-md-8 col-md-offset-2" style="background-color: #fff;border-radius: 5px;">
+                                <div class="row" align="center" style="border-bottom: 1px solid #eee;">
+                                    <h3 class="col-md-12">Account service is on hold because of the following reasons.</h3>
+                                </div>
+                                <br>
+                                <div>
+                                    @foreach(auth()->user()->client->disconnection_reasons as $disconnection_reason)
+                                    
+                                    <strong>{{ $disconnection_reason->cause }}</strong><br>
+                                    {{ $disconnection_reason->solution }}<br>
+                                    <br>
+
+                                    @endforeach
+                                </div>
+                                <div class="row" align="right" style="border-top: 1px solid #eee;padding: 10px;">
+                                    <a href="" type="button" data-id="" class="btn btn-upgrade btn-round">Contact Customer Service</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            @endif
 
             <div id="below-nav-design" style="height:200px;position:absolute;left:0px;top:50px;z-index: -1;background-color: #01d8da;"></div>
 

@@ -29,6 +29,16 @@ class AdminSettingTableSeeder extends Seeder
         $AdminSetting->save();
 
         $AdminSetting = new AdminSetting();
+        $AdminSetting->name = 'bill_website_url';
+        $AdminSetting->value = 'www.website.com';
+        $AdminSetting->save();
+
+        $AdminSetting = new AdminSetting();
+        $AdminSetting->name = 'bill_facebook_page';
+        $AdminSetting->value = 'facebook.com/pagename';
+        $AdminSetting->save();
+
+        $AdminSetting = new AdminSetting();
         $AdminSetting->name = 'bill_contact_numbers';
         $AdminSetting->value = '09260049848';
         $AdminSetting->save();

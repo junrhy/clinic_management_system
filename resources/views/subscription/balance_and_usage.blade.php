@@ -40,23 +40,23 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-12">
-                        <h2>Balance<small class="text-muted">View your account balance.</small></h2>
+                        <h2>Account Balance<small class="text-muted">View of your account balance</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                         <ul class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><a href="/home"><i class="fa fa-home"></i> {{ Auth::user()->client->name }}</a></li>
-                            <li class="breadcrumb-item active">Balance</li>
+                            <li class="breadcrumb-item active">Account Balance</li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading">Balance</div>
+                <div class="panel-heading">Account Balance</div>
 
                 <div class="panel-body">
                   <div class="row">
                      <div class="col-md-5">
-                      <h4 style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;"><i class="fa fa-file"></i> Balance</h4>
+                      <h4 style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;"><i class="fa fa-file"></i> Account Balance</h4>
                     </div>
                   </div>
 
