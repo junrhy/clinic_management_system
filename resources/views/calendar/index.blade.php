@@ -43,6 +43,10 @@
     text-decoration: none;
     cursor: pointer;
   }
+
+  .current_clinic {
+    border: 2px solid #018d8e;
+  }
 </style>
 @endsection
 
@@ -73,6 +77,12 @@
 
                 <div class="panel-body">
                     <div class="row">
+                        <div class="col-md-12">
+                            <div class="row col-md-3">
+                              {{ Form::select('current_clinic', $clinics, isset($_GET['clinic']) ? $_GET['clinic'] : null, array('class' => 'form-control current_clinic')) }}
+                              <br>
+                            </div>
+                        </div>
                         <div class="col-md-5">
                             <div id='calendar'></div>
                             <br>
@@ -164,9 +174,10 @@ $(document).ready(function() {
           if ($(jsEvent.target).hasClass('fc-day')) {
                 $(jsEvent.target).addClass("fc-state-highlight");
 
+                clinic = $("select[name='current_clinic']").val();
                 status = $("input[name='status']").val();
 
-                var refresh = window.location.protocol + "//" + window.location.host + window.location.pathname + "?status=" + status + "&calendar_date="+$(this).data('date');    
+                var refresh = window.location.protocol + "//" + window.location.host + window.location.pathname + "?status=" + status + "&calendar_date="+$(this).data('date')+'&clinic='+clinic;    
                 window.history.pushState({ path: refresh }, '', refresh);
 
                 // open appointments
@@ -176,6 +187,7 @@ $(document).ready(function() {
                   data: { 
                     date: $(this).data('date'),
                     status: 'Open',
+                    clinic_id: $("select[name='current_clinic']").val(),
                     _token: "{{ csrf_token() }}" 
                   }
                 })
@@ -190,6 +202,7 @@ $(document).ready(function() {
                   data: { 
                     date: $(this).data('date'),
                     status: 'In Progress',
+                    clinic_id: $("select[name='current_clinic']").val(),
                     _token: "{{ csrf_token() }}" 
                   }
                 })
@@ -202,11 +215,13 @@ $(document).ready(function() {
   });
 
   $(".nav-item").click(function(){
+      clinic = $("select[name='current_clinic']").val();
+
       status = $(this).data('status');
 
       var calendar_date = $(".fc-state-highlight").data("date");
 
-      var refresh = window.location.protocol + "//" + window.location.host + window.location.pathname + '?status='+ status + '&calendar_date='+calendar_date;    
+      var refresh = window.location.protocol + "//" + window.location.host + window.location.pathname + '?status='+ status + '&calendar_date='+calendar_date+'&clinic='+clinic;    
       window.history.pushState({ path: refresh }, '', refresh);
 
       $("input[name='status']").val(status);
@@ -223,11 +238,12 @@ $(document).ready(function() {
           method: "POST",
           url: "/calendar/get_all_appointments",
           data: { 
+            clinic_id: $("select[name='current_clinic']").val(),
             _token: "{{ csrf_token() }}" 
           }
       })
       .done(function( data ) {
-          console.log(data);
+          //console.log(data);
           $.each(data, function(i, item) {
 
               var event_name = 'patient';
@@ -272,6 +288,7 @@ $(document).ready(function() {
       data: { 
         date: calendar_date,
         status: 'Open',
+        clinic_id: $("select[name='current_clinic']").val(),
         _token: "{{ csrf_token() }}" 
       }
     })
@@ -286,6 +303,7 @@ $(document).ready(function() {
       data: { 
         date: calendar_date,
         status: 'In Progress',
+        clinic_id: $("select[name='current_clinic']").val(),
         _token: "{{ csrf_token() }}" 
       }
     })
@@ -295,10 +313,12 @@ $(document).ready(function() {
 
     // status
     status = $("input[name='status']").val();
+    clinic = $("select[name='current_clinic']").val();
 
     if (status == '') { status = 'open'}
 
-    var refresh = window.location.protocol + "//" + window.location.host + window.location.pathname + '?status=' + status + '&calendar_date='+calendar_date;    
+    var refresh = window.location.protocol + "//" + window.location.host + window.location.pathname + '?status=' + status + '&calendar_date='+calendar_date+'&clinic='+clinic;  
+
     window.history.pushState({ path: refresh }, '', refresh);
 
     $("input[name='status']").val(status);
@@ -317,6 +337,34 @@ $(document).ready(function() {
 
   $("#add-appointment").click(function(){
     $('#add_appointment_modal').modal('show');
+  });
+
+  $("select[name='current_clinic']").on('change', function() {
+      var d = new Date();
+
+      var month = d.getMonth()+1;
+      var day = d.getDate();
+
+      var today = d.getFullYear() + '-' +
+          (month<10 ? '0' : '') + month + '-' +
+          (day<10 ? '0' : '') + day;
+
+      var calendar_date = "{{ Request::get('calendar_date') }}";
+
+      if (calendar_date == "") {
+          calendar_date = today;
+      }
+
+      status = $("input[name='status']").val();
+      clinic = $("select[name='current_clinic']").val();
+
+      if (status == '') { status = 'open'}
+
+      var refresh = window.location.protocol + "//" + window.location.host + window.location.pathname + '?status=' + status + '&calendar_date='+calendar_date+'&clinic='+clinic;  
+
+      window.history.pushState({ path: refresh }, '', refresh);
+
+      location.reload();
   });
 });
 </script>

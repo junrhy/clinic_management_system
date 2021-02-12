@@ -48,6 +48,7 @@ class CalendarController extends Controller
     public function scheduled_patients(Request $request)
     {
         $scheduled = PatientDetail::where('client_id', Auth::user()->client_id)
+                                ->where('clinic_id', $request->clinic_id)
                                 ->whereDate('date_scheduled', $request->date)
                                 ->where('status', $request->status)
                                 ->orderBy('time_scheduled', 'asc')
@@ -64,10 +65,11 @@ class CalendarController extends Controller
         return $client_id;
     }
 
-    public function get_all_appointments()
+    public function get_all_appointments(Request $request)
     {
         $appointments = PatientDetail::select('date_scheduled', DB::raw('count(*) as total'))
                                 ->where('client_id', Auth::user()->client_id)
+                                ->where('clinic_id', $request->clinic_id)
                                 ->whereIn('status', ['Open', 'In Progress'])
                                 ->groupBy('date_scheduled')
                                 ->get();

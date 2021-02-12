@@ -216,9 +216,14 @@ class PatientController extends Controller
 
     public function update_patient_detail(Request $request, $id)
     {
+        $clinic = Clinic::find($request->clinic_id);
+        $doctor = Doctor::find($request->doctor_id);
+
         $patient_detail = PatientDetail::find($id);
-        $patient_detail->clinic = $request->clinic;
-        $patient_detail->doctor = $request->doctor;
+        $patient_detail->clinic_id = $clinic->id;
+        $patient_detail->doctor_id = $doctor->id;
+        $patient_detail->clinic = $clinic->name;
+        $patient_detail->doctor = $doctor->first_name .' '. $doctor->last_name;
         $patient_detail->service = $request->service;
         $patient_detail->notes = nl2br($request->notes);
 
