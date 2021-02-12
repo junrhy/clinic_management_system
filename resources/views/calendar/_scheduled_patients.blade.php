@@ -48,7 +48,7 @@
 					<td class="appointment">{{ $key + 1 }}</td>
 					<td class="appointment"><span style="font-family: sans-serif;color: #008385">{{ date('g:i a', strtotime($schedule->time_scheduled)) }}</span></td>
 					<td class="appointment">{{ $schedule->patient->last_name }}, {{ $schedule->patient->first_name }}</td>
-					<td class="appointment">{{ $schedule->doctor }}</td>
+					<td class="appointment"><i class="fa fa-user-md"></i> {{ $schedule->doctor }}</td>
 					<td class="appointment">{{ $schedule->service }}</td>
 				</tr>
 				@endforeach
