@@ -9,7 +9,9 @@ use Auth;
 use App\Model\Clinic;
 use App\Model\Doctor;
 use App\Model\Patient;
-use App\Model\FeatureUser;
+use App\Model\PatientDetail;
+
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -31,11 +33,18 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $patient_count = Patient::where('client_id', Auth::user()->client_id)->count();
-        $clinic_count = Clinic::where('client_id', Auth::user()->client_id)->count();
-        $doctor_count = Doctor::where('client_id', Auth::user()->client_id)->count();
+        $patients = Patient::where('client_id', Auth::user()->client_id)->get();
+        $clinics = Clinic::where('client_id', Auth::user()->client_id)->get();
+        $doctors = Doctor::where('client_id', Auth::user()->client_id)->get();
+
+        $patient_count = $patients->count();
+        $clinic_count = $clinics->count();
+        $doctor_count = $doctors->count();
 
         return view('home')
+                ->with('patients', $patients)
+                ->with('clinics', $clinics)
+                ->with('doctors', $doctors)
                 ->with('patient_count', $patient_count)
                 ->with('clinic_count', $clinic_count)
                 ->with('doctor_count', $doctor_count);

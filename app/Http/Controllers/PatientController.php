@@ -162,11 +162,16 @@ class PatientController extends Controller
 
     public function create_patient_detail(Request $request)
     {
+        $clinic = Clinic::find($request->clinic_id);
+        $doctor = Doctor::find($request->doctor_id);
+
         $patient_detail = new PatientDetail;
         $patient_detail->client_id = Auth::user()->client_id;
         $patient_detail->patient_id = $request->patient_id;
-        $patient_detail->clinic = $request->clinic;
-        $patient_detail->doctor = $request->doctor;
+        $patient_detail->clinic_id = $clinic->id;
+        $patient_detail->doctor_id = $doctor->id;
+        $patient_detail->clinic = $clinic->name;
+        $patient_detail->doctor = $doctor->first_name .' '. $doctor->last_name;
         $patient_detail->service = $request->service;
         $patient_detail->notes = nl2br($request->notes);
         $patient_detail->attachment_number = $request->attachment_number;

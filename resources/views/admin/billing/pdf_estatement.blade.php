@@ -7,7 +7,7 @@
 	}
 
 	th {
-		background-color: #eee;
+		background-color: #01d8da;
 	}	
 
 	#account_info {
@@ -17,6 +17,10 @@
 	.center {
 		margin-left: auto;
 		margin-right: auto;
+	}
+
+	.page-break {
+	    page-break-after: always;
 	}
 </style>
 
@@ -39,20 +43,20 @@
 	<br>
 	<table class="center" width="60%" cellpadding="5" cellspacing="0" border="1">
 		<tr>
-			<td align="left" style="background-color: #eee;" width="55%">Account Number: </td>
+			<td align="left" style="background-color: #01d8da;" width="55%">Account Number: </td>
 			<td>{{ $client->account_number }}</td>
 		</tr>
 		<tr>
-			<td align="left" style="background-color: #eee;">Due Date: </td>
+			<td align="left" style="background-color: #01d8da;">Due Date: </td>
 			<td>{{ $billing_statement->due_at->format('m/d/Y') }}</td>
 		</tr>
 		<tr>
-			<td align="left" style="background-color: #eee;">Total Amount Due: </td>
+			<td align="left" style="background-color: #01d8da;">Total Amount Due: </td>
 			<td>{{ number_format($total_amount_due, 2) }}</td>
 		</tr>
 
 		<tr>
-			<td align="left" style="background-color: #eee;">Payment Reference No.: </td>
+			<td align="left" style="background-color: #01d8da;">Payment Reference No.: </td>
 			<td>{{ $billing_statement->payment_reference_no }}</td>
 		</tr>
 	</table>
@@ -103,9 +107,11 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td align="center">{{ $app_currency }} {{ number_format(0, 2)  }}</td>
-			<td align="center">{{ $app_currency }} {{ number_format(0, 2)  }}</td>
-			<td align="center">{{ $app_currency }} {{ number_format(0, 2)  }}</td>
+			<?php $last_payment = $client->payments->first(); ?>
+
+			<td align="center">{{ $last_payment->created_at->format('M d, Y')  }}</td>
+			<td align="center">{{ $last_payment->payment_transaction_no  }}</td>
+			<td align="center">{{ $app_currency }} {{ number_format($last_payment->amount, 2)  }}</td>
 			<td align="center">{{ $app_currency }} {{ number_format($billing_statement->advance_payment, 2)  }}</td>
 		</tr>
 	</tbody>
@@ -146,4 +152,29 @@
 		<td>Look for:</td>
 		<td>{{ $bill_contact_persons }}</td>
 	</tr>
+</table>
+
+<div class="page-break"></div>
+
+<h3 align="center">Payment Transaction History</h3>
+
+<table class="table table-striped" width="100%" cellpadding="5" cellspacing="0" border="1">
+	<thead>
+		<tr>
+			<th align="center">Payment Date</th>
+			<th align="center">Transaction No.</th>
+			<th align="center">Bill Reference No.</th>
+			<th align="right">Amount</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach($client->payments->take(10) as $payment)
+		<tr>
+			<td align="center">{{ $payment->created_at->format('M d, Y')  }}</td>
+			<td align="center">{{ $payment->payment_transaction_no  }}</td>
+			<td align="center">{{ $payment->payment_reference_no  }}</td>
+			<td align="right">{{ $app_currency }} {{ number_format($payment->amount, 2)  }}</td>
+		</tr>
+		@endforeach
+	</tbody>
 </table>

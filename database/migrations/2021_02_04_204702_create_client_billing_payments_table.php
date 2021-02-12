@@ -15,10 +15,10 @@ class CreateClientBillingPaymentsTable extends Migration
     {
         Schema::create('client_billing_payments', function (Blueprint $table) {
             $table->increments('id');
+            $table->date('paid_at');
             $table->integer('client_id');
             $table->double('amount');
-            $table->string('currency');
-            $table->string('payment_reference_no');
+            $table->string('payment_reference_no')->nullable();
             $table->string('payment_transaction_no');
             $table->string('mode_of_payment');
             $table->timestamps();

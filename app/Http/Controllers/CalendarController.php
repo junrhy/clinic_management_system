@@ -30,11 +30,11 @@ class CalendarController extends Controller
                             ->orderBy('last_name', 'asc')
                             ->pluck('fullname', 'id');
 
-        $clinics = Clinic::where('client_id', $client_id)->pluck('name', 'name');
+        $clinics = Clinic::where('client_id', $client_id)->pluck('name', 'id');
 
         $doctors = Doctor::select(DB::raw("CONCAT(first_name,' ',last_name) AS fullname"),'id')
                             ->where('client_id', $client_id)
-                            ->pluck('fullname', 'fullname');
+                            ->pluck('fullname', 'id');
 
         $services = Service::where('client_id', $client_id)->pluck('name', 'name');
 

@@ -39,7 +39,7 @@
                 <select name="clinic" class='form-control'>
                   <option value='' disabled>Select Clinic</option>
                   @foreach($clinics as $clinic)
-                  <option value="{{ $clinic->name }}">{{ $clinic->name }}</option>
+                  <option value="{{ $clinic->id }}">{{ $clinic->name }}</option>
                   @endforeach
                 </select>
               </div>
@@ -49,7 +49,7 @@
                 <select name="doctor" class='form-control'>
                   <option value='' disabled>Select Doctor</option>
                   @foreach($doctors as $doctor)
-                  <option value="{{ $doctor->fullname }}">{{ $doctor->fullname }}</option>
+                  <option value="{{ $doctor->id }}">{{ $doctor->fullname }}</option>
                   @endforeach
                 </select>
               </div>
@@ -90,7 +90,7 @@
                     {{ Form::text('schedule', null, array('id' => 'date_scheduled', 'class' => 'form-control', 'placeholder' => 'mm/dd/yyyy', 'disabled')) }}
                   </div>
                   <div class="col-md-5">
-                    {{ Form::text('schedule_time', null, array('id' => 'time_scheduled', 'class' => 'form-control', 'placeholder' => '2:00 pm', 'disabled')) }}
+                    {{ Form::text('schedule_time', null, array('id' => 'time_scheduled', 'class' => 'form-control', 'placeholder' => '8:00 am', 'disabled')) }}
                   </div>
                 </div>
               </div>

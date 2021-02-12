@@ -7,9 +7,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     @if ($domain && $domain->client->logo != "")
-                        <a href="/"><img src="{{ $domain->client->logo }}" class="col-md-10 col-sm-10 col-xs-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1"></a>
+                        <a href="/"><img src="{{ asset('https://file-server1.sfo2.digitaloceanspaces.com/'. $domain->client->logo) }}" class="col-md-10 col-sm-10 col-xs-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1"></a>
                     @else
-                        <h3 class="text-center" style="font-weight:bold;color:#01d8da;"><i class="fa fa-clinic-medical"></i> Clinic Management System</h3>
+                        <h3 class="text-center" style="font-weight:bold;color:#01d8da;"><i class="fa fa-clinic-medical"></i> Bluewhale CMS</h3>
                     @endif
                 </div>
 

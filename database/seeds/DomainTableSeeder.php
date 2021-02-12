@@ -13,11 +13,6 @@ class DomainTableSeeder extends Seeder
      */
     public function run()
     {
-        $domain = new Domain();
-        $domain->client_id = 0;
-        $domain->domain_name = 'domain.com';
-        $domain->save();
-
         $this->command->info('Domain list seeded.');
     }
 }

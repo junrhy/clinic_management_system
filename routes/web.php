@@ -47,8 +47,15 @@ Route::group(['middleware' => ['is_admin']], function() {
 	Route::get('/admin/billing/view/{id}', 'AdminBillingController@pdf_estatement');
 
 	Route::get('/admin/payments', 'AdminPaymentController@index');
+	Route::get('/admin/payments/view_payments/{client_id}', 'AdminPaymentController@view_payments');
+	Route::get('/admin/payment/create/{client_id}', 'AdminPaymentController@create_payment');
+	Route::post('/admin/payment/store', 'AdminPaymentController@store_payment');
+	Route::delete('/admin/payment/delete/{id}', 'AdminPaymentController@delete_payment');
 	
 	Route::get('/admin/domains', 'AdminDomainController@index');
+	Route::get('/admin/domain/create', 'AdminDomainController@create');
+	Route::post('/admin/domain/store', 'AdminDomainController@store');
+	Route::delete('/admin/domain/delete/{id}', 'AdminDomainController@delete');
 	
 	Route::get('/admin/settings', 'AdminSettingController@index');
 	Route::get('/admin/setting/{id}', 'AdminSettingController@edit');
@@ -68,6 +75,7 @@ Route::group(['middleware' => ['is_default']], function() {
 
 	Route::get('/business_information', 'AccountController@business_information');
 	Route::post('/update_business_information', 'AccountController@update_business_information');
+	Route::get('/delete_company_logo/{id}', 'AccountController@delete_company_logo');
 
 	Route::get('/success', 'AccountController@success');
 	Route::get('/failed', 'AccountController@failed');

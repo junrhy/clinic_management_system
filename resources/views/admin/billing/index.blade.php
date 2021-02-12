@@ -64,7 +64,7 @@
                                     <td>
                                         <small style="font-family: 'arial';">
                                         @if($client->billing_statements->count() > 0)
-                                            Total Amount Due: <strong style="color: #018d8e;">{{ number_format($client->billing_statements->where('is_latest', true)->first()->outstanding_balance, 2) }}</strong> <br>
+                                            Total Amount Due: <strong style="color: #018d8e;">{{ number_format($client->billing_statements->where('is_latest', true)->first()->amount_due, 2) }}</strong> <br>
                                             Bill Date: <strong>{{ $client->billing_statements->where('is_latest', true)->first()->billed_at->format('M d, Y') }}</strong><br>
                                             Due Date: <strong>{{ $client->billing_statements->where('is_latest', true)->first()->due_at->format('M d, Y') }}</strong><br>
                                             Status: <strong class="latest_bill_status_{{ $client->billing_statements->where('is_latest', true)->first()->is_publish == true ? 'published' : 'on_hold' }}">
