@@ -52,4 +52,9 @@ class Client extends Model
     {
         return $this->hasMany(DisconnectionReason::class);
     }
+
+    public function payments()
+    {
+        return $this->hasMany(ClientBillingPayment::class)->orderBy('paid_at', 'desc');
+    }
 }

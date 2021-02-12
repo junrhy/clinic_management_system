@@ -1,5 +1,50 @@
 @extends('layouts.app')
 
+@section('page_level_css')
+<style type="text/css">
+  .text-red {
+    color:red;
+  }
+
+  .text-red {
+    color:green;
+  }
+
+  .logo {
+    height:98px;
+    width:371px;
+  }
+
+  .no-mage {
+    background-color: #ccc;
+    padding-top:36px;
+    margin-bottom: 5px;
+  }
+
+  .image-size {
+    margin-left:auto;
+    margin-right: auto;
+    width:70px;
+    color: #666;
+    font-family: sans-serif;
+  }
+
+  .remove-logo {
+    margin-bottom: 5px;
+    text-align: right;
+  }
+
+  #delete_company_logo {
+    color: #ccc;
+  }
+
+  #delete_company_logo:hover {
+    text-decoration: none;
+    color: red;
+  }
+</style>
+@endsection
+
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -21,9 +66,9 @@
                 <div class="panel-heading">Company Profile</div>
 
                 <div class="panel-body">
- 	               <div class="row col-md-4">
+ 	               <div class="row col-md-3">
                     @if (count($errors) > 0)
-                       <span style="color:red">
+                       <span class="text-red">
                             {{ Html::ul($errors->all()) }}
                          </span>
                     @endif
@@ -35,7 +80,7 @@
                     </div>
                     @endif
 
-                    {{ Form::open(array('url' => 'update_business_information')) }}
+                    {{ Form::open(array('url' => 'update_business_information', 'enctype' => 'multipart/form-data')) }}
                         <div class="form-group">
                           {{ Form::label('name', 'Company Name') }}
                           {{ Form::text('name', $client->name, array('class' => 'form-control')) }}
@@ -43,12 +88,46 @@
 
                         <div class="form-group">
                           {{ Form::label('name', 'Email') }}
+
+                          @if($client->is_email_verified)
+                          <small class="text-green"><i class="fa fa-check"></i> Verified</small>
+                          @else
+                          <small class="text-red">Not verified</small>
+                          @endif
+
                           {{ Form::email('email', $client->email, array('class' => 'form-control')) }}
                         </div>
 
                         <div class="form-group">
-                          {{ Form::label('contact', 'Contact No.') }}
+                          {{ Form::label('contact', 'Contact Number') }}
+                          
+                          @if($client->is_contact_verified)
+                          <small class="text-green"><i class="fa fa-check"></i> Verified</small>
+                          @else
+                          <small class="text-red">Not verified</small>
+                          @endif
+
                           {{ Form::text('contact', $client->contact, array('class' => 'form-control')) }}
+                        </div>
+
+                        <div class="form-group">
+                          {{ Form::label('logo', 'Company Logo') }}
+
+                          @if($client->logo)
+                          <img class="logo" src="{{ asset('https://file-server1.sfo2.digitaloceanspaces.com/' . $client->logo) }}" />
+
+                          <div class="remove-logo">
+                            <a id="delete_company_logo" href="/delete_company_logo/{{ $client->id }}"><small>Remove</small></a>
+                          </div>
+                          @else
+                          <div class="logo no-mage">
+                            <div class="image-size">371 x 98</div>
+                          </div>
+                          @endif
+
+                          <input type="hidden" name="attachment_number" value="{{ \Illuminate\Support\Str::random(6) }}">
+                          <input type="hidden" name="client_id" value="{{ $client->id }}">
+                          <input type="file" name="attachment">
                         </div>
 
                         {{ Form::hidden('id', $client->id) }}

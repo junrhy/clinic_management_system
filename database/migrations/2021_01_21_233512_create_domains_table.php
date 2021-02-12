@@ -20,7 +20,7 @@ class CreateDomainsTable extends Migration
             $table->integer('client_id');
             $table->string('domain_name');
             $table->string('params')->nullable();
-            $table->string('distibutor_code')->nullable();
+            $table->string('distributor_code')->nullable();
             $table->timestamps();
         });
     }

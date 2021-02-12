@@ -10,11 +10,11 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
 
 <style type="text/css">
-  .delete_domain {
+  .delete_payment {
     color: gray;
   }
 
-  .delete_domain:hover {
+  .delete_payment:hover {
     text-decoration: none;
     cursor: pointer;
     color: red;
@@ -30,44 +30,47 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-12">
-                        <h2>Domains <small class="text-muted">Manage web app domains</small></h2>
+                        <h2>View Payments <small class="text-muted">Manage web app payments</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
-                        <a class="btn btn-white btn-icon btn-round float-right m-l-10" href="/admin/domain/create" type="button">
+                        <a class="btn btn-white btn-icon btn-round float-right m-l-10" href="/admin/payment/create/{{ $client->id }}" type="button">
                             <i class="fa fa-plus"></i>
                         </a>
 
                         <ul class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><a href="/admin"><i class="fa fa-home"></i> Admin Panel</a></li>
-                            <li class="breadcrumb-item active">Domains</li>
+                            <li class="breadcrumb-item"><a href="/admin/payments"><i class="fa fa-file-alt"></i> Payments</a></li>
+                            <li class="breadcrumb-item active">View Payments</li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading">Domains</div>
+                <div class="panel-heading">{{ $client->name }} ( Account No.: {{ $client->account_number }} )</div>
 
                 <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Domain Name</th>
-                                    <th>Client Name</th>
-                                    <th>Parameters</th>
-                                    <th>Distributor Code</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Payment Reference No.</th>
+                                    <th>Payment Transaction No.</th>
+                                    <th>Mode of Payment</th>
                                     <th>Action</th>
-                                </tr>
+                                  </tr>
                             </thead>
                             <tbody>
-                                @foreach($domains as $domain)
-                                <tr>
-                                    <td>{{ $domain->domain_name }}</td>
-                                    <td>{{ $domain->client_id != 0 ? $domain->client->name : 'default' }}</td>
-                                    <td>{{ $domain->params }}</td>
-                                    <td>{{ $domain->distributor_code }}</td>
-                                    <td>
-                                       <a class="delete_domain" data-id="{{ $domain->id }}"><i class="fa fa-trash-o"></i> Delete</a>
+                                @foreach($payments as $payment)
+                                <tr style="font-family: sans-serif;">
+                                   <td>{{ $payment->paid_at->format('M d, Y') }}</td>
+                                   <td>{{ $app_currency }} {{ number_format($payment->amount, 2) }}</td>
+                                   <td>{{ $payment->payment_reference_no }}</td>
+                                   <td>{{ $payment->payment_transaction_no }}</td>
+                                   <td>{{ ucfirst($payment->mode_of_payment) }}</td>
+                                   <td>
+                                       <a class="delete_payment" data-id="{{ $payment->id }}"><i class="fa fa-trash-o"></i> Delete</a>
                                    </td>
                                 </tr>
                                 @endforeach
@@ -88,7 +91,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-    $(".delete_domain").unbind().click(function(){
+    $(".delete_payment").unbind().click(function(){
           id = $(this).data('id');
 
           Swal.fire({
@@ -103,7 +106,7 @@ $(document).ready(function() {
             if (result.value) {
               $.ajax({
                 method: "DELETE",
-                url: "/admin/domain/delete/" + id,
+                url: "/admin/payment/delete/" + id,
                 data: { 
                   _token: "{{ csrf_token() }}" 
                 }
@@ -111,7 +114,7 @@ $(document).ready(function() {
               .done(function( msg ) {
                 Swal.fire(
                   'Deleted!',
-                  'Domain has been deleted.',
+                  'Payment has been deleted.',
                   'success'
                 ).then((result) => {
                   location.reload();

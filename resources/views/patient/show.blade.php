@@ -52,6 +52,7 @@
 
   .btn-round-custom:hover {
     background-color: #00cfd1;
+    color: #ffffff;
   }
 </style>
 @endsection
@@ -236,7 +237,7 @@
           
                                                 @foreach($archive_detail->attachment as $attachment)
                                                   <small class="attachment">
-                                                    <a href="{{ asset('storage/'. $attachment->path .'/'. $attachment->filename) }}" target="_blank">
+                                                    <a href="{{ asset('https://file-server1.sfo2.digitaloceanspaces.com/client'. auth()->user()->client_id .'/'. $attachment->path .'/'. $attachment->filename) }}" target="_blank">
                                                        <i class="fa fa-paperclip" aria-hidden="true"></i> {{ $attachment->filename }}
                                                     </a>
                                                   </small>
@@ -339,21 +340,21 @@ $(document).ready(function() {
   });
 
   $("#record_detail").click(function(){
-      var clinic = $('select[name=clinic]').val();
-      var doctor = $('select[name=doctor]').val();
+      var clinic_id = $('select[name=clinic]').val();
+      var doctor_id = $('select[name=doctor]').val();
       var notes = $("#notes").val();
       var date_scheduled = $("#date_scheduled").val();
       var time_scheduled = $("#time_scheduled").val();
 
 
-      if (clinic == null) {
+      if (clinic_id == null) {
         $('select[name=clinic]').addClass('required-textfield');
         return false;
       } else {
         $('select[name=clinic]').removeClass('required-textfield');
       }
 
-      if (doctor == null) {
+      if (doctor_id == null) {
         $('select[name=doctor]').addClass('required-textfield');
         return false;
       } else {
@@ -381,8 +382,8 @@ $(document).ready(function() {
         url: "/patient/create_detail",
         data: { 
           patient_id: "{{ $patient->id }}",
-          clinic: clinic, 
-          doctor: doctor, 
+          clinic_id: clinic_id, 
+          doctor_id: doctor_id, 
           service: service, 
           notes: notes, 
           attachment_number: attachment_number,

@@ -26,16 +26,27 @@
                             <thead>
                                 <tr>
                                     <th>Client Name</th>
-                                    <th>Total Payments</th>
+                                    <th>Total Paid</th>
                                     <th>Last Payment Date</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($payments as $payment)
-                                <tr>
-                                    <td>{{ $payment->client->name }} ({{ $payment->client->account_number }})</td>
-                                    <td>{{ $payment->total_payments }}</td>
-                                    <td></td>
+                                @foreach($clients as $client)
+                                <tr style="font-family: sans-serif;">
+                                    <td>{{ $client->name }} ({{ $client->account_number }})</td>
+                                    <td>{{ $app_currency }} {{ number_format($client->payments != null ? $client->payments->sum('amount') : 0, 2) }}</td>
+                                    <td>
+                                        @if($client->payments != null)
+                                        <?php $last_payment = $client->payments->first(); ?>
+
+                                        {{ $last_payment->created_at->format('M d, Y') }}
+
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="/admin/payments/view_payments/{{ $client->id }}"><i class="fa fa-file-alt"></i> View Payments</a>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

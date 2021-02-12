@@ -19,6 +19,8 @@ class CreatePatientDetailsTable extends Migration
             $table->increments('id');
             $table->integer('client_id');
             $table->integer('patient_id');
+            $table->integer('clinic_id')->nullable();
+            $table->integer('doctor_id')->nullable();
             $table->string('clinic')->nullable();
             $table->string('doctor')->nullable();
             $table->string('service')->nullable();

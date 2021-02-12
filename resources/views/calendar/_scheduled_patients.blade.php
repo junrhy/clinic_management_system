@@ -38,8 +38,8 @@
 				<tr style="cursor:pointer;" 
 						data-id="{{ $schedule->id }}" 
 						data-patient="{{ $schedule->patient->last_name }}, {{ $schedule->patient->first_name }}" 
-						data-clinic="{{ $schedule->clinic }}" 
-						data-doctor="{{ $schedule->doctor }}" 
+						data-clinic="{{ $schedule->clinic_id }}" 
+						data-doctor="{{ $schedule->doctor_id }}" 
 						data-service="{{ $schedule->service }}" 
 						data-schedule_date="{{ date('m/d/Y', strtotime($schedule->date_scheduled)) }}" 
 						data-schedule_time="{{ date('g:i a', strtotime($schedule->time_scheduled)) }}"  
@@ -98,8 +98,8 @@ $(document).ready(function() {
 
   $("#btn-save-changes").unbind().click(function(){
     id = $("#btn-save-changes").data('id');
-    clinic = $("select[name='appointment_clinic']").val();
-    doctor = $("select[name='appointment_doctor']").val();
+    clinic_id = $("select[name='appointment_clinic']").val();
+    doctor_id = $("select[name='appointment_doctor']").val();
     service = $("select[name='appointment_service_type']").val();
     date_scheduled = $("input[name='appointment_schedule_date']").val();
     time_scheduled = $("input[name='appointment_schedule_time']").val();
@@ -110,8 +110,8 @@ $(document).ready(function() {
           method: "POST",
           url: "/patient/update_detail/" + id,
           data: { 
-            clinic: clinic, 
-            doctor: doctor, 
+            clinic_id: clinic_id, 
+            doctor_id: doctor_id, 
             service: service, 
             date_scheduled: date_scheduled, 
             time_scheduled: time_scheduled, 
@@ -134,8 +134,8 @@ $(document).ready(function() {
 
   $("#btn-submit-appointment").unbind().click(function(){
     id = $("select[name='new_appointment_patient']").val();
-    clinic = $("select[name='new_appointment_clinic']").val();
-    doctor = $("select[name='new_appointment_doctor']").val();
+    clinic_id = $("select[name='new_appointment_clinic']").val();
+    doctor_id = $("select[name='new_appointment_doctor']").val();
     service = $("select[name='new_appointment_service_type']").val();
     date_scheduled = $("input[name='new_appointment_schedule_date']").val();
     time_scheduled = $("input[name='new_appointment_schedule_time']").val();
@@ -147,8 +147,8 @@ $(document).ready(function() {
           url: "/patient/create_detail",
           data: { 
             patient_id: id,
-            clinic: clinic, 
-            doctor: doctor, 
+            clinic_id: clinic_id, 
+            doctor_id: doctor_id, 
             service: service, 
             date_scheduled: date_scheduled, 
             time_scheduled: time_scheduled, 
