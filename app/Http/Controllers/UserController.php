@@ -51,7 +51,7 @@ class UserController extends Controller
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'username' => 'required|string|max:50|unique:users',
-            'email' => 'required|string|email|max:255',
+            'email' => 'string|email|max:255',
             'password' => 'required|string|min:6',
         ]);
 
@@ -110,7 +110,7 @@ class UserController extends Controller
         $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            'email' => 'string|email|max:255',
         ]);
 
         $user = User::find($id);
