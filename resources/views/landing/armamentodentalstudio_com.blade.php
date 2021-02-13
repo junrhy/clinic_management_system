@@ -15,7 +15,7 @@
                             <img src="{{ asset('https://file-server1.sfo2.digitaloceanspaces.com/'. $domain->client->logo) }}" class="col-md-12 col-sm-12 col-xs-12">
                             <br><br><br><br>
                         @else
-                            <h3 class="text-center" style="font-weight:bold;color:#01d8da;font-family: 'Nunito';"><i class="fa fa-clinic-medical"></i> Bluewhale CMS</h3>
+                            <h3 class="text-center" style="font-weight:bold;color:#01d8da;font-family: 'Nunito';"><i class="fa fa-clinic-medical"></i> CMS</h3>
                         @endif
                     </div>
                 </div>
