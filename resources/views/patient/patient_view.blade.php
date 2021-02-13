@@ -93,7 +93,7 @@
 								<tbody>
 									@if($appointments->count() > 0)
 										@foreach($appointments as $key => $appointment)
-										<tr style="cursor:pointer;">
+										<tr>
 											<td class="appointment" width="20%">
 												{{ date('D', strtotime($appointment->date_scheduled)) }} - 
 												<strong style="color:#008385;">{{ date('M d, Y', strtotime($appointment->date_scheduled)) }}</strong>
