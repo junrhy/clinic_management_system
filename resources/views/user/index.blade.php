@@ -88,7 +88,7 @@
                         </td>
                         <td>{{ $user_item->email }}</td>
                         <td>
-                          <a class="show-privileges" href="{{ route('user.show',$user_item->id) }}">Show Privileges</a>
+                          <a class="show-privileges {{ App\Model\FeatureUser::is_feature_allowed('set_privileges', Auth::user()->id) }}" href="{{ route('user.show',$user_item->id) }}">Show Privileges</a>
                         </td>
                         <td>
                             <div class="pull-right">
