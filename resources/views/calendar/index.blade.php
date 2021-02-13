@@ -45,7 +45,24 @@
   }
 
   .current_clinic {
-    border: 2px solid #018d8e;
+    border: 2px solid #01d8da;
+  }
+
+  .appointment-list {
+    border: 1px solid #ccc;
+    padding: 1px;
+  }
+
+  .nav-tabs {
+    border-bottom: 1px solid #01d8da;
+  }
+
+  .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    border-radius: 0px;
+    border-color: #01d8da;
+    background-color: #01d8da;
+    color: #ffffff;
+    font-weight: bold;
   }
 </style>
 @endsection
@@ -78,7 +95,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="row col-md-3">
+                            <div class="row col-md-4 col-md-offset-3">
                               {{ Form::select('current_clinic', $clinics, isset($_GET['clinic']) ? $_GET['clinic'] : null, array('class' => 'form-control current_clinic')) }}
                               <br>
                             </div>
@@ -88,7 +105,7 @@
                             <br>
                         </div>
                         <div class="col-md-7">
-                          <div>
+                          <div class="appointment-list">
                             <div class="pull-right">
                               <span class="bulk-delete-appointment hidden"><i class="fa fa-trash"></i> Remove</span>
                             </div>
