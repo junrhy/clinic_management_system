@@ -11,20 +11,20 @@
   }
 
   .free-plan-head {
-    background:#63B5FF;
+    background:#FF6065;
     color:#FFFFFF;
     border:1px solid #ccc;
   } 
 
   .basic-plan-head {
-    background:#FF6065;
+    background:#636b6f;
     color:#FFFFFF;
     border-left:1px solid #ccc;
     border-right:1px solid #ccc;
   }
 
   .free {
-    color: #63B5FF;
+    color: #FF6065;
     font-weight: bold;
     font-family: 'arial';
   }
@@ -37,7 +37,6 @@
     padding:3px;
     border:1px solid #ccc;
     font-size:13pt;
-    color:#FF6065;
     font-family: 'arial';
   }
 
@@ -50,57 +49,56 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2 m-t-200" style="margin-top: 50px;">
+        <div class="col-md-8 col-md-offset-2" style="margin-top: 5px;">
         	<br>
             <div class="panel panel-default">
                 <div class="panel-heading">
                    <div class="row">
-                    <h3 class="text-center" style="font-weight:bold;color:#01d8da;font-family: 'Nunito';">
-                      <i class="fa fa-clinic-medical"></i> Bluewhale CMS <br>
-                      <small>Clinic Management Software</small>
-                    </h3>
+                    <img src="/img/brand/bluewhalecms.png" class="col-md-12 col-md-offset-3" style="width: 350px;">
                    </div>
                 </div>
 
-                <div class="panel-body" style="font-family: 'Nunito';font-size: 14pt;text-align: justify;">
-                    <h3 style="text-align: center;">Welcome to <span style="font-weight: bold;">Bluewhale Clinic Management Software.</span></h3>
-                    <br>
-                   
-                    <div style="margin-bottom: 50px;margin-left: auto;margin-right: auto;width: 30em;">
-                        <table width="100%">
+                <div class="panel-body" style="font-family: 'Nunito';text-align: justify;">
+                    <h3 style="text-align: center;">
+                      Welcome to <span style="font-weight: bold;">Bluewhale Clinic Management Software.</span> We are a start-up Software Development Company that primarily focus on building software solutions for doctor's who decide to have their own clinic. We are dedicated that our software service can help you to easily manage your clinic operation. 
+                    </h3>
+ 
+                    <h2 align="center">See Our Pricing</h2>
+                    <div class="table-responsive col-md-12">
+                        <table class="table">
                             <tr>
-                              <td></td>
+                              <td style="border: 0;"></td>
                               <td class="free-plan-head text-center" width="25%">Free</td>
                               <td class="basic-plan-head text-center" width="25%">Basic</td>
                             <tr>
-                              <td>Number of Appointments</td>
-                              <td class="free-plan text-center">Unlimited</td>
-                              <td class="basic-plan text-center">Unlimited</td>
+                              <td>Manage Appointments</td>
+                              <td class="free-plan text-center">Yes</td>
+                              <td class="basic-plan text-center">Yes</td>
                             </tr>
                             <tr>
-                              <td>Number of Patients</td>
+                              <td>Manage Patients</td>
                               <td class="free-plan text-center">100</td>
                               <td class="basic-plan text-center">Unlimited</td>
                             </tr>
                             <tr>
-                              <td>Number of Clinics</td>
-                              <td class="free-plan text-center">Unlimited</td>
-                              <td class="basic-plan text-center">Unlimited</td>
+                              <td>Manage Clinics</td>
+                              <td class="free-plan text-center">Yes</td>
+                              <td class="basic-plan text-center">Yes</td>
                             </tr>
                             <tr>
-                              <td>Number of Staffs</td>
-                              <td class="free-plan text-center">Unlimited</td>
-                              <td class="basic-plan text-center">Unlimited</td>
+                              <td>Manage Staffs</td>
+                              <td class="free-plan text-center">Yes</td>
+                              <td class="basic-plan text-center">Yes</td>
                             </tr>
                             <tr>
-                              <td>Number of Services</td>
-                              <td class="free-plan text-center">Unlimited</td>
-                              <td class="basic-plan text-center">Unlimited</td>
+                              <td>Manage Services</td>
+                              <td class="free-plan text-center">Yes</td>
+                              <td class="basic-plan text-center">Yes</td>
                             </tr>
                             <tr>
-                              <td>Number of Doctors</td>
-                              <td class="free-plan text-center">Unlimited</td>
-                              <td class="basic-plan text-center">Unlimited</td>
+                              <td>Manage Doctors</td>
+                              <td class="free-plan text-center">Yes</td>
+                              <td class="basic-plan text-center">Yes</td>
                             </tr>
                             <tr>
                               <td>Dental Chart Feature</td>
