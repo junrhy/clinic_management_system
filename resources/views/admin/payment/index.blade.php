@@ -37,10 +37,10 @@
                                     <td>{{ $client->name }} ({{ $client->account_number }})</td>
                                     <td>{{ $app_currency }} {{ number_format($client->payments != null ? $client->payments->sum('amount') : 0, 2) }}</td>
                                     <td>
-                                        @if($client->payments != null)
+                                        @if(count($client->payments) > 0)
                                         <?php $last_payment = $client->payments->first(); ?>
 
-                                        {{ $last_payment->created_at->format('M d, Y') }}
+                                        {{ $last_payment->created_at->format('M d, Y') }}    
 
                                         @endif
                                     </td>

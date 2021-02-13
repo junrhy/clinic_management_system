@@ -55,12 +55,15 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                    <div class="row">
-                    <h3 class="text-center" style="font-weight:bold;color:#01d8da;font-family: 'Nunito';"><i class="fa fa-clinic-medical"></i> Bluewhale CMS</h3>
+                    <h3 class="text-center" style="font-weight:bold;color:#01d8da;font-family: 'Nunito';">
+                      <i class="fa fa-clinic-medical"></i> Bluewhale CMS <br>
+                      <small>Clinic Management Software</small>
+                    </h3>
                    </div>
                 </div>
 
                 <div class="panel-body" style="font-family: 'Nunito';font-size: 14pt;text-align: justify;">
-                    <h3 style="text-align: center;">Welcome to <span style="font-weight: bold;">Bluewhale Clinic Management System.</span></h3>
+                    <h3 style="text-align: center;">Welcome to <span style="font-weight: bold;">Bluewhale Clinic Management Software.</span></h3>
                     <br>
                    
                     <div style="margin-bottom: 50px;margin-left: auto;margin-right: auto;width: 30em;">
