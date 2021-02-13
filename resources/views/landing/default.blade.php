@@ -114,7 +114,7 @@
                     </div>
 
                     <div class="col-md-4">
-                        <label>New Client</label>
+                        <label>Want to try out?</label>
                         @if ($domain == null)
                         <a href="{{ route('register') }}" class="btn btn-upgrade btn-lg btn-block">
                             <span style="color: #fff;">Sign Up for FREE!</span>
@@ -122,7 +122,7 @@
                         @endif
                     </div>
                     <div class="col-md-4 col-md-offset-4">
-                        <label>Existing Client</label>
+                        <label>Already a member?</label>
                         <a href="{{ route('login') }}" class="btn btn-primary btn-lg btn-block">
                             Sign In
                         </a>
