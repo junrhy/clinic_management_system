@@ -60,7 +60,13 @@
             @if (auth()->user()->client->logo != "")
             <div class="sidebar-header" style="padding: 0px;">
                 <h3 class="row" style="margin: 0px;">
+                    @if(env('FILESYSTEM_DRIVER') == 'spaces')
                     <a href="/"><img src="{{ asset('https://file-server1.sfo2.digitaloceanspaces.com/' . auth()->user()->client->logo) }}" id="logo" class="" style="margin: 30px 3px 3px 3px;height:75px;width: 97%;"></a>
+                    @endif
+
+                    @if(env('FILESYSTEM_DRIVER') == 'public')
+                    <a href="/"><img src="{{ asset('storage/' . auth()->user()->client->logo) }}" id="logo" class="" style="margin: 30px 3px 3px 3px;height:60px;width: 97%;"></a>
+                    @endif
                 </h3>
             
                 <strong style="padding-top:20px;"><i class="fa fa-clinic-medical"></i> <br>{{ substr(Auth::user()->client->name, 0, 1) }}</strong>

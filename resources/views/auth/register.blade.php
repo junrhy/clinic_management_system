@@ -4,13 +4,13 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3 m-t-30">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     @if ($domain && $domain->client->logo != "")
                         <a href="/"><img src="{{ asset('https://file-server1.sfo2.digitaloceanspaces.com/'. $domain->client->logo) }}" class="col-md-10 col-sm-10 col-xs-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1"></a>
                     @else
-                        <h3 class="text-center" style="font-weight:bold;color:#01d8da;font-family: 'Nunito';">
-                          <i class="fa fa-clinic-medical"></i> CMS
+                        <h3 class="text-center" style="font-weight:bold;color:#ffffff;">
+                          <i class="fa fa-clinic-medical"></i> Clinic Management Software
                         </h3>
                     @endif
                 </div>
@@ -163,19 +163,32 @@
                         @endif
                         
                         <div class="form-group">
-                            <div class="col-md-10 col-md-offset-1">
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary btn-block btn-round">
+                            <div class="col-md-12">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <button type="submit" class="btn btn-register btn-block">
                                         Register
                                     </button>
+                                </div>
+
+                                <div class="col-md-8">
                                     <br>
-                                    <div class="text-center"><a href="{{ route('login') }}">You already have a membership?</a></div>
+                                    <a class="btn btn-link" href="{{ route('login') }}">
+                                       You already have a membership?
+                                    </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <br>
+                                    <a class="btn btn-link" href="/">
+                                        Return to Homepage
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
+            <br>
+            <div class="text-center">Copyright <a href="http://clinic-app.junrhy.com" target="_BLANK">&copy; 2021 - Clinic Management Software by Bluewhale CMS.</a></div>
         </div>
     </div>
 </div>

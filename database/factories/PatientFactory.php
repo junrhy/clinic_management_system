@@ -13,7 +13,6 @@ $factory->define(App\Model\Patient::class, function (Faker $faker) {
         'gender' => $gender,
         'email' => $faker->unique()->safeEmail,
         'contact_number' => $faker->phoneNumber,
-        'address' => $faker->address,
         'user_id' => 1,
     ];
 });

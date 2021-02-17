@@ -20,8 +20,24 @@
       body {
         background: #FFFFFF;
       }
+
+      .panel-primary {
+        border-color: #018d8e;
+      }
+
+      .panel-primary > .panel-heading {
+        color: #fff;
+        background-color: #018d8e;
+        border-color: #018d8e;
+      }
+
+      .btn-register {
+        background-color: #018d8e;
+        border-radius: 5px;
+        color: #FFFFFF;
+      }
     </style>
-<body class="bg-darkblue">
+<body class="">
     <div id="app">
         
 
