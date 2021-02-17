@@ -8,6 +8,7 @@ use Auth;
 
 use App\Model\Clinic;
 use App\Model\Doctor;
+use App\Model\Service;
 use App\Model\Patient;
 use App\Model\PatientDetail;
 
@@ -36,10 +37,12 @@ class HomeController extends Controller
         $patients = Patient::where('client_id', Auth::user()->client_id)->get();
         $clinics = Clinic::where('client_id', Auth::user()->client_id)->get();
         $doctors = Doctor::where('client_id', Auth::user()->client_id)->get();
+        $services = Service::where('client_id', Auth::user()->client_id)->get();
 
         $patient_count = $patients->count();
         $clinic_count = $clinics->count();
         $doctor_count = $doctors->count();
+        $service_count = $services->count();
 
         return view('home')
                 ->with('patients', $patients)
@@ -47,7 +50,8 @@ class HomeController extends Controller
                 ->with('doctors', $doctors)
                 ->with('patient_count', $patient_count)
                 ->with('clinic_count', $clinic_count)
-                ->with('doctor_count', $doctor_count);
+                ->with('doctor_count', $doctor_count)
+                ->with('service_count', $service_count);
     }
 
 }

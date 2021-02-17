@@ -96,7 +96,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row col-md-4 col-md-offset-3">
-                              {{ Form::select('current_clinic', $clinics, isset($_GET['clinic']) ? $_GET['clinic'] : null, array('class' => 'form-control current_clinic')) }}
+                              {{ Form::select('current_clinic', $clinics, isset($_GET['clinic']) ? $_GET['clinic'] : null, array('class' => 'form-control current_clinic', 'placeholder' => 'Select Clinic')) }}
                               <br>
                             </div>
                         </div>

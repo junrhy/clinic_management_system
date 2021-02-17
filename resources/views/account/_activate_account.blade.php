@@ -1,44 +1,10 @@
 <style type="text/css">
-  .basic-plan, .business-plan {
-    padding:10px;
-    border:1px solid #ccc;
-    font-size:10pt;
-  }
-
-  .basic-plan-head {
-    background:#63B5FF;
-    color:#FFFFFF;
-    border:1px solid #ccc;
-  } 
-
-  .business-plan-head {
-    background:#FF6065;
-    color:#FFFFFF;
-    border-left:1px solid #ccc;
-    border-right:1px solid #ccc;
-  }
-
-  .basic-plan-foot {
-    padding:3px;
-  } 
-
-  .business-plan-foot {
-    padding:3px;
-    border:1px solid #ccc;
-    font-size:13pt;
-    color:#FF6065;
-  }
-
-  .text-upgrade {
-    color:#FF6065;
-  }
-
-  .btn-upgrade {
+  #btn-contact-support {
     background:#FF6065;
     color:#FFFFFF;
   }
 
-  .btn-upgrade:hover {
+  #btn-contact-support:hover {
     color:#FFFFFF;
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.15);
   }
@@ -59,7 +25,7 @@
       </div>
       <div class="modal-footer">
        <button type="button" class="btn btn-default btn-round" data-dismiss="modal">Close</button>
-       <a href="" type="button" id="btn-upgrade-account" data-id="" class="btn btn-upgrade btn-round">Contact Customer Service</a>
+       <a href="" type="button" id="btn-contact-support" data-id="" class="btn btn-round">Contact Customer Service</a>
     </div>
     </div>
   </div>

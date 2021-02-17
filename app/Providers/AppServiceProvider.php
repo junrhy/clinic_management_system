@@ -49,6 +49,7 @@ class AppServiceProvider extends ServiceProvider
 
         $bill_contact_persons = AdminSetting::where('name', 'bill_contact_persons')->first();
         view()->share('bill_contact_persons', $bill_contact_persons->value);
+
     }
 
     /**

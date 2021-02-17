@@ -6,20 +6,20 @@
   }
 
   .free-plan-head {
-    background:#63B5FF;
+    background:#FF6065;
     color:#FFFFFF;
     border:1px solid #ccc;
   } 
 
   .basic-plan-head {
-    background:#FF6065;
+    background:#636b6f;
     color:#FFFFFF;
     border-left:1px solid #ccc;
     border-right:1px solid #ccc;
   }
 
   .free {
-    color: #63B5FF;
+    color: #FF6065;
     font-weight: bold;
     font-family: 'arial';
   }
@@ -32,7 +32,7 @@
     padding:3px;
     border:1px solid #ccc;
     font-size:13pt;
-    color:#FF6065;
+    color:#636b6f;
     font-family: 'arial';
   }
 
@@ -41,7 +41,7 @@
   }
 
   .btn-upgrade {
-    background:#FF6065;
+    background:#636b6f;
     color:#FFFFFF;
   }
 
@@ -75,34 +75,34 @@
                   <td></td>
                   <td class="free-plan-head text-center" width="25%">Free</td>
                 <tr>
-                  <td>Number of Appointments</td>
-                  <td class="free-plan text-center">Unlimited</td>
-                  <td class="basic-plan text-center">Unlimited</td>
+                  <td>Manage Appointments</td>
+                  <td class="free-plan text-center">Yes</td>
+                  <td class="basic-plan text-center">Yes</td>
                 </tr>
                 <tr>
-                  <td>Number of Patients</td>
+                  <td>Manage Patients</td>
                   <td class="free-plan text-center">100</td>
                   <td class="basic-plan text-center">Unlimited</td>
                 </tr>
                 <tr>
-                  <td>Number of Clinics</td>
-                  <td class="free-plan text-center">Unlimited</td>
-                  <td class="basic-plan text-center">Unlimited</td>
+                  <td>Manage Clinics</td>
+                  <td class="free-plan text-center">Yes</td>
+                  <td class="basic-plan text-center">Yes</td>
                 </tr>
                 <tr>
-                  <td>Number of Staffs</td>
-                  <td class="free-plan text-center">Unlimited</td>
-                  <td class="basic-plan text-center">Unlimited</td>
+                  <td>Manage Staffs</td>
+                  <td class="free-plan text-center">Yes</td>
+                  <td class="basic-plan text-center">Yes</td>
                 </tr>
                 <tr>
-                  <td>Number of Services</td>
-                  <td class="free-plan text-center">Unlimited</td>
-                  <td class="basic-plan text-center">Unlimited</td>
+                  <td>Manage Services</td>
+                  <td class="free-plan text-center">Yes</td>
+                  <td class="basic-plan text-center">Yes</td>
                 </tr>
                 <tr>
-                  <td>Number of Doctors</td>
-                  <td class="free-plan text-center">Unlimited</td>
-                  <td class="basic-plan text-center">Unlimited</td>
+                  <td>Manage Doctors</td>
+                  <td class="free-plan text-center">Yes</td>
+                  <td class="basic-plan text-center">Yes</td>
                 </tr>
                 <tr>
                   <td>Dental Chart Feature</td>
@@ -121,8 +121,8 @@
                 <tr>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
-                  <td class=" text-center" style="border: 1px solid #FF6065;background-color: #FF6065;">
-                    <a href="{{ url('/subscription') }}" type="button" id="btn-upgrade-account" data-id="" class="btn btn-upgrade btn-block">Upgrade</a>
+                  <td class=" text-center" style="border: 1px solid #636b6f;background-color: #636b6f;">
+                    <a href="{{ url('/subscription') }}" type="button" id="btn-upgrade-account" data-id="" class="btn btn-upgrade btn-block">Click to Subscribe</a>
                   </td>
                 </tr>
               </table>
