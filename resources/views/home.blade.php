@@ -73,6 +73,29 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
+                    @if($clinic_count == 0 || $doctor_count == 0 || $service_count == 0 || $patient_count == 0)
+                    <h3 class="row col-md-12">Things you need to do first</h3>
+                    <div class="row col-md-12">
+                        <ol class="row">
+                            @if($clinic_count == 0)
+                            <li><a href="/clinic/create">Add clinic details</a></li>
+                            @endif
+
+                            @if($doctor_count == 0)
+                            <li><a href="/doctor/create">Add clinic doctors</a></li>
+                            @endif
+
+                            @if($service_count == 0)
+                            <li><a href="/service/create">Add clinic services</a></li>
+                            @endif
+
+                            @if($patient_count == 0)
+                            <li><a href="/patient/create">Add patients</a></li>
+                            @endif
+                        </ol>
+                    </div>
+                    @endif
+
                     <h3 class="row col-md-12">Overview</h3>
                     <div class="row col-md-12">
                         <div class="card card-color-2 col-md-2">
@@ -93,6 +116,16 @@
 
 
                     <h3 class="row col-md-12">Today Appointments</h3>
+
+                    @if($clinic_count == 0)
+                    <div class="row col-md-4 table-responsive clinic-appointments">
+                        <table class="table table-striped">
+                            <tr>
+                                <td colspan="4">You didn't add your clinic details yet.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    @endif
 
                     @foreach($clinics as $clinic)
                     <div class="row col-md-4 table-responsive clinic-appointments">

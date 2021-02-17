@@ -195,13 +195,13 @@
                             <a href="{{ url('change_password') }}">Change Password</a>
                         </li>
 
-                        @if(Auth::user()->client->account_type == 'free' && Auth::user()->client->is_active != 0 && Auth::user()->client->is_suspended != 1)
+                        @if(Auth::user()->client->account_type == 'free' && Auth::user()->client->is_active != 0 && Auth::user()->client->is_suspended == 0 && Auth::user()->is_client == 1)
                         <li>
                             <a style="cursor:pointer;" id="sidebar-menu-upgrade-account">Upgrade</a>
                         </li>
                         @endif
 
-                        @if(Auth::user()->client->account_type != 'free')
+                        @if(Auth::user()->client->account_type != 'free' && Auth::user()->is_client == 1)
                         <li>
                             <a href="{{ url('subscription') }}">Subscription</a>
                         </li>
