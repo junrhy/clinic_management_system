@@ -4,14 +4,14 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3 m-t-200">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     @if ($domain && $domain->client->logo != "")
                         <a href="/"><img src="{{ asset('https://file-server1.sfo2.digitaloceanspaces.com/'. $domain->client->logo) }}" class="col-md-10 col-sm-10 col-xs-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1"></a>
                         <br><br><br><br><br>
                     @else
-                        <h3 class="text-center" style="font-weight:bold;color:#01d8da;font-family: 'Nunito';">
-                          <i class="fa fa-clinic-medical"></i> CMS
+                        <h3 class="text-center" style="font-weight:bold;color:#ffffff;">
+                          <i class="fa fa-clinic-medical"></i> Clinic Management Software
                         </h3>
                     @endif
                 </div>
@@ -70,25 +70,33 @@
                         <div class="form-group">
                             <div class="col-md-10 col-md-offset-1">
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary btn-lg btn-round btn-block">
+                                    <button type="submit" class="btn btn-login btn-lg btn-block">
                                         Sign In
                                     </button>
                                 </div>
                             </div>
                             
-                            <div class="col-md-8 col-md-offset-1">
+                            <div class="col-md-4 col-md-offset-1">
                                 <br>
                                 <a class="btn btn-link btn-forgot-password" href="{{ route('password.request') }}">
                                     Forgot Your Password?
-                                </a><!--  | 
-                                <a class="btn btn-link btn-register" href="{{ route('register') }}">
-                                    Register
-                                </a> -->
+                                </a>
+                            </div>
+                            <div class="col-md-4 col-md-offset-1">
+                                <br>
+                                <a class="btn btn-link" href="/">
+                                    Return to Homepage
+                                </a>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="text-center">Copyright <a href="http://clinic-app.junrhy.com" target="_BLANK">&copy; 2021 - Clinic Management Software by Bluewhale CMS.</a></div>
         </div>
     </div>
 </div>
