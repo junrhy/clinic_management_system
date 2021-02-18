@@ -58,6 +58,7 @@ class UserController extends Controller
         $user->client_id = Auth::user()->client_id;
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
+        $user->name = $request->first_name .' '. $request->last_name;
         $user->username = $request->username;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
@@ -114,6 +115,7 @@ class UserController extends Controller
         $user = User::find($id);
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
+        $user->name = $request->first_name .' '. $request->last_name;
         $user->email = $request->email;
 
         $password = isset($request->password) ? $request->password : null;

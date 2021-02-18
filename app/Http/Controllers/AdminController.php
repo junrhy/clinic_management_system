@@ -38,6 +38,7 @@ class AdminController extends Controller
             'client_id' => 0,
             'first_name'=> $request->first_name,
             'last_name' => $request->last_name,
+            'name'      => $request->first_name .' '. $request->last_name,
             'username'  => $request->username,
             'email'     => $request->email,
             'password'  => bcrypt($request->password),
