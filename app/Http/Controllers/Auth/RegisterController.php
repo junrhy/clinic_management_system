@@ -100,6 +100,7 @@ class RegisterController extends Controller
             'client_id' => $client->id,
             'first_name'=> $data['first_name'],
             'last_name' => $data['last_name'],
+            'name'      => $data['first_name'] .' '. $data['last_name'],
             'username'  => $data['username'],
             'email'     => $data['email'],
             'password'  => bcrypt($data['password']),
