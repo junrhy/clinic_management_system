@@ -96,7 +96,7 @@
             <br>
             <br>
             <br>
-            <div class="text-center">Copyright <a href="http://clinic-app.junrhy.com" target="_BLANK">&copy; 2021 - Clinic Management Software by Bluewhale CMS.</a></div>
+            <div class="text-center">Copyright &copy; 2021 - Clinic Management Software by <a href="http://clinic-app.junrhy.com" target="_BLANK">Bluewhale CMS</a></div>
         </div>
     </div>
 </div>

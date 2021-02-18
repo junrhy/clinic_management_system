@@ -40,14 +40,11 @@
       }
   }
 
-/*  .navbar .navbar-nav>.active> a, 
+  .navbar .navbar-nav>.active> a, 
   .navbar .navbar-nav>.active> a:focus, 
   .navbar .navbar-nav>.active> a:hover,
   .navbar .navbar-nav>.active> a:visited {
-    background: #01d8da;
-    color: #FFFFFF;
-    border-radius:3px;
-  }*/
+  }
 
   .masthead {
     height: 100vh;
@@ -147,14 +144,14 @@
   }
 
   .btn-submit-message {
-    background-color: #FF6065;
+    background-color: #01d8da;
     color: #FFFFFF;
   }
 </style>
 
 <div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/"><img src="/img/brand/bluewhalecms.png" style="height: 70px;"></a>
+        <a class="navbar-brand" href="/"><img src="/img/brand/bluewhalecms.png" style="height: 60px;"></a>
         
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -162,7 +159,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                   <a class="nav-link" href="#home">Home</a>
                 </li>
                 <li class="nav-item">
@@ -177,8 +174,33 @@
                 <li class="nav-item">
                   <a class="nav-link" href="#contact">Contact</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/login">Sign In</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        My Account
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        @if (Route::has('login'))
+                          @auth
+                              <a href="{{ url('/home') }}" class="dropdown-item">{{ auth()->user()->client->name }} Dashboard</a>
+
+                              <a class="dropdown-item" href="{{ route('logout') }}"
+                                  onclick="event.preventDefault();
+                                           document.getElementById('logout-form').submit();">
+                                  Logout
+                              </a>
+
+                              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                  {{ csrf_field() }}
+                              </form>
+                          @else
+                              <a href="{{ route('login') }}" class="dropdown-item">Sign In</a>
+
+                              @if (Route::has('register'))
+                                  <a href="{{ route('register') }}" class="dropdown-item">Create New Account</a>
+                              @endif
+                          @endauth
+                        @endif
+                    </div>
                 </li>
             </ul>
         </div>
@@ -206,6 +228,7 @@
               <i class="fa fa-calendar"></i><br>
               <span class="feature-title">Manage Appointments</span>
               <p class="feature-body">
+                <br>
                 Your will appreciate the convenience of booking appointments online.
               </p>
             </div>
@@ -213,6 +236,7 @@
               <i class="fa fa-notes-medical"></i><br>
               <span class="feature-title">Manage Patient Records</span>
               <p class="feature-body">
+                <br>
                 Keeping your patient records in a safe and secure place that you can access anytime online.
               </p>
             </div>
@@ -220,6 +244,7 @@
               <i class="fa fa-clinic-medical"></i><br>
               <span class="feature-title">Support Multiple Clinics</span>
               <p class="feature-body">
+                <br>
                 See the how your other clinic perform in one platform.
               </p>
             </div>
@@ -227,6 +252,7 @@
               <i class="fa fa-file-alt"></i><br>
               <span class="feature-title">Manage Billing Invoice & Payments</span>
               <p class="feature-body">
+                <br>
                 You can record every charges and payments of patients.
               </p>
             </div>
@@ -234,6 +260,7 @@
               <i class="fa fa-users"></i><br>
               <span class="feature-title">Manage Staff</span>
               <p class="feature-body">
+                <br>
                 Control which staff can access the system features.
               </p>
             </div>
@@ -241,6 +268,7 @@
               <i class="fa fa-tooth"></i><br>
               <span class="feature-title">Dental Chart</span>
               <p class="feature-body">
+                <br>
                 Easily record your patient tooth diagnosis and treatment.
               </p>
             </div>
@@ -316,7 +344,7 @@
     <br>
     <br>
     <br>
-    <h2 id="testimonials" class="header" align="center">Here are some testimonials from our clients.</h2>
+    <h2 id="testimonials" class="header" align="center">Here are some testimonials from our clients</h2>
 
     <br>
     <br>
