@@ -181,7 +181,13 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         @if (Route::has('login'))
                           @auth
+                              @if(auth()->user()->type == 'default')
                               <a href="{{ url('/home') }}" class="dropdown-item">{{ auth()->user()->client->name }} Dashboard</a>
+                              @endif
+
+                              @if(auth()->user()->type == 'admin')
+                              <a href="{{ url('/home') }}" class="dropdown-item">Admin Dashboard</a>
+                              @endif
 
                               <a class="dropdown-item" href="{{ route('logout') }}"
                                   onclick="event.preventDefault();
