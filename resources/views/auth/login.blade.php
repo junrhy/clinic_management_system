@@ -76,7 +76,7 @@
                                 </div>
                             </div>
                             
-                            <div class="col-md-4 col-md-offset-1">
+                            <div class="col-md-5 col-md-offset-1">
                                 <br>
                                 <a class="btn btn-link btn-forgot-password" href="{{ route('password.request') }}">
                                     Forgot Your Password?

@@ -113,8 +113,14 @@
                         <div class="form-group">
                           {{ Form::label('logo', 'Company Logo') }}
 
-                          @if($client->logo)
+                          @if($client->logo && env('FILESYSTEM_DRIVER') == 'spaces')
                           <img class="logo" src="{{ asset('https://file-server1.sfo2.digitaloceanspaces.com/' . $client->logo) }}" />
+
+                          <div class="remove-logo">
+                            <a id="delete_company_logo" href="/delete_company_logo/{{ $client->id }}"><small>Remove</small></a>
+                          </div>
+                          @elseif($client->logo && env('FILESYSTEM_DRIVER') == 'public')
+                          <img class="logo" src="{{ asset('storage/' . $client->logo) }}" />
 
                           <div class="remove-logo">
                             <a id="delete_company_logo" href="/delete_company_logo/{{ $client->id }}"><small>Remove</small></a>
