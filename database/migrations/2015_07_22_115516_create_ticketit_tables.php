@@ -31,6 +31,7 @@ class CreateTicketitTables extends Migration
         });
 
         Schema::create('ticketit_categories_users', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('category_id')->unsigned();
             $table->integer('user_id')->unsigned();
         });
