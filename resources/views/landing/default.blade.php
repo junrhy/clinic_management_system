@@ -147,9 +147,27 @@
     background-color: #01d8da;
     color: #FFFFFF;
   }
+
+  .alert {
+    border-radius: 0px;
+}
 </style>
 
 <div class="container-fluid">
+    @if(session()->has('success'))
+    <div class="row">
+        <div class="col-sm-12">
+            <div align="center" class="alert  alert-success alert-dismissible fade show" role="alert">
+                {{ session()->get('success') }}
+                
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    @endif
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="/"><img src="/img/brand/bluewhalecms.png" style="height: 60px;"></a>
         
@@ -386,8 +404,9 @@
             <br>
         </div>
         <div class="col-md-3 mx-auto">
-            <h2 id="contact" class="header" align="left">Contact Us</h2>
-            <form action="" method="POST">
+            <h2 id="contact" class="header" align="left">Contact Us Today</h2>
+
+            <form action="/landing/contact_us" method="POST">
               <label class="label">First Name</label>
               <input type="text" name="first_name" class="form-control" required="required" placeholder="Type your first name">
               <br>
@@ -397,9 +416,12 @@
               <label class="label">Email</label>
               <input type="email" name="email" class="form-control" required="required" placeholder="Type your email address">
               <br>
-              <label class="label">Message</label>
-              <textarea name="message" class="form-control" required="required" placeholder="Type your message" rows="5"></textarea> 
+              <label class="label">Messages</label>
+              <textarea name="messages" class="form-control" required="required" placeholder="Type your message" rows="5"></textarea> 
               <br>
+              <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+              <input type="hidden" name="from_url" value="{{ $_SERVER['SERVER_NAME'] }}" />
+
               <input type="submit" class="btn btn-lg btn-block btn-submit-message">
             </form>
         </div>

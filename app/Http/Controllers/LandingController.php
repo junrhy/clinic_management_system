@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 use App\Model\Domain;
+
+use App\Mail\ContactUsMessage;
 
 use View;
 
@@ -29,5 +32,15 @@ class LandingController extends Controller
     	}
 
     	return view($view);
+    }
+
+    public function send_contact_us_message(Request $request)
+    {
+        $send_to_name = env('MAIL_CONTACT_US_RECIPIENT_NAME');
+        $send_to_email = env('MAIL_CONTACT_US_RECIPIENT_EMAIL');
+
+        Mail::send(new ContactUsMessage($request));
+
+        return redirect()->back()->with('success', 'Your message has been sent successfully!');
     }
 }
