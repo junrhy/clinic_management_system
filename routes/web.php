@@ -11,7 +11,8 @@
 |
 */
 
-Route::get('/', 'LandingController@index');  
+Route::get('/', 'LandingController@index'); 
+Route::post('/landing/contact_us', 'LandingController@send_contact_us_message'); 
 
 Auth::routes();
 
