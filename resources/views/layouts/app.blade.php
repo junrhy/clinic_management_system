@@ -230,6 +230,18 @@
                         @endif
                     </ul>
                 </li>
+
+                <li class="">
+                    <a href="#helpSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fa fa-question"></i> 
+                        &nbsp;&nbsp;Help</a>
+
+                    <ul class="collapse list-unstyled" id="helpSubmenu">
+                        <li class="">
+                            <a href="{{ url('/tickets') }}">Contact Support</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
 
         </nav>
