@@ -16,6 +16,10 @@
 	.app-action {
 		margin: 0px 5px;
 	}
+
+  .appointment-row:hover td {
+    background-color: #fcf8e3;
+  }
 </style>
 
 <div class="table-responsive">
@@ -25,7 +29,8 @@
 				<th></th>
 				<th>#</th>
 				<th>Time</th>
-				<th>Name</th>
+				<th>Lastname, Firstname</th>
+        <th>Contact No.</th>
 				<th>Doctor</th>
 				<th>Service</th>
 			</tr>
@@ -42,12 +47,13 @@
 						data-schedule_date="{{ date('m/d/Y', strtotime($schedule->date_scheduled)) }}" 
 						data-schedule_time="{{ date('g:i a', strtotime($schedule->time_scheduled)) }}"  
 						data-status="{{ $schedule->status }}" 
-						data-detail="{{ strip_tags($schedule->notes) }}">
+						data-detail="{{ strip_tags($schedule->notes) }}" class="appointment-row">
 
 					<td class="appointment"><input type="checkbox" name="appointment-action" data-id="{{ $schedule->id }}"></td>
 					<td class="appointment">{{ $key + 1 }}</td>
 					<td class="appointment"><span style="font-family: sans-serif;color: #008385">{{ date('g:i a', strtotime($schedule->time_scheduled)) }}</span></td>
 					<td class="appointment">{{ $schedule->patient->last_name }}, {{ $schedule->patient->first_name }}</td>
+          <td class="appointment"><i class="fa fa-phone"></i> <span style="font-family: sans-serif;">{{ $schedule->patient->contact_number }}</span></td>
 					<td class="appointment"><i class="fa fa-user-md"></i> {{ $schedule->doctor }}</td>
 					<td class="appointment">{{ $schedule->service }}</td>
 				</tr>
