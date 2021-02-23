@@ -67,13 +67,34 @@ class CalendarController extends Controller
 
     public function get_all_appointments(Request $request)
     {
-        $appointments = PatientDetail::select('date_scheduled', DB::raw('count(*) as total'))
+        $overview = PatientDetail::select('date_scheduled', 
+                                    DB::raw('count(*) as total'), 
+                                    DB::raw("SUM(case when status = 'Open' then 1 else 0 end) as open_total"),
+                                    DB::raw("SUM(case when status = 'In Progress' then 1 else 0 end) as in_progress_total") )
                                 ->where('client_id', Auth::user()->client_id)
                                 ->where('clinic_id', $request->clinic_id)
                                 ->whereIn('status', ['Open', 'In Progress'])
                                 ->groupBy('date_scheduled')
                                 ->get();
 
-        return response()->json($appointments);
+        return response()->json([
+                                'overview' => $overview
+                            ]);
+    }
+
+    public function get_appointment_status_count(Request $request)
+    {
+        $overview = PatientDetail::select('date_scheduled', 
+                                    DB::raw('count(*) as total'), 
+                                    DB::raw("SUM(case when status = 'Open' then 1 else 0 end) as open_total"),
+                                    DB::raw("SUM(case when status = 'In Progress' then 1 else 0 end) as in_progress_total") )
+                                ->where('client_id', Auth::user()->client_id)
+                                ->where('clinic_id', $request->clinic_id)
+                                ->where('date_scheduled', $request->date)
+                                ->whereIn('status', ['Open', 'In Progress'])
+                                ->groupBy('date_scheduled')
+                                ->get();
+
+        return response()->json($overview);
     }
 }

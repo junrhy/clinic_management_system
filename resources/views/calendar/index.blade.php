@@ -13,6 +13,26 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
 
 <style media="screen">
+  #calendar {
+    border: 1px solid #ccc;
+    padding: 5px;
+  }
+
+  .no_display {
+    display: hidden;
+  }
+
+  #open_count, #in_progress_count {
+    height: 25px;
+    width: 25px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: none;
+    text-align: center;
+    border:1px solid #888;
+    color: #000;
+  }
+
   .ui-datepicker {
     width: 100%;
   }
@@ -84,7 +104,7 @@
                         <ul class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><a href="/home"><i class="fa fa-home"></i> {{ Auth::user()->client->name }}</a></li>
                             <li class="breadcrumb-item">Patients</li>
-                            <li class="breadcrumb-item active">Appointment</li>
+                            <li class="breadcrumb-item active">Appointments</li>
                         </ul>
                     </div>
                 </div>
@@ -95,7 +115,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="row col-md-4 col-md-offset-3">
+                            <div class="row col-md-3">
                               {{ Form::select('current_clinic', $clinics, isset($_GET['clinic']) ? $_GET['clinic'] : null, array('class' => 'form-control current_clinic', 'placeholder' => 'Select Clinic')) }}
                               <br>
                             </div>
@@ -112,10 +132,10 @@
 
                             <ul class="nav nav-tabs">
                                 <li class="nav-item active" data-status="open">
-                                    <a data-toggle="tab" id="open_tab" href="#open">Open</a>
+                                    <a data-toggle="tab" id="open_tab" href="#open">Open <div id="open_count"></div></a>
                                 </li>
                                 <li class="nav-item" data-status="in_progress">
-                                    <a data-toggle="tab" id="in_progress_tab" href="#in_progress">In Progress</a>
+                                    <a data-toggle="tab" id="in_progress_tab" href="#in_progress">In Progress <div id="in_progress_count"></div></a>
                                 </li>
                             </ul>
 
@@ -227,6 +247,8 @@ $(document).ready(function() {
                   $("#patient_list_in_progress").html(response);
                 });
 
+                // show open and in progress count
+                show_appointment_status_count();
           }
       }
   });
@@ -260,9 +282,8 @@ $(document).ready(function() {
           }
       })
       .done(function( data ) {
-          //console.log(data);
-          $.each(data, function(i, item) {
-
+          $.each(data.overview, function(i, item) {
+              
               var event_name = 'patient';
               if (item.total > 1) {
                 event_name = 'patients';
@@ -276,7 +297,42 @@ $(document).ready(function() {
                   textColor: '#fff'
               });
           });
+
       });
+  }
+
+  function show_appointment_status_count() {
+        $("#open_count").css('display', 'none');
+        $("#in_progress_count").css('display', 'none');
+
+        $.ajax({
+            method: "POST",
+            url: "/calendar/get_appointment_status_count",
+            data: { 
+              clinic_id: $("select[name='current_clinic']").val(),
+              date: $(".fc-state-highlight").data("date"),
+              _token: "{{ csrf_token() }}" 
+            }
+        })
+        .done(function( data ) {
+            // console.log(data);
+            $.each(data, function(i, item) {
+                $("#open_count").css('display', 'inline-block');
+                $("#in_progress_count").css('display', 'inline-block');
+
+                $("#open_count").html(item.open_total);
+                $("#in_progress_count").html(item.in_progress_total);
+            });
+
+            if (data.length == 0) {
+                $("#open_count").css('display', 'inline-block');
+                $("#in_progress_count").css('display', 'inline-block');
+
+                $("#open_count").html(0);
+                $("#in_progress_count").html(0);
+            }
+
+        });
   }
 
   $(function(){
@@ -350,6 +406,9 @@ $(document).ready(function() {
 
     // show all appointments
     show_all_appointments();
+
+    // show open and in progress count
+    show_appointment_status_count();
   });
 
   $("#add-appointment").click(function(){

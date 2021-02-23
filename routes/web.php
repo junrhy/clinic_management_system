@@ -122,6 +122,7 @@ Route::group(['middleware' => ['is_default']], function() {
 
 	Route::post('/calendar/scheduled_patients', 'CalendarController@scheduled_patients');
 	Route::post('/calendar/get_all_appointments', 'CalendarController@get_all_appointments');
+	Route::post('/calendar/get_appointment_status_count', 'CalendarController@get_appointment_status_count');
 
 	Route::post('/user/update_privilege/{id}', 'UserController@update_privilege');
 
