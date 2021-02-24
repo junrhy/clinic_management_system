@@ -33,9 +33,10 @@
                 <div class="panel-heading">Hello {{ $patient->first_name }} {{ $patient->last_name }}!</div>
 
                 <div class="panel-body">
+                	
                 	<div class="row" style="font-size:10pt;">
 	                    <h4 style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;">
-	                    	<i class="fa fa-address-card"></i> Your Information
+	                    	<i class="fa fa-address-card"></i> Your Personal Information
 	                    </h4>
 
 	                    <table class="">
@@ -57,7 +58,7 @@
 	                      </tr>
 	                      <tr>
 	                        <td class="col-md-2 text-right">Gender:</td>
-	                        <td><span style="font-family: sans-serif;">{{ $patient->gender }}</span></td>
+	                        <td><span style="font-family: sans-serif;">{{ $patient->gender != 'Other' ? $patient->gender : 'Prefer not to say' }}</span></td>
 	                      </tr>
 	                      <tr>
 	                        <td class="col-md-2 text-right">Email:</td>
@@ -67,9 +68,22 @@
 	                        <td class="col-md-2 text-right">Contact No.:</td>
 	                        <td><span style="font-family: sans-serif;">{{ $patient->contact_number }}</span></td>
 	                      </tr>
+	                    </table>
+                 	</div>
+
+                 	<div class="row" style="font-size:10pt;">
+	                    <h4 style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;">
+	                    	<i class="fa fa-key"></i> Login Details
+	                    </h4>
+
+	                    <table class="">
 	                      <tr>
-	                        <td class="col-md-2 text-right">Address:</td>
-	                        <td><span style="font-family: sans-serif;">{{ $patient->address }}</span></td>
+	                        <td class="col-md-2 text-right">Username:</td>
+	                        <td><span style="font-family: sans-serif;">{{ $patient->user->username }}</span></td>
+	                      </tr>
+	                      <tr>
+	                        <td class="col-md-2 text-right">Password:</td>
+	                        <td><a href="">Change Password</a></td>
 	                      </tr>
 	                    </table>
                  	</div>

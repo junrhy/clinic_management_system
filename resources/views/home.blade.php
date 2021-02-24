@@ -115,7 +115,7 @@
                     </div>
 
 
-                    <h3 class="row col-md-12">Today Appointments</h3>
+                    <h3 class="row col-md-12">Today's Appointment</h3>
 
                     @if($clinic_count == 0)
                     <div class="row col-md-4 table-responsive clinic-appointments">
@@ -135,8 +135,9 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Time</th>
-                                    <th>Patient Name</th>
+                                    <th>Lastname, Firstname</th>
                                     <th>Doctor</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -149,9 +150,10 @@
                                 @foreach($clinic->appointments($client_id, $date, $clinic_id) as $key => $appointment)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ date('g:i a', strtotime($appointment->time_scheduled)) }}</td>
-                                    <td>{{ $appointment->patient->first_name }} {{ $appointment->patient->last_name }}</td>
-                                    <td>{{ $appointment->doctor }}</td>
+                                    <td><span style="font-family: sans-serif;color: #008385">{{ date('g:i a', strtotime($appointment->time_scheduled)) }}</span></td>
+                                    <td>{{ $appointment->patient->last_name }}, {{ $appointment->patient->first_name }}</td>
+                                    <td><i class="fa fa-user-md"></i> {{ $appointment->doctor }}</td>
+                                    <td>{{ $appointment->status }}</td>
                                 </tr>
                                 @endforeach
 

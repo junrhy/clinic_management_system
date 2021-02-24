@@ -60,7 +60,7 @@
 				@endforeach
 			@else
 				<tr>
-					<td colspan="8" class="text-center">No appointment</td>
+					<td colspan="8" class="text-center">No appointment found on this date.</td>
 				</tr>
 			@endif
 		</tbody>
