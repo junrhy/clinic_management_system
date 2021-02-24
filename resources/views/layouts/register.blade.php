@@ -15,7 +15,9 @@
     <link href="{{ asset('css/register.css') }}" rel="stylesheet">
 
     <script src="https://kit.fontawesome.com/e3497de5a4.js" crossorigin="anonymous"></script>
-
+    @yield('page_level_script')
+    @yield('page_level_css')
+    
     <style type="text/css">
       body {
         background: #FFFFFF;
@@ -46,5 +48,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @yield('page_level_footer_script')
 </body>
 </html>

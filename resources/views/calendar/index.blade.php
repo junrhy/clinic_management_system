@@ -38,7 +38,7 @@
   }
 
   .fc-past {
-    background: #fff2f4;
+    background: #ffe5e5;
   }
 
   .fc-today {

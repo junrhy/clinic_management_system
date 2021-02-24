@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
@@ -26,10 +27,14 @@ use PDF;
 
 class PatientController extends Controller
 {
-     public function __construct()
-     {
-        $this->middleware('auth');
-     }
+    use RegistersUsers;
+
+    protected $redirectTo = '/patient_view';
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['register_as_patient', 'create_patient_user'] ]);
+    }
 
     public function index(Request $request)
     {
@@ -367,5 +372,49 @@ class PatientController extends Controller
         $pdf->setPaper('a4', 'portrait');
 
         return $pdf->download($patient->first_name . '_' . $patient->last_name . '_medical_record.pdf');
+    }
+
+    public function register_as_patient()
+    {
+        return view('patient.auth.register');
+    }
+
+    public function create_patient_user(Request $request)
+    {
+        $validated = $request->validate([
+            'username' => 'required|string|max:50|unique:users',
+            'dob' => 'required',
+            'gender' => 'required',
+            'email' => 'nullable|string|email|max:255',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $user = User::create([
+            'client_id' => $request->client_id,
+            'first_name'=> $request->first_name,
+            'last_name' => $request->last_name,
+            'name'      => $request->first_name .' '. $request->last_name,
+            'username'  => $request->username,
+            'email'     => $request->email,
+            'password'  => bcrypt($request->password),
+            'type'      => User::PATIENT_TYPE,
+            'is_client' => false,
+        ]);
+
+        $patient = new Patient;
+        $patient->client_id = $request->client_id;
+        $patient->first_name = $request->first_name;
+        $patient->last_name = $request->last_name;
+        $patient->dob = $request->dob != '' ? date('Y-m-d', strtotime($request->dob)) : null;
+        $patient->gender = $request->gender;
+        $patient->email = $request->email;
+        $patient->contact_number = $request->contact;
+        $patient->user_id = $user->id;
+        $patient->save();
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
     }
 }

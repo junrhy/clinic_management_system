@@ -19,6 +19,9 @@ Auth::routes();
 Route::get('/register-admin', 'AdminController@register');
 Route::post('/create_admin_user', 'AdminController@create_admin_user')->name('create_admin_user');
 
+Route::get('/patient-registration-form', 'PatientController@register_as_patient');
+Route::post('/create_patient_user', 'PatientController@create_patient_user')->name('create_patient_user');
+
 Route::group(['middleware' => ['is_admin']], function() {
 	Route::get('/admin', 'AdminController@index')    
    		->name('admin');

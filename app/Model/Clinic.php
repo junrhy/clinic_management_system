@@ -23,6 +23,7 @@ class Clinic extends Model
     public function appointments($client_id, $date, $clinic_id)
     {
     	$appointments = PatientDetail::where('client_id', $client_id)
+                            ->whereDate('date_scheduled', $date)
     						->whereIn('status', ['Open', 'In Progress'])
     						->where('clinic_id', $clinic_id)
     						->orderBy('time_scheduled', 'asc')
