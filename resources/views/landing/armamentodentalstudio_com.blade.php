@@ -35,12 +35,12 @@
                     We appreciate the trust you have placed in us, and we will strive to provide the high quality of dental care that you expect. Please have your personal information added by our receptionist, Then you will be given a username and password that you can use to login into our system. We look forward to meeting you!
                     <br>
                     <br>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <a href="/patient-registration-form" class="btn btn-default btn-lg btn-block">
                             Patient Registration
                         </a>
                     </div>
-                    <div class="col-md-4 col-md-offset-4">
+                    <div class="col-md-4 col-md-offset-2">
                         <a href="{{ route('login') }}" class="btn btn-primary btn-lg btn-block">
                             Sign In
                         </a>
