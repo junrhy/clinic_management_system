@@ -20,28 +20,60 @@
 
     @yield('page_level_script')
     @yield('page_level_css')
+
+    <style type="text/css">
+        .navbar-primary {
+            background-color: #018d8e;
+        }
+
+        .panel-primary {
+            border-color: #018d8e;
+        }
+
+        .panel-primary > .panel-heading {
+            color: #fff;
+            background-color: #018d8e;
+            border-color: #018d8e;
+        }
+
+        .btn-primary {
+            background-color: #018d8e;
+        }
+
+        .header-section {
+            border-bottom:2px dotted #018d8e;
+            padding:10px;
+            color:#018d8e;
+            font-weight: bold;
+        }
+
+        .navbar-brand a, .navbar-brand a:hover, .navbar-brand a:active, .navbar-brand a:visited {
+            color: #FFFFFF;   
+        }
+    </style>
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top" style="background-color: #01d8da;">
+        <nav class="navbar navbar-primary navbar-static-top">
 
                 <div class="container">
-                    <div class="navbar-header">
-                        <!-- Branding Image -->
-                        <a class="navbar-brand" href="{{ url('/') }}">
-                            <i class="fa fa-clinic-medical"></i> {{ auth()->user()->client->name }}
-                        </a>
-                    </div>
-                    <div style="margin-top:6px;">
-                        <a class="btn btn-round btn-white float-right" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                                     document.getElementById('logout-form').submit();">
-                            <i class="fas fa-power-off"></i> Logout
-                        </a>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span class="navbar-brand">
+                                <a href="/patient_view"><i class="fa fa-clinic-medical"></i> {{ auth()->user()->client->name }}</a>
+                            </span>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a class="btn btn-round btn-white" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();" style="margin-top: 6px;">
+                                <i class="fas fa-power-off"></i> Logout
+                            </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </div>
                     </div>
                 </div>
             </nav>
