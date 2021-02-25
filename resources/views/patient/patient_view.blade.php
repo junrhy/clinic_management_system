@@ -28,14 +28,14 @@
         
         <div class="col-md-12">
         	<br><br>
-        	<div class="panel panel-default">
+        	<div class="panel panel-primary">
         
                 <div class="panel-heading">Hello {{ $patient->first_name }} {{ $patient->last_name }}!</div>
 
                 <div class="panel-body">
                 	
                 	<div class="row" style="font-size:10pt;">
-	                    <h4 style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;">
+	                    <h4 class="header-section">
 	                    	<i class="fa fa-address-card"></i> Your Personal Information
 	                    </h4>
 
@@ -72,8 +72,8 @@
                  	</div>
 
                  	<div class="row" style="font-size:10pt;">
-	                    <h4 style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;">
-	                    	<i class="fa fa-key"></i> Login Details
+	                    <h4 class="header-section">
+	                    	<i class="fa fa-key"></i> Account Information
 	                    </h4>
 
 	                    <table class="">
@@ -83,13 +83,13 @@
 	                      </tr>
 	                      <tr>
 	                        <td class="col-md-2 text-right">Password:</td>
-	                        <td><a href="">Change Password</a></td>
+	                        <td><a href="/patient_view/change_password">Change Password</a></td>
 	                      </tr>
 	                    </table>
                  	</div>
 
                  	<div class="row" style="font-size:10pt;">
-	                    <h4 style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;">
+	                    <h4 class="header-section">
 	                    	<i class="fa fa-calendar"></i> Appointments
 	                    </h4>
 
@@ -131,8 +131,8 @@
 
 
                  	<div class="row" style="font-size:10pt;">
-	                    <h4 style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;">
-	                    	<i class="fa fa-calendar"></i> Prescriptions
+	                    <h4 class="header-section">
+	                    	<i class="fa fa-file-alt"></i> Prescriptions
 	                    </h4>
 
 	                    <div class="table-responsive">

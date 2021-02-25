@@ -71,6 +71,9 @@ Route::group(['middleware' => ['is_patient']], function() {
 	    ->name('patient_view');
 
     Route::post('/patient_view/print_prescription', 'PatientController@print_prescription');
+
+    Route::get('/patient_view/change_password', 'PatientViewController@change_password');
+    Route::post('/patient_view/update_password', 'PatientViewController@update_password');
 });
 
 Route::group(['middleware' => ['is_default']], function() {
