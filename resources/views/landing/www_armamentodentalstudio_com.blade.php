@@ -37,13 +37,13 @@
                     <br>
                     <div class="row">
                         <div class="col-md-6">
-                            <label>New Patient?</label>
+                            <label class="label" style="color: #636b6f;">New Patient?</label>
                             <a href="/patient-registration-form" class="btn btn-default btn-lg btn-block">
                                 Patient Registration Form
                             </a>
                         </div>
                         <div class="col-md-5 col-md-offset-1">
-                            <label>Already have an account?</label>
+                            <label class="label" style="color: #636b6f;">Already have an account?</label>
                             <a href="{{ route('login') }}" class="btn btn-primary btn-lg btn-block">
                                 Sign In
                             </a>
