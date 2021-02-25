@@ -36,14 +36,14 @@
                     <br>
                     <br>
                     <div class="row">
-                        <div class="col-md-7">
-                            <label class="label">New Patient?</label>
+                        <div class="col-md-6">
+                            <label>New Patient?</label>
                             <a href="/patient-registration-form" class="btn btn-default btn-lg btn-block">
                                 Patient Registration Form
                             </a>
                         </div>
-                        <div class="col-md-4 col-md-offset-1">
-                            <label class="label">Already have an account?</label>
+                        <div class="col-md-5 col-md-offset-1">
+                            <label>Already have an account?</label>
                             <a href="{{ route('login') }}" class="btn btn-primary btn-lg btn-block">
                                 Sign In
                             </a>
