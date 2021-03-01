@@ -51,6 +51,7 @@ class CalendarController extends Controller
                                 ->where('clinic_id', $request->clinic_id)
                                 ->whereDate('date_scheduled', $request->date)
                                 ->where('status', $request->status)
+                                ->whereNull('is_schedule_request')
                                 ->orderBy('time_scheduled', 'asc')
                                 ->get();
 
@@ -73,6 +74,7 @@ class CalendarController extends Controller
                                     DB::raw("SUM(case when status = 'In Progress' then 1 else 0 end) as in_progress_total") )
                                 ->where('client_id', Auth::user()->client_id)
                                 ->where('clinic_id', $request->clinic_id)
+                                ->whereNull('is_schedule_request')
                                 ->whereIn('status', ['Open', 'In Progress'])
                                 ->groupBy('date_scheduled')
                                 ->get();
@@ -91,10 +93,34 @@ class CalendarController extends Controller
                                 ->where('client_id', Auth::user()->client_id)
                                 ->where('clinic_id', $request->clinic_id)
                                 ->where('date_scheduled', $request->date)
+                                ->whereNull('is_schedule_request')
                                 ->whereIn('status', ['Open', 'In Progress'])
                                 ->groupBy('date_scheduled')
                                 ->get();
 
         return response()->json($overview);
+    }
+
+    public function show_appointment_requests(Request $request)
+    {
+        $appointment_requests = PatientDetail::where('client_id', Auth::user()->client_id)
+                                        ->where('is_schedule_request', true)
+                                        ->get();
+
+        return view('calendar.appointment_requests')
+                    ->with('appointment_requests', $appointment_requests);
+    }
+
+    public function appointment_request_approved(Request $request)
+    {
+        $appointment_request = PatientDetail::find($request->id);
+        $appointment_request->is_schedule_request = null;
+        $appointment_request->save();
+    }
+
+    public function appointment_request_denied($id)
+    {
+        $appointment_request = PatientDetail::find($id);
+        $appointment_request->delete();
     }
 }

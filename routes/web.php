@@ -74,6 +74,9 @@ Route::group(['middleware' => ['is_patient']], function() {
 
     Route::get('/patient_view/change_password', 'PatientViewController@change_password');
     Route::post('/patient_view/update_password', 'PatientViewController@update_password');
+
+    Route::get('/patient_view/request_appointment', 'PatientViewController@request_appointment');
+    Route::post('/patient_view/submit_appointment_request', 'PatientViewController@submit_appointment_request');
 });
 
 Route::group(['middleware' => ['is_default']], function() {
@@ -129,6 +132,9 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::post('/calendar/scheduled_patients', 'CalendarController@scheduled_patients');
 	Route::post('/calendar/get_all_appointments', 'CalendarController@get_all_appointments');
 	Route::post('/calendar/get_appointment_status_count', 'CalendarController@get_appointment_status_count');
+	Route::get('/appointment/requests', 'CalendarController@show_appointment_requests');
+	Route::post('/appointment/request/approved', 'CalendarController@appointment_request_approved');
+	Route::delete('/appointment/request/denied/{id}', 'CalendarController@appointment_request_denied');
 
 	Route::post('/user/update_privilege/{id}', 'UserController@update_privilege');
 
