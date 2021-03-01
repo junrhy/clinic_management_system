@@ -116,7 +116,13 @@
 											<td class="appointment">{{ $appointment->clinic }}</td>
 											<td class="appointment">{{ $appointment->doctor }}</td>
 											<td class="appointment">{{ $appointment->service }}</td>
-											<td class="appointment" width="15%">{{ $appointment->date_scheduled->diffForHumans() }}</td>
+											<td class="appointment" width="15%">
+												@if($appointment->is_schedule_request == true)
+												Waiting for Approval 
+												@else
+												{{ $appointment->date_scheduled->diffForHumans() }}
+												@endif
+											</td>
 										</tr>
 										@endforeach
 									@else
@@ -124,6 +130,11 @@
 											<td colspan="5" class="text-center">No appointments.</td>
 										</tr>
 									@endif
+									<tr>
+										<td colspan="5" class="text-center">
+											<a href="/patient_view/request_appointment">Request new appointment</a>
+										</td>
+									</tr>
 								</tbody>
 							</table>
 						</div>

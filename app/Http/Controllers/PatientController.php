@@ -113,8 +113,16 @@ class PatientController extends Controller
                             ->get();
 
         $services = Service::where('client_id', Auth::user()->client_id)->orderBy('name', 'asc')->get();
-        $patient_details = PatientDetail::where('patient_id', $patient->id)->where('is_archived', false)->orderBy('created_at', 'asc')->get();
-        $archived_details = PatientDetail::where('patient_id', $patient->id)->where('is_archived', true)->orderBy('created_at', 'asc')->get();
+        
+        $patient_details = PatientDetail::where('patient_id', $patient->id)
+                                        ->whereNull('is_schedule_request')
+                                        ->where('is_archived', false)
+                                        ->orderBy('created_at', 'asc')->get();
+
+        $archived_details = PatientDetail::where('patient_id', $patient->id)
+                                        ->whereNull('is_schedule_request')
+                                        ->where('is_archived', true)
+                                        ->orderBy('created_at', 'asc')->get();
 
         $prescriptions = Prescription::where('patient_id', $patient->id)->orderBy('created_at', 'asc')->get();
 

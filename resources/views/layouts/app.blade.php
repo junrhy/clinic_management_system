@@ -91,8 +91,20 @@
 
               @if(Auth::user()->client->is_active && Auth::user()->client->is_suspended == 0)
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('appointment', Auth::user()->id) }}">
-                    <a href="{{ url('calendar') }}"><i class="fa fa-calendar"></i> Appointment</a>
+                    <a href="#appointmentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fa fa-calendar">
+                        </i> Appointment</a>
+
+                    <ul class="collapse list-unstyled" id="appointmentSubmenu">
+                        <li class="">
+                            <a href="{{ url('calendar') }}">Calendar</a>
+                        </li>
+                        <li class="">
+                            <a href="{{ url('/appointment/requests') }}">Requests</a>
+                        </li>
+                    </ul>
                 </li>
+
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('dental', Auth::user()->id) }}">
                     <a href="{{ url('/dental_chart') }}"><i class="fa fa-tooth"></i> Dental</a>
                 </li>
