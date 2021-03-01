@@ -418,6 +418,7 @@ class PatientController extends Controller
         $patient->email = $request->email;
         $patient->contact_number = $request->contact;
         $patient->user_id = $user->id;
+        $patient->is_registration_request = true;
         $patient->save();
 
         $this->guard()->login($user);

@@ -33,9 +33,14 @@
                 <div class="panel-heading">Hello {{ $patient->first_name }} {{ $patient->last_name }}!</div>
 
                 <div class="panel-body">
-                	
+                	@if ($patient->is_registration_request == true)
+                        <div class="alert alert-warning alert-block">
+                           <strong>Your account is under review.</strong>
+                        </div>
+                  	@endif
+
                 	<div class="row" style="font-size:10pt;">
-	                    <h4 class="header-section">
+                	    <h4 class="header-section">
 	                    	<i class="fa fa-address-card"></i> Your Personal Information
 	                    </h4>
 
@@ -130,11 +135,13 @@
 											<td colspan="5" class="text-center">No appointments.</td>
 										</tr>
 									@endif
+									@if ($patient->is_registration_request == false)
 									<tr>
 										<td colspan="5" class="text-center">
 											<a href="/patient_view/request_appointment">Request new appointment</a>
 										</td>
 									</tr>
+									@endif
 								</tbody>
 							</table>
 						</div>
