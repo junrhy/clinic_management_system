@@ -40,6 +40,7 @@ class PatientController extends Controller
     {
         $patients = Patient::where('client_id', Auth::user()->client_id)
                             ->where('last_name', 'like', $request->namelist . '%')
+                            ->whereNull('is_registration_request')
                             ->orderBy('last_name', 'asc')
                             ->paginate(30);
 
@@ -425,5 +426,33 @@ class PatientController extends Controller
 
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath());
+    }
+
+    public function patient_registration_requests()
+    {
+        $patients = Patient::where('client_id', Auth::user()->client_id)
+                            ->where('is_registration_request', true)
+                            ->orderBy('last_name', 'asc')
+                            ->paginate(30);
+
+        return view('patient.registration_requests')
+              ->with('patients', $patients);
+    }
+
+    public function patient_registration_request_approved(Request $request)
+    {
+        $patient = Patient::find($request->id);
+        $patient->is_registration_request = null;
+        $patient->save();
+    }
+
+    public function patient_registration_request_denied($id)
+    {
+        $patient = Patient::find($id);
+
+        $user = User::find($patient->user_id);
+        $user->forceDelete();
+        
+        $patient->delete();
     }
 }

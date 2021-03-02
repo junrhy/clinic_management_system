@@ -27,6 +27,7 @@ class CalendarController extends Controller
 
         $patients = Patient::select(DB::raw("CONCAT(last_name,', ',first_name) AS fullname"),'id')
                             ->where('client_id', $client_id)
+                            ->whereNull('is_registration_request')
                             ->orderBy('last_name', 'asc')
                             ->pluck('fullname', 'id');
 

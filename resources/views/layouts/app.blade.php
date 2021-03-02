@@ -120,8 +120,8 @@
                         <li class="{{ App\Model\FeatureUser::is_feature_allowed('patients', Auth::user()->id) }}">
                             <a href="{{ url('patient') }}">All Patients</a>
                         </li>
-                        <li class="{{ App\Model\FeatureUser::is_feature_allowed('add_patient', Auth::user()->id) }}">
-                            <a href="{{ url('patient/create') }}">Add Patient</a>
+                        <li class="{{ App\Model\FeatureUser::is_feature_allowed('patients', Auth::user()->id) }}">
+                            <a href="{{ url('/patient_registration_requests') }}">Registration Requests</a>
                         </li>
                     </ul>
                 </li>
