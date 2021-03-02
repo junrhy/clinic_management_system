@@ -203,6 +203,10 @@
                               <a href="{{ url('/home') }}" class="dropdown-item">{{ auth()->user()->client->name }} Dashboard</a>
                               @endif
 
+                              @if(auth()->user()->type == 'patient')
+                              <a href="{{ url('/patient_view') }}" class="dropdown-item"> {{ auth()->user()->first_name }} {{ auth()->user()->last_name }} Dashboard</a>
+                              @endif
+
                               @if(auth()->user()->type == 'admin')
                               <a href="{{ url('/home') }}" class="dropdown-item">Admin Dashboard</a>
                               @endif

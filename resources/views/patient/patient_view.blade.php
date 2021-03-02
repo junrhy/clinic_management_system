@@ -138,7 +138,7 @@
 									@if ($patient->is_registration_request == false)
 									<tr>
 										<td colspan="5" class="text-center">
-											<a href="/patient_view/request_appointment">Request new appointment</a>
+											<a href="/patient_view/request_appointment">Request appointment</a>
 										</td>
 									</tr>
 									@endif

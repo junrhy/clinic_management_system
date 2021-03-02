@@ -37,7 +37,7 @@
                     <br>
                     <div class="row">
                         <div class="col-md-6">
-                            <label class="label" style="color: #636b6f;">New Patient?</label>
+                            <label class="label" style="color: #636b6f;">For patient only!</label>
                             <a href="/patient-registration-form" class="btn btn-default btn-lg btn-block">
                                 Patient Registration Form
                             </a>
