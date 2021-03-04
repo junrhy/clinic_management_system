@@ -94,6 +94,12 @@
     border:1px solid #ccc;
   } 
 
+  .basic-shared-plan-head {
+    background:#01d8da;
+    color:#015a5b;
+    border:1px solid #ccc;
+  }
+
   .basic-plan-head {
     background:#636b6f;
     color:#FFFFFF;
@@ -104,6 +110,8 @@
   .free {
     color: #FF6065;
     font-weight: bold;
+    border:1px solid #ccc;
+    font-size:13pt;
     font-family: 'arial';
   }
 
@@ -111,7 +119,16 @@
     padding:3px;
   } 
 
+  .basic-shared-plan-foot {
+    color:#015a5b;
+    padding:3px;
+    border:1px solid #ccc;
+    font-size:13pt;
+    font-family: 'arial';
+  }
+
   .basic-plan-foot {
+    color:#636b6f;
     padding:3px;
     border:1px solid #ccc;
     font-size:13pt;
@@ -311,48 +328,61 @@
     <div class="col-md-6 mx-auto">
         <table class="table">
             <tr>
-              <td style="border: 0;"></td>
+              <td style="border: 0;" width="25%"></td>
+              <td style="border: 0;background: #FFA500;text-align: center;font-weight: bold;color: #FFFFFF;" width="25%">
+                  <i class="fa fa-star"></i> Most Popular
+              </td>
+              <td style="border: 0;" width="25%"></td>
+            </tr>
+            <tr>
               <td class="free-plan-head text-center" width="25%">Free</td>
-              <td class="basic-plan-head text-center" width="25%">Basic</td>
-            <tr>
-              <td>Manage Appointments</td>
-              <td class="free-plan text-center">Yes</td>
-              <td class="basic-plan text-center">Yes</td>
+              <td class="basic-shared-plan-head text-center" width="25%">Basic Shared</td>
+              <td class="basic-plan-head text-center" width="25%">Basic Dedicated</td>
             </tr>
             <tr>
-              <td>Manage Patients</td>
-              <td class="free-plan text-center">100</td>
-              <td class="basic-plan text-center">Unlimited</td>
+              <td class="free-plan text-center">Shared Server</td>
+              <td class="basic-plan text-center">Shared Server</td>
+              <td class="basic-plan text-center">Dedicated Server</td>
             </tr>
             <tr>
-              <td>Manage Clinics</td>
-              <td class="free-plan text-center">Yes</td>
-              <td class="basic-plan text-center">Yes</td>
+              <td class="free-plan text-center"><i class="fa fa-check"></i> Manage Appointments</td>
+              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Appointments</td>
+              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Appointments</td>
             </tr>
             <tr>
-              <td>Manage Staffs</td>
-              <td class="free-plan text-center">Yes</td>
-              <td class="basic-plan text-center">Yes</td>
+              <td class="free-plan text-center"><i class="fa fa-check"></i> Manage 100 Patients</td>
+              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Unlimited Patients</td>
+              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Unlimited Patients</td>
             </tr>
             <tr>
-              <td>Manage Services</td>
-              <td class="free-plan text-center">Yes</td>
-              <td class="basic-plan text-center">Yes</td>
+              <td class="free-plan text-center"><i class="fa fa-check"></i> Manage Clinics</td>
+              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Clinics</td>
+              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Clinics</td>
             </tr>
             <tr>
-              <td>Manage Doctors</td>
-              <td class="free-plan text-center">Yes</td>
-              <td class="basic-plan text-center">Yes</td>
+              <td class="free-plan text-center"><i class="fa fa-check"></i> Manage Staffs</td>
+              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Staffs</td>
+              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Staffs</td>
             </tr>
             <tr>
-              <td>Dental Chart Feature</td>
-              <td class="free-plan text-center">Yes</td>
-              <td class="basic-plan text-center">Yes</td>
+              <td class="free-plan text-center"><i class="fa fa-check"></i> Manage Services</td>
+              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Services</td>
+              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Services</td>
             </tr>
             <tr>
-              <td>Subscription Rate</td>
+              <td class="free-plan text-center"><i class="fa fa-check"></i> Manage Doctors</td>
+              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Doctors</td>
+              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Doctors</td>
+            </tr>
+            <tr>
+              <td class="free-plan text-center"><i class="fa fa-check"></i> Dental Chart</td>
+              <td class="basic-plan text-center"><i class="fa fa-check"></i> Dental Chart</td>
+              <td class="basic-plan text-center"><i class="fa fa-check"></i> Dental Chart</td>
+            </tr>
+            <tr>
               <td class="free-plan text-center free">FREE</td>
-              <td rowspan=2 class="basic-plan-foot text-center">&#8369;1,800 / month</td>
+              <td rowspan=2 class="basic-shared-plan-foot text-center">&#8369;1,800 / month</td>
+              <td rowspan=2 class="basic-plan-foot text-center">&#8369;3,249 / month</td>
             </tr>
         </table>
     </div>
