@@ -30,7 +30,7 @@
 
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="text-center" style="font-weight:bold;color:#ffffff;"><i class="fa fa-user"></i> Patient Registration Form</h3>
+                    <h3 class="text-center" style="font-weight:bold;color:#ffffff;"><i class="fa fa-notes-medical"></i> Patient Registration Form</h3>
                 </div>
 
                 <div class="panel-body">
@@ -76,7 +76,7 @@
                         <div class="form-group{{ $errors->has('dob') ? ' has-error' : '' }}">
                             <div class="col-md-10 col-md-offset-1">
                                 <div class="input-group input-lg">
-                                    <input id="dob" type="text" class="form-control" name="dob" placeholder="Date of Birth" value="{{ old('dob') }}" required autofocus>
+                                    <input id="dob" type="text" class="form-control" name="dob" placeholder="Date of Birth" value="{{ old('dob') }}" autocomplete="off" required autofocus>
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </span>
@@ -217,7 +217,12 @@
                     </form>
                 </div>
             </div>
-            <div class="text-center">Copyright &copy; 2021 - Clinic Management Software by <a href="http://clinic-app.junrhy.com" target="_BLANK">Bluewhale CMS</a></div>
+            <br>
+            <br>
+            <div class="text-center">
+                Copyright &copy; 2021 - Clinic Management Software by <a href="https://www.bluewhalecms.com" target="_BLANK">Bluewhale CMS</a>
+            </div>
+            <br>
         </div>
     </div>
 </div>
