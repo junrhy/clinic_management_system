@@ -67,7 +67,7 @@
                 </li>
 
                 <li class="">
-                    <a href="{{ url('/tickets-admin') }}">&nbsp;<i class="fa fa-question"></i> Tickets</a>
+                    <a href="{{ url('/tickets-admin') }}">&nbsp;<i class="fa fa-question"></i> Help Center</a>
                 </li>
 
                 <li class="">

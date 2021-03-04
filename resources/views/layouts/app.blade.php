@@ -246,7 +246,7 @@
                 <li class="">
                     <a href="#helpSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fa fa-question"></i> 
-                        &nbsp;&nbsp;Help</a>
+                        &nbsp;&nbsp;Help Center</a>
 
                     <ul class="collapse list-unstyled" id="helpSubmenu">
                         <li class="">

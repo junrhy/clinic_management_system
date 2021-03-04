@@ -35,7 +35,7 @@
                 <div class="panel-body">
                 	@if ($patient->is_registration_request == true)
                         <div class="alert alert-warning alert-block">
-                           <strong>Your account is under review.</strong>
+                           <strong>Pending Review:</strong> For security purposes, your account is pending review by our staff before being activated. This usually takes around <u>1 business day</u> to complete. Please note, we may require additional documentation if we are unable to verify your identity.
                         </div>
                   	@endif
 
