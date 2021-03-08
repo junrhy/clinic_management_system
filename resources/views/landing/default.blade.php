@@ -82,8 +82,7 @@
     min-height: 180px;
   }
 
-  .free-plan, .basic-plan {
-    padding:10px;
+  .free-plan, .basic-plan, .enterprise-plan {
     border:1px solid #ccc;
     font-size:10pt;
   }
@@ -94,13 +93,13 @@
     border:1px solid #ccc;
   } 
 
-  .basic-shared-plan-head {
+  .basic-plan-head {
     background:#01d8da;
     color:#015a5b;
     border:1px solid #ccc;
   }
 
-  .basic-plan-head {
+  .basic-enterprise-head {
     background:#636b6f;
     color:#FFFFFF;
     border-left:1px solid #ccc;
@@ -120,7 +119,7 @@
     
   } 
 
-  .basic-shared-plan-foot {
+  .basic-plan-foot {
     color:#015a5b;
     font-weight: bold;
     padding:3px;
@@ -129,7 +128,7 @@
     font-family: 'arial';
   }
 
-  .basic-plan-foot {
+  .basic-enterprise-foot {
     color:#636b6f;
     font-weight: bold;
     padding:3px;
@@ -349,64 +348,77 @@
             </tr>
             <tr>
               <td class="free-plan-head text-center" width="25%">Free</td>
-              <td class="basic-shared-plan-head text-center" width="25%">Basic</td>
-              <td class="basic-plan-head text-center" width="25%">Enterprise</td>
+              <td class="basic-plan-head text-center" width="25%">Basic</td>
+              <td class="basic-enterprise-head text-center" width="25%">Enterprise</td>
             </tr>
             <tr>
-              <td class="free-plan text-center"><i class="fa fa-check"></i> Web / Mobile / Tablet</td>
-              <td class="basic-plan text-center"><i class="fa fa-check"></i> Web / Mobile / Tablet</td>
-              <td class="basic-plan text-center"><i class="fa fa-check"></i> Web / Mobile / Tablet</td>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Web / Mobile / Tablet</td>
+              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Web / Mobile / Tablet</td>
+              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Web / Mobile / Tablet</td>
             </tr>
             <tr>
-              <td class="free-plan text-center"><i class="fa fa-check"></i> Shared Server</td>
-              <td class="basic-plan text-center"><i class="fa fa-check"></i> Shared Server</td>
-              <td class="basic-plan text-center"><i class="fa fa-check"></i> <u>Dedicated / Your Own Server</u></td>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Shared Server</td>
+              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Shared Server</td>
+              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> <u>Dedicated Server / Your own online Server</u></td>
             </tr>
             <tr>
-              <td class="free-plan text-center"><i class="fa fa-check"></i> Subdomain</td>
-              <td class="basic-plan text-center"><i class="fa fa-check"></i> Subdomain</td>
-              <td class="basic-plan text-center"><i class="fa fa-check"></i> <u>Domain name Integration / Your Own Domain</u></td>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> BluewhaleCMS Subdomain</td>
+              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> BluewhaleCMS Subdomain</td>
+              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> <u>Domain name Integration / Your own Domain</u></td>
             </tr>
             <tr>
-              <td class="free-plan text-center"><i class="fa fa-check"></i> Manage Appointments</td>
-              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Appointments</td>
-              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Appointments</td>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Appointments</td>
+              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Appointments</td>
+              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Appointments</td>
             </tr>
             <tr>
-              <td class="free-plan text-center"><i class="fa fa-check"></i> Manage 100 Patients</td>
-              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Unlimited Patients</td>
-              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Unlimited Patients</td>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage 100 Patients</td>
+              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Unlimited Patients</td>
+              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Unlimited Patients</td>
             </tr>
             <tr>
-              <td class="free-plan text-center"><i class="fa fa-check"></i> Manage Clinics</td>
-              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Clinics</td>
-              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Clinics</td>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Clinics</td>
+              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Clinics</td>
+              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Clinics</td>
             </tr>
             <tr>
-              <td class="free-plan text-center"><i class="fa fa-check"></i> Manage Staffs</td>
-              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Staffs</td>
-              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Staffs</td>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Staffs</td>
+              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Staffs</td>
+              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Staffs</td>
             </tr>
             <tr>
-              <td class="free-plan text-center"><i class="fa fa-check"></i> Manage Services</td>
-              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Services</td>
-              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Services</td>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Services</td>
+              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Services</td>
+              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Services</td>
             </tr>
             <tr>
-              <td class="free-plan text-center"><i class="fa fa-check"></i> Manage Doctors</td>
-              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Doctors</td>
-              <td class="basic-plan text-center"><i class="fa fa-check"></i> Manage Doctors</td>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Doctors</td>
+              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Doctors</td>
+              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Doctors</td>
             </tr>
             <tr>
-              <td class="free-plan text-center"><i class="fa fa-check"></i> Dental Chart</td>
-              <td class="basic-plan text-center"><i class="fa fa-check"></i> Dental Chart</td>
-              <td class="basic-plan text-center"><i class="fa fa-check"></i> Dental Chart</td>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Dental Chart</td>
+              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Dental Chart</td>
+              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Dental Chart</td>
             </tr>
             <tr>
-              <td class="free-plan text-center free">FREE</td>
-              <td rowspan=2 class="basic-shared-plan-foot text-center">&#8369;1,799 / Month</td>
-              <td rowspan=2 class="basic-plan-foot text-center">
-                  &#8369;50,000 <br>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Free 24/7 Support</td>
+              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Free 24/7 Support</td>
+              <td class="enterprise-plan" style="padding-left: 4%;">
+                  <i class="fa fa-check"></i> Free 24/7 Support. <u>For 12-months only.</u><br>
+                  <span style="font-size: 8pt;font-weight: normal;margin-left: 5%;color: #666;">succeeding support cost is &#8369;1,000 per month</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Automatic upgrade for new features</td>
+              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Automatic upgrade for new features</td>
+              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Upgrade with new features <u>by request</u></td>
+            </tr>
+            <tr>
+              <td class="free-plan text-center free" style="vertical-align: middle;">FREE</td>
+              <td rowspan=2 class="basic-plan-foot text-center" style="vertical-align: middle;">&#8369;1,799 / Month</td>
+              <td rowspan=2 class="basic-enterprise-foot text-center" style="vertical-align: middle;">
+                  &#8369;10,000 <br>
                   <span style="font-size: 8pt;font-weight: normal;">one-time only</span>
               </td>
             </tr>
