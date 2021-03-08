@@ -109,6 +109,7 @@
 
   .free {
     color: #FF6065;
+    padding:3px;
     font-weight: bold;
     border:1px solid #ccc;
     font-size:13pt;
@@ -116,11 +117,12 @@
   }
 
   .free-plan-foot {
-    padding:3px;
+    
   } 
 
   .basic-shared-plan-foot {
     color:#015a5b;
+    font-weight: bold;
     padding:3px;
     border:1px solid #ccc;
     font-size:13pt;
@@ -129,6 +131,7 @@
 
   .basic-plan-foot {
     color:#636b6f;
+    font-weight: bold;
     padding:3px;
     border:1px solid #ccc;
     font-size:13pt;
@@ -167,7 +170,17 @@
 
   .alert {
     border-radius: 0px;
-}
+  }
+
+  .logo {
+    height: 60px;
+  }
+
+  @media only screen and (max-width: 600px) {
+      .logo {
+          height: 30px;
+      }
+  }
 </style>
 
 <div class="container-fluid">
@@ -186,7 +199,7 @@
     @endif
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/"><img src="/img/brand/bluewhalecms.png" style="height: 60px;"></a>
+        <a class="navbar-brand" href="/"><img src="/img/brand/bluewhalecms.png" class="logo"></a>
         
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -325,7 +338,7 @@
     <h2 id="pricing" class="header" align="center">Pricing</h2>
     <div align="center">We simplify our pricing by just paying small amount every month. You can use the system right away.</div>
     <br>
-    <div class="col-md-6 mx-auto">
+    <div class="col-md-7 mx-auto">
         <table class="table">
             <tr>
               <td style="border: 0;" width="25%"></td>
@@ -336,13 +349,23 @@
             </tr>
             <tr>
               <td class="free-plan-head text-center" width="25%">Free</td>
-              <td class="basic-shared-plan-head text-center" width="25%">Basic Shared</td>
-              <td class="basic-plan-head text-center" width="25%">Basic Dedicated</td>
+              <td class="basic-shared-plan-head text-center" width="25%">Basic</td>
+              <td class="basic-plan-head text-center" width="25%">Enterprise</td>
             </tr>
             <tr>
-              <td class="free-plan text-center">Shared Server</td>
-              <td class="basic-plan text-center">Shared Server</td>
-              <td class="basic-plan text-center">Dedicated Server</td>
+              <td class="free-plan text-center"><i class="fa fa-check"></i> Web / Mobile / Tablet</td>
+              <td class="basic-plan text-center"><i class="fa fa-check"></i> Web / Mobile / Tablet</td>
+              <td class="basic-plan text-center"><i class="fa fa-check"></i> Web / Mobile / Tablet</td>
+            </tr>
+            <tr>
+              <td class="free-plan text-center"><i class="fa fa-check"></i> Shared Server</td>
+              <td class="basic-plan text-center"><i class="fa fa-check"></i> Shared Server</td>
+              <td class="basic-plan text-center"><i class="fa fa-check"></i> <u>Dedicated / Your Own Server</u></td>
+            </tr>
+            <tr>
+              <td class="free-plan text-center"><i class="fa fa-check"></i> Subdomain</td>
+              <td class="basic-plan text-center"><i class="fa fa-check"></i> Subdomain</td>
+              <td class="basic-plan text-center"><i class="fa fa-check"></i> <u>Domain name Integration / Your Own Domain</u></td>
             </tr>
             <tr>
               <td class="free-plan text-center"><i class="fa fa-check"></i> Manage Appointments</td>
@@ -381,8 +404,11 @@
             </tr>
             <tr>
               <td class="free-plan text-center free">FREE</td>
-              <td rowspan=2 class="basic-shared-plan-foot text-center">&#8369;1,800 / month</td>
-              <td rowspan=2 class="basic-plan-foot text-center">&#8369;3,249 / month</td>
+              <td rowspan=2 class="basic-shared-plan-foot text-center">&#8369;1,799 / Month</td>
+              <td rowspan=2 class="basic-plan-foot text-center">
+                  &#8369;50,000 <br>
+                  <span style="font-size: 8pt;font-weight: normal;">one-time only</span>
+              </td>
             </tr>
         </table>
     </div>
@@ -418,21 +444,21 @@
         <div class="col-md-4 mx-auto">
             <h2 id="followus" class="header" align="left">Follow Us</h2>
             <br>
-            <i class="fa fa-facebook-square" style="font-size: 25pt;"></i> <a href="" class="socialmedia"> Facebook.com/BluewhaleCMS</a><br>
+            <i class="fa fa-facebook-square" style="font-size: 25pt;"></i> <a href="https://www.facebook.com/bluewhaleCMS" target="_BLANK" class="socialmedia"> Facebook.com/BluewhaleCMS</a><br>
             <br>
-            <i class="fab fa-youtube-square" style="font-size: 25pt;"></i> <a href="" class="socialmedia"> Youtube.com/BluewhaleCMS</a><br>
+            <i class="fab fa-youtube-square" style="font-size: 25pt;"></i> <a href="https://www.youtube.com/bluewhaleCMS" target="_BLANK" class="socialmedia"> Youtube.com/BluewhaleCMS</a><br>
             <br>
-            <i class="fab fa-twitter-square" style="font-size: 25pt;"></i> <a href="" class="socialmedia"> Twitter.com/BluewhaleCMS</a><br>
+            <i class="fab fa-twitter-square" style="font-size: 25pt;"></i> <a href="https://www.twitter.com/bluewhaleCMS" target="_BLANK" class="socialmedia"> Twitter.com/BluewhaleCMS</a><br>
             <br>
             <br>
             <h2 id="customerservice" class="header" align="left">Offices</h2>
             <br>
             <span style="font-size: 14pt">Sales Office</span> <br>
-            Address: B2-208 Mivesa Salinas Drive Ext. Street Lahug Cebu City <br>
+            Address: Mivesa Salinas Drive Ext. Street Lahug Cebu City, Cebu Philippines <br>
             Landline: +63 (032) 342-8998 <br>
             <br>
             <span style="font-size: 14pt">R&D Office</span> <br>
-            Address: Relis Street Cambuntan Bolinawan, Carcar City <br>
+            Address: Relis Street Cambuntan Bolinawan, Carcar City, Cebu Philippines <br>
             Landline: +63 (032) 342-8998 <br>
             <br>
             <br>
