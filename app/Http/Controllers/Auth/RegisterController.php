@@ -131,7 +131,6 @@ class RegisterController extends Controller
         $domain = new Domain;
         $domain->client_id = $client->id;
         $domain->domain_name = $data['domain_name'];
-        $domain->distributor_code = Carbon::now()->format('y') . $client->id;
         $domain->save();
 
         // Mail::to($data['email'])->send(new NewClient());

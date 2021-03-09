@@ -73,6 +73,19 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
+                    @if(request()->gethost() == 'www.bluewhalecms.com' || request()->gethost() == 'bluewhalecms.com')
+                        @if($domains->count() > 0)
+                        <h3 class="row col-md-12">Switch To</h3>
+                        <div class="row col-md-12">
+                            @foreach($domains as $domain)
+                            <div class="col-md-1 text-center">
+                                <a href="https://{{ $domain->domain_name }}">{{ str_replace('.bluewhalecms.com', ' ', $domain->domain_name) }}</a>
+                            </div>
+                            @endforeach
+                        </div>
+                        @endif
+                    @endif
+
                     @if($clinic_count == 0 || $doctor_count == 0 || $service_count == 0 || $patient_count == 0)
                     <h3 class="row col-md-12">Things you need to do first</h3>
                     <div class="row col-md-12">
