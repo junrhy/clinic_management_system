@@ -28,8 +28,12 @@ class LandingController extends Controller
     	if(View::exists('landing.'.$landing)){
 		    $view = 'landing.'.$landing;
     	} else {
-    		$view = 'landing.default';
-    	}
+            if ($landing == 'default') {
+                $view = 'landing.default';
+            } else {
+                $view = 'landing.subdomain_default';
+            }
+      	}
 
     	return view($view);
     }

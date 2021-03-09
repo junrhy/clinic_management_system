@@ -157,4 +157,3 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::get('/pay_bills', 'SubscriptionController@pay_bills');
 	Route::post('/subscription/subscribe', 'SubscriptionController@subscribe');
 });
-

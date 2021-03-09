@@ -362,9 +362,9 @@
               <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> <u>Dedicated Server / Your own online Server</u></td>
             </tr>
             <tr>
-              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> BluewhaleCMS Subdomain</td>
-              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> BluewhaleCMS Subdomain</td>
-              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> <u>Domain name Integration / Your own Domain</u></td>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Domain name Integration</td>
+              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Domain name Integration</td>
+              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Domain name Integration</td>
             </tr>
             <tr>
               <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Appointments</td>

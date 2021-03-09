@@ -12,6 +12,7 @@ use App\Model\Clinic;
 use App\Model\Doctor;
 use App\Model\AdminSetting;
 use App\Model\FeatureUser;
+use App\Model\Domain;
 use App\User;
 
 use App\Mail\NewClient;
@@ -59,6 +60,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
+            'domain_name' => 'required|string|unique:domains',
             'username' => 'required|string|max:50|unique:users',
             'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:6|confirmed',
@@ -126,7 +128,13 @@ class RegisterController extends Controller
             $feature->save();
         });
 
-      // Mail::to($data['email'])->send(new NewClient());
+        $domain = new Domain;
+        $domain->client_id = $client->id;
+        $domain->domain_name = $data['domain_name'];
+        $domain->distributor_code = Carbon::now()->format('y') . $client->id;
+        $domain->save();
+
+        // Mail::to($data['email'])->send(new NewClient());
 
         return $user;
     }
