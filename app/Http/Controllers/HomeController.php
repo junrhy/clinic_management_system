@@ -11,6 +11,7 @@ use App\Model\Doctor;
 use App\Model\Service;
 use App\Model\Patient;
 use App\Model\PatientDetail;
+use App\Model\Domain;
 
 use Carbon\Carbon;
 
@@ -34,6 +35,9 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        $domain_name = $request->gethost();
+        $domains = Domain::where('client_id', Auth::user()->client_id)->get();
+
         $patients = Patient::where('client_id', Auth::user()->client_id)->get();
         $clinics = Clinic::where('client_id', Auth::user()->client_id)->get();
         $doctors = Doctor::where('client_id', Auth::user()->client_id)->get();
@@ -45,6 +49,7 @@ class HomeController extends Controller
         $service_count = $services->count();
 
         return view('home')
+                ->with('domains', $domains)
                 ->with('patients', $patients)
                 ->with('clinics', $clinics)
                 ->with('doctors', $doctors)
