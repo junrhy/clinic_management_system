@@ -22,15 +22,25 @@
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <div class="col-md-10 col-md-offset-1">
                                 <div class="input-group input-lg">
-                                    <input id="name" type="text" class="form-control" name="name" placeholder="Company Name" value="{{ old('name') }}" required autofocus>
+                                    <input id="name" type="text" class="form-control" name="name" placeholder="Company Name" value="{{ old('name') }}" required autofocus autocomplete="off" maxlength="30">
                                     <span class="input-group-addon">
                                         <i class="fa fa-clinic-medical"></i>
                                     </span>
-                                </div>  
+                                </div>
+                                <div class="col-md-12">
+                                    <small>Your website URL:</small><br>
+                                    <span id="subdomain"></span>.bluewhalecms.com
+                                </div>
                                 <div class="col-md-12">
                                     @if ($errors->has('name'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('name') }}</strong>
+                                        </span>
+                                    @endif
+
+                                    @if ($errors->has('domain_name'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('domain_name') }}</strong>
                                         </span>
                                     @endif
                                 </div>
@@ -184,6 +194,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        <input type="hidden" name="domain_name" value="">
                     </form>
                 </div>
             </div>
@@ -192,4 +204,32 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('page_level_footer_script')
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $(function(){
+        var subdomain = $("#name").val().replace(/\s/g, '').toLowerCase();
+        $("input[name='domain_name']").val(subdomain + '.bluewhalecms.com');
+    });
+
+    $("#name").on("keyup change", function(e) {
+        var regex = /[^a-zA-Z0-9\s]/;
+        var input = $("#name").val();
+
+        if(regex.test(input)) {
+            e.preventDefault();
+            $("#name").val(input.slice(0, -1));
+        } else {
+            var subdomain = input.replace(/\s/g, '').toLowerCase();
+
+            $("#subdomain").html(subdomain);
+            $("input[name='domain_name']").val(subdomain + '.bluewhalecms.com');
+        }
+    });
+});
+</script>
 @endsection
