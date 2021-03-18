@@ -99,6 +99,29 @@ class PatientController extends Controller
         $patient->user_id = $user->id;
         $patient->save();
 
+        // begin upload logo
+        $FILESYSTEM_DRIVER = env('FILESYSTEM_DRIVER', 'local');
+
+        $file = $request->file('profile_picture');
+
+        if(!empty($file)):
+            $folder_name = 'patient_profile_pictures';
+            $directory = 'client' . Auth::user()->client_id .'/' . $folder_name;
+
+            Storage::disk($FILESYSTEM_DRIVER)->makeDirectory($directory);
+
+            try {
+                Storage::disk($FILESYSTEM_DRIVER)->put($directory . '/' . $patient->id .'_'. $file->getClientOriginalName(), file_get_contents($file), 'public');
+            } catch (Exception $e) {
+                dd($e);
+            }
+
+            $patient = Patient::find($patient->id);
+            $patient->profile_picture = $directory . '/' . $patient->id .'_'. $file->getClientOriginalName();
+            $patient->save();
+        endif;
+        // end upload
+
         return redirect('patient');
     }
 
@@ -154,10 +177,47 @@ class PatientController extends Controller
         $patient->gender = $request->gender;
         $patient->email = $request->email;
         $patient->contact_number = $request->contact_number;
-        $patient->address = $request->address;
+
+        // begin upload logo
+        $FILESYSTEM_DRIVER = env('FILESYSTEM_DRIVER', 'local');
+
+        $file = $request->file('profile_picture');
+
+        if(!empty($file)):
+            $folder_name = 'patient_profile_pictures';
+            $directory = 'client' . Auth::user()->client_id .'/' . $folder_name;
+
+            Storage::disk($FILESYSTEM_DRIVER)->makeDirectory($directory);
+
+            try {
+                Storage::disk($FILESYSTEM_DRIVER)->put($directory . '/' . $patient->id .'_'. $file->getClientOriginalName(), file_get_contents($file), 'public');
+            } catch (Exception $e) {
+                dd($e);
+            }
+
+            $patient->profile_picture = $directory . '/' . $patient->id .'_'. $file->getClientOriginalName();
+        endif;
+        // end upload
+
         $patient->save();
 
         return redirect('patient');
+    }
+
+    public function delete_patient_profile_pic($id)
+    {
+        $patient = Patient::find($id);
+        
+        $folder_name = 'patient_profile_pictures';
+        $file = $patient->profile_picture;
+
+        $FILESYSTEM_DRIVER = env('FILESYSTEM_DRIVER', 'local');
+        Storage::disk($FILESYSTEM_DRIVER)->delete($file);
+
+        $patient->profile_picture = null;
+        $patient->save();
+
+        return back()->with('success','Profile picture successfully deleted!');
     }
 
     public function destroy(Request $request, $id)
@@ -165,6 +225,9 @@ class PatientController extends Controller
         $patient = Patient::find($id);
         $patient_id = $patient->id;
         $user_id = $patient->user_id;
+
+        $FILESYSTEM_DRIVER = env('FILESYSTEM_DRIVER', 'local');
+        Storage::disk($FILESYSTEM_DRIVER)->delete($patient->profile_picture);
 
         $patient->delete();
 

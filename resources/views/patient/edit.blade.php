@@ -41,6 +41,41 @@
   .ui-datepicker-today {
     background: #00cfd1 !important;
   }
+
+  .no-image {
+    background-color: #ccc;
+    padding-top:36px;
+    margin-bottom: 5px;
+  }
+
+  .profile-picture {
+    height: 170px;
+    width: 170px;
+  }
+
+  .image-size {
+    margin-top: 35px;
+    margin-left:auto;
+    margin-right: auto;
+    width:70px;
+    color: #666;
+    font-family: sans-serif;
+  }
+
+  .remove-profile-pic {
+    margin-bottom: 5px;
+    width:170px;
+    text-align: right;
+  }
+
+  #delete_patient_profile_picture {
+    color: #ccc;
+  }
+
+  #delete_patient_profile_picture:hover {
+    text-decoration: none;
+    color: red;
+  }
 </style>
 @endsection
 
@@ -67,8 +102,34 @@
 
                 <div class="panel-body">
                     <div class="row col-md-3">
-                        {{ Form::model($patient, array('route' => array('patient.update', $patient->id), 'method' => 'PUT')) }}
+                        {{ Form::model($patient, array('route' => array('patient.update', $patient->id), 'method' => 'PUT', 'enctype' => 'multipart/form-data')) }}
                         {{ Html::ul($errors->all()) }}
+
+                        <div class="form-group">
+                          {{ Form::label('profile_pic', 'Profile Picture') }}
+
+                          @if($patient->profile_picture == '')
+                          <div class="profile-picture no-image">
+                              <div class="image-size">170 x 170</div>
+                          </div>
+
+                          <input type="file" name="profile_picture">
+                          @else
+                          <div class="profile-picture">
+                              @if(env('FILESYSTEM_DRIVER') == 'spaces')
+                              <img class="profile-picture" src="{{ asset('https://file-server1.sfo2.digitaloceanspaces.com/' . $patient->profile_picture) }}" />
+                              @endif
+
+                              @if(env('FILESYSTEM_DRIVER') == 'public')
+                              <img class="profile-picture" src="{{ asset('storage/' . $patient->profile_picture) }}" />
+                              @endif
+                          </div>
+
+                          <div class="remove-profile-pic">
+                            <a id="delete_patient_profile_picture" href="/delete_patient_profile_pic/{{ $patient->id }}"><small>Remove</small></a>
+                          </div>
+                          @endif
+                        </div>
 
                         <div class="form-group">
                           {{ Form::label('first_name', 'First Name') }}

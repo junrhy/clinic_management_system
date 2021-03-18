@@ -41,6 +41,26 @@
   .ui-datepicker-today {
     background: #00cfd1 !important;
   }
+
+  .no-image {
+    background-color: #ccc;
+    padding-top:36px;
+    margin-bottom: 5px;
+  }
+
+  .profile-picture {
+    height: 170px;
+    width: 170px;
+  }
+
+  .image-size {
+    margin-top: 35px;
+    margin-left:auto;
+    margin-right: auto;
+    width:70px;
+    color: #666;
+    font-family: sans-serif;
+  }
 </style>
 @endsection
 
@@ -69,21 +89,29 @@
                   <div class="row col-md-3">
                   {{ Html::ul($errors->all()) }}
 
-                  {{ Form::open(array('url' => 'patient', 'id' => 'form-add-patient')) }}
+                  {{ Form::open(array('url' => 'patient', 'id' => 'form-add-patient', 'enctype' => 'multipart/form-data')) }}
+                      <div class="form-group">
+                        {{ Form::label('profile_pic', 'Profile Picture') }}
+                        <div class="profile-picture no-image">
+                          <div class="image-size">170 x 170</div>
+                        </div>
+                        <input type="file" name="profile_picture">
+                      </div>
+
                       <div class="form-group">
                         {{ Form::label('first_name', 'First Name') }}
-                        {{ Form::text('first_name', Input::old('first_name'), array('class' => 'form-control', 'required')) }}
+                        {{ Form::text('first_name', Input::old('first_name'), array('class' => 'form-control', 'required', 'autocomplete' => 'off')) }}
                       </div>
 
                       <div class="form-group">
                         {{ Form::label('last_name', 'Last Name') }}
-                        {{ Form::text('last_name', Input::old('last_name'), array('class' => 'form-control', 'required')) }}
+                        {{ Form::text('last_name', Input::old('last_name'), array('class' => 'form-control', 'required', 'autocomplete' => 'off')) }}
                       </div>
 
                       <div class="form-group row">
                         <div class="col-md-6">
                           {{ Form::label('dob', 'Date of birth') }}
-                          {{ Form::text('dob', Input::old('dob'), array('class' => 'form-control', 'required', 'placeholder' => 'mm/dd/yyyy')) }}
+                          {{ Form::text('dob', Input::old('dob'), array('class' => 'form-control', 'required', 'placeholder' => 'mm/dd/yyyy', 'autocomplete' => 'off')) }}
                         </div>
                       </div>
 
@@ -101,12 +129,12 @@
           
                        <div class="form-group">
                         {{ Form::label('email', 'Email') }}
-                        {{ Form::email('email', Input::old('email'), array('class' => 'form-control')) }}
+                        {{ Form::email('email', Input::old('email'), array('class' => 'form-control', 'autocomplete' => 'off')) }}
                       </div>
 
                       <div class="form-group">
                         {{ Form::label('contact_number', 'Contact Number') }}
-                        {{ Form::text('contact_number', Input::old('contact_number'), array('class' => 'form-control')) }}
+                        {{ Form::text('contact_number', Input::old('contact_number'), array('class' => 'form-control', 'autocomplete' => 'off')) }}
                       </div>
 
                       <div>

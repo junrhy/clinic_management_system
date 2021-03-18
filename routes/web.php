@@ -108,7 +108,9 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::get('patient_registration_requests', 'PatientController@patient_registration_requests');
 	Route::post('/patient_registration/request/approved', 'PatientController@patient_registration_request_approved');
 	Route::delete('/patient_registration/request/denied/{id}', 'PatientController@patient_registration_request_denied');
-	
+
+	Route::get('/delete_patient_profile_pic/{id}', 'PatientController@delete_patient_profile_pic');
+		
 	Route::post('/patient/create_detail', 'PatientController@create_patient_detail');
 	Route::post('/patient/update_detail/{id}', 'PatientController@update_patient_detail');
 	Route::post('/patient/upload_detail', 'PatientController@upload_detail');
