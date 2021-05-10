@@ -26,8 +26,8 @@
   }
 
   .profile-picture {
-    height: 170px;
-    width: 170px;
+    height: 130px;
+    width: 130px;
     margin-left: 30px;
   }
 

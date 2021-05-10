@@ -418,7 +418,7 @@
               <td class="free-plan text-center free" style="vertical-align: middle;">FREE</td>
               <td rowspan=2 class="basic-plan-foot text-center" style="vertical-align: middle;">&#8369;1,799 / Month</td>
               <td rowspan=2 class="basic-enterprise-foot text-center" style="vertical-align: middle;">
-                  &#8369;10,000 <br>
+                  &#8369;100,000 <br>
                   <span style="font-size: 8pt;font-weight: normal;">one-time only</span>
               </td>
             </tr>
