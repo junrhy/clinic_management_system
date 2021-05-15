@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading">Privileges</div>
+                <div class="panel-heading">{{ $user->first_name }} {{ $user->last_name }}</div>
 
                 <div class="panel-body">
                     @foreach($features as $key => $feature)
