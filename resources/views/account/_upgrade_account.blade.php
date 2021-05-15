@@ -12,8 +12,8 @@
   } 
 
   .basic-plan-head {
-    background:#636b6f;
-    color:#FFFFFF;
+    background:#01d8da;
+    color:#015a5b;
     border-left:1px solid #ccc;
     border-right:1px solid #ccc;
   }
@@ -41,7 +41,7 @@
   }
 
   .btn-upgrade {
-    background:#636b6f;
+    background:#FF8C00;
     color:#FFFFFF;
   }
 
@@ -121,8 +121,8 @@
                 <tr>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
-                  <td class=" text-center" style="border: 1px solid #636b6f;background-color: #636b6f;">
-                    <a href="{{ url('/subscription') }}" type="button" id="btn-upgrade-account" data-id="" class="btn btn-upgrade btn-block">Click to Subscribe</a>
+                  <td class=" text-center" style="border: 1px solid #FF8C00;background-color: #FF8C00;">
+                    <a href="{{ url('/subscription') }}" type="button" id="btn-upgrade-account" data-id="" class="btn btn-upgrade btn-block">Click here to Subscribe</a>
                   </td>
                 </tr>
               </table>
