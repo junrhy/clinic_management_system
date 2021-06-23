@@ -41,8 +41,7 @@
 
                         <ul class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><a href="/home"><i class="fa fa-home"></i> {{ Auth::user()->client->name }}</a></li>
-                            <li class="breadcrumb-item">Clinics</li>
-                            <li class="breadcrumb-item active">All Clinics</li>
+                            <li class="breadcrumb-item active"><strong style="color:#fff;">Clinics</strong></li>
                         </ul>
                     </div>
                 </div>

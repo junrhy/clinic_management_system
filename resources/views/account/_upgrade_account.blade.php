@@ -112,7 +112,7 @@
                 <tr>
                   <td>Subscription Rate</td>
                   <td class="free-plan text-center free">FREE</td>
-                  <td rowspan=2 class="basic-plan-foot text-center">&#8369;1,800 / month</td>
+                  <td rowspan=2 class="basic-plan-foot text-center">&#8369;1,799 / month</td>
                 </tr>
                 <tr>
                   <td>&nbsp;</td>
