@@ -55,7 +55,7 @@
                     <h4 style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;"><i class="fa fa-gear"></i> Active Subscriptions</h4>
                   </div>
                   <br>
-                  <small style="color: green;">This services is active during this period and will be renewed every time the bill is paid.</small>
+                  <small style="color: green;">This services is active during this period and will be automatically renewed every time the bill is paid.</small>
                   <div class="table-responsive row">
                     <div class="col-md-5">
                       <table class="table table-striped">
