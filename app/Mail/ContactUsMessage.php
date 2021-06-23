@@ -37,8 +37,8 @@ class ContactUsMessage extends Mailable
                         'fromURL' => $this->request->from_url,
                         'firstName' => $this->request->first_name,
                         'lastName' => $this->request->last_name,
+                        'phone' => $this->request->phone,
                         'email' => $this->request->email,
-                        'messages' => nl2br($this->request->messages),
                     ]);
     }
 }

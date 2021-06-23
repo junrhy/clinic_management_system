@@ -163,7 +163,7 @@
   }
 
   .btn-submit-message {
-    background-color: #01d8da;
+    background-color: #FF6065;
     color: #FFFFFF;
   }
 
@@ -432,7 +432,7 @@
         <h2 class="">Want to try out?</h2>
         @if ($domain == null)
         <a href="/register" class="btn btn-lg btn-block btn-signup">
-            Sign Up for FREE!
+            Sign Up FREE!
         </a>
         @endif
     </div>
@@ -478,7 +478,7 @@
             <br>
         </div>
         <div class="col-md-3 mx-auto">
-            <h2 id="contact" class="header" align="left">Contact Us Today</h2>
+            <h2 id="contact" class="header" align="left">How it works?</h2>
 
             <form action="/landing/contact_us" method="POST">
               <label class="label">First Name</label>
@@ -487,16 +487,16 @@
               <label class="label">Last Name</label>
               <input type="text" name="last_name" class="form-control" required="required" placeholder="Type your last name">
               <br>
+              <label class="label">Phone</label>
+              <input type="text" name="phone" class="form-control" required="required" placeholder="Type your phone number">
+              <br>
               <label class="label">Email</label>
               <input type="email" name="email" class="form-control" required="required" placeholder="Type your email address">
-              <br>
-              <label class="label">Messages</label>
-              <textarea name="messages" class="form-control" required="required" placeholder="Type your message" rows="5"></textarea> 
               <br>
               <input type="hidden" name="_token" value="{{ csrf_token() }}" />
               <input type="hidden" name="from_url" value="{{ $_SERVER['SERVER_NAME'] }}" />
 
-              <input type="submit" class="btn btn-lg btn-block btn-submit-message">
+              <input type="submit" class="btn btn-lg btn-block btn-submit-message" value="Request a Demo">
             </form>
         </div>
       </div>

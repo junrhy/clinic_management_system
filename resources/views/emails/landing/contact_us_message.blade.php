@@ -13,12 +13,12 @@
 			<td>{{ $lastName }}</td>
 		</tr>
 		<tr>
-			<td>Reply-To Email</td>
-			<td>{{ $email }}</td>
+			<td>Phone</td>
+			<td>{{ $phone }}</td>
 		</tr>
 		<tr>
-			<td>Message</td>
-			<td>{!! $messages !!}</td>
+			<td>Email</td>
+			<td>{{ $email }}</td>
 		</tr>
 	</table>
 </div>
