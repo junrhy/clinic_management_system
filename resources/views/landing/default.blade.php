@@ -253,7 +253,7 @@
                               <a href="{{ route('login') }}" class="dropdown-item">Sign In</a>
 
                               @if (Route::has('register'))
-                                  <a href="{{ route('register') }}" class="dropdown-item">Create New Account</a>
+                                  <a href="{{ route('register') }}" class="dropdown-item">Sign Up</a>
                               @endif
                           @endauth
                         @endif
@@ -277,7 +277,7 @@
     </header>
     <br>
     <br>
-    <h2 id="features" class="header" align="center">Features</h2>
+    <h2 id="features" class="header" align="center">Features our customers love</h2>
     <br>
     <div class="col-md-12">
         <div class="row">
@@ -362,8 +362,8 @@
               <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> <u>Dedicated Server / Your own online Server</u></td>
             </tr>
             <tr>
-              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Domain name Integration</td>
-              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Domain name Integration</td>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-times"></i> Domain name Integration</td>
+              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-times"></i> Domain name Integration</td>
               <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Domain name Integration</td>
             </tr>
             <tr>
@@ -440,10 +440,12 @@
     <br>
     <br>
     <br>
-    <h2 id="testimonials" class="header" align="center">Here are some testimonials from our clients</h2>
+    <h2 id="testimonials" class="header" align="center">Our Clients</h2>
 
-    <br>
-    <br>
+    <div class="row">
+      <img src="/img/clients-logo/armamentodentalstudio.png" class="col-md-2 mx-auto">
+    </div>
+   
     <br>
     <div class="col-md-12 footer">
       <div class="row">
