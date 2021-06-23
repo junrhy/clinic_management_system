@@ -28,7 +28,7 @@
   .profile-picture {
     height: 130px;
     width: 130px;
-    margin-left: 30px;
+    float: left;
   }
 
   .image-size {
@@ -71,12 +71,12 @@
 		                        <td class="col-md-2 text-right">First Name:</td>
 		                        <td><span style="font-family: sans-serif;">{{ $patient->first_name }}</span></td>
 		                        <td class="col-md-3" rowspan="7">
-		                        	@if($patient->profile_picture == '')
+		                        		@if($patient->profile_picture == '')
 			                          <div class="profile-picture no-image">
 			                              <div class="image-size">170 x 170</div>
 			                          </div>
 		                            @else
-			                          <div class="profile-picture">
+		                            <div class="profile-picture">
 			                              @if(env('FILESYSTEM_DRIVER') == 'spaces')
 			                              <img class="profile-picture" src="{{ asset('https://file-server1.sfo2.digitaloceanspaces.com/' . $patient->profile_picture) }}" />
 			                              @endif

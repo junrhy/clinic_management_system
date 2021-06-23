@@ -31,7 +31,7 @@ $(document).ready(function() {
 
               var imgData = canvas.toDataURL('image/png');
               console.log('Report Image URL: '+imgData);
-              var doc = new jsPDF('p', 'mm', [101.6, 139.7]); //101.6mm wide and 139.7mm high
+              var doc = new jsPDF(); //var doc = new jsPDF('p', 'mm', [101.6, 139.7]); 101.6mm wide and 139.7mm high
               
               var width = doc.internal.pageSize.width - 6;
               var height = doc.internal.pageSize.height - 6;

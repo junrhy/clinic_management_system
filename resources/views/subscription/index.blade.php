@@ -42,7 +42,7 @@
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                         <ul class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><a href="/home"><i class="fa fa-home"></i> {{ Auth::user()->client->name }}</a></li>
-                            <li class="breadcrumb-item active">Subscription</li>
+                            <li class="breadcrumb-item active"><strong style="color:#fff;">Subscription</strong></li>
                         </ul>
                     </div>
                 </div>
@@ -120,8 +120,8 @@
                               <span class="pricing"><span style="text-decoration: line-through;">&#8369;21,600 / year</span> &#8369;18,899 / year</span><br>
                               <small style="color: red;">12% discount</small>
                               @else
-                              <span class="pricing">&#8369;1,800 / month</span><br>
-                              <small>Pay yearly to enjoy discount</small>
+                              <span class="pricing">&#8369;1,799 / month</span><br>
+                              <small>Pay yearly to enjoy huge discount</small>
                               @endif
                             </td>
                             <td>
@@ -131,7 +131,7 @@
                                 @if(request()->frequency == 'yearly')
                                 <button data-plan="Basic" data-plan-amount="18899" data-plan-currency="&#8369" class="btn btn-primary subscribe">Subscribe</button>
                                 @else
-                                <button data-plan="Basic" data-plan-amount="1800" data-plan-currency="&#8369" class="btn btn-primary subscribe">Subscribe</button>
+                                <button data-plan="Basic" data-plan-amount="1799" data-plan-currency="&#8369" class="btn btn-primary subscribe">Subscribe</button>
                                 @endif
                               @endif
                             </td>

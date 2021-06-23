@@ -46,13 +46,12 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-12">
-                        <h2>All Patient Invoices <small class="text-muted">View patient's invoices</small></h2>
+                        <h2>Invoices <small class="text-muted">View patient's invoices</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                         <ul class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><a href="/home"><i class="fa fa-home"></i> {{ Auth::user()->client->name }}</a></li>
-                            <li class="breadcrumb-item">Patient</li>
-                            <li class="breadcrumb-item active">All Invoices</li>
+                            <li class="breadcrumb-item active"><strong style="color:#fff;">Invoices</strong></li>
                         </ul>
                     </div>
                 </div>

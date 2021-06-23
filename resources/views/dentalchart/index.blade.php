@@ -211,19 +211,18 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-12">
-                        <h2>Dental Record <small class="text-muted">Patient Dental Record</small></h2>
+                        <h2>Dental Chart <small class="text-muted">Patient Dental Record</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                         <ul class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><a href="/home"><i class="fa fa-home"></i> {{ Auth::user()->client->name }}</a></li>
-                            <li class="breadcrumb-item">Patient</li>
-                            <li class="breadcrumb-item active">Dental Record</li>
+                            <li class="breadcrumb-item active"><strong style="color:#fff;">Dental Chart</strong></li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading">Dental Record</div>
+                <div class="panel-heading">Dental Chart</div>
 
                 <div class="panel-body">
                 	<h4 class="col-md-12 section">Patient Name</h4>

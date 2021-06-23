@@ -1,4 +1,4 @@
-<div style="font-family: Arial, Helvetica, sans-serif;">
+<div style="font-family: Arial, Helvetica, sans-serif;color: #000;">
 	
 	<div style="text-align: center;">
 		<div style="font-size: 16pt;font-weight: bold;">{{ $prescription->clinic }}</div>
@@ -19,12 +19,10 @@
 		<td width="35%" align="right">Date: {{ $prescription->created_at->format('M d, Y') }}</td>
 	</tr>
 	</table>
-	<div style="height: 350px;">
-		<span style="font-size: 100pt;font-weight: bold;position: relative;top: -40px;left: -10px;color: #eee;"><!-- ℞ --></span>
-		
-	</div>
-	<div style="height: 350px;position: absolute;top: 190px;overflow-y: auto;">
-		<span style="position: relative; top:30px; left: 0px;font-size: 12pt;">{!! $prescription->prescription !!}</span>
+
+	<div style="height: 350px;overflow-y: auto;">
+		<span style="font-size: 100pt;font-weight: bold;position: relative;top: -40px;left: -10px;height: 120px;float: left;">℞</span>
+		<span style="position: relative; top:10px; left: 0px;font-size: 12pt;">{!! $prescription->prescription !!}</span>
 	</div>
 
 	<br>
