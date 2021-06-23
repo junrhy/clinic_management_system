@@ -28,10 +28,6 @@
                                     </span>
                                 </div>
                                 <div class="col-md-12">
-                                    <small>Your website URL:</small><br>
-                                    <span id="subdomain"></span>.bluewhalecms.com
-                                </div>
-                                <div class="col-md-12">
                                     @if ($errors->has('name'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('name') }}</strong>
@@ -180,7 +176,7 @@
                                     </button>
                                 </div>
 
-                                <div class="col-md-8">
+                                <div class="col-md-7">
                                     <br>
                                     <a class="btn btn-link" href="{{ route('login') }}">
                                        You already have a membership?
@@ -211,25 +207,25 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $(function(){
-        var subdomain = $("#name").val().replace(/\s/g, '').toLowerCase();
-        $("input[name='domain_name']").val(subdomain + '.bluewhalecms.com');
-    });
+    // $(function(){
+    //     var subdomain = $("#name").val().replace(/\s/g, '').toLowerCase();
+    //     $("input[name='domain_name']").val(subdomain + '.bluewhalecms.com');
+    // });
 
-    $("#name").on("keyup change", function(e) {
-        var regex = /[^a-zA-Z0-9\s]/;
-        var input = $("#name").val();
+    // $("#name").on("keyup change", function(e) {
+    //     var regex = /[^a-zA-Z0-9\s]/;
+    //     var input = $("#name").val();
 
-        if(regex.test(input)) {
-            e.preventDefault();
-            $("#name").val(input.slice(0, -1));
-        } else {
-            var subdomain = input.replace(/\s/g, '').toLowerCase();
+    //     if(regex.test(input)) {
+    //         e.preventDefault();
+    //         $("#name").val(input.slice(0, -1));
+    //     } else {
+    //         var subdomain = input.replace(/\s/g, '').toLowerCase();
 
-            $("#subdomain").html(subdomain);
-            $("input[name='domain_name']").val(subdomain + '.bluewhalecms.com');
-        }
-    });
+    //         $("#subdomain").html(subdomain);
+    //         $("input[name='domain_name']").val(subdomain + '.bluewhalecms.com');
+    //     }
+    // });
 });
 </script>
 @endsection
