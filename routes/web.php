@@ -101,6 +101,7 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::resource('doctor', 'DoctorController');
 	Route::resource('calendar', 'CalendarController');
 	Route::resource('service', 'ServiceController');
+	Route::resource('inventory', 'InventoryController');
 	Route::resource('invoice', 'InvoiceController');
 	Route::resource('payment', 'PaymentController');
 
@@ -158,4 +159,7 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::get('/balance_and_usage', 'SubscriptionController@balance_and_usage');
 	Route::get('/pay_bills', 'SubscriptionController@pay_bills');
 	Route::post('/subscription/subscribe', 'SubscriptionController@subscribe');
+
+	Route::get('/inventory/show/{name}', 'InventoryController@show');
+	Route::get('/inventory/increase/{name}', 'InventoryController@increase');
 });

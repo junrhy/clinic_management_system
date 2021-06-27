@@ -159,7 +159,7 @@
 
                                 @if($clinic->appointments($client_id, $date, $clinic_id)->count() == 0)
                                 <tr>
-                                    <td colspan="4">{{ $clinic->name }} doesn't have appointment today.</td>
+                                    <td colspan="5" align="center">{{ $clinic->name }} doesn't have appointment today.</td>
                                 </tr>
                                 @endif
                             </tbody>

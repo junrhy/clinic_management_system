@@ -169,6 +169,20 @@
                         </li>
                     </ul>
                 </li>
+                <li class="{{ App\Model\FeatureUser::is_feature_allowed('inventory', Auth::user()->id) }}">
+                    <a href="#inventorySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fa fa-box"></i> 
+                        Inventory</a>
+
+                    <ul class="collapse list-unstyled" id="inventorySubmenu">
+                        <li class="{{ App\Model\FeatureUser::is_feature_allowed('inventory', Auth::user()->id) }}">
+                            <a href="{{ url('inventory') }}">All Inventory</a>
+                        </li>
+                        <li class="{{ App\Model\FeatureUser::is_feature_allowed('add_inventory', Auth::user()->id) }}">
+                            <a href="{{ url('inventory/create') }}">Add Inventory</a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('billing', Auth::user()->id) }}">
                     <a href="#billingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fa fa-file-alt"></i> 
