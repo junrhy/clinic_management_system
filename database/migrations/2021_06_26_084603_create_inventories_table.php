@@ -21,7 +21,7 @@ class CreateInventoriesTable extends Migration
             $table->float('qty');
             $table->double('price')->nullable();
             $table->date('expire_at')->nullable();
-            $table->integer('location_id')->nullable();
+            $table->string('location')->nullable();
             $table->string('created_by');
             $table->boolean('is_hidden')->nullable();
             $table->timestamps();

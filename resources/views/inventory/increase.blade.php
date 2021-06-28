@@ -32,7 +32,7 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-12">
-                        <h2>Inventory In <small class="text-muted">Add more on this inventory name</small></h2>
+                        <h2>Inventory In <small class="text-muted">Add more to this inventory name</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                         <ul class="breadcrumb float-md-right">
@@ -52,10 +52,10 @@
                             <table id="inventory_in" class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
+                                        <th width="30">#</th>
                                         <th width="300">Sku</th>
                                         <th width="100">Quantity</th>
-                                        <th width="200">Price</th>
+                                        <th width="200">Price Per Piece (PPP)</th>
                                         <th width="200">Expiration Date</th>
                                         <th width="300">Location</th>
                                         <th width="20"></th>
@@ -63,9 +63,9 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="inventory-name">{{ $name }}</td>
+                                        <td class="row-index">1</td>
                                         <td>{{ Form::text('sku', null, array('class' => 'form-control')) }}</td>
-                                        <td>{{ Form::number('qty', null, array('class' => 'form-control', 'step' => '0.1')) }}</td>
+                                        <td>{{ Form::number('qty', 1, array('class' => 'form-control', 'step' => '0.1')) }}</td>
                                         <td>{{ Form::number('price', null, array('class' => 'form-control', 'step' => '0.1')) }}</td>
                                         <td>{{ Form::text('expire_at', null, array('class' => 'form-control')) }}</td>
                                         <td>{{ Form::text('location', null, array('class' => 'form-control')) }}</td>
@@ -74,11 +74,18 @@
                                 </tbody>
                             </table>
                             
-                            <button id="add-more" class="btn btn-default float-right" style="margin-left: 10px;outline:0;">
+                            
+                            <a id="add-more" class="btn btn-default float-right" style="margin-left: 10px;outline:0;">
                                 <i class='fa fa-plus' aria-hidden='true'></i></span> Add More
-                            </button>
+                            </a>
+
+                            <div class="form-check float-right" style="padding-top:10px;">
+                                <input type="checkbox" name="copy_previous" class="form-check-input">
+                                <label for="copy_last_row">Copy previous?</label>
+                            </div>
 
                             <input type="submit" name="Submit" class="btn btn-primary">
+
                             {{ Form::close() }}
                         </div>
                     </div>
@@ -96,6 +103,12 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+
+    var prev_qty = '';
+    var prev_price = '';
+    var prev_exp_date = '';
+    var prev_location = '';
+
     $(function(){
         apply_calendar();
     });
@@ -106,18 +119,48 @@ $(document).ready(function() {
             format: 'mm/dd/yyyy',
             changeMonth: true,
             changeYear: true,
-            // isRTL: true
         });
     }
 
-    $("#add-more").click(function(){
-        $("form").submit(function(e){
-            e.preventDefault();
+    function recount_table_rows() {
+        $('.row-index').each(function(index) {
+            $(this).html(index + 1);
         });
+    }
 
-        var new_row = "<tr><td class='inventory-name'>{{ $name }}</td><td><input type='text' name='sku' value='' class='form-control' /></td><td><input type='number' name='qty' value='' class='form-control' step='0.1' /></td><td><input type='number' name='price' value='' class='form-control' step='0.1' /></td><td><input type='text' name='expire_at' value='' class='form-control' /></td><td><input type='text' name='location' value='' class='form-control' /></td><td  style='text-align: center;padding-top: 10px;padding-right: 15px;font-size: 14pt;cursor:pointer;'><span class='cancel-row' onclick='cancelThisRow(this)'><i class='fa fa-minus' aria-hidden='true'></i></span></td></tr>";
+    $("input[name='copy_previous']").click(function(){
+
+        if ($(this).prop('checked')) {
+
+            prev_qty = $("input[name='qty']:last").val();
+            prev_price = $("input[name='price']:last").val();
+            prev_exp_date = $("input[name='expire_at']:last").val();
+            prev_location = $("input[name='location']:last").val();
+
+        } else {
+
+            prev_qty = '';
+            prev_price = '';
+            prev_exp_date = '';
+            prev_location = '';
+        }
+    });
+
+    $("#add-more").click(function(){
+        if ($("input[name='copy_previous']").prop('checked')) {
+            prev_qty = $("input[name='qty']:last").val();
+            prev_price = $("input[name='price']:last").val();
+            prev_exp_date = $("input[name='expire_at']:last").val();
+            prev_location = $("input[name='location']:last").val();
+        }
+
+
+        var new_row = "<tr><td class='row-index'></td><td><input type='text' name='sku' value='' class='form-control' /></td><td><input type='number' name='qty' value='"+prev_qty+"' class='form-control' step='0.1' /></td><td><input type='number' name='price' value='"+prev_price+"' class='form-control' step='0.1' /></td><td><input type='text' name='expire_at' value='"+prev_exp_date+"' class='form-control' /></td><td><input type='text' name='location' value='"+prev_location+"' class='form-control' /></td><td  style='text-align: center;padding-top: 10px;padding-right: 15px;font-size: 14pt;cursor:pointer;'><span class='cancel-row' onclick='cancelThisRow(this)'><i class='fa fa-minus' aria-hidden='true'></i></span></td></tr>";
 
         $("#inventory_in tbody").append(new_row);
+        $("input[name='sku']:last").focus();
+
+        recount_table_rows();
 
         apply_calendar();
     });
@@ -125,8 +168,16 @@ $(document).ready(function() {
 
 // event listener pure javascript code
 function cancelThisRow(element){
-    //console.log(element.parentNode.parentNode.remove());
     element.parentNode.parentNode.remove();
+
+    var table_rows = document.getElementsByClassName("row-index");
+    for (var i = 0; i < table_rows.length; i++) {
+       table_rows.item(i).innerHTML = i + 1;
+    }
+
+    var allSkuInputs = document.querySelectorAll("input[name='sku']");
+    lastInput = allSkuInputs[allSkuInputs.length - 1];
+    lastInput.focus();
 };
 </script>
 @endsection
