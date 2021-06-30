@@ -23,6 +23,7 @@ class CreateInventoriesTable extends Migration
             $table->date('expire_at')->nullable();
             $table->string('location')->nullable();
             $table->string('created_by');
+            $table->string('status')->default('IN');
             $table->boolean('is_hidden')->nullable();
             $table->timestamps();
         });

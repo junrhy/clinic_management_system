@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@section('page_level_script')
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/e3497de5a4.js" crossorigin="anonymous"></script>
+@endsection
+
+@section('page_level_css')
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+@endsection
+
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -29,7 +38,27 @@
                     {{ Form::open(array('url' => 'inventory')) }}
                       <div class="form-group">
                         {{ Form::label('name', 'Inventory Name') }}
-                        {{ Form::text('name', Input::old('name'), array('class' => 'form-control', 'required')) }}
+                        {{ Form::text('name', null, array('class' => 'form-control', 'required')) }}
+                      </div>
+
+                      <div class="form-group">
+                        {{ Form::label('qty', 'Quantity') }}
+                        {{ Form::number('qty', null, array('class' => 'form-control', 'step' => '0.1', 'required')) }}
+                      </div>
+
+                      <div class="form-group">
+                        {{ Form::label('price', 'Price Per Piece') }}
+                        {{ Form::number('price', null, array('class' => 'form-control', 'step' => '0.1')) }}
+                      </div>
+
+                      <div class="form-group">
+                        {{ Form::label('expire_at', 'Expiration Date') }}
+                        {{ Form::text('expire_at', null, array('class' => 'form-control')) }}
+                      </div>
+
+                      <div class="form-group">
+                        {{ Form::label('location', 'Location') }}
+                        {{ Form::text('location', null, array('class' => 'form-control')) }}
                       </div>
 
                       <div>
@@ -43,3 +72,28 @@
     </div>
 </div>
 @endsection
+
+@section('page_level_footer_script')
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+    $(function(){
+        apply_calendar();
+    });
+
+    function apply_calendar() {
+        $("input[name='expire_at']").datepicker({  
+            minDate: '0',
+            format: 'mm/dd/yyyy',
+            changeMonth: true,
+            changeYear: true,
+        });
+    }
+});
+
+</script>
+@endsection
+

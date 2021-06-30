@@ -19,27 +19,42 @@
     font-size: 12pt;
   }
 
-  .increase-inventory {
-    color: #01d8da;
-    font-size: 14pt;
+  .add_by_sku {
+    color: #666;
     cursor: pointer;
   }
 
-  .decrease-inventory {
+  .inventory-out {
     color: #666;
-    font-size: 14pt;
     cursor: pointer;
   }
 
   .hide-inventory {
     color: #ccc;
-    font-size: 14pt;
     cursor: pointer;
   }
 
   .hide-inventory:hover {
     color: red;
     cursor: pointer;
+  }
+
+  .namelist {
+    cursor:pointer;
+  }
+
+  .font-weight-bold {
+    font-weight:bold;
+    font-size:14pt;
+  }
+
+  #txt-search {
+    border: 1px solid #00cfd1;
+  }
+
+  #btn-search {
+    padding: 5px 10px;
+    border-radius: 0;
   }
 </style>
 @endsection
@@ -78,11 +93,50 @@
                   </div>
 
                   <div class="row col-md-12 table-responsive">
+                      <div>
+                        <input type="text" name="search" class="col-md-2" id="txt-search" placeholder="Search">
+                        <input type="submit" class="btn btn-primary" id="btn-search" value="Go!">
+                        <br><br>
+                      </div>
+                      <table width="100%">
+                        <tr>
+                          <td width="3.7%" class="namelist text-center" data-list="all">All</td>
+
+                          <td width="3.7%" class="namelist text-center" data-list="A">A</td>
+                          <td width="3.7%" class="namelist text-center" data-list="B">B</td>
+                          <td width="3.7%" class="namelist text-center" data-list="C">C</td>
+                          <td width="3.7%" class="namelist text-center" data-list="D">D</td>
+                          <td width="3.7%" class="namelist text-center" data-list="E">E</td>
+                          <td width="3.7%" class="namelist text-center" data-list="F">F</td>
+                          <td width="3.7%" class="namelist text-center" data-list="G">G</td>
+                          <td width="3.7%" class="namelist text-center" data-list="H">H</td>
+                          <td width="3.7%" class="namelist text-center" data-list="I">I</td>
+                          <td width="3.7%" class="namelist text-center" data-list="J">J</td>
+                          <td width="3.7%" class="namelist text-center" data-list="K">K</td>
+                          <td width="3.7%" class="namelist text-center" data-list="L">L</td>
+                          <td width="3.7%" class="namelist text-center" data-list="M">M</td>
+                          <td width="3.7%" class="namelist text-center" data-list="N">N</td>
+                          <td width="3.7%" class="namelist text-center" data-list="O">O</td>
+                          <td width="3.7%" class="namelist text-center" data-list="P">P</td>
+                          <td width="3.7%" class="namelist text-center" data-list="Q">Q</td>
+                          <td width="3.7%" class="namelist text-center" data-list="R">R</td>
+                          <td width="3.7%" class="namelist text-center" data-list="S">S</td>
+                          <td width="3.7%" class="namelist text-center" data-list="T">T</td>
+                          <td width="3.7%" class="namelist text-center" data-list="U">U</td>
+                          <td width="3.7%" class="namelist text-center" data-list="B">V</td>
+                          <td width="3.7%" class="namelist text-center" data-list="W">W</td>
+                          <td width="3.7%" class="namelist text-center" data-list="X">X</td>
+                          <td width="3.7%" class="namelist text-center" data-list="Y">Y</td>
+                          <td width="3.7%" class="namelist text-center" data-list="Z">Z</td>
+                        </tr>
+                      </table>
+                    <br>
+
                     <table class="table table-striped">
                       <thead>
-                        <th>Name</th>
+                        <th width="300">Name</th>
                         <th width="300">Quantity</th>
-                        <th width="300" class="text-right">Action</th>
+                        <th width="300" class="text-right">More Options</th>
                       </thead>
                       <?php foreach ($inventories as $inventory_key => $inventory_item): ?>
                       <tr>
@@ -96,14 +150,14 @@
                         </td>
                         <td>
                             <div class="pull-right">
-                              <a class="increase-inventory {{ App\Model\FeatureUser::is_feature_allowed('increase_inventory', Auth::user()->id) }}" data-name="{{ $inventory_item->name }}"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                              <a class="add_by_sku {{ App\Model\FeatureUser::is_feature_allowed('add_by_sku', Auth::user()->id) }}" data-name="{{ $inventory_item->name }}"><i class="fa fa-boxes" aria-hidden="true"></i> Add By SKU</a>
 
                               |
 
                               @if($inventory_item->qty > 0)
-                              <a class="decrease-inventory {{ App\Model\FeatureUser::is_feature_allowed('decrease_inventory', Auth::user()->id) }}" data-name="{{ $inventory_item->name }}"><i class="fa fa-minus" aria-hidden="true"></i></a>
+                              <a class="inventory-out {{ App\Model\FeatureUser::is_feature_allowed('decrease_inventory', Auth::user()->id) }}" data-name="{{ $inventory_item->name }}"><i class="fa fa-box-open" aria-hidden="true"></i> Inventory Out</a>
                               @else
-                               <a class="hide-inventory {{ App\Model\FeatureUser::is_feature_allowed('hide_inventory', Auth::user()->id) }}" data-name="{{ $inventory_item->name }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                               <a class="hide-inventory {{ App\Model\FeatureUser::is_feature_allowed('hide_inventory', Auth::user()->id) }}" data-name="{{ $inventory_item->name }}"><i class="fa fa-trash-o" aria-hidden="true"></i> Remove</a>
                               @endif
                             </div>
                         </td>
@@ -124,10 +178,10 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $(".increase-inventory").unbind().click(function(){
+    $(".add_by_sku").unbind().click(function(){
         var name = $(this).data('name');
 
-        window.location.href = "/inventory/increase/"+name;
+        window.location.href = "/inventory/add_by_sku/"+name;
     });
 
     $(".decrease-inventory").unbind().click(function(){
@@ -140,6 +194,42 @@ $(document).ready(function() {
         var name = $(this).data('name');
 
         alert("hide! " + name);
+    });
+
+    $("#btn-search").click(function(){
+        keyword = $("#txt-search").val();
+
+        $.ajax({
+          method: "POST",
+          url: "/inventory/search",
+          data: { 
+            keyword: keyword,
+            _token: "{{ csrf_token() }}" 
+          }
+        })
+        .done(function( data ) {
+          $("#tableData").html(data);
+        });
+    });
+
+    $(".namelist").unbind().click(function(){
+        if ($(this).data('list') != 'all') {
+          location.href = '{{ Request::url() }}?namelist=' + $(this).data('list');
+        } else {
+          location.href = '{{ Request::url() }}';
+        }
+    });
+
+    $(function(){
+        $('.namelist').each(function(i, obj) {
+            if ($(this).data('list') == "{{ app('request')->namelist }}") {
+              $('.namelist').removeClass('font-weight-bold');
+              $(this).addClass('font-weight-bold');
+              return false;
+            } else {
+              $('.namelist').first().addClass('font-weight-bold');
+            }
+        });
     });
 });
 </script>

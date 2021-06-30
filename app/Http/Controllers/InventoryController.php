@@ -35,40 +35,54 @@ class InventoryController extends Controller
 
     public function store(Request $request)
     {
-        $duplicates = Inventory::where('name', $request->name)
-                                ->whereNull('is_hidden')
-                                ->orWhere('is_hidden', 0)
-                                ->get();
+        $inventory = new Inventory;
+        $inventory->client_id = Auth::user()->client_id;
+        $inventory->name = $request->name;
+        $inventory->qty = $request->qty;
+        $inventory->price = $request->price;
+        $inventory->expire_at = $request->expire_at != '' ? date('Y-m-d', strtotime($request->expire_at)) : null;
+        $inventory->location = $request->location;
+        $inventory->created_by = Auth::user()->name;
+        $inventory->save();
 
-        if ($duplicates->count() == 0) {
-            $inventory = new Inventory;
-            $inventory->client_id = Auth::user()->client_id;
-            $inventory->name = $request->name;
-            $inventory->qty = 0;
-            $inventory->created_by = Auth::user()->name;
-            $inventory->save();
-
-            return redirect('inventory')->with('message','New inventory name '. $request->name .' successfully added!');
-        } else {
-            return back()->withErrors(['Inventory name already exist. You can increase (+) the quantity instead in the inventory list.']);
-        }
-        
+        return redirect('inventory')->with('message', $request->qty . ' x '. $request->name .' successfully added!');
     }
 
     public function show($name)
     {
         $inventories = Inventory::where('name', $name)
                                 ->where('client_id', Auth::user()->client_id)
-                                ->orderBy('created_at')
+                                ->whereNull('is_hidden')
+                                ->orWhere('is_hidden', 0)
+                                ->orderBy('created_at', 'DESC')
                                 ->get();
 
         return view('inventory.show')
+                    ->with('name', $name)
                     ->with('inventories', $inventories);
     }
 
-    public function increase($name)
+    public function add_by_sku($name)
     {
-        return view('inventory.increase')
+        return view('inventory.add_by_sku')
                     ->with('name', $name);
+    }
+
+    public function inventory_in_store(Request $request)
+    {
+        for ($i=0; $i < count($request->sku); $i++) { 
+            $inventory = new Inventory;
+            $inventory->client_id = Auth::user()->client_id;
+            $inventory->name = $request->inventory_name;
+            $inventory->sku = $request->sku[$i];
+            $inventory->qty = $request->qty[$i];
+            $inventory->price = $request->price[$i];
+            $inventory->expire_at = $request->expire_at != '' ? date('Y-m-d', strtotime($request->expire_at[$i])) : null;
+            $inventory->location = $request->location[$i];
+            $inventory->created_by = Auth::user()->name;
+            $inventory->save();
+        }
+
+        return redirect('inventory')->with('message','New '. $request->inventory_name .'has been added successfully.');
     }
 }

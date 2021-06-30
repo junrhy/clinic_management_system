@@ -161,5 +161,7 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::post('/subscription/subscribe', 'SubscriptionController@subscribe');
 
 	Route::get('/inventory/show/{name}', 'InventoryController@show');
-	Route::get('/inventory/increase/{name}', 'InventoryController@increase');
+	Route::get('/inventory/add_by_sku/{name}', 'InventoryController@add_by_sku');
+	Route::post('inventory_in/store', 'InventoryController@inventory_in_store');
+	
 });
