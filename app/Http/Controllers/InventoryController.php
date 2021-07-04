@@ -85,4 +85,31 @@ class InventoryController extends Controller
 
         return redirect('inventory')->with('message','New '. $request->inventory_name .'has been added successfully.');
     }
+
+    public function inventory_out($name)
+    {
+        $inventories = Inventory::select('sku', DB::raw('SUM(qty) as qty'))
+                                ->where('name', $name)
+                                ->where('client_id', Auth::user()->client_id)
+                                ->whereNull('is_hidden')
+                                ->orWhere('is_hidden', 0)
+                                ->groupBy('sku')
+                                ->get();
+
+        return view('inventory.inventory_out')
+                    ->with('name', $name)
+                    ->with('inventories', $inventories);
+    }
+
+    public function inventory_out_update(Request $request)
+    {
+        $inventory = new Inventory;
+        $inventory->client_id = Auth::user()->client_id;
+        $inventory->status = 'OUT';
+        $inventory->name = $request->name;
+        $inventory->sku = $request->sku;
+        $inventory->qty = $request->qty * -1; // save as negative value
+        $inventory->created_by = Auth::user()->name;
+        $inventory->save();
+    }
 }

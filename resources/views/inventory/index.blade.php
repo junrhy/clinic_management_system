@@ -19,6 +19,11 @@
     font-size: 12pt;
   }
 
+  .add_qty {
+    color: #666;
+    cursor: pointer;
+  }
+
   .add_by_sku {
     color: #666;
     cursor: pointer;
@@ -150,12 +155,16 @@
                         </td>
                         <td>
                             <div class="pull-right">
+                              <a class="add_qty {{ App\Model\FeatureUser::is_feature_allowed('add_qty', Auth::user()->id) }}" data-name="{{ $inventory_item->name }}"><i class="fa fa-box" aria-hidden="true"></i> Add</a>
+
+                              |
+
                               <a class="add_by_sku {{ App\Model\FeatureUser::is_feature_allowed('add_by_sku', Auth::user()->id) }}" data-name="{{ $inventory_item->name }}"><i class="fa fa-boxes" aria-hidden="true"></i> Add By SKU</a>
 
                               |
 
                               @if($inventory_item->qty > 0)
-                              <a class="inventory-out {{ App\Model\FeatureUser::is_feature_allowed('decrease_inventory', Auth::user()->id) }}" data-name="{{ $inventory_item->name }}"><i class="fa fa-box-open" aria-hidden="true"></i> Inventory Out</a>
+                              <a class="inventory-out {{ App\Model\FeatureUser::is_feature_allowed('inventory_out', Auth::user()->id) }}" data-name="{{ $inventory_item->name }}"><i class="fa fa-box-open" aria-hidden="true"></i> Inventory Out</a>
                               @else
                                <a class="hide-inventory {{ App\Model\FeatureUser::is_feature_allowed('hide_inventory', Auth::user()->id) }}" data-name="{{ $inventory_item->name }}"><i class="fa fa-trash-o" aria-hidden="true"></i> Remove</a>
                               @endif
@@ -178,16 +187,22 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+    $(".add_qty").unbind().click(function(){
+        var name = $(this).data('name');
+
+        window.location.href = "inventory/create/?name="+name;
+    });
+
     $(".add_by_sku").unbind().click(function(){
         var name = $(this).data('name');
 
         window.location.href = "/inventory/add_by_sku/"+name;
     });
 
-    $(".decrease-inventory").unbind().click(function(){
+    $(".inventory-out").unbind().click(function(){
         var name = $(this).data('name');
 
-        alert("decreased! " + name);
+        window.location.href = "/inventory/inventory_out/"+name;
     });
 
     $(".hide-inventory").unbind().click(function(){

@@ -66,8 +66,8 @@
                                     <tr>
                                         <td class="row-index">1</td>
                                         <td>{{ Form::text('sku[]', null, array('class' => 'form-control sku-textfield', 'required')) }}</td>
-                                        <td>{{ Form::number('qty[]', 1, array('class' => 'form-control', 'step' => '0.1', 'required')) }}</td>
-                                        <td>{{ Form::number('price[]', null, array('class' => 'form-control', 'step' => '0.1')) }}</td>
+                                        <td>{{ Form::number('qty[]', 1, array('class' => 'form-control', 'step' => '0.5', 'min' => '0', 'required')) }}</td>
+                                        <td>{{ Form::number('price[]', null, array('class' => 'form-control', 'step' => '0.5', 'min' => '0')) }}</td>
                                         <td>{{ Form::text('expire_at[]', null, array('class' => 'form-control')) }}</td>
                                         <td>{{ Form::text('location[]', null, array('class' => 'form-control')) }}</td>
                                         <td>&nbsp;</td>

@@ -21,6 +21,7 @@
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                         <ul class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><a href="/home"><i class="fa fa-home"></i> {{ Auth::user()->client->name }}</a></li>
+                            <li class="breadcrumb-item"><a href="/inventory">Inventory List</a></li>
                             <li class="breadcrumb-item active"><strong style="color:#fff;">New Inventory</strong></li>
                         </ul>
                     </div>
@@ -43,12 +44,12 @@
 
                       <div class="form-group">
                         {{ Form::label('qty', 'Quantity') }}
-                        {{ Form::number('qty', null, array('class' => 'form-control', 'step' => '0.1', 'required')) }}
+                        {{ Form::number('qty', null, array('class' => 'form-control', 'step' => '0.5', 'min' => '0', 'required')) }}
                       </div>
 
                       <div class="form-group">
                         {{ Form::label('price', 'Price Per Piece') }}
-                        {{ Form::number('price', null, array('class' => 'form-control', 'step' => '0.1')) }}
+                        {{ Form::number('price', null, array('class' => 'form-control', 'step' => '0.5', 'min' => '0')) }}
                       </div>
 
                       <div class="form-group">
