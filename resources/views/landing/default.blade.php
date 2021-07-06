@@ -216,10 +216,10 @@
                   <a class="nav-link" href="#pricing">Pricing</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#testimonials">Testimonials</a>
+                  <a class="nav-link" href="#testimonials">Our Clients</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#contact">Contact Us</a>
+                  <a class="nav-link" href="#contact">Request a Demo</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -404,10 +404,7 @@
             <tr>
               <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Free 24/7 Support</td>
               <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Free 24/7 Support</td>
-              <td class="enterprise-plan" style="padding-left: 4%;">
-                  <i class="fa fa-check"></i> Free 24/7 Support. <u>For 12-months only.</u><br>
-                  <span style="font-size: 8pt;font-weight: normal;margin-left: 5%;color: #666;">succeeding support cost is &#8369;1,000 per month</span>
-              </td>
+              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Free 24/7 Support</td>
             </tr>
             <tr>
               <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Automatic upgrade for new features</td>
@@ -418,7 +415,7 @@
               <td class="free-plan text-center free" style="vertical-align: middle;">FREE</td>
               <td rowspan=2 class="basic-plan-foot text-center" style="vertical-align: middle;">&#8369;1,799 / Month</td>
               <td rowspan=2 class="basic-enterprise-foot text-center" style="vertical-align: middle;">
-                  &#8369;100,000 <br>
+                  &#8369;25,000 <br>
                   <span style="font-size: 8pt;font-weight: normal;">one-time only</span>
               </td>
             </tr>
@@ -442,8 +439,10 @@
     <br>
     <h2 id="testimonials" class="header" align="center">Our Clients</h2>
 
-    <div class="row">
-      <img src="/img/clients-logo/armamentodentalstudio.png" class="col-md-2 mx-auto">
+    <div class="col-md-12">
+      <div class="row">
+        <img src="/img/clients-logo/armamentodentalstudio.png" class="col-md-2 mx-auto">
+      </div>
     </div>
    
     <br>
@@ -470,12 +469,6 @@
             <span style="font-size: 14pt">Sales Office</span> <br>
             Address: Mivesa Salinas Drive Ext. Street Lahug Cebu City, Cebu Philippines <br>
             Landline: +63 (032) 342-8998 <br>
-            <br>
-            <span style="font-size: 14pt">R&D Office</span> <br>
-            Address: Relis Street Cambuntan Bolinawan, Carcar City, Cebu Philippines <br>
-            Landline: +63 (032) 342-8998 <br>
-            <br>
-            <br>
         </div>
         <div class="col-md-3 mx-auto">
             <h2 id="contact" class="header" align="left">How it works?</h2>
