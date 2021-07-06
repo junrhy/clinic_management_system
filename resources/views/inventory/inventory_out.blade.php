@@ -10,10 +10,19 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
 
 <style type="text/css">
-  .inventory-name {
-    color: #018d8e;
-    font-size: 12pt;
-  }
+    .inventory-name {
+        color: #018d8e;
+        font-size: 12pt;
+    }
+
+    #txt-search {
+        border: 1px solid #00cfd1;
+    }
+
+    #btn-search {
+        padding: 5px 10px;
+        border-radius: 0;
+    }
 </style>
 @endsection
 
@@ -45,42 +54,14 @@
 
                   <div class="row">
                         <div class="col-md-12 table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th width="200">Sku</th>
-                                        <th width="100">Quantity</th>
-                                        <th width="200" style="text-align: right;">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                @if($inventories->sum('qty') >  0)
-                                    <?php foreach ($inventories as $inventory_key => $inventory_item): ?>
-                                    @if($inventory_item->qty > 0)
-                                    <tr>
-                                        <td>
-                                            {{ $inventory_item->sku }}
-
-                                            @if($inventory_item->sku == "")
-                                                {{ $name }} <small>( No sku specified )</small>
-                                            @endif
-                                        </td>
-                                        <td>{{ $inventory_item->qty }}</td>
-                                        <td align="right">
-                                            Enter Quantity: 
-                                            <input type="number" name="inv_out_qty" value=0 step="0.5" min="0" class="qty" style="width: 50px;text-align: center;">
-                                            <button data-name="{{ $name }}" data-sku="{{ $inventory_item->sku }}" data-old_qty="{{ $inventory_item->qty }}" class="btn-out">Out</button>
-                                        </td>
-                                    </tr>
-                                    @endif
-                                    <?php endforeach; ?>
-                                @else
-                                    <tr>
-                                        <td colspan="3" align="center" style="color: red;">Out of Stock</td>
-                                    </tr>
-                                @endif
-                                </tbody>
-                            </table>
+                            <div>
+                                <input type="text" name="search" class="col-md-2" id="txt-search" placeholder="Search">
+                                <input type="submit" class="btn btn-primary" id="btn-search" value="Go!">
+                                <br><br>
+                            </div>
+                            <div class="table-responsive" id="tableData">
+                                @include('inventory._inv_out_table_data')
+                            </div>
                         </div>
                   </div>
                 </div>
@@ -107,25 +88,63 @@ $(document).ready(function() {
             return false;
         }
 
-        $.ajax({
-            method: "POST",
-            url: "/inventory_out/update",
-            data: { 
-                name: name,
-                sku: sku,
-                qty: qty,
-                _token: "{{ csrf_token() }}" 
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You are about to remove " + qty + " " + name + " from your inventory. Do you want to proceed?",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, proceed.'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    method: "POST",
+                    url: "/inventory_out/update",
+                    data: { 
+                        name: name,
+                        sku: sku,
+                        qty: qty,
+                        _token: "{{ csrf_token() }}" 
+                    }
+                })
+                .done(function( data ) {
+                    Swal.fire(
+                        'Updated!',
+                        'Record has been updated.',
+                        'success'
+                    ).then((result) => {
+                        location.reload();
+                    });
+                });
             }
+        });
+
+    });
+
+
+    $("#btn-search").click(function(){
+        keyword = $("#txt-search").val();
+
+        $.ajax({
+          method: "POST",
+          url: "/inventory_out/search",
+          data: { 
+            name: "{{ $name }}",
+            keyword: keyword,
+            _token: "{{ csrf_token() }}" 
+          }
         })
         .done(function( data ) {
-            Swal.fire(
-                'Updated!',
-                'Record has been updated.',
-                'success'
-            ).then((result) => {
-                location.reload();
-            });
+          $("#tableData").html(data);
         });
+    });
+
+    $("#txt-search").on('keyup', function(e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode === 13) { 
+            $("#btn-search").click();
+        }
     });
 });
 

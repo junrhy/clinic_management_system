@@ -53,6 +53,10 @@
     font-size:14pt;
   }
 
+  #more-filters {
+    color: #00cfd1;
+  }
+
   #txt-search {
     border: 1px solid #00cfd1;
   }
@@ -98,11 +102,16 @@
                   </div>
 
                   <div class="row col-md-12 table-responsive">
+                      <div class="pull-right">
+                        <a id="more-filters" href="inventory/more_filters">More Filters</a>
+                        <br><br>
+                      </div>
+                     
                       <div>
                         <input type="text" name="search" class="col-md-2" id="txt-search" placeholder="Search">
                         <input type="submit" class="btn btn-primary" id="btn-search" value="Go!">
-                        <br><br>
                       </div>
+                     
                       <table width="100%">
                         <tr>
                           <td width="3.7%" class="namelist text-center" data-list="all">All</td>
@@ -222,6 +231,13 @@ $(document).ready(function() {
         .done(function( data ) {
           $("#tableData").html(data);
         });
+    });
+
+    $("#txt-search").on('keyup', function(e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode === 13) { 
+            $("#btn-search").click();
+        }
     });
 
     $(".namelist").unbind().click(function(){

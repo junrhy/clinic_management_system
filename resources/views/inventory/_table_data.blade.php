@@ -20,7 +20,7 @@
 
           |
 
-          <a class="add_by_sku {{ App\Model\FeatureUser::is_feature_allowed('add_by_sku', Auth::user()->id) }}" data-name="{{ $inventory_item->name }}"><i class="fa fa-boxes" aria-hidden="true"></i> Add By SKU</a>
+          <a class="add_by_sku {{ App\Model\FeatureUser::is_feature_allowed('add_by_sku', Auth::user()->id) }}" data-name="{{ $inventory_item->name }}"><i class="fa fa-boxes" aria-hidden="true"></i> Add Multiple Sku</a>
 
           |
 

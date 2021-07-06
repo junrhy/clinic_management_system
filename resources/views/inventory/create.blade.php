@@ -43,6 +43,11 @@
                       </div>
 
                       <div class="form-group">
+                        {{ Form::label('sku', 'Sku ( Stock-keeping unit )') }}
+                        {{ Form::text('sku', null, array('class' => 'form-control')) }}
+                      </div>
+
+                      <div class="form-group">
                         {{ Form::label('qty', 'Quantity') }}
                         {{ Form::number('qty', null, array('class' => 'form-control', 'step' => '0.5', 'min' => '0', 'required')) }}
                       </div>

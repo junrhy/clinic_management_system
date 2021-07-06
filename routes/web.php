@@ -167,4 +167,5 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::post('inventory_out/update', 'InventoryController@inventory_out_update');
 	Route::post('hide-inventory', 'InventoryController@hide_inventory');
 	Route::post('inventory/search', 'InventoryController@search');
+	Route::post('inventory_out/search', 'InventoryController@inv_out_search');
 });

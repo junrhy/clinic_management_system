@@ -415,7 +415,7 @@
               <td class="free-plan text-center free" style="vertical-align: middle;">FREE</td>
               <td rowspan=2 class="basic-plan-foot text-center" style="vertical-align: middle;">&#8369;1,799 / Month</td>
               <td rowspan=2 class="basic-enterprise-foot text-center" style="vertical-align: middle;">
-                  &#8369;10,000 <br>
+                  &#8369;25,000 <br>
                   <span style="font-size: 8pt;font-weight: normal;">one-time only</span>
               </td>
             </tr>
@@ -439,8 +439,10 @@
     <br>
     <h2 id="testimonials" class="header" align="center">Our Clients</h2>
 
-    <div class="row">
-      <img src="/img/clients-logo/armamentodentalstudio.png" class="col-md-2 mx-auto">
+    <div class="col-md-12">
+      <div class="row">
+        <img src="/img/clients-logo/armamentodentalstudio.png" class="col-md-2 mx-auto">
+      </div>
     </div>
    
     <br>
