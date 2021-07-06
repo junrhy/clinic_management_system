@@ -62,7 +62,7 @@
                                             {{ $inventory_item->sku }}
 
                                             @if($inventory_item->sku == "")
-                                                {{ $name }}
+                                                {{ $name }} <small>( No sku specified )</small>
                                             @endif
                                         </td>
                                         <td>{{ $inventory_item->qty }}</td>

@@ -16,16 +16,20 @@ class InventoryController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $inventories = Inventory::select('name', DB::raw("SUM(qty) AS qty"), DB::raw("SUM(price) AS inventory_value"))
                                 ->where('client_id', Auth::user()->client_id)
+                                ->where('name', 'like', $request->namelist . '%')
+                                ->whereNull('is_hidden')
+                                ->orWhere('is_hidden', 0)
                                 ->groupBy('name')
                                 ->orderBy('name')
-                                ->get();
+                                ->paginate(30);
 
         return view('inventory.index')
-            ->with('inventories', $inventories);
+            ->with('inventories', $inventories)
+            ->with('namelist', $request->namelist);
     }
 
     public function create()
@@ -111,5 +115,32 @@ class InventoryController extends Controller
         $inventory->qty = $request->qty * -1; // save as negative value
         $inventory->created_by = Auth::user()->name;
         $inventory->save();
+    }
+
+    public function hide_inventory(Request $request)
+    {
+        $inventory = Inventory::where('name', $request->name)
+                            ->where('client_id', Auth::user()->client_id)
+                            ->update(['is_hidden' => 1]);
+    }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->keyword;
+        
+        $multiple_keyword = explode(' ', $request->keyword);
+
+        $inventories = Inventory::select('name', DB::raw("SUM(qty) AS qty"), DB::raw("SUM(price) AS inventory_value"))
+                            ->where('client_id', Auth::user()->client_id)
+                            ->whereIn('name', $multiple_keyword)
+                            ->orWhere('name', 'like', '%' . $keyword . '%')
+                            ->whereNull('is_hidden')
+                            ->orWhere('is_hidden', 0)
+                            ->groupBy('name')
+                            ->orderBy('name')
+                            ->paginate(30);
+
+        return view('inventory._table_data')
+              ->with('inventories', $inventories);
     }
 }
