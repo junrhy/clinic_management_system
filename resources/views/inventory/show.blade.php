@@ -7,6 +7,13 @@
     font-size: 12pt;
     font-family: sans-serif;
   }
+
+  #filter_sku {
+    border: 1px solid #00cfd1;
+    padding: 5px 10px;
+    width: 200px;
+    border-radius: 3px;
+  }
 </style>
 @endsection
 
@@ -39,7 +46,14 @@
                                     <tr>
                                         <th width="200">Transaction Date</th>
                                         <th width="100">Status</th>
-                                        <th width="200">Sku</th>
+                                        <th width="200">
+                                            Sku 
+                                            <select id="filter_sku">
+                                                <?php foreach ($skus as $sku): ?>
+                                                <option>{{ $sku }}</option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </th>
                                         <th width="100">Quantity</th>
                                         <th width="200">Price Per Piece (PPP)</th>
                                         <th width="200">Expiration Date</th>
@@ -56,11 +70,11 @@
                                             {{ $inventory_item->sku }}
 
                                             @if($inventory_item->sku == "")
-                                                {{ $name }}
+                                                <small>( No sku specified )</small>
                                             @endif
                                         </td>
                                         <td>{{ $inventory_item->qty }}</td>
-                                        <td>{{ $inventory_item->price }}</td>
+                                        <td>&#8369; {{ number_format($inventory_item->price, 2) }}</td>
                                         <td>
                                             @if($inventory_item->expire_at != null)
                                             {{ $inventory_item->expire_at->format('M d, Y') }}

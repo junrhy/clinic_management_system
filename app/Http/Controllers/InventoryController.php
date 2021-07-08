@@ -53,7 +53,7 @@ class InventoryController extends Controller
         return redirect('inventory')->with('message', $request->qty . ' x '. $request->name .' successfully added!');
     }
 
-    public function show($name)
+    public function show($name, Request $request)
     {
         $inventories = Inventory::where('name', $name)
                                 ->where('client_id', Auth::user()->client_id)
@@ -62,9 +62,20 @@ class InventoryController extends Controller
                                 ->orderBy('created_at', 'DESC')
                                 ->get();
 
+        if (isset($request->sku) || $request->sku == "n/a") {
+            $sku = $request->sku != "n/a" ? $request->sku : "";
+
+            $output_inventories = $inventories->where('sku', $sku);
+        } else {
+            $output_inventories = $inventories;
+        }
+
+        $skus = $inventories->groupBy('sku');
+
         return view('inventory.show')
                     ->with('name', $name)
-                    ->with('inventories', $inventories);
+                    ->with('skus', $skus)
+                    ->with('inventories', $output_inventories);
     }
 
     public function add_by_sku($name)
@@ -91,7 +102,7 @@ class InventoryController extends Controller
         return redirect('inventory')->with('message','New '. $request->inventory_name .'has been added successfully.');
     }
 
-    public function inventory_out($name)
+    public function inventory_out($name, Request $request)
     {
         $inventories = Inventory::select('sku', DB::raw('SUM(qty) as qty'))
                                 ->where('name', $name)
@@ -101,9 +112,18 @@ class InventoryController extends Controller
                                 ->groupBy('sku')
                                 ->get();
 
+        
+        if (isset($request->sku) || $request->sku == "n/a") {
+            $sku = $request->sku != "n/a" ? $request->sku : "";
+
+            $output_inventories = $inventories->where('sku', $sku);
+        } else {
+            $output_inventories = $inventories;
+        }
+
         return view('inventory.inventory_out')
                     ->with('name', $name)
-                    ->with('inventories', $inventories);
+                    ->with('inventories', $output_inventories);
     }
 
     public function inventory_out_update(Request $request)
@@ -175,5 +195,24 @@ class InventoryController extends Controller
         return view('inventory._inv_out_table_data')
                 ->with('name', $name)
                 ->with('inventories', $inventories);
+    }
+
+    public function more_filters()
+    {
+        $inventories = Inventory::select(
+                                DB::raw('MAX(name) as name'), 
+                                'sku', 
+                                DB::raw('SUM(qty) as qty'),
+                                DB::raw('SUM(price) as price')
+                            )
+                            ->where('client_id', Auth::user()->client_id)
+                            ->whereNull('is_hidden')
+                            ->orWhere('is_hidden', 0)
+                            ->groupBy('sku')
+                            ->orderBy('name')
+                            ->get(30);
+
+        return view('inventory.more_filters')
+                ->with('inventories', $inventories->where('qty', '>', 0));
     }
 }

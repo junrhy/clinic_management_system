@@ -103,7 +103,7 @@
 
                   <div class="row col-md-12 table-responsive">
                       <div class="pull-right">
-                        <a id="more-filters" href="inventory/more_filters">More Filters</a>
+                        <a id="more-filters" href="{{ url('inventory/more_filters/search') }}">More Filters</a>
                         <br><br>
                       </div>
                      
