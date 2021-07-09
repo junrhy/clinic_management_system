@@ -6,7 +6,7 @@
   </thead>
   <?php foreach ($inventories as $inventory_key => $inventory_item): ?>
   <tr>
-    <td><a class="inventory-name" href="{{ url('inventory/show/'.$inventory_item->name) }}">{{ $inventory_item->name }}</a></td>
+    <td>{{ $inventory_item->name }}</td>
     <td>
         <span class="inventory-qty" style="font-family: sans-serif;">{{ $inventory_item->qty }}</span>
 
@@ -25,10 +25,14 @@
           |
 
           @if($inventory_item->qty > 0)
-          <a class="inventory-out {{ App\Model\FeatureUser::is_feature_allowed('inventory_out', Auth::user()->id) }}" data-name="{{ $inventory_item->name }}"><i class="fa fa-box-open" aria-hidden="true"></i> Inventory Out</a>
+          <a class="inventory-out {{ App\Model\FeatureUser::is_feature_allowed('inventory_out', Auth::user()->id) }}" data-name="{{ $inventory_item->name }}"><i class="fa fa-clipboard-list" aria-hidden="true"></i> View</a>
           @else
            <a class="hide-inventory {{ App\Model\FeatureUser::is_feature_allowed('hide_inventory', Auth::user()->id) }}" data-name="{{ $inventory_item->name }}"><i class="fa fa-trash-o" aria-hidden="true"></i> Remove</a>
           @endif
+
+          |
+
+          <a class="inventory-history {{ App\Model\FeatureUser::is_feature_allowed('inventory_history', Auth::user()->id) }}" data-name="{{ $inventory_item->name }}"><i class="fa fa-history" aria-hidden="true"></i> Transaction History</a>
         </div>
     </td>
   </tr>

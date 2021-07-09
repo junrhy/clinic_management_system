@@ -15,6 +15,10 @@
         font-size: 12pt;
     }
 
+    .location-link {
+        color: #00cfd1;
+    }
+
     #txt-search {
         border: 1px solid #00cfd1;
     }
@@ -33,13 +37,13 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-12">
-                        <h2>Inventory Out <small class="text-muted">Decrease inventory quantity from the system</small></h2>
+                        <h2>View Inventory <small class="text-muted">View the details of the inventories</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                         <ul class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><a href="/home"><i class="fa fa-home"></i> {{ Auth::user()->client->name }}</a></li>
                             <li class="breadcrumb-item"><a href="/inventory">Inventory List</a></li>
-                            <li class="breadcrumb-item active"><strong style="color:#fff;">Inventory Out</strong></li>
+                            <li class="breadcrumb-item active"><strong style="color:#fff;">View Inventory</strong></li>
                         </ul>
                     </div>
                 </div>
@@ -55,7 +59,7 @@
                   <div class="row">
                         <div class="col-md-12 table-responsive">
                             <div>
-                                <input type="text" name="search" class="col-md-2" id="txt-search" placeholder="Search">
+                                <input type="text" name="search" class="col-md-2" id="txt-search" placeholder="Search Sku">
                                 <input type="submit" class="btn btn-primary" id="btn-search" value="Go!">
                                 <br><br>
                             </div>
@@ -80,6 +84,10 @@ $(document).ready(function() {
     $(".btn-out").unbind().click(function(){
         var name = $(this).data('name');
         var sku = $(this).data('sku');
+        var price = $(this).data('price');
+        var expire_at = $(this).data('expire_at');
+        var location = $(this).data('location');
+
         var old_qty = $(this).data('old_qty');
         var qty = $(this).prev(".qty").val();
 
@@ -90,7 +98,7 @@ $(document).ready(function() {
 
         Swal.fire({
             title: 'Are you sure?',
-            text: "You are about to remove " + qty + " " + name + " from your inventory. Do you want to proceed?",
+            text: "You are about to remove " + qty + " " + name + " from " + location + ". Do you want to proceed?",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -105,6 +113,9 @@ $(document).ready(function() {
                         name: name,
                         sku: sku,
                         qty: qty,
+                        price: price,
+                        expire_at: expire_at,
+                        location: location,
                         _token: "{{ csrf_token() }}" 
                     }
                 })
@@ -114,7 +125,7 @@ $(document).ready(function() {
                         'Record has been updated.',
                         'success'
                     ).then((result) => {
-                        location.reload();
+                        window.location.reload();
                     });
                 });
             }

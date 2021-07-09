@@ -56,7 +56,7 @@
                                         <th width="30">#</th>
                                         <th width="300">Sku</th>
                                         <th width="100">Quantity</th>
-                                        <th width="200">Price Per Piece (PPP)</th>
+                                        <th width="100">Cost</th>
                                         <th width="200">Expiration Date</th>
                                         <th width="300">Location</th>
                                         <th width="20"></th>
@@ -69,7 +69,7 @@
                                         <td>{{ Form::number('qty[]', 1, array('class' => 'form-control', 'step' => '0.5', 'min' => '0', 'required')) }}</td>
                                         <td>{{ Form::number('price[]', null, array('class' => 'form-control', 'step' => '0.5', 'min' => '0')) }}</td>
                                         <td>{{ Form::text('expire_at[]', null, array('class' => 'form-control')) }}</td>
-                                        <td>{{ Form::text('location[]', null, array('class' => 'form-control')) }}</td>
+                                        <td>{{ Form::text('location[]', null, array('class' => 'form-control', 'maxlength' => '25')) }}</td>
                                         <td>&nbsp;</td>
                                     </tr>
                                 </tbody>

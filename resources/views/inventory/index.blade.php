@@ -29,6 +29,11 @@
     cursor: pointer;
   }
 
+  .inventory-history {
+    color: #666;
+    cursor: pointer;
+  }
+
   .inventory-out {
     color: #666;
     cursor: pointer;
@@ -51,10 +56,6 @@
   .font-weight-bold {
     font-weight:bold;
     font-size:14pt;
-  }
-
-  #more-filters {
-    color: #00cfd1;
   }
 
   #txt-search {
@@ -102,16 +103,11 @@
                   </div>
 
                   <div class="row col-md-12 table-responsive">
-                      <div class="pull-right">
-                        <a id="more-filters" href="inventory/more_filters">More Filters</a>
-                        <br><br>
-                      </div>
-                     
                       <div>
-                        <input type="text" name="search" class="col-md-2" id="txt-search" placeholder="Search">
+                        <input type="text" name="search" class="col-md-2" id="txt-search" placeholder="Search Name">
                         <input type="submit" class="btn btn-primary" id="btn-search" value="Go!">
                       </div>
-                     
+                      <br>
                       <table width="100%">
                         <tr>
                           <td width="3.7%" class="namelist text-center" data-list="all">All</td>
@@ -179,6 +175,12 @@ $(document).ready(function() {
         var name = $(this).data('name');
 
         window.location.href = "/inventory/inventory_out/"+name;
+    });
+
+    $(".inventory-history").unbind().click(function(){
+        var name = $(this).data('name');
+
+        window.location.href = "/inventory/show/"+name;
     });
 
     $(".hide-inventory").unbind().click(function(){
