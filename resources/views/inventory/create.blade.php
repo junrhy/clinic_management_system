@@ -53,7 +53,7 @@
                       </div>
 
                       <div class="form-group">
-                        {{ Form::label('price', 'Price Per Piece') }}
+                        {{ Form::label('price', 'Cost Per Unit') }}
                         {{ Form::number('price', null, array('class' => 'form-control', 'step' => '0.5', 'min' => '0')) }}
                       </div>
 
@@ -63,8 +63,8 @@
                       </div>
 
                       <div class="form-group">
-                        {{ Form::label('location', 'Location') }}
-                        {{ Form::text('location', null, array('class' => 'form-control')) }}
+                        {{ Form::label('location', 'Inventory Location') }} <small>Where is this inventory located?</small>
+                        {{ Form::text('location', null, array('class' => 'form-control', 'required', 'maxlength' => '25')) }}
                       </div>
 
                       <div>

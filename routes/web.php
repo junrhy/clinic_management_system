@@ -163,7 +163,6 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::get('/inventory/show/{name}', 'InventoryController@show');
 	Route::get('/inventory/add_by_sku/{name}', 'InventoryController@add_by_sku');
 	Route::get('/inventory/inventory_out/{name}', 'InventoryController@inventory_out');
-	Route::get('/inventory/more_filters/search', 'InventoryController@more_filters');
 	Route::post('inventory_in/store', 'InventoryController@inventory_in_store');
 	Route::post('inventory_out/update', 'InventoryController@inventory_out_update');
 	Route::post('hide-inventory', 'InventoryController@hide_inventory');

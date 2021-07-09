@@ -8,11 +8,13 @@
     font-family: sans-serif;
   }
 
-  #filter_sku {
+  #txt-search {
     border: 1px solid #00cfd1;
+  }
+
+  #btn-search {
     padding: 5px 10px;
-    width: 200px;
-    border-radius: 3px;
+    border-radius: 0;
   }
 </style>
 @endsection
@@ -41,51 +43,12 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12 table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th width="200">Transaction Date</th>
-                                        <th width="100">Status</th>
-                                        <th width="200">
-                                            Sku 
-                                            <select id="filter_sku">
-                                                <?php foreach ($skus as $sku): ?>
-                                                <option>{{ $sku }}</option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </th>
-                                        <th width="100">Quantity</th>
-                                        <th width="200">Price Per Piece (PPP)</th>
-                                        <th width="200">Expiration Date</th>
-                                        <th width="200">Location</th>
-                                        <th width="200">Created By</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($inventories as $inventory_key => $inventory_item): ?>
-                                    <tr>
-                                        <td><span style="font-family:sans-serif;">{{ $inventory_item->created_at->format('M d, Y') }} - {{ $inventory_item->created_at->format('h:ia') }}</span></td>
-                                        <td>{{ $inventory_item->status }}</td>
-                                        <td>
-                                            {{ $inventory_item->sku }}
-
-                                            @if($inventory_item->sku == "")
-                                                <small>( No sku specified )</small>
-                                            @endif
-                                        </td>
-                                        <td>{{ $inventory_item->qty }}</td>
-                                        <td>&#8369; {{ number_format($inventory_item->price, 2) }}</td>
-                                        <td>
-                                            @if($inventory_item->expire_at != null)
-                                            {{ $inventory_item->expire_at->format('M d, Y') }}
-                                            @endif
-                                        </td>
-                                        <td>{{ $inventory_item->location_id }}</td>
-                                        <td>{{ $inventory_item->created_by }}</td>
-                                    </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
+                            <input type="text" name="search" value="{{ isset($_GET['sku']) ? $_GET['sku'] : '' }}" class="col-md-2" id="txt-search" placeholder="Search Sku">
+                            <input type="submit" class="btn btn-primary" id="btn-search" value="Go!">
+                        </div>
+                        <br><br>
+                        <div class="col-md-12 table-responsive" id="tableData">
+                            @include('inventory._show_table_data')
                         </div>
                     </div>
                 </div>
@@ -93,4 +56,26 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('page_level_footer_script')
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#btn-search").click(function(){
+        sku = $("#txt-search").val();
+
+        location.href = "{{ url('inventory/show/'.$name) }}?sku="+sku;
+    });
+
+    $("#txt-search").on('keyup', function(e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode === 13) { 
+            $("#btn-search").click();
+        }
+    });
+});
+</script>
 @endsection

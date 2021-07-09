@@ -59,7 +59,7 @@ class InventoryController extends Controller
                                 ->where('client_id', Auth::user()->client_id)
                                 ->whereNull('is_hidden')
                                 ->orWhere('is_hidden', 0)
-                                ->orderBy('created_at', 'DESC')
+                                ->orderBy('created_at', 'ASC')
                                 ->get();
 
         if (isset($request->sku) || $request->sku == "n/a") {
@@ -70,11 +70,8 @@ class InventoryController extends Controller
             $output_inventories = $inventories;
         }
 
-        $skus = $inventories->groupBy('sku');
-
         return view('inventory.show')
                     ->with('name', $name)
-                    ->with('skus', $skus)
                     ->with('inventories', $output_inventories);
     }
 
@@ -99,19 +96,26 @@ class InventoryController extends Controller
             $inventory->save();
         }
 
-        return redirect('inventory')->with('message','New '. $request->inventory_name .'has been added successfully.');
+        return redirect('inventory')->with('message','New '. $request->inventory_name .' has been added successfully.');
     }
 
     public function inventory_out($name, Request $request)
     {
-        $inventories = Inventory::select('sku', DB::raw('SUM(qty) as qty'))
+        $inventories = Inventory::select(
+                                    DB::raw('MAX(name) as name'),
+                                    'sku', 
+                                    DB::raw('SUM(qty) as qty'),
+                                    DB::raw('MAX(price) as price'),
+                                    DB::raw('MAX(expire_at) as expire_at'),
+                                    DB::raw('MAX(location) as location')
+                                )
                                 ->where('name', $name)
                                 ->where('client_id', Auth::user()->client_id)
                                 ->whereNull('is_hidden')
                                 ->orWhere('is_hidden', 0)
-                                ->groupBy('sku')
+                                ->orderBy('sku', 'ASC')
+                                ->groupBy(['sku', 'price', 'expire_at', 'location'])
                                 ->get();
-
         
         if (isset($request->sku) || $request->sku == "n/a") {
             $sku = $request->sku != "n/a" ? $request->sku : "";
@@ -123,7 +127,78 @@ class InventoryController extends Controller
 
         return view('inventory.inventory_out')
                     ->with('name', $name)
-                    ->with('inventories', $output_inventories);
+                    ->with('inventories', $output_inventories->where('qty', '!=', 0));
+    }
+
+    public function inv_out_search(Request $request)
+    {
+        $name = $request->name;
+        $keyword = $request->keyword;
+        
+        $multiple_keyword = explode(' ', $request->keyword);
+
+
+        $inventories = Inventory::select(
+                                    DB::raw('MAX(name) as name'),
+                                    'sku', 
+                                    DB::raw('SUM(qty) as qty'),
+                                    DB::raw('MAX(price) as price'),
+                                    DB::raw('MAX(expire_at) as expire_at'),
+                                    DB::raw('MAX(location) as location')
+                                )
+                                ->where('name', $name)
+                                ->whereIn('sku', $multiple_keyword)
+                                ->orWhere('sku', 'like', '%' . $keyword . '%')
+                                ->where('client_id', Auth::user()->client_id)
+                                ->whereNull('is_hidden')
+                                ->orWhere('is_hidden', 0)
+                                ->orderBy('sku', 'ASC')
+                                ->groupBy(['sku', 'price', 'expire_at', 'location'])
+                                ->get();
+
+        if (empty($keyword)) {
+            $inventories = Inventory::select(
+                                    DB::raw('MAX(name) as name'),
+                                    'sku', 
+                                    DB::raw('SUM(qty) as qty'),
+                                    DB::raw('MAX(price) as price'),
+                                    DB::raw('MAX(expire_at) as expire_at'),
+                                    DB::raw('MAX(location) as location')
+                                )
+                                ->where('name', $name)
+                                ->where('client_id', Auth::user()->client_id)
+                                ->whereNull('is_hidden')
+                                ->orWhere('is_hidden', 0)
+                                ->orderBy('sku', 'ASC')
+                                ->groupBy(['sku', 'price', 'expire_at', 'location'])
+                                ->get();
+        }
+
+        if ($keyword == "n/a") {
+            $inventories = Inventory::select(
+                                    DB::raw('MAX(name) as name'),
+                                    'sku', 
+                                    DB::raw('SUM(qty) as qty'),
+                                    DB::raw('MAX(price) as price'),
+                                    DB::raw('MAX(expire_at) as expire_at'),
+                                    DB::raw('MAX(location) as location')
+                                )
+                                ->where('name', $name)
+                                ->where('client_id', Auth::user()->client_id)
+                                ->whereNull('is_hidden')
+                                ->orWhere('is_hidden', 0)
+                                ->orderBy('sku', 'ASC')
+                                ->groupBy(['sku', 'price', 'expire_at', 'location'])
+                                ->get();
+
+            $output_inventories = $inventories->where('sku', "");
+        } else {
+            $output_inventories = $inventories;
+        }
+
+        return view('inventory._inv_out_table_data')
+                ->with('name', $name)
+                ->with('inventories', $output_inventories->where('qty', '!=', 0));
     }
 
     public function inventory_out_update(Request $request)
@@ -134,6 +209,9 @@ class InventoryController extends Controller
         $inventory->name = $request->name;
         $inventory->sku = $request->sku;
         $inventory->qty = $request->qty * -1; // save as negative value
+        $inventory->price = $request->price;
+        $inventory->expire_at = $request->expire_at != '' ? date('Y-m-d', strtotime($request->expire_at)) : null;
+        $inventory->location = $request->location;
         $inventory->created_by = Auth::user()->name;
         $inventory->save();
     }
@@ -163,56 +241,5 @@ class InventoryController extends Controller
 
         return view('inventory._table_data')
               ->with('inventories', $inventories);
-    }
-
-    public function inv_out_search(Request $request)
-    {
-        $name = $request->name;
-        $keyword = $request->keyword;
-        
-        $multiple_keyword = explode(' ', $request->keyword);
-
-        $inventories = Inventory::select('sku', DB::raw('SUM(qty) as qty'))
-                                ->where('name', $name)
-                                ->whereIn('sku', $multiple_keyword)
-                                ->orWhere('sku', 'like', '%' . $keyword . '%')
-                                ->where('client_id', Auth::user()->client_id)
-                                ->whereNull('is_hidden')
-                                ->orWhere('is_hidden', 0)
-                                ->groupBy('sku')
-                                ->get();
-
-        if (empty($keyword)) {
-            $inventories = Inventory::select('sku', DB::raw('SUM(qty) as qty'))
-                                ->where('name', $name)
-                                ->where('client_id', Auth::user()->client_id)
-                                ->whereNull('is_hidden')
-                                ->orWhere('is_hidden', 0)
-                                ->groupBy('sku')
-                                ->get();
-        }
-
-        return view('inventory._inv_out_table_data')
-                ->with('name', $name)
-                ->with('inventories', $inventories);
-    }
-
-    public function more_filters()
-    {
-        $inventories = Inventory::select(
-                                DB::raw('MAX(name) as name'), 
-                                'sku', 
-                                DB::raw('SUM(qty) as qty'),
-                                DB::raw('SUM(price) as price')
-                            )
-                            ->where('client_id', Auth::user()->client_id)
-                            ->whereNull('is_hidden')
-                            ->orWhere('is_hidden', 0)
-                            ->groupBy('sku')
-                            ->orderBy('name')
-                            ->get(30);
-
-        return view('inventory.more_filters')
-                ->with('inventories', $inventories->where('qty', '>', 0));
     }
 }
