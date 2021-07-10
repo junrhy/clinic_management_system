@@ -27,6 +27,13 @@
     font-weight: bold;
     color: green;
   }
+
+  #frequency {
+    border: 1px solid #00cfd1;
+    padding: 5px 10px;
+    border-radius: 3px;
+  }
+
 </style>
 @endsection
 
@@ -113,7 +120,8 @@
                               Unlimited Staffs<br>
                               Unlimited Services<br>
                               Unlimited Doctors<br>
-                              Dental Chart
+                              Dental Chart<br>
+                              Inventory Management
                             </td>
                             <td>
                               @if(request()->frequency == 'yearly')
@@ -140,7 +148,7 @@
                             <td>Premium Plan</td>
                             <td>
                               <span style="font-weight: bold;">All Basic Plan Features</span> <br>
-                              Inventory Management <br>
+                              Automated Text Messages <br>
                               Automated Emails <br>
                               Data Analytics <br>
                             </td>
