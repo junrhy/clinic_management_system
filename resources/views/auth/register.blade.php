@@ -34,11 +34,11 @@
                                         </span>
                                     @endif
 
-                                    @if ($errors->has('domain_name'))
+<!--                                     @if ($errors->has('domain_name'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('domain_name') }}</strong>
                                         </span>
-                                    @endif
+                                    @endif -->
                                 </div>
                             </div>
                         </div>
