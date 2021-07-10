@@ -343,6 +343,7 @@ $(document).ready(function() {
       var clinic_id = $('select[name=clinic]').val();
       var doctor_id = $('select[name=doctor]').val();
       var notes = $("#notes").val();
+      var fees = $("#fees").val();
       var date_scheduled = $("#date_scheduled").val();
       var time_scheduled = $("#time_scheduled").val();
 
@@ -385,7 +386,8 @@ $(document).ready(function() {
           clinic_id: clinic_id, 
           doctor_id: doctor_id, 
           service: service, 
-          notes: notes, 
+          notes: notes,
+          fees: fees,
           attachment_number: attachment_number,
           date_scheduled: date_scheduled, 
           time_scheduled: time_scheduled,

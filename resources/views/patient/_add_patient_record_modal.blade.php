@@ -68,6 +68,13 @@
                 {{ Form::textarea('notes', null, ['id' => 'notes','class' => 'form-control', 'rows' => 4, 'cols' => 54, 'placeholder' => 'Limit to 300 characters only', 'style' => 'resize:none']) }}
               </div>
 
+              <div class="form-group col-md-12">
+                <div class="row col-md-6">
+                  {{ Form::label('fees', 'Fees') }}
+                  {{ Form::number('fees', null, ['id' => 'fees','class' => 'form-control']) }}
+                </div>
+              </div>
+
               <div class="form-group col-md-6">
                 {{ Form::label('attachment', 'Attachment') }}
                 <div class="row">
@@ -101,6 +108,7 @@
           <br><br><br>
           <br><br><br>
           <br><br><br>
+           <br><br><br>
           <br><br>
       </div>
       <div class="modal-footer">

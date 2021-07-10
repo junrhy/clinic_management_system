@@ -335,7 +335,7 @@
     <br>
     <br>
     <h2 id="pricing" class="header" align="center">Pricing</h2>
-    <div align="center">We simplify our pricing by just paying small amount every month. You can use the system right away.</div>
+    <div align="center">Our popular plan is simplified by just paying small amount every month. You can use the system right away.</div>
     <br>
     <div class="col-md-7 mx-auto">
         <table class="table">
@@ -352,6 +352,11 @@
               <td class="basic-enterprise-head text-center" width="25%">Enterprise</td>
             </tr>
             <tr>
+              <td class="free-plan" style="padding-left: 4%;font-weight: bold;text-align: center;">Best for starting clinic with few patients</td>
+              <td class="basic-plan" style="padding-left: 4%;font-weight: bold;text-align: center;">Best for clinic with expanding services</td>
+              <td class="enterprise-plan" style="padding-left: 4%;font-weight: bold;text-align: center;">Best for clinic with large operations</td>
+            </tr>
+            <tr>
               <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Web / Mobile / Tablet</td>
               <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Web / Mobile / Tablet</td>
               <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Web / Mobile / Tablet</td>
@@ -359,12 +364,12 @@
             <tr>
               <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Shared Server</td>
               <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Shared Server</td>
-              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> <u>Dedicated Server / Your own online Server</u></td>
+              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Dedicated Server</td>
             </tr>
             <tr>
-              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-times"></i> Domain name Integration</td>
-              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-times"></i> Domain name Integration</td>
-              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Domain name Integration</td>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-times"></i> Cannot use your own domain</td>
+              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-times"></i> Cannot use your own domain</td>
+              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Use Your Own Domain</td>
             </tr>
             <tr>
               <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Appointments</td>
@@ -402,21 +407,26 @@
               <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Dental Chart</td>
             </tr>
             <tr>
-              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Free 24/7 Support</td>
-              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Free 24/7 Support</td>
-              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Free 24/7 Support</td>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage 100 Inventory</td>
+              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Inventory</td>
+              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Inventory</td>
+            </tr>
+            <tr>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> 24/7 Customer Service</td>
+              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> 24/7 Customer Service</td>
+              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> 24/7 Customer Service</td>
             </tr>
             <tr>
               <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Automatic upgrade for new features</td>
               <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Automatic upgrade for new features</td>
-              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Upgrade with new features <u>by request</u></td>
+              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-times"></i> Scheduled upgrade for new features</td>
             </tr>
             <tr>
               <td class="free-plan text-center free" style="vertical-align: middle;">FREE</td>
               <td rowspan=2 class="basic-plan-foot text-center" style="vertical-align: middle;">&#8369;1,799 / Month</td>
               <td rowspan=2 class="basic-enterprise-foot text-center" style="vertical-align: middle;">
-                  &#8369;25,000 <br>
-                  <span style="font-size: 8pt;font-weight: normal;">one-time only</span>
+                  &#8369;3,000 / Month <br>
+                  <span style="font-size: 8pt;font-weight: normal;"><i class="fa fa-star" style="color: #FFA500;"></i> VIP support included</span>
               </td>
             </tr>
         </table>

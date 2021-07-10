@@ -256,6 +256,15 @@ class PatientController extends Controller
         $patient_detail->date_scheduled = $request->date_scheduled != '' ? date('Y-m-d', strtotime($request->date_scheduled)) : null;
         $patient_detail->time_scheduled = $request->time_scheduled != '' ? DateTime::createFromFormat('H:i a', $request->time_scheduled) : null;
 
+        if ($request->fees != '') {
+            $billing_charge = new PatientBillingCharge;
+            $billing_charge->client_id = Auth::user()->client_id;
+            $billing_charge->patient_id = $request->patient_id;
+            $billing_charge->description = $request->service;
+            $billing_charge->amount = $request->fees;
+            $billing_charge->save();
+        }
+
         if ($request->date_scheduled != '') {
           $patient_detail->status = 'Open';
         }
