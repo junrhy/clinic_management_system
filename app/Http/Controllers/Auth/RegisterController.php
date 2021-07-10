@@ -60,7 +60,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
-            'domain_name' => 'required|string|unique:domains',
+            // 'domain_name' => 'required|string|unique:domains',
             'username' => 'required|string|max:50|unique:users',
             'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:6|confirmed',
@@ -128,10 +128,10 @@ class RegisterController extends Controller
             $feature->save();
         });
 
-        $domain = new Domain;
-        $domain->client_id = $client->id;
-        $domain->domain_name = $data['domain_name'];
-        $domain->save();
+        // $domain = new Domain;
+        // $domain->client_id = $client->id;
+        // $domain->domain_name = $data['domain_name'];
+        // $domain->save();
 
         // Mail::to($data['email'])->send(new NewClient());
 
