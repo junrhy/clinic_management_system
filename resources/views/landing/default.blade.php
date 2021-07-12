@@ -148,6 +148,15 @@
     color:#FFFFFF;
   }
 
+  .btn-signup-menu {
+    background:#FF6065;
+    color:#FFFFFF;
+  }
+
+  .btn-signup-menu:hover {
+    color:#FFFFFF;
+  }
+
   .footer {
     background-color: #01a6a7;
     padding: 25px;
@@ -218,12 +227,9 @@
                 <li class="nav-item">
                   <a class="nav-link" href="#testimonials">Our Clients</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#contact">Request a Demo</a>
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Clinic Portal
+                        Account
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         @if (Route::has('login'))
@@ -251,14 +257,15 @@
                               </form>
                           @else
                               <a href="{{ route('login') }}" class="dropdown-item">Sign In</a>
-
-                              @if (Route::has('register'))
-                                  <a href="{{ route('register') }}" class="dropdown-item">Sign Up</a>
-                              @endif
                           @endauth
                         @endif
                     </div>
                 </li>
+                @if (Route::has('register'))
+                <li class="nav-item">
+                  <a class="btn btn-signup-menu" href="{{ route('register') }}">Sign Up</a>
+                </li>
+                @endif
             </ul>
         </div>
     </nav>
@@ -425,7 +432,7 @@
               <td class="free-plan text-center free" style="vertical-align: middle;">FREE</td>
               <td rowspan=2 class="basic-plan-foot text-center" style="vertical-align: middle;">&#8369;1,799 / Month</td>
               <td rowspan=2 class="basic-enterprise-foot text-center" style="vertical-align: middle;">
-                  &#8369;3,000 / Month <br>
+                  &#8369;5,099 / Month <br>
                   <span style="font-size: 8pt;font-weight: normal;"><i class="fa fa-star" style="color: #FFA500;"></i> VIP support included</span>
               </td>
             </tr>
@@ -448,20 +455,20 @@
     <br>
     <br>
     <h2 id="testimonials" class="header" align="center">Our Clients</h2>
-
+    <br>
     <div class="col-md-12">
       <div class="row">
         <img src="/img/clients-logo/armamentodentalstudio.png" class="col-md-2 mx-auto">
       </div>
     </div>
    
-    <br>
+    <br><br><br><br><br>
     <div class="col-md-12 footer">
       <div class="row">
         <div class="col-md-3 mx-auto">
             <h2 id="aboutus" class="header" align="left">About Us</h2>
             <p align="justify">
-              Bluewhale IT Software Services is a one year old company located in Cebu City, Philippines that was design by doctors for the doctor who is looking to simplify their clinic operations by using an online system.
+              Bluewhale IT Software Services is a one year old company located in Cebu City, Philippines that was design by doctors for the doctor who are looking to simplify their clinic operations by using an online system.
             </p>
         </div>
         <div class="col-md-4 mx-auto">
@@ -499,7 +506,7 @@
               <input type="hidden" name="_token" value="{{ csrf_token() }}" />
               <input type="hidden" name="from_url" value="{{ $_SERVER['SERVER_NAME'] }}" />
 
-              <input type="submit" class="btn btn-lg btn-block btn-submit-message" value="Request a Demo">
+              <input type="submit" class="btn btn-lg btn-block btn-submit-message" value="Request Demo">
             </form>
         </div>
       </div>

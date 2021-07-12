@@ -11,8 +11,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="row">
-                        @if ($domain && $domain->client->logo != "")
-                            <img src="{{ asset('https://file-server1.sfo2.digitaloceanspaces.com/'. $domain->client->logo) }}" class="col-md-12 col-sm-12 col-xs-12">
+                        @if ($client->logo != "")
+                            <img src="{{ asset('https://file-server1.sfo2.digitaloceanspaces.com/'. $client->logo) }}" class="col-md-12 col-sm-12 col-xs-12">
                             <br><br><br><br>
                         @else
                             <h3 class="text-center" style="font-weight:bold;color:#01d8da;font-family: 'Nunito';">
@@ -25,12 +25,8 @@
 
                 <div class="panel-body" style="font-family: 'Nunito';font-size: 14pt;text-align: justify;">
                     <h3 style="text-align: left;">Welcome to 
-                        @if ($domain)
-                            <span style="font-weight: bold;">{{ $domain->client->name }}</span>.
-                        @else
-                            <span style="font-weight: bold;"> CMS</span>.
-                        @endif
-                      </h3>
+                        <span style="font-weight: bold;">{{ $client->name }}</span>.
+                    </h3>
                     <br>
                     We appreciate the trust you have placed in us, and we will strive to provide the high quality of dental care that you expect. Please have your personal information added by our receptionist, Then you will be given a username and password that you can use to login into our system. We look forward to meeting you!
                     <br>
@@ -38,7 +34,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label class="label" style="color: #636b6f;">For patient only!</label>
-                            <a href="/patient-registration-form" class="btn btn-default btn-lg btn-block">
+                            <a href="/patient-registration-form?profile={{ $client->slug }}&cid={{ $client->id }}" class="btn btn-default btn-lg btn-block">
                                 Patient Registration Form
                             </a>
                         </div>

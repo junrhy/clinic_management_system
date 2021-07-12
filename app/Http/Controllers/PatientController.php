@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 
+use App\Model\Client;
 use App\Model\Patient;
 use App\User;
 use App\Model\Clinic;
@@ -462,6 +463,12 @@ class PatientController extends Controller
 
     public function create_patient_user(Request $request)
     {
+        $client = Client::find($request->client_id);
+
+        if ($client == null) {
+            return abort(404, 'Registration not available. Contact Administrator.');
+        }
+
         $validated = $request->validate([
             'username' => 'required|string|max:50|unique:users',
             'dob' => 'required',

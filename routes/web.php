@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'LandingController@index'); 
+Route::get('/profile/{client_slug}', 'LandingController@client_page'); 
 Route::post('/landing/contact_us', 'LandingController@send_contact_us_message'); 
 
 Auth::routes();
