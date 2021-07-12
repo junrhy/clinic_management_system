@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 use App\Model\Domain;
+use App\Model\Client;
 
 use App\Mail\ContactUsMessage;
 
@@ -28,14 +29,22 @@ class LandingController extends Controller
     	if(View::exists('landing.'.$landing)){
 		    $view = 'landing.'.$landing;
     	} else {
-            if ($landing == 'default') {
-                $view = 'landing.default';
-            } else {
-                $view = 'landing.subdomain_default';
-            }
-      	}
+            $view = 'landing.default';
+       	}
 
     	return view($view);
+    }
+
+    public function client_page(Request $request)
+    {
+        $client = Client::where('slug', $request->client_slug)->first();
+
+        if ($client == null) {
+            return abort(404, 'Client profile does not exist.');
+        }
+
+        return view('landing.client.default')
+                    ->with('client', $client);
     }
 
     public function send_contact_us_message(Request $request)

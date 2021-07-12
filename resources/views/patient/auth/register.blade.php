@@ -201,10 +201,14 @@
                         <input type="hidden" name="client_id" value="{{ $domain->client->id }}">
                         @endif
 
+                        @if (isset($_GET['profile']))
+                        <input type="hidden" name="client_id" value="{{ $_GET['cid'] }}">
+                        @endif
+
                         <div class="form-group">
                             <div class="col-md-10 col-md-offset-1">
                                 <div class="col-md-12">
-                                     @if ($domain)
+                                    @if ($domain || isset($_GET['profile']) )
                                     <button type="submit" class="btn btn-register btn-block">Register</button>
                                     @else
                                     <button type="submit" class="btn btn-block" disabled>Registration not available. Contact Administrator.</button>
