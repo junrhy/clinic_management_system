@@ -28,6 +28,11 @@
                               {{ Form::text('app_license_no', Input::old('app_license_no'), array('class' => 'form-control')) }}
                             </div>
 
+                            <div class="form-group">
+                              {{ Form::label('slug', 'Slug') }}
+                              {{ Form::text('slug', Input::old('slug'), array('class' => 'form-control')) }}
+                            </div>
+
                              <div class="form-group">
                               {{ Form::label('is_vip', 'Is VIP?') }}
                               {{ Form::select('is_vip', ['0' => 'No', '1' => 'Yes'], Input::old('is_vip'), array('class' => 'form-control')) }}
