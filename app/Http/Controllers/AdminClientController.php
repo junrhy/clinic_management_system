@@ -34,6 +34,7 @@ class AdminClientController extends Controller
     {
       $client = Client::find($id);
       $client->app_license_no = $request->app_license_no;
+      $client->slug = $request->slug;
       $client->is_vip = $request->is_vip;
       $client->is_active = $request->is_active;
       $client->is_suspended = $request->is_suspended;
