@@ -21,6 +21,21 @@ class AdminSettingController extends Controller
     				->with('settings', $settings);
     }
 
+    public function create()
+    {
+        return view('admin.setting.create');
+    }
+
+    public function store(Request $request)
+    {
+        $setting = new AdminSetting;
+        $setting->name = $request->name;
+        $setting->value = $request->value;
+        $setting->save();
+
+        return redirect('/admin/settings');
+    }
+
     public function edit($id)
     {
         $setting = AdminSetting::find($id);

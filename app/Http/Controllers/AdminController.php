@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 use App\User;
+use App\Model\AdminSetting;
 
 use Hash;
 use Auth;
@@ -33,6 +34,14 @@ class AdminController extends Controller
             'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:6|confirmed',
 	    ]);
+
+        $setting = AdminSetting::where('name', 'pin_code')->first();
+        $pin_code = $setting != null ? $setting->value : null;
+        if ($pin_code == null) {  return abort(404, 'Pin code is not set. Contact Administrator.');  }
+
+        if ($request->pin != $pin_code) {
+            return abort(404, 'You are not allowed to do this request. Contact Administrator.');
+        }
 
     	$user = User::create([
             'client_id' => 0,

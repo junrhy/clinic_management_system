@@ -63,6 +63,8 @@ Route::group(['middleware' => ['is_admin']], function() {
 	Route::delete('/admin/domain/delete/{id}', 'AdminDomainController@delete');
 	
 	Route::get('/admin/settings', 'AdminSettingController@index');
+	Route::get('/admin/setting/create', 'AdminSettingController@create');
+	Route::post('/admin/setting/store', 'AdminSettingController@store');
 	Route::get('/admin/setting/{id}', 'AdminSettingController@edit');
 	Route::put('/admin/setting/update/{id}', 'AdminSettingController@update')->name('admin.setting.update');
 });

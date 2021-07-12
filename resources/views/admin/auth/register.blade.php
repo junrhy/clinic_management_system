@@ -88,7 +88,7 @@
                         <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                             <div class="col-md-10 col-md-offset-1">
                                 <div class="input-group input-lg">
-                                    <input id="username" type="username" class="form-control" name="username" placeholder="Username" required>
+                                    <input id="username" type="text" class="form-control" name="username" placeholder="Username" required>
                                     <span class="input-group-addon">
                                         <i class="fa fa-user-lock"></i>
                                     </span>
@@ -128,6 +128,24 @@
                                     <span class="input-group-addon">
                                         <i class="fa fa-lock"></i>
                                     </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('pin') ? ' has-error' : '' }}">
+                            <div class="col-md-10 col-md-offset-1">
+                                <div class="input-group input-lg">
+                                    <input id="pin" type="text" class="form-control" name="pin" placeholder="Pin Code" required>
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-key"></i>
+                                    </span>
+                                </div>  
+                                <div class="col-md-12">
+                                    @if ($errors->has('pin'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('pin') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
