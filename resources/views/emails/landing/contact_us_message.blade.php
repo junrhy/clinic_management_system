@@ -1,7 +1,7 @@
 <div>
 	Hi <strong>{{ env('MAIL_CONTACT_US_RECIPIENT_NAME') }}</strong>,<br>
 	<br>
-	Someone sent you a message from <span style="color: green;">{{ $fromURL }}</span> url. <br>
+	Someone is asking for product demo. Please contact immediately. <br>
 	<br>
 	<table border="1" cellspacing="0" cellpadding="5">
 		<tr>

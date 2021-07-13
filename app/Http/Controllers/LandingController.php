@@ -54,6 +54,6 @@ class LandingController extends Controller
 
         Mail::send(new ContactUsMessage($request));
 
-        return redirect()->back()->with('success', 'Your message has been sent successfully!');
+        return redirect()->back()->with('success', 'Your message has been sent! A representative will contact you shortly.');
     }
 }
