@@ -33,12 +33,6 @@
                                             <strong>{{ $errors->first('name') }}</strong>
                                         </span>
                                     @endif
-
-<!--                                     @if ($errors->has('domain_name'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('domain_name') }}</strong>
-                                        </span>
-                                    @endif -->
                                 </div>
                             </div>
                         </div>
@@ -207,25 +201,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    // $(function(){
-    //     var subdomain = $("#name").val().replace(/\s/g, '').toLowerCase();
-    //     $("input[name='domain_name']").val(subdomain + '.bluewhalecms.com');
-    // });
-
-    // $("#name").on("keyup change", function(e) {
-    //     var regex = /[^a-zA-Z0-9\s]/;
-    //     var input = $("#name").val();
-
-    //     if(regex.test(input)) {
-    //         e.preventDefault();
-    //         $("#name").val(input.slice(0, -1));
-    //     } else {
-    //         var subdomain = input.replace(/\s/g, '').toLowerCase();
-
-    //         $("#subdomain").html(subdomain);
-    //         $("input[name='domain_name']").val(subdomain + '.bluewhalecms.com');
-    //     }
-    // });
+    
 });
 </script>
 @endsection
