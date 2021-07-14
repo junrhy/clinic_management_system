@@ -156,10 +156,10 @@
                             </div>
                         </div>
 
-                        @if ($domain != "")
+                        @if ($domain)
                             <input type="hidden" name="distributor_code" value="{{ $domain->distributor_code != '' ? $domain->distributor_code : '0000' }}">
                         @else
-                            <input type="hidden" name="distributor_code" value="0000">
+                            <input type="hidden" name="distributor_code" value="{{ Carbon\Carbon::now()->format('Y') }}">
                         @endif
                         
                         <div class="form-group">

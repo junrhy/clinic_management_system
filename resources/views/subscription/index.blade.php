@@ -44,12 +44,12 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-12">
-                        <h2>Subscription <small class="text-muted">Upgrade account to enjoy more features.</small></h2>
+                        <h2>Plan <small class="text-muted">Upgrade account to enjoy more features.</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                         <ul class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><a href="/home"><i class="fa fa-home"></i> {{ Auth::user()->client->name }}</a></li>
-                            <li class="breadcrumb-item active"><strong style="color:#fff;">Subscription</strong></li>
+                            <li class="breadcrumb-item active"><strong style="color:#fff;">Plan</strong></li>
                         </ul>
                     </div>
                 </div>
@@ -148,7 +148,6 @@
                             <td>Premium Plan</td>
                             <td>
                               <span style="font-weight: bold;">All Basic Plan Features</span> <br>
-                              Automated Text Messages <br>
                               Automated Emails <br>
                               Data Analytics <br>
                             </td>

@@ -99,7 +99,7 @@
                                   <a href="{{ url('view_estatements') }}" class="btn btn-primary">View Statements</a>
                                 </td>
                                 <td align="center">
-                                  <a href="{{ url('pay_bills') }}" class="btn btn-primary">Pay bills now</a>
+                                  <a href="{{ url('pay_bills') }}" class="btn btn-primary">Pay Now</a>
                                 </td>
                               </tr>
                             </tbody>

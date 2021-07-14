@@ -157,6 +157,7 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::delete('/attachment/delete/{id}', 'AttachmentController@delete');
 
 	Route::get('/subscription', 'SubscriptionController@index');
+	Route::get('/payment_method', 'SubscriptionController@payment_method');
 	Route::get('/view_estatements', 'SubscriptionController@view_estatements');
 	Route::get('/view_billing_statement/{id}', 'SubscriptionController@view_billing_statement');
 	Route::get('/balance_and_usage', 'SubscriptionController@balance_and_usage');

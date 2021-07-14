@@ -33,6 +33,7 @@ class AdminClientController extends Controller
     public function update(Request $request, $id)
     {
       $client = Client::find($id);
+      $client->account_type = $request->account_type;
       $client->app_license_no = $request->app_license_no;
       $client->slug = $request->slug;
       $client->is_vip = $request->is_vip;

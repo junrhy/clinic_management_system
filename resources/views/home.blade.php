@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">How are you doing today?</div>
 
                 <div class="panel-body">
                     @if($clinic_count == 0 || $doctor_count == 0 || $service_count == 0 || $patient_count == 0)

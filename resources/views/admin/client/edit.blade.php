@@ -18,11 +18,24 @@
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading">Clients</div>
+                <div class="panel-heading">{{ $client->name }}</div>
 
                 <div class="panel-body">
                     <div class="row col-md-2">
                           {{ Form::model($client, array('route' => array('admin.client.update', $client->id), 'method' => 'PUT')) }}
+                            <div class="form-group">
+                              {{ Form::label('account_type', 'Account Type') }}
+                              <div class="row">
+                                    <div class="col-md-3">{{ ucfirst($client->account_type) }}</div>
+                                    <div class="col-md-9 text-right">
+                                        | <small>change to:</small> 
+                                        {{ Form::select('account_type', ['basic' => 'Basic', 'premium' => 'Premium', 'enterprise' => 'Enterprise'], Input::old('account_type'), array('class' => '')) }}
+                                    </div>
+                              </div>
+                              
+                              
+                            </div>
+
                             <div class="form-group">
                               {{ Form::label('app_license_no', 'App License Number') }}
                               {{ Form::text('app_license_no', Input::old('app_license_no'), array('class' => 'form-control')) }}
