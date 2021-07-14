@@ -49,7 +49,6 @@
   .masthead {
     height: 100vh;
     min-height: 300px;
-    /*background-image: url('https://source.unsplash.com/BtbjCFUvBXs/1920x1080');*/
     background-color: #01d8da;
     background-size: cover;
     background-position: center;
@@ -275,7 +274,7 @@
         <div class="row h-100 align-items-center">
           <div class="col-12 text-center">
             <h1 class="font-weight-light">Welcome to <span style="font-weight: bold;color: #fff;">Bluewhale Clinic Management Software.</span></h1>
-            <p class="lead">We are a start-up Software Development Company that primarily focus on building software solutions for doctor's that have their own clinic. We are doing our best that our software services can help you to easily manage your clinic operations.</p>
+            <p class="lead">We are a start-up Software Development Company that primarily focus on building software solutions for doctor's that have their own clinic. We are doing our best that our software services can help you easily manage your clinic operations.</p>
 
             <img src="/img/brand/banner.png" class="col-md-10 mx-auto">
           </div>
@@ -284,7 +283,7 @@
     </header>
     <br>
     <br>
-    <h2 id="features" class="header" align="center">Features our customers love</h2>
+    <h2 id="features" class="header" align="center">Features our customer's love</h2>
     <br>
     <div class="col-md-12">
         <div class="row">
@@ -330,10 +329,10 @@
             </div>
             <div class="col-md-4 feature-details">
               <i class="fa fa-tooth"></i><br>
-              <span class="feature-title">Dental Chart</span>
+              <span class="feature-title">Manage Inventory</span>
               <p class="feature-body">
                 <br>
-                Easily record your patient tooth diagnosis and treatment.
+                Keep track of your inventory.
               </p>
             </div>
         </div>
@@ -342,7 +341,7 @@
     <br>
     <br>
     <h2 id="pricing" class="header" align="center">Pricing</h2>
-    <div align="center">Our popular plan is simplified by just paying small amount every month. You can use the system right away.</div>
+    <div align="center">Our popular plan is simplified by just paying small fee every month. You can use the system right away.</div>
     <br>
     <div class="col-md-7 mx-auto">
         <table class="table">
@@ -414,7 +413,10 @@
               <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Dental Chart</td>
             </tr>
             <tr>
-              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage 100 Inventory</td>
+              <td class="free-plan" style="padding-left: 4%;">
+                <i class="fa fa-times"></i> Manage Inventory <br>
+                <span style="font-size: 8pt;color: #636b6f;">&nbsp;&nbsp;&nbsp;&nbsp;Available in Basic Plan</span>
+              </td>
               <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Inventory</td>
               <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Inventory</td>
             </tr>
@@ -426,7 +428,7 @@
             <tr>
               <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Automatic upgrade for new features</td>
               <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Automatic upgrade for new features</td>
-              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-times"></i> Scheduled upgrade for new features</td>
+              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Scheduled upgrade for new features</td>
             </tr>
             <tr>
               <td class="free-plan text-center free" style="vertical-align: middle;">FREE</td>

@@ -125,4 +125,9 @@ class SubscriptionController extends Controller
         $pdf->setPaper('a4', 'portrait');
         return $pdf->stream();
     }
+
+    public function payment_method()
+    {
+        return view('subscription.payment_method');
+    }
 }

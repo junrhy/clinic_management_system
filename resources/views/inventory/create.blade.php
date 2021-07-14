@@ -36,7 +36,7 @@
                   </div>
 
                   <div class="row col-md-3">
-                    {{ Form::open(array('url' => 'inventory')) }}
+                    {{ Form::open(array('url' => 'inventory', 'id' => 'form-add-inventory')) }}
                       <div class="form-group">
                         {{ Form::label('name', 'Inventory Name') }}
                         {{ Form::text('name', null, array('class' => 'form-control', 'required')) }}

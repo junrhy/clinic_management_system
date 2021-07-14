@@ -43,6 +43,13 @@
                 <div class="panel-heading"><i class="fa fa-notes-medical" aria-hidden="true"></i> Review Registration Request</div>
 
                 <div class="panel-body">
+                    @if( in_array(Auth::user()->client->account_type, ['free', 'basic', 'premium']) )
+                        Patient Registration Form: 
+                        <a href="/profile/{{ Auth::user()->client->slug }}" target="_BLANK">
+                            <i class="fa fa-external-link"></i> Open
+                        </a><br><br>
+                    @endif
+
                     <table class="table">
                         <thead>
                             <th>Date Registered</th>

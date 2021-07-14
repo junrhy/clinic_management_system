@@ -40,7 +40,7 @@ class LandingController extends Controller
         $client = Client::where('slug', $request->client_slug)->first();
 
         if ($client == null) {
-            return abort(404, 'Client profile does not exist.');
+            return abort(404, 'Profile does not exist.');
         }
 
         return view('landing.client.default')

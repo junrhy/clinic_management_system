@@ -169,6 +169,8 @@
                         </li>
                     </ul>
                 </li>
+                
+                @if( !in_array(Auth::user()->client->account_type, ['free']) )
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('inventory', Auth::user()->id) }}">
                     <a href="#inventorySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fa fa-box"></i> 
@@ -183,6 +185,8 @@
                         </li>
                     </ul>
                 </li>
+                @endif
+
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('billing', Auth::user()->id) }}">
                     <a href="#billingSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fa fa-file-alt"></i> 
@@ -227,22 +231,15 @@
                             <a href="{{ url('change_password') }}">Change Password</a>
                         </li>
 
-                        @if(Auth::user()->client->account_type == 'free' && Auth::user()->client->is_active != 0 && Auth::user()->client->is_suspended == 0 && Auth::user()->is_client == 1)
+                        @if(Auth::user()->client->account_type == 'free' 
+                        && Auth::user()->client->is_active != 0 
+                        && Auth::user()->client->is_suspended == 0 
+                        && Auth::user()->is_client == 1)
+                        
                         <li>
                             <a style="cursor:pointer;" id="sidebar-menu-upgrade-account">Upgrade</a>
                         </li>
-                        @endif
-
-                        @if(Auth::user()->client->account_type != 'free' && Auth::user()->is_client == 1)
-                        <li>
-                            <a href="{{ url('subscription') }}">Subscription</a>
-                        </li>
-                        <li>
-                            <a href="{{ url('balance_and_usage') }}">Balance</a>
-                        </li>
-                        <li>
-                            <a href="{{ url('view_estatements') }}">Statements</a>
-                        </li>
+                        
                         @endif
 
                         @if(Auth::user()->client->is_active == 0 && Auth::user()->client->account_type == 'basic')
@@ -256,6 +253,29 @@
                         @endif
                     </ul>
                 </li>
+
+                @if( !in_array(Auth::user()->client->account_type, ['free', 'enterprise']) && Auth::user()->is_client == 1 )
+                <li class="">
+                    <a href="#subscriptionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fa fa-credit-card"></i> 
+                        &nbsp;&nbsp;Subscription</a>
+
+                    <ul class="collapse list-unstyled" id="subscriptionSubmenu">
+                        <li>
+                            <a href="{{ url('subscription') }}">Plan</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('payment_method') }}">Payment Method</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('balance_and_usage') }}">Balance</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('view_estatements') }}">Statements</a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
 
                 <li class="">
                     <a href="#helpSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">

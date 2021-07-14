@@ -53,6 +53,11 @@ class AdminSettingTableSeeder extends Seeder
         $AdminSetting->value = 'Jun Rhy Crodua';
         $AdminSetting->save();
 
+        $AdminSetting = new AdminSetting();
+        $AdminSetting->name = 'pin_code';
+        $AdminSetting->value = '1234';
+        $AdminSetting->save();
+
         $this->command->info('Admin settings list seeded.');
     }
 }
