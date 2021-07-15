@@ -201,6 +201,15 @@
 		left: 0px;
 		top: 0px;
 	}
+
+	.d-none {
+        display: none;
+    }
+
+    #show-legend {
+    	cursor: pointer;
+    	text-decoration: none;
+    }
 </style>
 @endsection
 
@@ -236,7 +245,57 @@
 			        		</select>
 	            		</div>
 		        	</div>
-		        	<h4 class="col-md-12 section">Dental Chart</h4>
+		        	<h4 class="col-md-12 section">Chart</h4>
+		        	
+		        	<div class="col-md-12">
+		        		<a id="show-legend">Legends</a>
+		        	</div>
+		        			        	
+		        	<div class="col-md-12 col-sm-12 d-none" id="legend">
+	        			<br>
+		        		<div class="row">
+		        			<div class="col-md-2 col-sm-12">
+		        				<br>
+				        		<img style="height:43px;position: relative;top: -16px;" src="/img/dental-chart/x.png"> 
+				        		<span style="position: relative;top: -14px;">Missing</span><br>
+				        		
+				        		<img style="height:43px;position: relative;top: -16px;" src="/img/dental-chart/circle.png"> 
+				        		<span style="position: relative;top: -14px;">Impacted</span><br>
+				        		
+				        		<img style="height:43px;position: relative;top: -16px;" src="/img/dental-chart/slash.png"> 
+				        		<span style="position: relative;top: -14px;">To Be Extracted</span><br>
+
+								<div style="position: relative;top: -16px;" class="filling filling-center">
+									<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+								</div>
+								<span style="position: relative;top: -28px;">Filling Center</span>
+		        			</div>
+
+		        			<div class="col-md-4 col-sm-12">
+		        				<div style="position: relative;top:5px;" class="filling filling-top">
+									<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+								</div>
+								<span style="position: relative;top: -5px;">Filling Top</span><br>
+
+								<div  style="position: relative;top:5px;" class="filling filling-right">
+									<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+								</div>
+								<span style="position: relative;top: -5px;">Filling Right</span><br>
+
+								<div  style="position: relative;top:5px;" class="filling filling-bottom">
+									<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+								</div>
+								<span style="position: relative;top: -5px;">Filling Bottom</span><br>
+
+								<div  style="position: relative;top:5px;" class="filling filling-left">
+									<img class="filling-none" src="/img/dental-chart/filling_none.gif">
+								</div>
+								<span style="position: relative;top: -5px;">Filling Left</span>
+								<br>
+								<br>
+		        			</div>
+		        		</div>
+		        	</div>
                     <div class="col-md-12 table-responsive">
                     	<table>
                     	<tr>
@@ -434,6 +493,15 @@
 						</tr>	
                     	</table>
                     </div>
+
+                    <h4 class="col-md-12 section">Notes</h4>
+                    <div class="row col-md-12">
+                    	<div class="col-md-6">
+                     		{{ Form::textarea('notes', $dental_note != null ? strip_tags($dental_note->notes) : null, ['id' => 'dental-notes','class' => 'form-control', 'rows' => 10, 'placeholder' => 'Limit to 300 characters only', 'style' => 'resize:none', 'disabled']) }}
+                    		<br>
+                    		<button id="btn-update-notes" class="btn btn-primary" disabled>Update</button>
+                    	</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -567,7 +635,16 @@ $(document).ready(function() {
 	});
 
 	$(function(){
+
 		get_patient_attributes();
+
+		var isset_patient_id = "{{ isset($_GET['patient_id']) }}";
+
+		if (isset_patient_id != "") {
+			$("#dental-notes").removeAttr('disabled');
+			$("#btn-update-notes").removeAttr('disabled');
+		}
+		
 	});
 
 	function apply_tooth_attribute(element, tooth_number, attr, root_filename = "root.png", crown_filename = "crown.png", img_folder = "/img/dental-chart/"){
@@ -660,6 +737,40 @@ $(document).ready(function() {
 			});
         });
 	}
+
+	$("#show-legend").click(function(){
+        $("#legend").toggleClass('d-none');
+
+        if ( $(this).html() == 'Legends' ) {
+            $(this).html('Hide');
+        } else {
+            $(this).html('Legends');
+        }
+        
+    });
+
+    $("#btn-update-notes").click(function(){
+    	var notes = $("#dental-notes").val();
+
+    	$.ajax({
+			method: "POST",
+			url: "/dental_notes/update_note",
+			data: { 
+				patient_id: "{{ $patient_id }}",
+				notes: notes,
+				_token: "{{ csrf_token() }}" 
+			}
+        })
+        .done(function( data ) {
+        	Swal.fire(
+	            'Updated!',
+	            'Record has been updated.',
+	            'success'
+	        ).then((result) => {
+	            location.reload();
+	        });
+    	});
+    });
 });
 </script>
 @endsection

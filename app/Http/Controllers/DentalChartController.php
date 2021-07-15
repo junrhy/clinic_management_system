@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Model\Patient;
 use App\Model\DentalChart;
+use App\Model\DentalNote;
 use App\Model\Domain;
 
 use Auth;
@@ -33,12 +34,15 @@ class DentalChartController extends Controller
 
         $patient_name = Patient::find($patient_id);
 
+        $dental_note = DentalNote::where('patient_id', $patient_id)->first();
+
 		return view('dentalchart.index')
                     ->with('dental_records', $dental_records)
                     ->with('tooth_numbers', $tooth_numbers)
                     ->with('patients', $patients)
                     ->with('patient_id', $patient_id)
-                    ->with('patient_name', $patient_name);
+                    ->with('patient_name', $patient_name)
+                    ->with('dental_note', $dental_note);
 	}
 
     public function get_attributes(Request $request)
@@ -100,6 +104,23 @@ class DentalChartController extends Controller
 
                 $dentalchart->delete();
             }
+        }
+    }
+
+    public function update_note(Request $request)
+    {
+        $dental_note = DentalNote::where('patient_id', $request->patient_id)->first();
+
+        if ($dental_note) {
+            $dental_note = DentalNote::find($request->patient_id);
+            $dental_note->notes = nl2br($request->notes);
+            $dental_note->save();
+        } else {
+            $dental_note = new DentalNote;
+            $dental_note->client_id = Auth::user()->client_id;
+            $dental_note->patient_id = $request->patient_id;
+            $dental_note->notes = nl2br($request->notes);
+            $dental_note->save();
         }
     }
 }

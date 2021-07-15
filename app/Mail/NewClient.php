@@ -28,6 +28,8 @@ class NewClient extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.auth.new_client');
+        return $this->view('emails.auth.new_client')
+                    ->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
+                    ->subject("Hi, please verify your Bluewhale Clinic Management Software account");
     }
 }

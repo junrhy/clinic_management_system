@@ -153,11 +153,15 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::post('/dental_chart/get_attributes', 'DentalChartController@get_attributes');
 	Route::post('/dental_chart/update_attribute', 'DentalChartController@update_attribute');
 	Route::post('/dental_chart/get_patient_attributes', 'DentalChartController@get_patient_attributes');
+	Route::post('/dental_notes/update_note', 'DentalChartController@update_note');
 
 	Route::delete('/attachment/delete/{id}', 'AttachmentController@delete');
 
 	Route::get('/subscription', 'SubscriptionController@index');
 	Route::get('/payment_method', 'SubscriptionController@payment_method');
+	Route::post('/payment_method/save_card', 'SubscriptionController@save_card');
+	Route::post('/payment_method/remove_card', 'SubscriptionController@remove_card');
+	Route::post('/payment_method/make_primary', 'SubscriptionController@make_primary');
 	Route::get('/view_estatements', 'SubscriptionController@view_estatements');
 	Route::get('/view_billing_statement/{id}', 'SubscriptionController@view_billing_statement');
 	Route::get('/balance_and_usage', 'SubscriptionController@balance_and_usage');
