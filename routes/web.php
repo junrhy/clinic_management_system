@@ -158,6 +158,9 @@ Route::group(['middleware' => ['is_default']], function() {
 
 	Route::get('/subscription', 'SubscriptionController@index');
 	Route::get('/payment_method', 'SubscriptionController@payment_method');
+	Route::post('/payment_method/save_card', 'SubscriptionController@save_card');
+	Route::post('/payment_method/remove_card', 'SubscriptionController@remove_card');
+	Route::post('/payment_method/make_primary', 'SubscriptionController@make_primary');
 	Route::get('/view_estatements', 'SubscriptionController@view_estatements');
 	Route::get('/view_billing_statement/{id}', 'SubscriptionController@view_billing_statement');
 	Route::get('/balance_and_usage', 'SubscriptionController@balance_and_usage');

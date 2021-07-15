@@ -47,7 +47,7 @@
   }
 
   .masthead {
-    height: 100vh;
+    height: 50em;
     min-height: 300px;
     background-color: #01d8da;
     background-size: cover;
@@ -470,24 +470,31 @@
         <div class="col-md-3 mx-auto">
             <h2 id="aboutus" class="header" align="left">About Us</h2>
             <p align="justify">
-              Bluewhale IT Software Services is a one year old company located in Cebu City, Philippines that was design by doctors for the doctor who are looking to simplify their clinic operations by using an online system.
+              Bluewhale Web Development Services is a one year old company located in Cebu City, Philippines that was design by doctors for the doctor who are looking to simplify their clinic operations by using an online system.
             </p>
         </div>
-        <div class="col-md-4 mx-auto">
-            <h2 id="followus" class="header" align="left">Follow Us</h2>
-            <br>
-            <i class="fa fa-facebook-square" style="font-size: 25pt;"></i> <a href="https://www.facebook.com/bluewhaleCMS" target="_BLANK" class="socialmedia"> Facebook.com/BluewhaleCMS</a><br>
-            <br>
-            <i class="fab fa-youtube-square" style="font-size: 25pt;"></i> <a href="https://www.youtube.com/bluewhaleCMS" target="_BLANK" class="socialmedia"> Youtube.com/BluewhaleCMS</a><br>
-            <br>
-            <i class="fab fa-twitter-square" style="font-size: 25pt;"></i> <a href="https://www.twitter.com/bluewhaleCMS" target="_BLANK" class="socialmedia"> Twitter.com/BluewhaleCMS</a><br>
-            <br>
-            <br>
+        <div class="col-md-4 mx-auto" style="font-size:10pt;">
             <h2 id="customerservice" class="header" align="left">Offices</h2>
             <br>
-            <span style="font-size: 14pt">Sales Office</span> <br>
+            <span style="font-size: 14pt">Main Office Address</span> <br>
             Address: Mivesa Salinas Drive Ext. Street Lahug Cebu City, Cebu Philippines <br>
             Landline: +63 (032) 342-8998 <br>
+            <br>
+            <span style="font-size: 14pt">Office Hours</span> <br>
+            Monday - Friday<br>
+            8:00 am - 5:00 pm<br>
+            (except holidays)<br>
+            <br>
+            <span style="font-size: 14pt">Customer Contact Center</span> <br>
+            Monday - Sunday<br>
+            8:00 am - 5:00 pm<br>
+            (except holidays)<br>
+            <br>
+            Telephone: +63 (032) 342-8998<br>
+            Mobile: +63 (0926) 004-9848<br>
+            Email: ask@bluewhalecms.com<br>
+            <br>
+            <br>
         </div>
         <div class="col-md-3 mx-auto">
             <h2 id="contact" class="header" align="left">How it works?</h2>

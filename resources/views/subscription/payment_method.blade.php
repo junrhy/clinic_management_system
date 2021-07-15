@@ -18,7 +18,7 @@
         font-weight: bold;
     }
 
-    input[type=text] {
+    input[type=text], input[type=number] {
       width: 100%;
       margin-bottom: 20px;
       padding: 12px;
@@ -45,6 +45,10 @@
       font-size: 24px;
     }
 
+    .make-primary {
+        cursor: pointer;
+    }
+
     .remove-card {
         color: red;
         cursor: pointer;
@@ -57,6 +61,14 @@
 
     .logo {
         height: 60px;
+    }
+
+    .d-none {
+        display: none;
+    }
+
+    #add-card {
+        cursor: pointer;
     }
 </style>
 @endsection
@@ -105,73 +117,88 @@
                             <div class="tab-content">
                                 <div id="card" class="tab-pane fade in active">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <span>Select the card you want to use for your subscription.</span><br><br>
-                                            <a href="">New Card</a>
+                                        <div class="col-md-12">
+                                            <a id="add-card">Add Card</a>
                                             <br><br>
-                                            <div class="table-responsive">
-                                                <table class="table table-striped">
-                                                    <thead>
-                                                        <th>Name on Card</th>
-                                                        <th>Credit / Debit card number</th>
-                                                        <th></th>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>card name</td>
-                                                            <td>card number</td>
-                                                            <td align="right">
-                                                                <a class="">Select</a>
-                                                                |
-                                                                <a class="remove-card">Remove</a>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-offset-1 col-lg-4">
-                                            <label for="fname">Accepted Cards</label>
-                                            <div class="icon-container">
-                                                <i class="fa fa-cc-visa" style="color:navy;"></i>
-                                                <i class="fa fa-cc-amex" style="color:blue;"></i>
-                                                <i class="fa fa-cc-mastercard" style="color:red;"></i>
-                                                <i class="fa fa-cc-discover" style="color:orange;"></i>
-                                            </div>
-                                           
-                                            <label for="cname">Name on Card</label>
-                                            <input type="text" id="cname" name="cardname" placeholder="John More Doe">
-                                            <label for="ccnum">Credit / Debit card number</label>
-                                            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
-                                            <label for="expmonth">Exp Month</label>
-                                            <select id="expmonth" name="expmonth">
-                                                <option value="01">January</option>
-                                                <option value="02">February</option>
-                                                <option value="03">March</option>
-                                                <option value="04">April</option>
-                                                <option value="05">May</option>
-                                                <option value="06">June</option>
-                                                <option value="07">July</option>
-                                                <option value="08">August</option>
-                                                <option value="09">September</option>
-                                                <option value="10">October</option>
-                                                <option value="11">November</option>
-                                                <option value="12">December</option>
-                                            </select>
-
                                             <div class="row">
-                                                <div class="col-md-6">
-                                                    <label for="expyear">Exp Year</label>
-                                                    <input type="text" id="expyear" name="expyear" placeholder="2018">
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label for="cvv">CVV</label>
-                                                    <input type="text" id="cvv" name="cvv" placeholder="352">
+                                                <div id="new_card" class="col-md-4 d-none">
+                                                    <label for="fname">Accepted Cards</label>
+                                                    <div class="icon-container">
+                                                        <i class="fa fa-cc-visa" style="color:navy;"></i>
+                                                        <i class="fa fa-cc-amex" style="color:blue;"></i>
+                                                        <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                                                        <i class="fa fa-cc-discover" style="color:orange;"></i>
+                                                    </div>
+                                                   
+                                                    <label for="cname">Name on Card</label>
+                                                    <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+                                                    <label for="ccnum">Credit / Debit card number</label>
+                                                    <input type="number" id="ccnum" name="cardnumber" placeholder="1111222233334444" maxlength="16">
+                                                    <label for="expmonth">Exp Month</label>
+                                                    <select id="expmonth" name="expmonth">
+                                                        <option value="01">January</option>
+                                                        <option value="02">February</option>
+                                                        <option value="03">March</option>
+                                                        <option value="04">April</option>
+                                                        <option value="05">May</option>
+                                                        <option value="06">June</option>
+                                                        <option value="07">July</option>
+                                                        <option value="08">August</option>
+                                                        <option value="09">September</option>
+                                                        <option value="10">October</option>
+                                                        <option value="11">November</option>
+                                                        <option value="12">December</option>
+                                                    </select>
+
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label for="expyear">Exp Year</label>
+                                                            <input type="number" id="expyear" name="expyear" placeholder="2018">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="cvv">CVV</label>
+                                                            <input type="number" id="cvv" name="cvv" placeholder="352">
+                                                        </div>
+                                                    </div>
+
+                                                    <input type="submit" value="Add Card" id="submit-card" class="btn btn-primary btn-block">
                                                 </div>
                                             </div>
 
-                                            <input type="submit" value="Add Card" class="btn btn-primary btn-block">
+                                            <div class="row table-responsive">
+                                                <div id="card-list" class="col-md-6">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <th>Name on Card</th>
+                                                            <th>Credit / Debit card number</th>
+                                                            <th></th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php foreach ($client_cards as $card_key => $card_item): ?>
+                                                            <tr>
+                                                                <td>{{ $card_item->name_on_card }}</td>
+                                                                <td>{{ $card_item->card_number }}</td>
+                                                                <td align="right">
+                                                                    @if($card_item->is_default)
+                                                                        <span style="color:#ccc;">This is your primary card</span>
+                                                                    @else
+                                                                        <a class="make-primary" data-id="{{  $card_item->id }}">Make Primary</a>
+                                                                        |
+                                                                        <a class="remove-card" data-id="{{  $card_item->id }}">Remove</a>
+                                                                    @endif    
+                                                                </td>
+                                                            </tr>
+                                                            <?php endforeach; ?>
+
+                                                            @if($client_cards->count() == 0)
+                                                            <tr>
+                                                                <td align="center" colspan="3">No card found.</td>
+                                                            </tr>
+                                                            @endif
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -274,7 +301,85 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-  
+    $("#add-card").click(function(){
+        $("#new_card").toggleClass('d-none');
+        $("#card-list").toggleClass('d-none');
+
+        if ( $(this).html() == 'Add Card' ) {
+            $(this).html('Cancel');
+        } else {
+            $(this).html('Add Card');
+        }
+        
+    });
+
+    $("#submit-card").click(function(){
+        var cname = $("#cname").val();
+        var ccnum = $("#ccnum").val();
+        var expmonth = $("#expmonth").val();
+        var expyear = $("#expyear").val();
+        var cvv = $("#cvv").val();
+
+        $.ajax({
+            method: "POST",
+            url: "/payment_method/save_card",
+            data: { 
+                cname: cname,
+                ccnum: ccnum,
+                expmonth: expmonth,
+                expyear: expyear,
+                cvv: cvv,
+                _token: "{{ csrf_token() }}" 
+            }
+        })
+        .done(function( data ) {
+            window.location.reload();
+        });
+    });
+    
+    $(".remove-card").unbind().click(function(){
+        var id = $(this).data('id');
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, remove it!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    method: "POST",
+                    url: "/payment_method/remove_card",
+                    data: { 
+                        id: id,
+                        _token: "{{ csrf_token() }}" 
+                    }
+                })
+                .done(function( data ) {
+                    window.location.reload();
+                });
+            }
+        });
+    });
+
+    $(".make-primary").unbind().click(function(){
+        var id = $(this).data('id');
+
+        $.ajax({
+            method: "POST",
+            url: "/payment_method/make_primary",
+            data: { 
+                id: id,
+                _token: "{{ csrf_token() }}" 
+            }
+        })
+        .done(function( data ) {
+            window.location.reload();
+        });
+    });
 });
 </script>
 @endsection

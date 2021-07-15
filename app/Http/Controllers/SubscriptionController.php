@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Model\Client;
 use App\Model\Subscription;
 use App\Model\BillingStatement;
+use App\Model\ClientCard;
 
 use Auth;
 use Carbon\Carbon;
@@ -128,6 +129,45 @@ class SubscriptionController extends Controller
 
     public function payment_method()
     {
-        return view('subscription.payment_method');
+        $client_cards = ClientCard::where('client_id', Auth::user()->client_id)->get();
+
+        return view('subscription.payment_method')
+                    ->with('client_cards', $client_cards);
+    }
+
+    public function save_card(Request $request)
+    {
+        $default_card = ClientCard::where('client_id', Auth::user()->client_id)
+                                    ->where('is_default', 1)
+                                    ->first();
+
+        $client_card = new ClientCard;
+        $client_card->client_id = Auth::user()->client_id;
+        $client_card->name_on_card = $request->cname;
+        $client_card->card_number = $request->ccnum;
+        $client_card->expiry_month = $request->expmonth;
+        $client_card->expiry_year = $request->expyear;
+
+        if ($default_card == null) {
+            $client_card->is_default = true;
+        }
+
+        $client_card->save();
+    }
+
+    public function remove_card(Request $request)
+    {
+        $client_card = ClientCard::find($request->id);
+        $client_card->delete();
+    }
+
+    public function make_primary(Request $request)
+    {
+        ClientCard::where('client_id', Auth::user()->client_id)
+                    ->update(['is_default' => false]);
+
+        $client_card = ClientCard::find($request->id);
+        $client_card->is_default = true;
+        $client_card->save();
     }
 }
