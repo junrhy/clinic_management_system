@@ -153,6 +153,7 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::post('/dental_chart/get_attributes', 'DentalChartController@get_attributes');
 	Route::post('/dental_chart/update_attribute', 'DentalChartController@update_attribute');
 	Route::post('/dental_chart/get_patient_attributes', 'DentalChartController@get_patient_attributes');
+	Route::post('/dental_notes/update_note', 'DentalChartController@update_note');
 
 	Route::delete('/attachment/delete/{id}', 'AttachmentController@delete');
 

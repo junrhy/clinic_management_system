@@ -18,6 +18,10 @@ class InventoryController extends Controller
 
     public function index(Request $request)
     {
+        if (Auth::user()->client->account_type == 'free') {
+            return redirect('home');
+        }
+
         $inventories = Inventory::select('name', DB::raw("SUM(qty) AS qty"), DB::raw("SUM(price) AS inventory_value"))
                                 ->where('client_id', Auth::user()->client_id)
                                 ->where('name', 'like', $request->namelist . '%')
