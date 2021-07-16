@@ -21,7 +21,7 @@
 	</table>
 
 	<div style="height: 350px;overflow-y: auto;">
-		<span style="font-size: 100pt;font-weight: bold;position: relative;top: -40px;left: -10px;height: 120px;float: left;">℞</span>
+		<span style="font-size: 100pt;font-weight: bold;position: relative;top: -40px;left: -10px;height: 380px;float: left;">℞</span>
 		<span style="position: relative; top:10px; left: 0px;font-size: 12pt;">{!! $prescription->prescription !!}</span>
 	</div>
 

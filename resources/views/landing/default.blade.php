@@ -434,8 +434,7 @@
               <td class="free-plan text-center free" style="vertical-align: middle;">FREE</td>
               <td rowspan=2 class="basic-plan-foot text-center" style="vertical-align: middle;">&#8369;1,799 / Month</td>
               <td rowspan=2 class="basic-enterprise-foot text-center" style="vertical-align: middle;">
-                  &#8369;5,099 / Month <br>
-                  <span style="font-size: 8pt;font-weight: normal;"><i class="fa fa-star" style="color: #FFA500;"></i> VIP support included</span>
+                  Contact Sales
               </td>
             </tr>
         </table>

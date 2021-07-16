@@ -54,6 +54,10 @@
     background-color: #00cfd1;
     color: #ffffff;
   }
+
+  .created_by {
+    font-size: 8pt;
+  }
 </style>
 @endsection
 
@@ -135,7 +139,7 @@
                             <div class="table-responsive" id="medical-record-table">
                               <table class="table table-striped">
                                 <thead>
-                                  <th style="width:7%">Created</th>
+                                  <th style="width:13%">Created</th>
                                   <th style="width:12%">Clinic</th>
                                   <th style="width:10%">Doctor</th>
                                   <th style="width:15%">Service</th>
@@ -149,7 +153,10 @@
                                 @if(count($details) > 0)
                                   @foreach ($details as $detail)
                                     <tr>
-                                        <td>{{ $detail->created_at->format('M d, Y') }}</td>
+                                        <td>
+                                          {{ $detail->created_at->format('M d, Y') }} - {{ $detail->created_at->format('h:ia') }}<br>
+                                          <span class="created_by">Encoded by {{ $detail->created_by }}</span>
+                                        </td>
                                         <td>{{ $detail->clinic }}</td>
                                         <td>{{ $detail->doctor }}</td>
                                         <td>{{ $detail->service }}</td>
@@ -205,7 +212,7 @@
                             <div class="table-responsive" id="medical-record-archived-table">
                                 <table class="table table-striped">
                                   <thead>
-                                    <th style="width:7%">Created</th>
+                                    <th style="width:13%">Created</th>
                                     <th style="width:20%">Clinic</th>
                                     <th style="width:10%">Doctor</th>
                                     <th style="width:15%">Service</th>
@@ -219,7 +226,9 @@
                                   @if(count($archived_details) > 0)
                                     @foreach ($archived_details as $archive_detail)
                                       <tr>
-                                          <td>{{ $archive_detail->created_at->format('M d, Y') }}</td>
+                                          <td>{{ $archive_detail->created_at->format('M d, Y') }} - {{ $archive_detail->created_at->format('h:ia') }}<br>
+                                              <span class="created_by">Encoded by {{ $archive_detail->created_by }}</span>
+                                          </td>
                                           <td>{{ $archive_detail->clinic }}</td>
                                           <td>{{ $archive_detail->doctor }}</td>
                                           <td>{{ $archive_detail->service }}</td>
@@ -280,7 +289,7 @@
                         <div class="table-responsive">
                           <table class="table table-striped">
                             <thead>
-                              <th style="width:7%">Created</th>
+                              <th style="width:13%">Created</th>
                               <th style="width:13%">Clinic</th>
                               <th style="width:13%">Doctor</th>
                               <th style="width:5%">Prescription</th>
@@ -291,7 +300,9 @@
                             @if(count($prescriptions) > 0)
                               @foreach ($prescriptions as $prescription)
                               <tr>
-                                <td>{{ $prescription->created_at->format('M d, Y') }}</td>
+                                <td>{{ $prescription->created_at->format('M d, Y') }} - {{ $prescription->created_at->format('h:ia') }}<br>
+                                    <span class="created_by">Encoded by {{ $prescription->created_by }}</span>
+                                </td>
                                 <td>{{ $prescription->clinic }}</td>
                                 <td>{{ $prescription->doctor }}</td>
                                 <td>

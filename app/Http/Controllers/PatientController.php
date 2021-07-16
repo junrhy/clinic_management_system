@@ -256,6 +256,7 @@ class PatientController extends Controller
         $patient_detail->is_scheduled = $request->date_scheduled != '' ? true : false;
         $patient_detail->date_scheduled = $request->date_scheduled != '' ? date('Y-m-d', strtotime($request->date_scheduled)) : null;
         $patient_detail->time_scheduled = $request->time_scheduled != '' ? DateTime::createFromFormat('H:i a', $request->time_scheduled) : null;
+        $patient_detail->created_by = Auth::user()->first_name . ' ' . Auth::user()->last_name;
 
         if ($request->fees != '') {
             $billing_charge = new PatientBillingCharge;
@@ -406,7 +407,8 @@ class PatientController extends Controller
         $prescription->clinic = $request->clinic;
         $prescription->doctor = $doctor->fullname;
         $prescription->prescription = nl2br($request->prescription);
-
+        $prescription->created_by = Auth::user()->first_name . ' ' . Auth::user()->last_name;
+        
         $prescription->save();
     }
 
