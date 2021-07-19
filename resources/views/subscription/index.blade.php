@@ -34,6 +34,16 @@
     border-radius: 3px;
   }
 
+  #cancel-subscription {
+    color: red;
+    text-decoration: none;
+    font-size: 10pt;
+  }
+
+  #cancel-subscription:hover {
+    text-decoration: underline;
+  }
+
 </style>
 @endsection
 
@@ -72,18 +82,26 @@
                             <th>Active from</th>
                             <th>Until</th>
                             <th>Status</th>
+                            <th>Auto-Renew</th>
                           </tr>
                         </thead>
                         @foreach($subscriptions as $subscription)
                         <tr>
                           <td>{{ ucfirst($subscription->plan) }} Plan</td>
-                          <td>{{ $subscription->start->format('M d, Y') }}</td>
-                          <td>{{ $subscription->end->format('M d, Y') }}</td>
+                          <td><span style="font-family: sans-serif;">{{ $subscription->start->format('M d, Y') }}</span></td>
+                          <td><span style="font-family: sans-serif;">{{ $subscription->end->format('M d, Y') }}</span></td>
                           <td>
                             @if(\Carbon\Carbon::now()->diffInDays($subscription->end, false) > 0)
-                              Will expire in {{ \Carbon\Carbon::now()->diffInDays($subscription->end, false) }} days from now
+                              Will expire in <span style="font-family: sans-serif;">{{ \Carbon\Carbon::now()->diffInDays($subscription->end, false) }}</span> days from now
                             @else
-                              This subscription is expired. <a href="/balance_and_usage">Renew Now</a>
+                              This subscription is expired
+                            @endif
+                          </td>
+                          <td>
+                            @if(\Carbon\Carbon::now()->diffInDays($subscription->end, false) > 0)
+                              <a id="cancel-subscription" href="/cancel_plan">Cancel</a>
+                            @else
+                              <a href="/balance_and_usage">Renew Now</a>
                             @endif
                           </td>
                         </tr>
@@ -124,12 +142,14 @@
                               Inventory Management
                             </td>
                             <td>
-                              @if(request()->frequency == 'yearly')
-                              <span class="pricing"><span style="text-decoration: line-through;">&#8369;21,600 / year</span> &#8369;18,899 / year</span><br>
-                              <small style="color: red;">12% discount</small>
-                              @else
-                              <span class="pricing">&#8369;1,799 / month</span><br>
-                              <small>Pay yearly to enjoy huge discount</small>
+                              @if(Auth::user()->client->account_type != "basic")
+                                  @if(request()->frequency == 'yearly')
+                                  <span class="pricing"><span style="text-decoration: line-through;">&#8369;21,600 / year</span> &#8369;18,899 / year</span><br>
+                                  <small style="color: red;">12% discount</small>
+                                  @else
+                                  <span class="pricing">&#8369;1,799 / month</span><br>
+                                  <small>Pay yearly to enjoy huge discount</small>
+                                  @endif
                               @endif
                             </td>
                             <td>

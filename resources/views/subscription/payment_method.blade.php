@@ -222,7 +222,7 @@
                                             <li>Wait for the text confirmation of your transaction.</li>
                                             <li>Take a picture of the payment receipt or the text confirmation and email it
                                                 <ul>
-                                                    <li>To: <strong>billing@bluewhalecms.com</strong></li>
+                                                    <li>To: <strong>jrcrodua@gmail.com</strong></li>
                                                     <li>Subject: <strong>"Payment for {{ Auth::user()->client->name }} ( Acct #: <span style="font-family: sans-serif;">{{ Auth::user()->client->account_number }}</span> )"</strong></li>
                                                 </ul>
                                             </li>
@@ -256,7 +256,7 @@
                                                 <li>Take note of the Reference Number.</li>
                                                 <li>Take a picture of the confirmation and email it
                                                     <ul>
-                                                        <li>To: <strong>billing@bluewhalecms.com</strong></li>
+                                                        <li>To: <strong>jrcrodua@gmail.com</strong></li>
                                                         <li>Subject: <strong>"Payment for {{ Auth::user()->client->name }} ( Acct #: <span style="font-family: sans-serif;">{{ Auth::user()->client->account_number }}</span> )"</strong></li>
                                                     </ul>
                                                 </li>
@@ -277,7 +277,7 @@
                                                 <li>Give the deposit slip to the teller.</li>
                                                 <li>Take a picture of the deposit slip copy and email it
                                                     <ul>
-                                                        <li>To: <strong>billing@bluewhalecms.com</strong></li>
+                                                        <li>To: <strong>jrcrodua@gmail.com</strong></li>
                                                         <li>Subject: <strong>"Payment for {{ Auth::user()->client->name }} ( Acct #: <span style="font-family: sans-serif;">{{ Auth::user()->client->account_number }}</span> )"</strong></li>
                                                     </ul>
                                                 </li>

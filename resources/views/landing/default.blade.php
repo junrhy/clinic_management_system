@@ -383,7 +383,7 @@
               <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Appointments</td>
             </tr>
             <tr>
-              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage 100 Patients</td>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Unlimited Patients</td>
               <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Unlimited Patients</td>
               <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Unlimited Patients</td>
             </tr>
@@ -393,7 +393,9 @@
               <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Clinics</td>
             </tr>
             <tr>
-              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Staffs</td>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-times"></i> Manage Staffs <br>
+                <span style="font-size: 8pt;color: #636b6f;">&nbsp;&nbsp;&nbsp;&nbsp;Available in Basic Plan</span>
+              </td>
               <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Staffs</td>
               <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Staffs</td>
             </tr>
@@ -408,7 +410,9 @@
               <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Doctors</td>
             </tr>
             <tr>
-              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Dental Chart</td>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-times"></i> Dental Chart <br>
+                <span style="font-size: 8pt;color: #636b6f;">&nbsp;&nbsp;&nbsp;&nbsp;Available in Basic Plan</span>
+              </td>
               <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Dental Chart</td>
               <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Dental Chart</td>
             </tr>

@@ -33,6 +33,16 @@
             background-color: #FFFFFF;
             padding: 3px;
         }
+
+        #button-upgrade-account {
+            border: 1px solid #FF8C00;
+            background: #FF8C00;
+            color: #fff;
+            margin-right: 20px;
+            border-radius: 3px;
+            position: relative;
+            top: -3px;        }
+        }
     </style>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/layout.css') }}" rel="stylesheet">
@@ -105,9 +115,11 @@
                     </ul>
                 </li>
 
+                @if( !in_array(Auth::user()->client->account_type, ['free']) )
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('dental', Auth::user()->id) }}">
                     <a href="{{ url('/dental_chart') }}"><i class="fa fa-tooth"></i> Dental</a>
                 </li>
+                @endif
               @endif
 
               
@@ -201,6 +213,8 @@
                         </li>
                     </ul>
                 </li>
+
+                @if( !in_array(Auth::user()->client->account_type, ['free']) )
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('staffs', Auth::user()->id) }}">
                     <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fa fa-users"></i> 
@@ -215,6 +229,7 @@
                         </li>
                     </ul>
                 </li>
+                @endif
               @endif
                 
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('account', Auth::user()->id) }}">
@@ -326,6 +341,15 @@
                         
 
                         <div class="float-right" style="margin: 8px;font-size: 11pt;color:#fff;">
+                            @if(Auth::user()->client->account_type == 'free' 
+                            && Auth::user()->client->is_active != 0 
+                            && Auth::user()->client->is_suspended == 0 
+                            && Auth::user()->is_client == 1)
+                            
+                            <button id="button-upgrade-account">Upgrade</button>
+                           
+                            @endif
+
                             <strong><i class="fa fa-user-circle"></i>  {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</strong>
                         </div>
                     </div>

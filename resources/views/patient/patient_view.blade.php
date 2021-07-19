@@ -11,7 +11,7 @@
 <style type="text/css">
   .show_link, .print-link {
     font-size: 9pt;
-    color: #008385;
+    color: #018d8e;
     cursor: pointer;
   }
 
@@ -20,24 +20,24 @@
   }
 
   .no-image {
-    background-color: #ccc;
-    padding-top:36px;
-    margin-bottom: 5px;
+    background-color: #eee;
+    text-align: center;
+    padding-top: 42%;
   }
 
   .profile-picture {
-    height: 130px;
-    width: 130px;
-    float: left;
+  	margin-top: 10px;
+    height: 150px;
+    width: 150px;
+    float: right;
+    border: 2px solid #018d8e;
+    border-radius: 50%;
   }
 
   .image-size {
-    margin-top: 35px;
-    margin-left:auto;
-    margin-right: auto;
-    width:70px;
-    color: #666;
-    font-family: sans-serif;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
   }
 </style>
 @endsection
@@ -65,54 +65,56 @@
 	                    	<i class="fa fa-address-card"></i> Your Personal Information
 	                    </h4>
 
-	                    <div class="row">
-	                    	<table class="col-md-12">
-		                      <tr>
-		                        <td class="col-md-2 text-right">First Name:</td>
-		                        <td><span style="font-family: sans-serif;">{{ $patient->first_name }}</span></td>
-		                        <td class="col-md-3" rowspan="7">
-		                        		@if($patient->profile_picture == '')
-			                          <div class="profile-picture no-image">
-			                              <div class="image-size">170 x 170</div>
-			                          </div>
-		                            @else
-		                            <div class="profile-picture">
-			                              @if(env('FILESYSTEM_DRIVER') == 'spaces')
-			                              <img class="profile-picture" src="{{ asset('https://file-server1.sfo2.digitaloceanspaces.com/' . $patient->profile_picture) }}" />
-			                              @endif
+	                    <div class="col-md-12">
+	                    		<div class="col-md-12">
+	                    					<table border="0" width="100%">
+						                      <tr>
+						                        <td class="col-md-2 text-right">First Name:</td>
+						                        <td><span style="font-family: sans-serif;">{{ $patient->first_name }}</span></td>
+						                        <td class="" rowspan="7">
+						                        		@if($patient->profile_picture == '')
+							                          <div class="profile-picture">
+							                              <div class="image-size no-image">No Picture</div>
+							                          </div>
+						                            @else
+						                            <div class="profile-picture">
+							                              @if(env('FILESYSTEM_DRIVER') == 'spaces')
+							                              <img class="image-size" src="{{ asset('https://file-server1.sfo2.digitaloceanspaces.com/' . $patient->profile_picture) }}" />
+							                              @endif
 
-			                              @if(env('FILESYSTEM_DRIVER') == 'public')
-			                              <img class="profile-picture" src="{{ asset('storage/' . $patient->profile_picture) }}" />
-			                              @endif
-			                          </div>
-		                            @endif
-		                        </td>
-		                      </tr>
-		                      <tr>
-		                        <td class="col-md-2 text-right">Last Name:</td>
-		                        <td><span style="font-family: sans-serif;">{{ $patient->last_name }}</span></td>
-		                      </tr>
-		                      <tr>
-		                        <td class="col-md-2 text-right">Birthdate:</td>
-		                        <td><span style="font-family: sans-serif;">{{ $patient->dob->format('M d, Y') }}</span></td>
-		                      </tr>
-		                      <tr>
-		                        <td class="col-md-2 text-right">Age:</td>
-		                        <td><span style="font-family: sans-serif;">{{ $patient->dob->age }}</span></td>
-		                      </tr>
-		                      <tr>
-		                        <td class="col-md-2 text-right">Gender:</td>
-		                        <td><span style="font-family: sans-serif;">{{ $patient->gender != 'Other' ? $patient->gender : 'Prefer not to say' }}</span></td>
-		                      </tr>
-		                      <tr>
-		                        <td class="col-md-2 text-right">Email:</td>
-		                        <td><span style="font-family: sans-serif;">{{ $patient->email }}</span></td>
-		                      </tr>
-		                      <tr>
-		                        <td class="col-md-2 text-right">Contact No.:</td>
-		                        <td><span style="font-family: sans-serif;">{{ $patient->contact_number }}</span></td>
-		                      </tr>
-		                    </table>
+							                              @if(env('FILESYSTEM_DRIVER') == 'public')
+							                              <img class="image-size" src="{{ asset('storage/' . $patient->profile_picture) }}" />
+							                              @endif
+							                          </div>
+						                            @endif
+						                        </td>
+						                      </tr>
+						                      <tr>
+						                        <td class="col-md-2 text-right">Last Name:</td>
+						                        <td><span style="font-family: sans-serif;">{{ $patient->last_name }}</span></td>
+						                      </tr>
+						                      <tr>
+						                        <td class="col-md-2 text-right">Birthdate:</td>
+						                        <td><span style="font-family: sans-serif;">{{ $patient->dob->format('M d, Y') }}</span></td>
+						                      </tr>
+						                      <tr>
+						                        <td class="col-md-2 text-right">Age:</td>
+						                        <td><span style="font-family: sans-serif;">{{ $patient->dob->age }}</span></td>
+						                      </tr>
+						                      <tr>
+						                        <td class="col-md-2 text-right">Gender:</td>
+						                        <td><span style="font-family: sans-serif;">{{ $patient->gender != 'Other' ? $patient->gender : 'Prefer not to say' }}</span></td>
+						                      </tr>
+						                      <tr>
+						                        <td class="col-md-2 text-right">Email:</td>
+						                        <td><span style="font-family: sans-serif;">{{ $patient->email }}</span></td>
+						                      </tr>
+						                      <tr>
+						                        <td class="col-md-2 text-right">Contact No.:</td>
+						                        <td><span style="font-family: sans-serif;">{{ $patient->contact_number }}</span></td>
+						                      </tr>
+						                    </table>
+	                    		</div>
 	                    </div>
                  	</div>
 
@@ -121,16 +123,20 @@
 	                    	<i class="fa fa-key"></i> Account Information
 	                    </h4>
 
-	                    <table class="col-md-11">
-	                      <tr>
-	                        <td class="col-md-2 text-right">Username:</td>
-	                        <td><span style="font-family: sans-serif;">{{ $patient->user->username }}</span></td>
-	                      </tr>
-	                      <tr>
-	                        <td class="col-md-2 text-right">Password:</td>
-	                        <td><a href="/patient_view/change_password">Change Password</a></td>
-	                      </tr>
-	                    </table>
+	                    <div class="col-md-12">
+	                    	<div class="col-md-12">
+	                    		<table width="100%">
+			                      <tr>
+			                        <td class="col-md-2 text-right">Username:</td>
+			                        <td><span style="font-family: sans-serif;">{{ $patient->user->username }}</span></td>
+			                      </tr>
+			                      <tr>
+			                        <td class="col-md-2 text-right">Password:</td>
+			                        <td><a href="/patient_view/change_password">Change Password</a></td>
+			                      </tr>
+			                    </table>
+	                    	</div>
+	                    </div>
                  	</div>
 
                  	<div class="row" style="font-size:10pt;">
