@@ -265,6 +265,14 @@ $(document).ready(function() {
       $("input[name='status']").val(status);
   });
 
+  $('.fc-prev-button').click(function(){
+      show_all_appointments();
+  });
+
+  $('.fc-next-button').click(function(){
+      show_all_appointments();
+  });
+
   function show_all_appointments() {
       var eventSources = $('#calendar').fullCalendar('clientEvents');
       var len = eventSources.length;
