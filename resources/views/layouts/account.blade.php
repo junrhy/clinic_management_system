@@ -52,7 +52,7 @@
                 </div>
 
                 <ul class="nav navbar-nav navbar-right m-t-20">
-                    <li class="nav-item"><a class="nav-link" href="/home">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}"
                           onclick="event.preventDefault();

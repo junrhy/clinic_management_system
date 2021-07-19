@@ -58,6 +58,12 @@
     font-size: 10pt;
   }
 
+  .bulk-delete-appointment {
+    position: relative;
+    top: 10px;
+    left: -10px;
+  }
+
   .bulk-delete-appointment:hover {
     color: red;
     text-decoration: none;
