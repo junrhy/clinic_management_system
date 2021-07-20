@@ -49,7 +49,7 @@
   .masthead {
     height: 50em;
     min-height: 300px;
-    background-color: #01d8da;
+    background-color: #f8f9fa;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -213,10 +213,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                  <a class="nav-link" href="#home">Home</a>
-                </li>
+            <ul class="navbar-nav mr-auto ml-auto col-md-10">
                 <li class="nav-item">
                   <a class="nav-link" href="#features">Features</a>
                 </li>
@@ -226,45 +223,54 @@
                 <li class="nav-item">
                   <a class="nav-link" href="#testimonials">Our Clients</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Account
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        @if (Route::has('login'))
-                          @auth
-                              @if(auth()->user()->type == 'default')
-                              <a href="{{ url('/home') }}" class="dropdown-item">{{ auth()->user()->client->name }} Dashboard</a>
-                              @endif
+            </ul>
 
-                              @if(auth()->user()->type == 'patient')
-                              <a href="{{ url('/patient_view') }}" class="dropdown-item"> {{ auth()->user()->first_name }} {{ auth()->user()->last_name }} Dashboard</a>
-                              @endif
+            <ul class="navbar-nav">
+                @auth
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Account
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            
+                            @if(auth()->user()->type == 'default')
+                            <a href="{{ url('/home') }}" class="dropdown-item">{{ auth()->user()->client->name }} Dashboard</a>
+                            @endif
 
-                              @if(auth()->user()->type == 'admin')
-                              <a href="{{ url('/home') }}" class="dropdown-item">Admin Dashboard</a>
-                              @endif
+                            @if(auth()->user()->type == 'patient')
+                            <a href="{{ url('/patient_view') }}" class="dropdown-item"> {{ auth()->user()->first_name }} {{ auth()->user()->last_name }} Dashboard</a>
+                            @endif
 
-                              <a class="dropdown-item" href="{{ route('logout') }}"
-                                  onclick="event.preventDefault();
-                                           document.getElementById('logout-form').submit();">
-                                  Logout
-                              </a>
+                            @if(auth()->user()->type == 'admin')
+                            <a href="{{ url('/home') }}" class="dropdown-item">Admin Dashboard</a>
+                            @endif
 
-                              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                  {{ csrf_field() }}
-                              </form>
-                          @else
-                              <a href="{{ route('login') }}" class="dropdown-item">Sign In</a>
-                          @endauth
-                        @endif
-                    </div>
-                </li>
-                @if (Route::has('register'))
-                <li class="nav-item">
-                  <a class="btn btn-signup-menu" href="{{ route('register') }}">Sign Up</a>
-                </li>
-                @endif
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </div>
+                    </li>
+
+                @else
+
+                    @if (Route::has('login'))
+                    <li class="nav-item">
+                      <a href="{{ route('login') }}" class="nav-link">Sign In</a>
+                    </li>
+                    @endif
+
+                    @if (Route::has('register'))
+                    <li class="nav-item">
+                      <a class="btn btn-signup-menu" href="{{ route('register') }}">Sign Up</a>
+                    </li>
+                    @endif
+                @endauth
             </ul>
         </div>
     </nav>
@@ -273,8 +279,8 @@
       <div class="container h-100">
         <div class="row h-100 align-items-center">
           <div class="col-12 text-center">
-            <h1 class="font-weight-light">Welcome to <span style="font-weight: bold;color: #fff;">Bluewhale Clinic Management Software.</span></h1>
-            <p class="lead">We are a start-up Software Development Company that primarily focus on building software solutions for doctor's that have their own clinic. We are doing our best that our software services can help you easily manage your clinic operations.</p>
+            <h1 class="font-weight-light">Welcome to <span style="font-weight: bold;color: #01d8da;">Bluewhale Clinic Management Software.</span></h1>
+            <p class="lead">Regardless of what type of clinic are you in, We simplify and automate the necessary part so that you will have a clear vision on how your clinic is doing. We are doing our best that our online system can help you easily manage your clinic operations.</p>
 
             <img src="/img/brand/banner.png" class="col-md-10 mx-auto">
           </div>
@@ -358,9 +364,9 @@
               <td class="basic-enterprise-head text-center" width="25%">Enterprise</td>
             </tr>
             <tr>
-              <td class="free-plan" style="padding-left: 4%;font-weight: bold;text-align: center;">Best for starting clinic with few patients</td>
-              <td class="basic-plan" style="padding-left: 4%;font-weight: bold;text-align: center;">Best for clinic with expanding services</td>
-              <td class="enterprise-plan" style="padding-left: 4%;font-weight: bold;text-align: center;">Best for clinic with large operations</td>
+              <td class="free-plan" style="font-weight: bold;text-align: center;">Best for starting clinic with few patients</td>
+              <td class="basic-plan" style="font-weight: bold;text-align: center;">Best for clinic with expanding services</td>
+              <td class="enterprise-plan" style="font-weight: bold;text-align: center;">Best for clinic with large operations</td>
             </tr>
             <tr>
               <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Web / Mobile / Tablet</td>
@@ -393,11 +399,11 @@
               <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Clinics</td>
             </tr>
             <tr>
-              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-times"></i> Manage Staffs <br>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-times"></i> Staff's Access <br>
                 <span style="font-size: 8pt;color: #636b6f;">&nbsp;&nbsp;&nbsp;&nbsp;Available in Basic Plan</span>
               </td>
-              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Staffs</td>
-              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Staffs</td>
+              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Staff's Access</td>
+              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Staff's Access</td>
             </tr>
             <tr>
               <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Services</td>
@@ -438,7 +444,8 @@
               <td class="free-plan text-center free" style="vertical-align: middle;">FREE</td>
               <td rowspan=2 class="basic-plan-foot text-center" style="vertical-align: middle;">&#8369;1,799 / Month</td>
               <td rowspan=2 class="basic-enterprise-foot text-center" style="vertical-align: middle;">
-                  Contact Sales
+                  Contact Sales<br>
+                  <span style="font-size: 8pt;color: #636b6f;font-weight: normal;">sales@bluewhalecms.com</span>
               </td>
             </tr>
         </table>
