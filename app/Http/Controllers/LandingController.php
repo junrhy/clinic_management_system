@@ -20,14 +20,14 @@ class LandingController extends Controller
 
         $domain = Domain::where('domain_name', $domain_name)->first();
 
+        $client_homepage = '';
+        
     	if ($domain) {
-    		$landing = str_replace('.', '_', $domain->domain_name);
-    	} else {
-    		$landing = 'default';
+    		$client_homepage = str_replace('.', '_', $domain->domain_name);
     	}
 
-    	if(View::exists('landing.'.$landing)){
-		    $view = 'landing.'.$landing;
+    	if(View::exists('landing.client.'.$client_homepage)){
+		    $view = 'landing.client.'.$client_homepage;
     	} else {
             $view = 'landing.default';
        	}
