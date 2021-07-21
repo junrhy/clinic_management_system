@@ -10,6 +10,7 @@ use App\Model\AdminSetting;
 
 use Hash;
 use Auth;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -64,6 +65,12 @@ class AdminController extends Controller
 
     public function index()
     {
+        if( Auth::check() ) {
+            $user = User::find(Auth::user()->id);
+            $user->last_active_at = Carbon::now()->toDateTimeString();
+            $user->save();
+        }
+
         return view('admin.index');
     }
 

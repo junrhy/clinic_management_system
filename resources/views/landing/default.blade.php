@@ -40,6 +40,38 @@
       }
   }
 
+  @media (max-width: 991px) {
+      .navbar-collapse {
+          position: fixed;
+          top: 85px;
+          left: 0;
+          padding-top: 15px;
+          padding-left: 15px;
+          padding-right: 15px;
+          padding-bottom: 15px;
+          height: 100%;
+          min-width: 15em;
+          background-color: #ffffff;
+          z-index: 1000;
+      }
+
+      .navbar-collapse.collapsing {
+          height: 100%;
+          left: -75%;
+          transition: height 0s ease;
+      }
+
+      .navbar-collapse.show {
+          height: 100%;
+          left: 0;
+          transition: left 400ms ease-in-out;
+      }
+
+      .navbar-toggler.collapsed ~ .navbar-collapse {
+          transition: left 400ms ease-in;
+      }
+  }
+
   .navbar .navbar-nav>.active> a, 
   .navbar .navbar-nav>.active> a:focus, 
   .navbar .navbar-nav>.active> a:hover,
@@ -150,10 +182,16 @@
   .btn-signup-menu {
     background:#FF6065;
     color:#FFFFFF;
+    display: inline-block;
+    padding: .466rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
   }
 
   .btn-signup-menu:hover {
     color:#FFFFFF;
+    text-decoration: none;
   }
 
   .footer {
@@ -184,8 +222,28 @@
   }
 
   @media only screen and (max-width: 600px) {
-      .logo {
-          height: 30px;
+      .navbar-brand {
+          display: none;
+      }
+
+      .navbar-collapse {
+          top: 70px;
+      }
+  }
+
+  @media only screen and (max-width: 991px) {
+      .btn-signin-menu {
+          padding: 15px 0px;
+      }
+
+      .btn-signup-menu {
+          padding: 15px 0px;
+          background-color: transparent;
+          color: rgba(0,0,0,.5);
+      }
+      
+      .btn-signup-menu:hover {
+          color: #666;
       }
   }
 </style>
@@ -205,7 +263,7 @@
     </div>
     @endif
 
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffffff;">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ffffff;height: 85px;">
         <a class="navbar-brand" href="/"><img src="/img/brand/bluewhalecms.png" class="logo"></a>
         
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -213,19 +271,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto ml-auto col-md-10">
-                <li class="nav-item">
-                  <a class="nav-link" href="#features">Features</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#pricing">Pricing</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#testimonials">Our Clients</a>
-                </li>
-            </ul>
-
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ml-auto">
                 @auth
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -261,26 +307,28 @@
 
                     @if (Route::has('login'))
                     <li class="nav-item">
-                      <a href="{{ route('login') }}" class="nav-link">Sign In</a>
+                      <a href="{{ route('login') }}" class="nav-link btn-signin-menu">Sign In</a>
                     </li>
                     @endif
 
                     @if (Route::has('register'))
                     <li class="nav-item">
-                      <a class="btn btn-signup-menu" href="{{ route('register') }}">Sign Up</a>
+                      <a class="btn-signup-menu" href="{{ route('register') }}">Sign Up</a>
                     </li>
                     @endif
                 @endauth
             </ul>
         </div>
     </nav>
-
+    <br>
+    <br>
+    <br>
     <header class="masthead">
       <div class="container h-100">
         <div class="row h-100 align-items-center">
           <div class="col-12 text-center">
             <h1 class="font-weight-light">Welcome to <span style="font-weight: bold;color: #01d8da;">Bluewhale Clinic Management Software.</span></h1>
-            <p class="lead">Regardless of what type of clinic are you in, We simplify and automate the necessary part so that you will have a clear vision on how your clinic is doing. We are doing our best that our online system can help you easily manage your clinic operations.</p>
+            <p class="lead">Regardless of what type of clinic are you in, We simplify and automate the necessary process so that you will have a clear vision on how your clinic is doing. We are doing our best that our online system can help you easily manage your clinic operations.</p>
 
             <img src="/img/brand/banner.png" class="col-md-10 mx-auto">
           </div>

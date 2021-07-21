@@ -37,6 +37,8 @@ Route::group(['middleware' => ['is_admin']], function() {
 	Route::get('/admin/client/disconnection_reason/create/{id}', 'AdminClientController@create_disconnection_reason');
 	Route::post('/admin/client/disconnection_reason/store', 'AdminClientController@store_disconnection_reason');
 	Route::delete('/admin/client/delete_disconnection_status/{id}', 'AdminClientController@delete_disconnection_reason');
+	Route::get('/admin/inactive_clients', 'AdminClientController@inactive_clients');
+	Route::post('/admin/delete_client', 'AdminClientController@delete_client');
 
 	Route::get('/admin/subscriptions', 'AdminSubscriptionController@index');
 	Route::get('/admin/subscription/renew/{id}', 'AdminSubscriptionController@renew');

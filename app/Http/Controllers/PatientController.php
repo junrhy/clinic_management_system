@@ -25,6 +25,7 @@ use DB;
 use Auth;
 use DateTime;
 use PDF;
+use Carbon\Carbon;
 
 class PatientController extends Controller
 {
@@ -428,6 +429,12 @@ class PatientController extends Controller
 
     public function patient_view()
     {
+        if( Auth::check() ) {
+            $user = User::find(Auth::user()->id);
+            $user->last_active_at = Carbon::now()->toDateTimeString();
+            $user->save();
+        }
+
         $patient = Patient::where('user_id', Auth::user()->id)->first();
 
         $appointments = PatientDetail::where('client_id', Auth::user()->client_id)

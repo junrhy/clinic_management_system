@@ -25,6 +25,7 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Name</th>
                                     <th>Username</th>
                                     <th>Email</th>
@@ -41,10 +42,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($clients as $client)
+                                @foreach($clients as $key => $client)
                                 <tr>
+                                    <td>{{ $key + 1 }}</td>
                                     <td>{{ $client->name }}</td>
-                                    <td>{{ $client->user->username }}</td>
+                                    <td>
+                                        @if($client->user)
+                                        {{ $client->user->username }}
+                                        @endif
+                                    </td>
                                     <td>{{ $client->email }}</td>
                                     <td>{{ $client->secondary_email }}</td>
                                     <td>{{ $client->contact }}</td>
