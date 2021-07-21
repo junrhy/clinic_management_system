@@ -36,6 +36,13 @@
     padding: 5px 10px;
     border-radius: 0;
   }
+
+  .remove-user-account {
+    color: red;
+    text-decoration: none;
+    font-size: 8pt;
+    cursor: pointer;
+  }
 </style>
 @endsection
 
@@ -179,6 +186,40 @@ $(document).ready(function() {
     } else {
       location.href = '{{ Request::url() }}';
     }
+  });
+
+  $(".remove-user-account").unbind().click(function(){
+    id = $(this).data('id');
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, remove it!'
+    }).then((result) => {
+      if (result.value) {
+        $.ajax({
+          method: "POST",
+          url: "/remove_patient_user_account",
+          data: { 
+            id: id,
+            _token: "{{ csrf_token() }}" 
+          }
+        })
+        .done(function( msg ) {
+          Swal.fire(
+            'Removed!',
+            'Account has been removed.',
+            'success'
+          ).then((result) => {
+            location.reload();
+          });
+        });
+      }
+    })
   });
 
   $(function(){

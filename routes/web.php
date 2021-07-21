@@ -129,6 +129,9 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::post('/patient/store_prescription', 'PatientController@store_prescription');
 	Route::delete('/patient/delete_prescription/{id}', 'PatientController@delete_prescription');
 	Route::post('/patient/print_prescription', 'PatientController@print_prescription');
+	Route::get('/patient/create_account/{id}', 'PatientController@create_patient_user_account');
+	Route::post('/patient/save_patient_user_account', 'PatientController@save_patient_user_account');
+	Route::post('/remove_patient_user_account', 'PatientController@remove_patient_user_account');
 
 	Route::post('/invoice/create_billing_charge', 'InvoiceController@create_billing_charge');
 	Route::delete('/invoice/delete_charge/{id}', 'InvoiceController@delete_patient_charge');

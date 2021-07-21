@@ -366,7 +366,7 @@
             <tr>
               <td class="free-plan" style="font-weight: bold;text-align: center;">Best for starting clinic with few patients</td>
               <td class="basic-plan" style="font-weight: bold;text-align: center;">Best for clinic with expanding services</td>
-              <td class="enterprise-plan" style="font-weight: bold;text-align: center;">Best for clinic with large operations</td>
+              <td class="enterprise-plan" style="font-weight: bold;text-align: center;">Best for multiple clinics with large operations</td>
             </tr>
             <tr>
               <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Web / Mobile / Tablet</td>

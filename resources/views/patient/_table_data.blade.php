@@ -19,7 +19,14 @@
     <td><span style="font-family: sans-serif;">{{ $patient_item->dob->format('M d, Y') }}</span></td>
     <td><span style="font-family: sans-serif;">{{ $patient_item->dob->age }}</span></td>
     <td><span style="font-family: sans-serif;">{{ $patient_item->contact_number }}</span></td>
-    <td><span style="font-family: sans-serif;">{{ $patient_item->user->username }}</span></td>
+    <td>
+      @if($patient_item->user_id != null)
+      <span style="font-family: sans-serif;">{{ $patient_item->user->username }}</span>
+<!--       <a class="remove-user-account" data-id="{{ $patient_item->id }}">remove</a> -->
+      @else
+      <a href="/patient/create_account/{{ $patient_item->id }}" style="font-size: 8pt;">Create account</a>
+      @endif
+    </td>
     <td><a class="show-patient {{ App\Model\FeatureUser::is_feature_allowed('view_patient_record', Auth::user()->id) }}" href="{{ route('patient.show',$patient_item->id) }}"><i class="fa fa-notes-medical" aria-hidden="true"></i> View Record</a></td>
     <td>
       <div>
