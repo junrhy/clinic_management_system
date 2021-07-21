@@ -169,11 +169,6 @@
                           {{ Form::text('contact_number', Input::old('contact_number'), array('class' => 'form-control')) }}
                         </div>
 
-                        <div class="form-group">
-                          {{ Form::label('address', 'Address') }}
-                          {{ Form::text('address', Input::old('address'), array('class' => 'form-control')) }}
-                        </div>
-                        
                         <div>
                           {{ Form::submit('Save Changes', array('class' => 'btn btn-primary btn-round')) }}
                         </div>

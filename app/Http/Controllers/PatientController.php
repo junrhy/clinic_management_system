@@ -79,15 +79,15 @@ class PatientController extends Controller
         $user_max_id = User::whereRaw('id = (select max(`id`) from users)')->first();
         $unique_id = $user_max_id->id + 1;
 
-        $user = new User;
-        $user->client_id = Auth::user()->client_id;
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->username = strtolower(substr($request->first_name, 0, 1) . str_replace(" ", "_", $request->last_name) . $unique_id);
-        $user->email = $request->email;
-        $user->password = bcrypt("123456");
-        $user->type = 'patient';
-        $user->save();
+        // $user = new User;
+        // $user->client_id = Auth::user()->client_id;
+        // $user->first_name = $request->first_name;
+        // $user->last_name = $request->last_name;
+        // $user->username = strtolower(substr($request->first_name, 0, 1) . str_replace(" ", "_", $request->last_name) . $unique_id);
+        // $user->email = $request->email;
+        // $user->password = bcrypt("123456");
+        // $user->type = 'patient';
+        // $user->save();
 
         $patient = new Patient;
         $patient->client_id = Auth::user()->client_id;
@@ -97,7 +97,7 @@ class PatientController extends Controller
         $patient->gender = $request->gender;
         $patient->email = $request->email;
         $patient->contact_number = $request->contact_number;
-        $patient->user_id = $user->id;
+        // $patient->user_id = $user->id;
         $patient->save();
 
         // begin upload logo
@@ -535,5 +535,52 @@ class PatientController extends Controller
         $user->forceDelete();
         
         $patient->delete();
+    }
+
+    public function create_patient_user_account($id)
+    {
+        $patient = Patient::find($id);
+
+        return view('patient.auth.create_patient_user_account')
+              ->with('patient', $patient);
+    }
+
+    public function save_patient_user_account(Request $request)
+    {
+        $request->validate([
+            'patient_id' => 'required',
+            'username' => 'required|string|max:50|unique:users',
+            'password' => 'required|confirmed|min:6'
+        ]);
+
+        $patient = Patient::find($request->patient_id);
+
+        $user = new User();
+        $user->client_id = Auth::user()->client_id;
+        $user->first_name = $patient->first_name;
+        $user->last_name = $patient->last_name;
+        $user->name = $patient->first_name .' '. $patient->last_name;
+        $user->username = $request->username;
+        $user->email = $patient->email;
+        $user->password = bcrypt($request->password);
+        $user->type = User::PATIENT_TYPE;
+        $user->is_client = false;
+        $user->save();
+
+        $patient->user_id = $user->id;
+        $patient->save();
+
+        return redirect('patient');
+    }
+
+    public function remove_patient_user_account(Request $request)
+    {
+        $patient = Patient::find($request->id);
+
+        $user = User::find($patient->user_id);
+        $user->forceDelete();
+
+        $patient->user_id = null;
+        $patient->save();
     }
 }
