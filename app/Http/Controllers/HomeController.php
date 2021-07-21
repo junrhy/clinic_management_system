@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Auth;
-
+use App\User;
 use App\Model\Clinic;
 use App\Model\Doctor;
 use App\Model\Service;
@@ -35,6 +35,12 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        if( Auth::check() ) {
+            $user = User::find(Auth::user()->id);
+            $user->last_active_at = Carbon::now()->toDateTimeString();
+            $user->save();
+        }
+
         $domain_name = $request->gethost();
         $domains = Domain::where('client_id', Auth::user()->client_id)->get();
 

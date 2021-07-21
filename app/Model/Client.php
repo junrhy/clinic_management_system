@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\User;
 
+use DB;
+
 class Client extends Model
 {
 	public function clinics()
@@ -16,6 +18,11 @@ class Client extends Model
 	public function patients()
     {
         return $this->hasMany(Patient::class);
+    }
+
+    public function inventories()
+    {
+        return $this->hasMany(Inventory::class)->select('name', DB::raw('SUM(qty) as qty'))->groupBy('name');
     }
 
     public function users()

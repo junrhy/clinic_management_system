@@ -47,7 +47,19 @@
                 </li>
 
                 <li class="">
-                    <a href="{{ url('admin/clients') }}"><i class="fa fa-users"></i> Clients</a>
+                    <a href="#clientsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fa fa-users"></i>
+                        Clients
+                    </a>
+                    <ul class="collapse list-unstyled" id="clientsSubmenu">
+                        <li>
+                            <a href="{{ url('admin/clients') }}">All Clients</a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('admin/inactive_clients') }}">Inactive Clients</a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="">
