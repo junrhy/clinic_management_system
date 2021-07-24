@@ -354,7 +354,6 @@ $(document).ready(function() {
       var clinic_id = $('select[name=clinic]').val();
       var doctor_id = $('select[name=doctor]').val();
       var notes = $("#notes").val();
-      var fees = $("#fees").val();
       var date_scheduled = $("#date_scheduled").val();
       var time_scheduled = $("#time_scheduled").val();
 
@@ -383,12 +382,30 @@ $(document).ready(function() {
           }
       }).get();
 
+
       if ($("input[name='attachment[]").get(0).files.length != 0) {
         var attachment_number = $("input[name='attachment_number']").val();
       } else {
         var attachment_number = '';
       }
-      
+
+
+      var invoice_item = [];
+      var amount_paid = $("input[name='payment").val();
+      $(".invoice-item").each(function() {
+        var service = $(this).data('service');
+        var row_count = $(this).data('row_count');
+        var qty = $('#invoice-qty'+row_count).val();
+        var price = $('#invoice-price'+row_count).val();
+
+        invoice_item['service'] = service;
+        invoice_item['qty'] = qty;
+        invoice_item['price'] = price;
+
+        invoice_item.push({"service" : service, "qty" : qty, "price" : price});
+      });
+
+
       $.ajax({
         method: "POST",
         url: "/patient/create_detail",
@@ -398,10 +415,11 @@ $(document).ready(function() {
           doctor_id: doctor_id, 
           service: service, 
           notes: notes,
-          fees: fees,
           attachment_number: attachment_number,
           date_scheduled: date_scheduled, 
           time_scheduled: time_scheduled,
+          invoice_item: invoice_item,
+          amount_paid: amount_paid,
           _token: "{{ csrf_token() }}" 
         }
       })

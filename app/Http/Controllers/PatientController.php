@@ -80,16 +80,6 @@ class PatientController extends Controller
         $user_max_id = User::whereRaw('id = (select max(`id`) from users)')->first();
         $unique_id = $user_max_id->id + 1;
 
-        // $user = new User;
-        // $user->client_id = Auth::user()->client_id;
-        // $user->first_name = $request->first_name;
-        // $user->last_name = $request->last_name;
-        // $user->username = strtolower(substr($request->first_name, 0, 1) . str_replace(" ", "_", $request->last_name) . $unique_id);
-        // $user->email = $request->email;
-        // $user->password = bcrypt("123456");
-        // $user->type = 'patient';
-        // $user->save();
-
         $patient = new Patient;
         $patient->client_id = Auth::user()->client_id;
         $patient->first_name = $request->first_name;
@@ -98,7 +88,6 @@ class PatientController extends Controller
         $patient->gender = $request->gender;
         $patient->email = $request->email;
         $patient->contact_number = $request->contact_number;
-        // $patient->user_id = $user->id;
         $patient->save();
 
         // begin upload logo
@@ -243,6 +232,7 @@ class PatientController extends Controller
     {
         $clinic = Clinic::find($request->clinic_id);
         $doctor = Doctor::find($request->doctor_id);
+        $patient = Patient::find($request->patient_id);
 
         $patient_detail = new PatientDetail;
         $patient_detail->client_id = Auth::user()->client_id;
@@ -259,13 +249,27 @@ class PatientController extends Controller
         $patient_detail->time_scheduled = $request->time_scheduled != '' ? DateTime::createFromFormat('H:i a', $request->time_scheduled) : null;
         $patient_detail->created_by = Auth::user()->first_name . ' ' . Auth::user()->last_name;
 
-        if ($request->fees != '') {
-            $billing_charge = new PatientBillingCharge;
-            $billing_charge->client_id = Auth::user()->client_id;
-            $billing_charge->patient_id = $request->patient_id;
-            $billing_charge->description = $request->service;
-            $billing_charge->amount = $request->fees;
-            $billing_charge->save();
+        if (count($request->invoice_item) > 0) {
+            
+            for ($invoice_item_count=0; $invoice_item_count < count($request->invoice_item); $invoice_item_count++) { 
+                $billing_charge = new PatientBillingCharge;
+                $billing_charge->client_id = Auth::user()->client_id;
+                $billing_charge->patient_id = $request->patient_id;
+                $billing_charge->doctor_id = $request->doctor_id;
+                $billing_charge->description = $request->invoice_item[$invoice_item_count]['service'] ." x ". $request->invoice_item[$invoice_item_count]['qty'];
+                $billing_charge->amount = $request->invoice_item[$invoice_item_count]['qty'] * $request->invoice_item[$invoice_item_count]['price'];
+                $billing_charge->save();
+            }
+        }
+
+        if ($request->amount_paid) {
+            $billing_payment = new PatientBillingPayment;
+            $billing_payment->client_id = Auth::user()->client_id;
+            $billing_payment->patient_id = $request->patient_id;
+            $billing_payment->doctor_id = $request->doctor_id;
+            $billing_payment->description = "Payment for services: " . $request->service;
+            $billing_payment->amount = $request->amount_paid;
+            $billing_payment->save();
         }
 
         if ($request->date_scheduled != '') {
