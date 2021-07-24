@@ -232,6 +232,7 @@ class PatientController extends Controller
     {
         $clinic = Clinic::find($request->clinic_id);
         $doctor = Doctor::find($request->doctor_id);
+        $patient = Patient::find($request->patient_id);
 
         $patient_detail = new PatientDetail;
         $patient_detail->client_id = Auth::user()->client_id;
@@ -259,6 +260,16 @@ class PatientController extends Controller
                 $billing_charge->amount = $request->invoice_item[$invoice_item_count]['qty'] * $request->invoice_item[$invoice_item_count]['price'];
                 $billing_charge->save();
             }
+        }
+
+        if ($request->amount_paid) {
+            $billing_payment = new PatientBillingPayment;
+            $billing_payment->client_id = Auth::user()->client_id;
+            $billing_payment->patient_id = $request->patient_id;
+            $billing_payment->doctor_id = $request->doctor_id;
+            $billing_payment->description = "Payment for services: " . $request->service;
+            $billing_payment->amount = $request->amount_paid;
+            $billing_payment->save();
         }
 
         if ($request->date_scheduled != '') {

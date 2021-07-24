@@ -391,6 +391,7 @@ $(document).ready(function() {
 
 
       var invoice_item = [];
+      var amount_paid = $("input[name='payment").val();
       $(".invoice-item").each(function() {
         var service = $(this).data('service');
         var row_count = $(this).data('row_count');
@@ -418,6 +419,7 @@ $(document).ready(function() {
           date_scheduled: date_scheduled, 
           time_scheduled: time_scheduled,
           invoice_item: invoice_item,
+          amount_paid: amount_paid,
           _token: "{{ csrf_token() }}" 
         }
       })

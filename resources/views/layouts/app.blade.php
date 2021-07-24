@@ -209,7 +209,7 @@
                             <a href="{{ url('invoice') }}">All Invoices</a>
                         </li>
                         <li class="{{ App\Model\FeatureUser::is_feature_allowed('view_billing_payments', Auth::user()->id) }}">
-                            <a href="{{ url('payment') }}">All Payments</a>
+                            <a href="{{ url('payment') }}">All Payments & Balances</a>
                         </li>
                     </ul>
                 </li>

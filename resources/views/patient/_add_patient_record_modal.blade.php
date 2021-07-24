@@ -26,7 +26,7 @@
   }
 
   #invoice-holder {
-    height: 500px;
+    height: 400px;
     overflow-y: auto;
     border: 1px solid #eee;
     padding: 3px 2px;
@@ -162,6 +162,12 @@
                   <div class="form-group row total-fees-group">
                     <h2 class="col-md-4" style="color:#ccc;position: relative;top: -3px;">Total</h2>
                     <h2 class="col-md-8" id="total-fees" align="right">0.00</h2>
+                  </div>
+
+                  <div class="form-group">
+                    <br>
+                    {{ Form::label('payment', 'Amount Paid') }}
+                    {{ Form::number('payment', null, array('class' => 'form-control', 'placeholder' => 'Enter the amount paid')) }}
                   </div>
               </div>
              
