@@ -27,7 +27,7 @@
       <a class="show-payment {{ App\Model\FeatureUser::is_feature_allowed('view_patient_payment', Auth::user()->id) }}" href="{{ route('payment.show',$patient_item->id) }}"><i class="fa fa-file-alt" aria-hidden="true"></i> View Payments</a>
        |
       <a class="show-balance {{ App\Model\FeatureUser::is_feature_allowed('view_patient_balance', Auth::user()->id) }}" 
-        href="{{ url("/report/balance/{$patient_item->id}") }}"><i class="fa fa-file-alt" aria-hidden="true"></i> View Balance</a>
+        href="{{ url("/billing/patient_balance_report/{$patient_item->id}") }}"><i class="fa fa-file-alt" aria-hidden="true"></i> View Balance</a>
  </td>
 </tr>
 <?php endforeach; ?>

@@ -267,7 +267,7 @@ class PatientController extends Controller
             $billing_payment->client_id = Auth::user()->client_id;
             $billing_payment->patient_id = $request->patient_id;
             $billing_payment->doctor_id = $request->doctor_id;
-            $billing_payment->description = "Payment for services: " . $request->service;
+            $billing_payment->description = "Payment For: " . $request->service;
             $billing_payment->amount = $request->amount_paid;
             $billing_payment->save();
         }
