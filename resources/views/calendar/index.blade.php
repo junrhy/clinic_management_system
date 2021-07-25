@@ -121,7 +121,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row col-md-3">
-                              {{ Form::select('current_clinic', $clinics, isset($_GET['clinic']) ? $_GET['clinic'] : null, array('class' => 'form-control current_clinic', 'placeholder' => 'Select Clinic')) }}
+                              {{ Form::select('current_clinic', $clinics->pluck('name', 'id'), isset($_GET['clinic']) ? $_GET['clinic'] : null, array('class' => 'form-control current_clinic', 'placeholder' => 'Select Clinic')) }}
                               <br>
                             </div>
                         </div>
@@ -137,10 +137,10 @@
 
                             <ul class="nav nav-tabs">
                                 <li class="nav-item active" data-status="open">
-                                    <a data-toggle="tab" id="open_tab" href="#open">Open <div id="open_count"></div></a>
+                                    <a data-toggle="tab" id="open_tab" href="#open">Waiting <div id="open_count"></div></a>
                                 </li>
                                 <li class="nav-item" data-status="in_progress">
-                                    <a data-toggle="tab" id="in_progress_tab" href="#in_progress">In Progress <div id="in_progress_count"></div></a>
+                                    <a data-toggle="tab" id="in_progress_tab" href="#in_progress">Service In Progress <div id="in_progress_count"></div></a>
                                 </li>
                             </ul>
 

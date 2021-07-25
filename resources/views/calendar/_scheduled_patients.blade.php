@@ -32,7 +32,6 @@
 				<th>Lastname, Firstname</th>
         <th>Contact No.</th>
 				<th>Doctor</th>
-				<th>Service</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -40,6 +39,7 @@
 				@foreach($scheduled as $key => $schedule)
 				<tr style="cursor:pointer;" 
 						data-id="{{ $schedule->id }}" 
+            data-patient_id="{{ $schedule->patient->id }}"
 						data-patient="{{ $schedule->patient->last_name }}, {{ $schedule->patient->first_name }}" 
 						data-clinic="{{ $schedule->clinic_id }}" 
 						data-doctor="{{ $schedule->doctor_id }}" 
@@ -55,7 +55,6 @@
 					<td class="appointment">{{ $schedule->patient->last_name }}, {{ $schedule->patient->first_name }}</td>
           <td class="appointment"><i class="fa fa-phone"></i> <span style="font-family: sans-serif;">{{ $schedule->patient->contact_number }}</span></td>
 					<td class="appointment"><i class="fa fa-user-md"></i> {{ $schedule->doctor }}</td>
-					<td class="appointment">{{ $schedule->service }}</td>
 				</tr>
 				@endforeach
 			@else
@@ -78,6 +77,7 @@ $(document).ready(function() {
   });
 
   $(".appointment").unbind().click(function(){
+
   	if($(this).index() != 0){
       var is_feature_allowed = "{{ App\Model\FeatureUser::is_feature_allowed('edit_appointment', Auth::user()->id) }}";
 
@@ -85,15 +85,27 @@ $(document).ready(function() {
           return false;
       }
 
+      $('#appointment_patient_id').val($(this).parent().data('patient_id'));
 	    $('#appointment_patient_name').html($(this).parent().data('patient'));
 	    $("select[name='appointment_clinic']").val($(this).parent().data('clinic'));
 	    $("select[name='appointment_doctor']").val($(this).parent().data('doctor'));
-	    $("select[name='appointment_service_type']").val($(this).parent().data('service'));
 	    $("input[name='appointment_schedule_date']").val($(this).parent().data('schedule_date'));
 	    $("input[name='appointment_schedule_time']").val($(this).parent().data('schedule_time'));
 	    $("select[name='appointment_status']").val($(this).parent().data('status'));
 	    $("textarea[name='notes']").text($(this).parent().data('detail'));
 	    $("#btn-save-changes").attr('data-id', $(this).parent().data('id'));
+
+
+      if ($(this).parent().data('status') == 'Open' || $(this).parent().data('status') == 'In Progress') {
+        $("#labelServices").addClass('disabledContent');
+        $(".services-holder").addClass('disabledContent');
+        $(".next-visit").addClass('disabledContent');
+        $("#labelInvoice").addClass('disabledContent');
+        $("#invoice-holder").addClass('disabledContent');
+        $(".total-fees-group").addClass('disabledContent');
+        $(".amount-paid").addClass('disabledContent');
+      }
+
 	 	  $('#edit_appointment_modal').modal('show');
  	  }
   });
@@ -102,35 +114,61 @@ $(document).ready(function() {
     id = $("#btn-save-changes").data('id');
     clinic_id = $("select[name='appointment_clinic']").val();
     doctor_id = $("select[name='appointment_doctor']").val();
-    service = $("select[name='appointment_service_type']").val();
+    
     date_scheduled = $("input[name='appointment_schedule_date']").val();
     time_scheduled = $("input[name='appointment_schedule_time']").val();
     status = $("select[name='appointment_status']").val();
     notes = $("textarea[name='notes']").val();
 
+    var service = "";
+    $(".service-selected").map(function() {
+        if (service == "") {
+          service = this.innerHTML;
+        } else {
+          service = service + ", " + this.innerHTML;
+        }
+    }).get();
+
+    var invoice_item = [];
+    var amount_paid = $("input[name='payment").val();
+    $(".invoice-item").each(function() {
+      var service = $(this).data('invoice_service');
+      var row_count = $(this).data('row_count');
+      var qty = $('#invoice-qty'+row_count).val();
+      var price = $('#invoice-price'+row_count).val();
+
+      invoice_item['service'] = service;
+      invoice_item['qty'] = qty;
+      invoice_item['price'] = price;
+
+      invoice_item.push({"service" : service, "qty" : qty, "price" : price});
+    });
+
     $.ajax({
-          method: "POST",
-          url: "/patient/update_detail/" + id,
-          data: { 
-            clinic_id: clinic_id, 
-            doctor_id: doctor_id, 
-            service: service, 
-            date_scheduled: date_scheduled, 
-            time_scheduled: time_scheduled, 
-            status: status, 
-            notes: notes,
-            _token: "{{ csrf_token() }}" 
-          }
-        })
-        .done(function( msg ) {
-          Swal.fire(
-            'Saved!',
-            'Changes successfully saved.',
-            'success'
-          ).then((result) => {
-            location.reload();
-          });
-        });
+      method: "POST",
+      url: "/patient/update_detail/" + id,
+      data: { 
+        clinic_id: clinic_id, 
+        doctor_id: doctor_id, 
+        service: service, 
+        date_scheduled: date_scheduled, 
+        time_scheduled: time_scheduled, 
+        status: status, 
+        notes: notes,
+        invoice_item: invoice_item,
+        amount_paid: amount_paid,
+        _token: "{{ csrf_token() }}" 
+      }
+    })
+    .done(function( msg ) {
+      Swal.fire(
+        'Saved!',
+        'Changes successfully saved.',
+        'success'
+      ).then((result) => {
+        location.reload();
+      });
+    });
 
   });
 
@@ -138,7 +176,6 @@ $(document).ready(function() {
     id = $("select[name='new_appointment_patient']").val();
     clinic_id = $("select[name='new_appointment_clinic']").val();
     doctor_id = $("select[name='new_appointment_doctor']").val();
-    service = $("select[name='new_appointment_service_type']").val();
     date_scheduled = $("input[name='new_appointment_schedule_date']").val();
     time_scheduled = $("input[name='new_appointment_schedule_time']").val();
     status = $("select[name='new_appointment_status']").val();
@@ -151,7 +188,6 @@ $(document).ready(function() {
             patient_id: id,
             clinic_id: clinic_id, 
             doctor_id: doctor_id, 
-            service: service, 
             date_scheduled: date_scheduled, 
             time_scheduled: time_scheduled, 
             status: status, 

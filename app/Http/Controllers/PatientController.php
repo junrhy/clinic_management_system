@@ -249,7 +249,7 @@ class PatientController extends Controller
         $patient_detail->time_scheduled = $request->time_scheduled != '' ? DateTime::createFromFormat('H:i a', $request->time_scheduled) : null;
         $patient_detail->created_by = Auth::user()->first_name . ' ' . Auth::user()->last_name;
 
-        if (count($request->invoice_item) > 0) {
+        if ($request->invoice_item && count($request->invoice_item) > 0) {
             
             for ($invoice_item_count=0; $invoice_item_count < count($request->invoice_item); $invoice_item_count++) { 
                 $billing_charge = new PatientBillingCharge;
@@ -324,6 +324,30 @@ class PatientController extends Controller
             $patient_detail->date_scheduled = null;
             $patient_detail->time_scheduled = null;
             $patient_detail->created_at = $request->date_scheduled != '' ? date('Y-m-d', strtotime($request->date_scheduled)) : date('Y-m-d');
+
+            if ($request->invoice_item && count($request->invoice_item) > 0) {
+                
+                for ($invoice_item_count=0; $invoice_item_count < count($request->invoice_item); $invoice_item_count++) { 
+                    $billing_charge = new PatientBillingCharge;
+                    $billing_charge->client_id = Auth::user()->client_id;
+                    $billing_charge->patient_id = $patient_detail->patient_id;
+                    $billing_charge->doctor_id = $request->doctor_id;
+                    $billing_charge->description = $request->invoice_item[$invoice_item_count]['service'] ." x ". $request->invoice_item[$invoice_item_count]['qty'];
+                    $billing_charge->amount = $request->invoice_item[$invoice_item_count]['qty'] * $request->invoice_item[$invoice_item_count]['price'];
+                    $billing_charge->save();
+                }
+            }
+
+            if ($request->amount_paid) {
+                $billing_payment = new PatientBillingPayment;
+                $billing_payment->client_id = Auth::user()->client_id;
+                $billing_payment->patient_id = $patient_detail->patient_id;
+                $billing_payment->doctor_id = $request->doctor_id;
+                $billing_payment->description = "Payment for services: " . $request->service;
+                $billing_payment->amount = $request->amount_paid;
+                $billing_payment->save();
+            }
+            
         } else {
             $patient_detail->date_scheduled = $request->date_scheduled != '' ? date('Y-m-d', strtotime($request->date_scheduled)) : null;
             $patient_detail->time_scheduled = DateTime::createFromFormat('H:i a', $request->time_scheduled);

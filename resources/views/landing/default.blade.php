@@ -528,7 +528,7 @@
         <div class="col-md-3 mx-auto">
             <h2 id="aboutus" class="header" align="left">About Us</h2>
             <p align="justify">
-              Bluewhale Web Development Services is a one year old company located in Cebu City, Philippines that was design by doctors for the doctor who are looking to simplify their clinic operations by using an online system.
+              Bluewhale Clinic Management Software is design and developed by Crodua Web Development Company. 
             </p>
         </div>
         <div class="col-md-4 mx-auto" style="font-size:10pt;">

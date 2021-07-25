@@ -19,7 +19,7 @@
     font-size:14pt;
   }
 
-  .show-payment, .delete-payment, .update-payment {
+  .show-payment, .delete-payment, .update-payment, .show-balance {
     color: gray;
   }
 

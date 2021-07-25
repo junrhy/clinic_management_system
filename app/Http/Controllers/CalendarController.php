@@ -25,19 +25,34 @@ class CalendarController extends Controller
     {
         $client_id = $this->get_client_id();
 
+        // $patients = Patient::select(DB::raw("CONCAT(last_name,', ',first_name) AS fullname"),'id')
+        //                     ->where('client_id', $client_id)
+        //                     ->whereNull('is_registration_request')
+        //                     ->orderBy('last_name', 'asc')
+        //                     ->pluck('fullname', 'id');
+
+        // $clinics = Clinic::where('client_id', $client_id)->pluck('name', 'id');
+
+        // $doctors = Doctor::select(DB::raw("CONCAT(first_name,' ',last_name) AS fullname"),'id')
+        //                     ->where('client_id', $client_id)
+        //                     ->pluck('fullname', 'id');
+
+        // $services = Service::where('client_id', $client_id)->pluck('name', 'name');
+
+
         $patients = Patient::select(DB::raw("CONCAT(last_name,', ',first_name) AS fullname"),'id')
                             ->where('client_id', $client_id)
                             ->whereNull('is_registration_request')
                             ->orderBy('last_name', 'asc')
-                            ->pluck('fullname', 'id');
+                            ->get();
 
-        $clinics = Clinic::where('client_id', $client_id)->pluck('name', 'id');
+        $clinics = Clinic::where('client_id', $client_id)->get();
 
         $doctors = Doctor::select(DB::raw("CONCAT(first_name,' ',last_name) AS fullname"),'id')
                             ->where('client_id', $client_id)
-                            ->pluck('fullname', 'id');
+                            ->get();
 
-        $services = Service::where('client_id', $client_id)->pluck('name', 'name');
+        $services = Service::where('client_id', $client_id)->get();
 
         return view('calendar.index')
                     ->with('patients', $patients)
