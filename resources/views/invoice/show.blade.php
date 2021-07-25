@@ -73,7 +73,7 @@
                           <tr>
                             <td>{{ $billing_charge->created_at->format('M d, Y') }}</td>
                             <td>{{ $billing_charge->description }}</td>
-                            <td class="text-right">&#8369; {{ number_format($billing_charge->amount, 2) }}</td>
+                            <td class="text-right">{{ number_format($billing_charge->amount, 2) }}</td>
                             <td class="text-center"></span><a class="delete-link delete-charge {{ App\Model\FeatureUser::is_feature_allowed('delete_billing_invoice', Auth::user()->id) }}" data-id="{{ $billing_charge->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
                           </tr>
                           @endforeach

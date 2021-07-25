@@ -9,7 +9,7 @@
   <th>Total Invoice</th>
   <th>Total Payment</th>
   <th>Total Balance</th>
-  <th>Action</th>
+  <th style="text-align:right;">Action</th>
 </thead>
 @if($patients->count() > 0)
 <?php foreach ($patients as $patient_key => $patient_item): ?>
@@ -23,10 +23,11 @@
   <td><span style="font-family: sans-serif;">{{ number_format($patient_item->charges->sum('amount'), 2) }}</span></td>
   <td><span style="font-family: sans-serif;">{{ number_format($patient_item->payments->sum('amount'), 2) }}</span></td>
   <td><span style="font-family: sans-serif;">{{ number_format($patient_item->charges->sum('amount') - $patient_item->payments->sum('amount'), 2) }}</span></td>
-  <td>
-    <div>
+  <td align="right">
       <a class="show-payment {{ App\Model\FeatureUser::is_feature_allowed('view_patient_payment', Auth::user()->id) }}" href="{{ route('payment.show',$patient_item->id) }}"><i class="fa fa-file-alt" aria-hidden="true"></i> View Payments</a>
-    </div>
+       |
+      <a class="show-balance {{ App\Model\FeatureUser::is_feature_allowed('view_patient_balance', Auth::user()->id) }}" 
+        href="{{ url("/billing/patient_balance_report/{$patient_item->id}") }}"><i class="fa fa-file-alt" aria-hidden="true"></i> View Balance</a>
  </td>
 </tr>
 <?php endforeach; ?>

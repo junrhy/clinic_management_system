@@ -19,7 +19,7 @@
             <td width="20%" align="right"><div style="margin-top: 7px;font-weight: bold;">Patient Name: </div></td>
             <td>
               <div class="row col-md-8">
-                {{ Form::select('new_appointment_patient', $patients, null, array('class' => 'form-control')) }}
+                {{ Form::select('new_appointment_patient', $patients->pluck('fullname', 'id'), null, array('class' => 'form-control')) }}
               </div>
             </td>
           </tr>
@@ -27,7 +27,7 @@
             <td align="right"><div style="margin-top: 7px;font-weight: bold;">Clinic: </div></td>
             <td>
               <div class="row col-md-8">
-                {{ Form::select('new_appointment_clinic', $clinics, null, array('class' => 'form-control')) }}
+                {{ Form::select('new_appointment_clinic', $clinics->pluck('name', 'id'), null, array('class' => 'form-control')) }}
               </div>
             </td>
           </tr>
@@ -35,15 +35,7 @@
             <td align="right"><div style="margin-top: 7px;font-weight: bold;">Doctor: </div></td>
             <td>
               <div class="row col-md-8">
-                {{ Form::select('new_appointment_doctor', $doctors, null, array('class' => 'form-control')) }}
-              </div>
-            </td>
-          </tr>
-        <tr>
-            <td align="right"><div style="margin-top: 7px;font-weight: bold;">Service: </div></td>
-            <td>
-              <div class="row col-md-8">
-                {{ Form::select('new_appointment_service_type', $services, null, array('class' => 'form-control')) }}
+                {{ Form::select('new_appointment_doctor', $doctors->pluck('fullname', 'id'), null, array('class' => 'form-control')) }}
               </div>
             </td>
           </tr>
@@ -56,7 +48,7 @@
           </tr>
           <tr>
             <td align="right"><div style="margin-top: 11px;font-weight: bold;">Status: </div></td>
-            <td>{{ Form::select('new_appointment_status', array('Open' => 'Open', 'In Progress' => 'In Progress', 'Done' => 'Done'), null, array('class' => 'custom-text-input')) }}</td>
+            <td>{{ Form::select('new_appointment_status', array('Open' => 'Waiting', 'In Progress' => 'Service In Progress'), null, array('class' => 'custom-text-input')) }}</td>
           </tr>
         </table>
         {{ Form::textarea('new_notes', null, ['id' => 'notes','class' => 'form-control', 'rows' => 4, 'cols' => 54, 'maxlength' => 300, 'placeholder' => 'Remarks', 'style' => 'resize:none']) }}
