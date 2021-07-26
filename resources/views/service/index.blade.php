@@ -54,11 +54,13 @@
                     <table class="table table-striped">
                       <thead>
                         <th>Name</th>
+                        <th class="text-right">Default Price</th>
                         <th class="text-right">Action</th>
                       </thead>
                       <?php foreach ($services as $service_key => $service_item): ?>
                       <tr>
                         <td>{{ $service_item->name }}</td>
+                        <td align="right">{{ number_format($service_item->default_price, 2) }}</td>
                         <td>
                             <div class="pull-right">
                               <a class="update-service {{ App\Model\FeatureUser::is_feature_allowed('edit_service', Auth::user()->id) }}" href="{{ route('service.edit',$service_item->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a> | 

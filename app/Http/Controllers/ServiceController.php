@@ -49,6 +49,7 @@ class ServiceController extends Controller
         $service = new Service;
         $service->client_id = Auth::user()->client_id;
         $service->name = $request->name;
+        $service->default_price = $request->default_price;
         $service->save();
 
         return redirect('service');
@@ -90,6 +91,7 @@ class ServiceController extends Controller
     {
         $service = Service::find($id);
         $service->name = $request->name;
+        $service->default_price = $request->default_price;
         $service->save();
 
         return redirect('service');    

@@ -56,7 +56,7 @@
                 <div class="panel-body">
                 	@if ($patient->is_registration_request == true)
                         <div class="alert alert-warning alert-block">
-                           <strong>Pending Review:</strong> For security purposes, your account is pending review by our staff before being activated. This usually takes around <u>1 business day</u> to complete. Please note, we may require additional documentation if we are unable to verify your identity.
+                           <strong>Pending Review:</strong> For security purposes, your account is pending review by our staff. This usually takes around <u>1 business day</u> to complete. Please note, we may require additional documentation if we are unable to verify your identity.
                         </div>
                   	@endif
 
@@ -151,7 +151,6 @@
 										<th>Date</th>
 										<th>Clinic</th>
 										<th>Doctor</th>
-										<th>Purpose</th>
 										<th>Reminder</th>
 									</tr>
 								</thead>
@@ -166,7 +165,6 @@
 											</td>
 											<td class="appointment">{{ $appointment->clinic }}</td>
 											<td class="appointment">{{ $appointment->doctor }}</td>
-											<td class="appointment">{{ $appointment->service }}</td>
 											<td class="appointment" width="15%">
 												@if($appointment->is_schedule_request == true)
 												Waiting for Approval 
@@ -200,36 +198,36 @@
 	                    </h4>
 
 	                    <div class="table-responsive">
-							<table class="table table-striped">
-	                            <thead>
-	                              <th style="width:7%">Date</th>
-	                              <th style="width:13%">Clinic</th>
-	                              <th style="width:13%">Doctor</th>
-	                              <th style="width:5%">Prescription</th>
-	                            </thead>
+												<table class="table table-striped">
+                            <thead>
+                              <th style="width:7%">Date</th>
+                              <th style="width:13%">Clinic</th>
+                              <th style="width:13%">Doctor</th>
+                              <th style="width:5%">Prescription</th>
+                            </thead>
 
-	                            <tbody>
-	                            @if(count($prescriptions) > 0)
-	                              @foreach ($prescriptions as $prescription)
-	                              <tr>
-	                                <td>{{ $prescription->created_at->format('M d, Y') }}</td>
-	                                <td>{{ $prescription->clinic }}</td>
-	                                <td>{{ $prescription->doctor }}</td>
-	                                <td>
-	                                  <a class="print-link print-prescription" data-id="{{ $prescription->id }}"><i class="fa fa-file-prescription" aria-hidden="true"></i> Preview</a>
-	                                </td>
-	                              </tr>
-	                              @endforeach
-	                            @else
-	                              <tr>
-	                                <td class="text-center" colspan="8">No prescriptions.</td>
-	                              </tr>
-	                            @endif
-	                            </tbody>
-                          </table>
+                            <tbody>
+                            @if(count($prescriptions) > 0)
+                              @foreach ($prescriptions as $prescription)
+                              <tr>
+                                <td>{{ $prescription->created_at->format('M d, Y') }}</td>
+                                <td>{{ $prescription->clinic }}</td>
+                                <td>{{ $prescription->doctor }}</td>
+                                <td>
+                                  <a class="print-link print-prescription" data-id="{{ $prescription->id }}"><i class="fa fa-file-prescription" aria-hidden="true"></i> Preview</a>
+                                </td>
+                              </tr>
+                              @endforeach
+                            @else
+                              <tr>
+                                <td class="text-center" colspan="8">No prescriptions.</td>
+                              </tr>
+                            @endif
+                            </tbody>
+                        </table>
 
-                          @include('patient._print_preview')
-						</div>
+                        @include('patient._print_preview')
+											</div>
                  	</div>
 
                 </div>

@@ -82,7 +82,7 @@
               
               <div class="col-md-7" style="border-right:1px dashed #666;">
                   <div class="form-group col-md-12">
-                    {{ Form::label('appointment_status', "What is the status of this appointment?") }}
+                    {{ Form::label('appointment_status', "What is the status of this patient?") }}
                     {{ Form::select('appointment_status', array('Open' => 'Waiting', 'In Progress' => 'Service In Progress', 'Done' => 'Service Completed'), null, array('class' => 'form-control')) }}  
                   </div>
 
@@ -110,7 +110,7 @@
                     <span id='labelServices'>{{ Form::label('service', 'Services') }}</span>
                     <div class="services-holder">
                       @foreach ($services as $key => $service)
-                        <div class="col-md-3 text-center bg-light services" id="service{{ $key }}">{{ $service->name }}</div>
+                        <div class="col-md-3 text-center bg-light services" id="service{{ $key }}" data-default_price="{{ $service->default_price }}">{{ $service->name }}</div>
                       @endforeach
                     </div>
                   </div>
@@ -172,7 +172,7 @@
       </div>
       <div class="modal-footer">
             <button type="button" class="btn btn-default btn-round" data-dismiss="modal">Close</button>
-            <a class="btn btn-primary btn-round" id="btn-save-changes"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save Changes</a>
+            <a class="btn btn-primary btn-round" id="btn-save-changes"><i class="fa fa-plus" aria-hidden="true"></i> Submit</a>
       </div>
     </div>
   </div>
@@ -219,6 +219,7 @@ $(document).ready(function () {
 
   $(".services").unbind().click(function(){
     var service = $(this).text();
+    var service_default_price = $(this).data('default_price');
     var id = $(this).attr('id');
     var invoiceRowCount = $('#invoice-rows tr').length;
 
@@ -231,11 +232,13 @@ $(document).ready(function () {
         <input type='number' value=1 class='invoice-qty' id='invoice-qty"+invoiceRowCount+"' min='1' onchange='calculate("+invoiceRowCount+")' />\
       </td>\
       <td style='text-align:right'>\
-        <input type='number' value=0 class='invoice-price' id='invoice-price"+invoiceRowCount+"' min='0.0' onchange='calculate("+invoiceRowCount+")' />\
+        <input type='number' value="+parseFloat(service_default_price)+" class='invoice-price' id='invoice-price"+invoiceRowCount+"' min='0.0' onchange='calculate("+invoiceRowCount+")' />\
       </td>\
       <td style='text-align:right'><span id='invoice-amount"+invoiceRowCount+"' class='amount' data-amount='0'>0</span></td>\
       <td style='text-align:right'><i class='fa fa-trash remove-invoice-row' onclick='deleteRow("+invoiceRowCount+")' aria-hidden='true'></i></td>\
       </tr>");
+
+    calculate(invoiceRowCount);
   });
 });
 
