@@ -8,6 +8,7 @@
 <style type="text/css">
   .pricing {
     font-family: arial;
+    font-size: 14pt;
   }
 
   .btn-subscribe {
@@ -38,6 +39,7 @@
     color: red;
     text-decoration: none;
     font-size: 10pt;
+    cursor: pointer;
   }
 
   #cancel-subscription:hover {
@@ -54,12 +56,12 @@
             <div class="block-header">
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-12">
-                        <h2>Plan <small class="text-muted">Upgrade account to enjoy more features.</small></h2>
+                        <h2>Subscription Plan's <small class="text-muted">Upgrade your subscription to enjoy more features.</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                         <ul class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><a href="/home"><i class="fa fa-home"></i> {{ Auth::user()->client->name }}</a></li>
-                            <li class="breadcrumb-item active"><strong style="color:#fff;">Plan</strong></li>
+                            <li class="breadcrumb-item active"><strong style="color:#fff;">Subscription Plan's</strong></li>
                         </ul>
                     </div>
                 </div>
@@ -72,9 +74,8 @@
                     <h4 style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;"><i class="fa fa-gear"></i> Active Subscriptions</h4>
                   </div>
                   <br>
-                  <small style="color: green;">This services is active during this period and will be automatically renewed every time the bill is paid.</small>
                   <div class="table-responsive row">
-                    <div class="col-md-5">
+                    <div class="col-md-7">
                       <table class="table table-striped">
                         <thead>
                           <tr>
@@ -82,26 +83,25 @@
                             <th>Active from</th>
                             <th>Until</th>
                             <th>Status</th>
-                            <th>Auto-Renew</th>
+                            <th class="text-center">Auto-Renew</th>
                           </tr>
                         </thead>
                         @foreach($subscriptions as $subscription)
                         <tr>
                           <td>{{ ucfirst($subscription->plan) }} Plan</td>
-                          <td><span style="font-family: sans-serif;">{{ $subscription->start->format('M d, Y') }}</span></td>
-                          <td><span style="font-family: sans-serif;">{{ $subscription->end->format('M d, Y') }}</span></td>
+                          <td><span style="font-family: sans-serif;">{{ $subscription->start->format('M-d-Y, h:iA') }}</span></td>
+                          <td><span style="font-family: sans-serif;">{{ $subscription->end->format('M-d-Y, h:iA') }}</span></td>
                           <td>
                             @if(\Carbon\Carbon::now()->diffInDays($subscription->end, false) > 0)
                               Will expire in <span style="font-family: sans-serif;">{{ \Carbon\Carbon::now()->diffInDays($subscription->end, false) }}</span> days from now
-                            @else
-                              This subscription is expired
                             @endif
                           </td>
-                          <td>
-                            @if(\Carbon\Carbon::now()->diffInDays($subscription->end, false) > 0)
-                              <a id="cancel-subscription" href="/cancel_plan">Cancel</a>
+                          <td align="center">
+                            @if($subscription->auto_renew == 1)
+                              Yes | 
+                              <a id="cancel-subscription" data-subscription_id="{{ $subscription->id }}" data-plan="{{ $subscription->plan }}">Cancel</a>
                             @else
-                              <a href="/balance_and_usage">Renew Now</a>
+                              No
                             @endif
                           </td>
                         </tr>
@@ -111,7 +111,8 @@
                   </div>
 
                    <div class="row">
-                    <h4 style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;"><i class="fa fa-gear"></i> Upgrade your plan</h4>
+                    <br><br><br>
+                    <h4 style="border-bottom:2px dotted #00cfd1;padding:10px;color:#00cfd1;font-weight: bold;"><i class="fa fa-arrow-up"></i> Upgrade your plan</h4>
                   </div>
                   <div class="table-responsive">
                       <table class="table table-striped">
@@ -119,12 +120,7 @@
                           <tr>
                             <th width="20%">Plan Name</th>
                             <th width="30%">Plan Features</th>
-                            <th>Pricing 
-                              <select id="frequency">
-                                <option value="monthly">Monthly</option>
-                                <option value="yearly">Yearly</option>
-                              </select>
-                            </th>
+                            <th>Pricing</th>
                             <th></th>
                           </tr>
                         </thead>
@@ -142,25 +138,13 @@
                               Inventory Management
                             </td>
                             <td>
-                              @if(Auth::user()->client->account_type != "basic")
-                                  @if(request()->frequency == 'yearly')
-                                  <span class="pricing"><span style="text-decoration: line-through;">&#8369;21,600 / year</span> &#8369;18,899 / year</span><br>
-                                  <small style="color: red;">12% discount</small>
-                                  @else
-                                  <span class="pricing">&#8369;1,799 / month</span><br>
-                                  <small>Pay yearly to enjoy huge discount</small>
-                                  @endif
-                              @endif
+                              <span class="pricing">&#8369;1,799 / Month</span><br>
                             </td>
                             <td>
-                              @if(Auth::user()->client->account_type == "basic")
+                              @if($subscriptions->where('plan', 'basic')->first())
                                 <button class="btn btn-success"><i class="fa fa-check"></i> Subscribed</button>
                               @else
-                                @if(request()->frequency == 'yearly')
-                                <button data-plan="Basic" data-plan-amount="18899" data-plan-currency="&#8369" class="btn btn-primary subscribe">Subscribe</button>
-                                @else
                                 <button data-plan="Basic" data-plan-amount="1799" data-plan-currency="&#8369" class="btn btn-primary subscribe">Subscribe</button>
-                                @endif
                               @endif
                             </td>
                           </tr>
@@ -198,11 +182,11 @@ $(document).ready(function() {
         var plan = $(this).data('plan');
         var currency = $(this).data('plan-currency');
         var planAmount = $(this).data('plan-amount');
-        var frequency = $("#frequency").val();
+        var frequency = 'monthly';
 
         Swal.fire({
             title: 'Confirming...',
-            text: "You are about to subscribe to our " + plan + " Plan. By subscribing to this plan, You agreed that you will be billed the amount of " + currency+planAmount + " "+ frequency + " until you end your subscription. Do you wish to continue?",
+            text: "You are about to subscribe to our " + plan + " Plan. By subscribing to this plan, You've agreed that you will be billed the amount of " + currency+ numberWithCommas(planAmount) + " monthly until you end your subscription. Do you wish to continue?",
             type: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -233,13 +217,49 @@ $(document).ready(function() {
         });
     });
 
-    $("#frequency").change(function(){
-      var frequency = $(this).val();
-      location.href="?frequency="+frequency;
+    $("#cancel-subscription").click(function(){
+        var id = $(this).data('subscription_id');
+        var plan = $(this).data('plan');
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You'll soon lose access to "+capitalizeFirstLetter(plan)+" Plan and will automatically downgrade your account into Free Plan by the end of your subscription. Do you wish to proceed?",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Proceed!'
+        }).then((result) => {
+            if (result.value) {
+              $.ajax({
+                method: "POST",
+                url: "/subscription/cancel_auto_renew",
+                data: { 
+                  id: id,
+                  _token: "{{ csrf_token() }}" 
+                }
+              })
+              .done(function( msg ) {
+                Swal.fire(
+                  'Canceled!',
+                  'Plan auto-renew has been cancelled.',
+                  'success'
+                ).then((result) => {
+                  location.reload();
+                });
+              });
+            }
+        });
+        
     });
 
-    $("#frequency").val("{{ isset($_GET['frequency']) ? $_GET['frequency'] : 'monthly' }}");
-   
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
 });
 </script>
 @endsection

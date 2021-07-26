@@ -72,12 +72,8 @@
 	                        </div>
 
 	                        <div class="form-group">
-	                          {{ Form::label('service', 'Purpose') }}
-	                          <select name="service" class="form-control">
-	                          		@foreach($services as $service)
-	                          		<option value="{{ $service->name }}">{{ $service->name }}</option>
-	                          		@endforeach
-	                          </select>
+	                          {{ Form::label('notes', 'Purpose') }}
+	                          {{ Form::textarea('notes', null, ['id' => 'notes','class' => 'form-control', 'rows' => 4, 'cols' => 54, 'placeholder' => 'What is your purpose of this appointment?', 'style' => 'resize:none']) }}
 	                        </div>
 
 	                        <input type="hidden" name="patient_id" value="{{ $patient->id }}">

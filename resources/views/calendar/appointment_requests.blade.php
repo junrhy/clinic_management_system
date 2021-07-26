@@ -53,7 +53,7 @@
                             <th>Requested Time</th>
                             <th>Clinic</th>
                             <th>Doctor</th>
-                            <th>Service</th>
+                            <th>Purpose</th>
                             <th>Action</th>
                         </thead>
                         <tbody>
@@ -64,7 +64,7 @@
                                 <td><span style="font-family: sans-serif;color: #008385">{{ date('g:i a', strtotime($appointment_request->time_scheduled)) }}</span></td>
                                 <td>{{ $appointment_request->clinic_model->name }}</td>
                                 <td><i class="fa fa-user-md"></i> {{ $appointment_request->doctor_model->first_name }} {{ $appointment_request->doctor_model->last_name }}</td>
-                                <td>{{ $appointment_request->service }}</td>
+                                <td>{{ $appointment_request->notes }}</td>
                                 <td>
                                   <a class="approved" data-id="{{ $appointment_request->id }}"><i class="fa fa-check"></i> Approved</a> |
                                   <a class="denied" data-id="{{ $appointment_request->id }}"><i class="fa fa-times"></i> Denied</a>

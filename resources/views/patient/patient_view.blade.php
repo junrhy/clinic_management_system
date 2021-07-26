@@ -151,6 +151,7 @@
 										<th>Date</th>
 										<th>Clinic</th>
 										<th>Doctor</th>
+										<th>Purpose</th>
 										<th>Reminder</th>
 									</tr>
 								</thead>
@@ -165,6 +166,7 @@
 											</td>
 											<td class="appointment">{{ $appointment->clinic }}</td>
 											<td class="appointment">{{ $appointment->doctor }}</td>
+											<td class="appointment">{{ $appointment->notes }}</td>
 											<td class="appointment" width="15%">
 												@if($appointment->is_schedule_request == true)
 												Waiting for Approval 

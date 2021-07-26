@@ -346,7 +346,7 @@
                             && Auth::user()->client->is_suspended == 0 
                             && Auth::user()->is_client == 1)
                             
-                            <button id="button-upgrade-account">Upgrade</button>
+                            <strong style="color:#ffeeda;">Free Plan</strong> <button id="button-upgrade-account">Upgrade</button>
                            
                             @endif
 
