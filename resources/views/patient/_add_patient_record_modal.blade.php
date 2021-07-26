@@ -100,7 +100,7 @@
                     {{ Form::label('service', 'Services') }}
                     <div class="services-holder">
                       @foreach ($services as $key => $service)
-                        <div class="col-md-3 text-center bg-light services" id="service{{ $key }}">{{ $service->name }}</div>
+                        <div class="col-md-3 text-center bg-light services" id="service{{ $key }}" data-default_price="{{ $service->default_price }}">{{ $service->name }}</div>
                       @endforeach
                     </div>
                   </div>
@@ -190,24 +190,27 @@ $(document).ready(function () {
   });
 
   $(".services").unbind().click(function(){
-    var service = $(this).text();
-    var id = $(this).attr('id');
-    var invoiceRowCount = $('#invoice-rows tr').length;
+      var service = $(this).text();
+      var service_default_price = $(this).data('default_price');
+      var id = $(this).attr('id');
+      var invoiceRowCount = $('#invoice-rows tr').length;
 
-    $(this).addClass('bg-selected');
-    $(this).addClass('service-selected');
+      $(this).addClass('bg-selected');
+      $(this).addClass('service-selected');
 
-    $("#invoice-rows").append("<tr id='invoice-row"+invoiceRowCount+"' data-service='"+service+"' data-service_id='"+id+"' data-row_count='"+invoiceRowCount+"' class='invoice-item'>\
-      <td>"+service+"</td>\
-      <td style='text-align:right'>\
-        <input type='number' value=1 class='invoice-qty' id='invoice-qty"+invoiceRowCount+"' min='1' onchange='calculate("+invoiceRowCount+")' />\
-      </td>\
-      <td style='text-align:right'>\
-        <input type='number' value=0 class='invoice-price' id='invoice-price"+invoiceRowCount+"' min='0.0' onchange='calculate("+invoiceRowCount+")' />\
-      </td>\
-      <td style='text-align:right'><span id='invoice-amount"+invoiceRowCount+"' class='amount' data-amount='0'>0</span></td>\
-      <td style='text-align:right'><i class='fa fa-trash remove-invoice-row' onclick='deleteRow("+invoiceRowCount+")' aria-hidden='true'></i></td>\
-      </tr>");
+      $("#invoice-rows").append("<tr id='invoice-row"+invoiceRowCount+"' data-service='"+service+"' data-service_id='"+id+"' data-row_count='"+invoiceRowCount+"' class='invoice-item'>\
+        <td>"+service+"</td>\
+        <td style='text-align:right'>\
+          <input type='number' value=1 class='invoice-qty' id='invoice-qty"+invoiceRowCount+"' min='1' onchange='calculate("+invoiceRowCount+")' />\
+        </td>\
+        <td style='text-align:right'>\
+          <input type='number' value="+parseFloat(service_default_price)+" class='invoice-price' id='invoice-price"+invoiceRowCount+"' min='0.0' onchange='calculate("+invoiceRowCount+")' />\
+        </td>\
+        <td style='text-align:right'><span id='invoice-amount"+invoiceRowCount+"' class='amount' data-amount='0'>0</span></td>\
+        <td style='text-align:right'><i class='fa fa-trash remove-invoice-row' onclick='deleteRow("+invoiceRowCount+")' aria-hidden='true'></i></td>\
+        </tr>");
+
+      calculate(invoiceRowCount);
   });
 
 });

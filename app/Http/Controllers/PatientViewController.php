@@ -76,7 +76,7 @@ class PatientViewController extends Controller
             'time_scheduled' => ['required'],
             'clinic_id' => ['required'],
             'doctor_id' => ['required'],
-            'service' => ['required']
+            'notes' => ['required']
         ]);
 
         $clinic = Clinic::find($request->clinic_id);
@@ -89,7 +89,7 @@ class PatientViewController extends Controller
         $patient_detail->doctor_id = $doctor->id;
         $patient_detail->clinic = $clinic->name;
         $patient_detail->doctor = $doctor->first_name .' '. $doctor->last_name;
-        $patient_detail->service = $request->service;
+        $patient_detail->notes = $request->notes;
         $patient_detail->is_schedule_request = true;
         $patient_detail->is_scheduled = true;
         $patient_detail->date_scheduled = date('Y-m-d', strtotime($request->date_scheduled));

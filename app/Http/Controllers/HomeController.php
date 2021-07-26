@@ -12,6 +12,8 @@ use App\Model\Service;
 use App\Model\Patient;
 use App\Model\PatientDetail;
 use App\Model\Domain;
+use App\Model\Subscription;
+use App\Model\Client;
 
 use Carbon\Carbon;
 
@@ -39,6 +41,14 @@ class HomeController extends Controller
             $user = User::find(Auth::user()->id);
             $user->last_active_at = Carbon::now()->toDateTimeString();
             $user->save();
+        }
+
+        $subscriptions = Subscription::where('client_id', Auth::user()->client_id)->where('is_active', true)->get();
+
+        if (count($subscriptions) == 0) {
+            $client = Client::find(Auth::user()->client_id);
+            $client->account_type = 'free';
+            $client->save();
         }
 
         $domain_name = $request->gethost();

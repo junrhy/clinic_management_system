@@ -170,4 +170,11 @@ class SubscriptionController extends Controller
         $client_card->is_default = true;
         $client_card->save();
     }
+
+    public function cancel_auto_renew(Request $request)
+    {
+        $subscription = Subscription::find($request->id);
+        $subscription->auto_renew = false;
+        $subscription->save();
+    }
 }

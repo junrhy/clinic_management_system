@@ -172,6 +172,8 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::get('/balance_and_usage', 'SubscriptionController@balance_and_usage');
 	Route::get('/pay_bills', 'SubscriptionController@pay_bills');
 	Route::post('/subscription/subscribe', 'SubscriptionController@subscribe');
+	Route::post('/subscription/cancel_auto_renew', 'SubscriptionController@cancel_auto_renew');
+	
 
 	Route::get('/inventory/show/{name}', 'InventoryController@show');
 	Route::get('/inventory/add_by_sku/{name}', 'InventoryController@add_by_sku');
