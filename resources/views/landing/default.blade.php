@@ -528,7 +528,7 @@
         <div class="col-md-3 mx-auto">
             <h2 id="aboutus" class="header" align="left">About Us</h2>
             <p align="justify">
-              Bluewhale Clinic Management Software is design and developed by Crodua Web Development Company. 
+              Bluewhale Clinic Management Software is design and developed by Crodua Web Development Agency. 
             </p>
         </div>
         <div class="col-md-4 mx-auto" style="font-size:10pt;">
