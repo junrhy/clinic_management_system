@@ -31,12 +31,12 @@ $(document).ready(function() {
 
               var imgData = canvas.toDataURL('image/png');
               console.log('Report Image URL: '+imgData);
-              var doc = new jsPDF(); //var doc = new jsPDF('p', 'mm', [101.6, 139.7]); 101.6mm wide and 139.7mm high
+              var doc = new jsPDF('l', 'in', [8.3, 11.7]); // A4 wide and high
               
-              var width = doc.internal.pageSize.width - 6;
-              var height = doc.internal.pageSize.height - 6;
+              // var width = doc.internal.pageSize.width;
+              // var height = doc.internal.pageSize.height;
 
-              doc.addImage(imgData, 'PNG', 3, 3, width, height);
+              doc.addImage(imgData, 'PNG', 0.3, 0.1, 5, 8);
               // doc.save('prescription.pdf'); -- do not download
 
               var string = doc.output('datauristring');

@@ -24,7 +24,7 @@
 
 	img.filling-none {
 		height: 56px;
-		width: 56px;
+		width: 55px;
 		position: relative;
 		top:-15px;
 		left:-13px;
@@ -89,23 +89,23 @@
 	}
 
 	.filling-top {
-		border-top: 6px solid #ffebcc;
+		border-top: 6px solid #94e5ff;
 	}
 
 	.filling-right {
-		border-right: 6px solid #ffebcc;
+		border-right: 6px solid #94e5ff;
 	}
 
 	.filling-bottom {
-		border-bottom: 6px solid #ffebcc;
+		border-bottom: 6px solid #94e5ff;
 	}
 
 	.filling-left {
-		border-left: 6px solid #ffebcc;
+		border-left: 6px solid #94e5ff;
 	}
 
 	.filling-center {
-		background-color: #ffebcc;
+		background-color: #94e5ff;
 	}
 
 	.upper-jaw-root, .lower-jaw-root {
@@ -271,7 +271,7 @@
 								<span style="position: relative;top: -28px;">Filling Center</span>
 		        			</div>
 
-		        			<div class="col-md-4 col-sm-12">
+		        			<div class="col-md-2 col-sm-12">
 		        				<div style="position: relative;top:5px;" class="filling filling-top">
 									<img class="filling-none" src="/img/dental-chart/filling_none.gif">
 								</div>
@@ -291,6 +291,15 @@
 									<img class="filling-none" src="/img/dental-chart/filling_none.gif">
 								</div>
 								<span style="position: relative;top: -5px;">Filling Left</span>
+		        			</div>
+
+		        			<div class="col-md-2 col-sm-12">
+		        				<br>
+		        				<div  style="height:43px;position: relative;top: -16px;width: 40px;text-align: center;display: inline-block;">
+									<span style="position:relative;top:5px;font-size: 14pt;color: red;">RCT</span>
+								</div>
+								<span style="position: relative;top: -10px;">Root Canal Theraphy</span><br>
+
 								<br>
 								<br>
 		        			</div>
