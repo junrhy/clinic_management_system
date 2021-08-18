@@ -1,4 +1,4 @@
-<style type="text/css">
+  <style type="text/css">
 
 </style>
 <!-- Modal -->
@@ -27,6 +27,9 @@
 $(document).ready(function() {
   $('#print_now').click(function() {
      html2canvas(document.getElementById("print_preview_content"), {
+          letterRendering: 1, 
+          allowTaint: false,
+          useCORS: true,
           onrendered: function(canvas) {
 
               var imgData = canvas.toDataURL('image/png');
