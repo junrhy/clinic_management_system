@@ -142,7 +142,7 @@
                                   <th style="width:13%">Created</th>
                                   <th style="width:12%">Clinic</th>
                                   <th style="width:10%">Doctor</th>
-                                  <th style="width:15%">Service</th>
+                                  <th style="width:15%">Services</th>
                                   <th style="width:15%">Remarks</th>
                                   <th style="width:10%">Next Visit</th>
                                   <th style="width:15%">Attachments</th>
@@ -159,8 +159,8 @@
                                         </td>
                                         <td>{{ $detail->clinic }}</td>
                                         <td>{{ $detail->doctor }}</td>
-                                        <td>{{ $detail->service }}</td>
-                                        <td>{!! $detail->notes !!}</td>
+                                        <td><small>{{ $detail->service }}</small></td>
+                                        <td><small>{!! $detail->notes !!}</small></td>
                                         <td>
                                           @if($detail->date_scheduled != '')
                                             {{ date('M d, Y', strtotime($detail->date_scheduled)) }}&nbsp;&nbsp;
@@ -215,7 +215,7 @@
                                     <th style="width:13%">Created</th>
                                     <th style="width:20%">Clinic</th>
                                     <th style="width:10%">Doctor</th>
-                                    <th style="width:15%">Service</th>
+                                    <th style="width:15%">Services</th>
                                     <th style="width:20%">Remarks</th>
                                     <th style="width:10%">Next Visit</th>
                                     <th style="width:15%">Attachments</th>
@@ -231,8 +231,8 @@
                                           </td>
                                           <td>{{ $archive_detail->clinic }}</td>
                                           <td>{{ $archive_detail->doctor }}</td>
-                                          <td>{{ $archive_detail->service }}</td>
-                                          <td>{!! $archive_detail->notes !!}</td>
+                                          <td><small>{{ $archive_detail->service }}</small></td>
+                                          <td><small>{!! $archive_detail->notes !!}</small></td>
                                           <td>
                                             @if($archive_detail->date_scheduled != '')
                                               {{ date('M d, Y', strtotime($archive_detail->date_scheduled)) }}&nbsp;&nbsp;
@@ -356,6 +356,7 @@ $(document).ready(function() {
       var notes = $("#notes").val();
       var date_scheduled = $("#date_scheduled").val();
       var time_scheduled = $("#time_scheduled").val();
+      var is_set_custom_total_amount = "{{ App\Model\ClientSettings::is_setting_checked('set_custom_total_amount', Auth::user()->client_id ) }}";
 
 
       if (clinic_id == null) {
@@ -372,17 +373,6 @@ $(document).ready(function() {
         $('select[name=doctor]').removeClass('required-textfield');
       }
 
-
-      var service = "";
-      $(".service-selected").map(function() {
-          if (service == "") {
-            service = this.innerHTML;
-          } else {
-            service = service + ", " + this.innerHTML;
-          }
-      }).get();
-
-
       if ($("input[name='attachment[]").get(0).files.length != 0) {
         var attachment_number = $("input[name='attachment_number']").val();
       } else {
@@ -391,18 +381,28 @@ $(document).ready(function() {
 
 
       var invoice_item = [];
-      var amount_paid = $("input[name='payment").val();
+      var invoice_total_amount = $("#total-fees").text();
+      var amount_paid = $("input[name='payment']").val();
       $(".invoice-item").each(function() {
         var service = $(this).data('service');
         var row_count = $(this).data('row_count');
         var qty = $('#invoice-qty'+row_count).val();
-        var price = $('#invoice-price'+row_count).val();
 
-        invoice_item['service'] = service;
-        invoice_item['qty'] = qty;
-        invoice_item['price'] = price;
+        if (is_set_custom_total_amount == '') {
+            var price = $('#invoice-price'+row_count).val();
 
-        invoice_item.push({"service" : service, "qty" : qty, "price" : price});
+            invoice_item['service'] = service;
+            invoice_item['qty'] = qty;
+            invoice_item['price'] = price;
+
+            invoice_item.push({"service" : service, "qty" : qty, "price" : price});
+        } else {
+            invoice_item['service'] = service;
+            invoice_item['qty'] = qty;
+
+            invoice_item.push({"service" : service, "qty" : qty});
+        }
+        
       });
 
 
@@ -413,12 +413,12 @@ $(document).ready(function() {
           patient_id: "{{ $patient->id }}",
           clinic_id: clinic_id, 
           doctor_id: doctor_id, 
-          service: service, 
           notes: notes,
           attachment_number: attachment_number,
           date_scheduled: date_scheduled, 
           time_scheduled: time_scheduled,
           invoice_item: invoice_item,
+          invoice_total_amount: invoice_total_amount,
           amount_paid: amount_paid,
           _token: "{{ csrf_token() }}" 
         }

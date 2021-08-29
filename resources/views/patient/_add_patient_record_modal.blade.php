@@ -61,6 +61,14 @@
     font-size: 9pt;
     border: 1px solid #eee;
   }
+
+  .editable-amount {
+    cursor: pointer;
+  }
+
+  .editable-amount:hover {
+    text-decoration: underline;
+  }
 </style>
 <!-- Modal -->
 <div class="modal fade" id="add_patient_record_modal" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
@@ -147,8 +155,12 @@
                           <thead>
                             <th width="60%">Service</th>
                             <th>Qty</th>
+
+                            @if( !App\Model\ClientSettings::is_setting_checked('set_custom_total_amount', Auth::user()->client_id) )
                             <th>Price</th>
                             <th style="text-align:right">Amount</th>
+                            @endif
+
                             <th>&nbsp;</th>
                           </thead>
                           <tbody id="invoice-rows">
@@ -161,7 +173,7 @@
                   
                   <div class="form-group row total-fees-group">
                     <h2 class="col-md-4" style="color:#ccc;position: relative;top: -3px;">Total</h2>
-                    <h2 class="col-md-8" id="total-fees" align="right">0.00</h2>
+                    <h2 class="col-md-8 {{ App\Model\ClientSettings::is_setting_checked('set_custom_total_amount', Auth::user()->client_id) == true ? 'editable-amount' : '' }}" id="total-fees" align="right">0.00</h2>
                   </div>
 
                   <div class="form-group">
@@ -195,24 +207,65 @@ $(document).ready(function () {
       var id = $(this).attr('id');
       var invoiceRowCount = $('#invoice-rows tr').length;
 
+      var is_set_custom_total_amount = "{{ App\Model\ClientSettings::is_setting_checked('set_custom_total_amount', Auth::user()->client_id ) }}";
+
       $(this).addClass('bg-selected');
       $(this).addClass('service-selected');
 
-      $("#invoice-rows").append("<tr id='invoice-row"+invoiceRowCount+"' data-service='"+service+"' data-service_id='"+id+"' data-row_count='"+invoiceRowCount+"' class='invoice-item'>\
-        <td>"+service+"</td>\
-        <td style='text-align:right'>\
-          <input type='number' value=1 class='invoice-qty' id='invoice-qty"+invoiceRowCount+"' min='1' onchange='calculate("+invoiceRowCount+")' />\
-        </td>\
-        <td style='text-align:right'>\
-          <input type='number' value="+parseFloat(service_default_price)+" class='invoice-price' id='invoice-price"+invoiceRowCount+"' min='0.0' onchange='calculate("+invoiceRowCount+")' />\
-        </td>\
-        <td style='text-align:right'><span id='invoice-amount"+invoiceRowCount+"' class='amount' data-amount='0'>0</span></td>\
-        <td style='text-align:right'><i class='fa fa-trash remove-invoice-row' onclick='deleteRow("+invoiceRowCount+")' aria-hidden='true'></i></td>\
-        </tr>");
+      if (has_duplicate(service) == 0) {
 
-      calculate(invoiceRowCount);
+          if (is_set_custom_total_amount == '') {
+            $("#invoice-rows").append("<tr id='invoice-row"+invoiceRowCount+"' data-service='"+service+"' data-service_id='"+id+"' data-row_count='"+invoiceRowCount+"' class='invoice-item'>\
+              <td>"+service+"</td>\
+              <td style='text-align:right'>\
+                <input type='number' value=1 class='invoice-qty' id='invoice-qty"+invoiceRowCount+"' min='1' onchange='calculate("+invoiceRowCount+")' />\
+              </td>\
+              <td style='text-align:right'>\
+                <input type='number' value="+parseFloat(service_default_price)+" class='invoice-price' id='invoice-price"+invoiceRowCount+"' min='0.0' onchange='calculate("+invoiceRowCount+")' />\
+              </td>\
+              <td style='text-align:right'><span id='invoice-amount"+invoiceRowCount+"' class='amount' data-amount='0'>0</span></td>\
+              <td style='text-align:right'><i class='fa fa-trash remove-invoice-row' onclick='deleteRow("+invoiceRowCount+")' aria-hidden='true'></i></td>\
+              </tr>");
+
+              calculate(invoiceRowCount);
+
+          } else {
+        
+            $("#invoice-rows").append("<tr id='invoice-row"+invoiceRowCount+"' data-service='"+service+"' data-service_id='"+id+"' data-row_count='"+invoiceRowCount+"' class='invoice-item'>\
+              <td>"+service+"</td>\
+              <td>\
+                <input type='number' value=1 class='invoice-qty' id='invoice-qty"+invoiceRowCount+"' min='1' />\
+              </td>\
+              <td style='text-align:right'><i class='fa fa-trash remove-invoice-row' onclick='deleteRow("+invoiceRowCount+")' aria-hidden='true'></i></td>\
+              </tr>");
+          }
+
+      } else {
+
+          jQuery(".invoice-item").each(function(index, currentElement) {
+              if ($(this).data('service') == service) {
+                row = $(this).data('row_count');
+                current_val = parseInt($("#invoice-qty"+row).val());
+
+                $("#invoice-qty"+row).val(current_val + 1);
+
+                calculate(row);
+              }
+          });
+      }
   });
 
+  function has_duplicate(keyword) {
+      var qty = 0;
+
+      jQuery(".invoice-item").each(function(index, currentElement) {
+          if ($(this).data('service') == keyword) {
+            qty++;
+          }
+      });
+
+      return qty > 0 ? true : false;
+  }
 });
 
 function deleteRow(id) {
