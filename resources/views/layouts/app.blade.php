@@ -273,7 +273,7 @@
                 <li class="">
                     <a href="#subscriptionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fa fa-credit-card"></i> 
-                        &nbsp;&nbsp;Subscription</a>
+                        Subscription</a>
 
                     <ul class="collapse list-unstyled" id="subscriptionSubmenu">
                         <li>
@@ -291,6 +291,10 @@
                     </ul>
                 </li>
                 @endif
+
+                <li class="">
+                    <a href="{{ url('settings') }}"><i class="fa fa-gear"></i> Settings</a>
+                </li>
 
                 <li class="">
                     <a href="#helpSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">

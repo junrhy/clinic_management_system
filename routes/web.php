@@ -186,4 +186,7 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::post('inventory_out/search', 'InventoryController@inv_out_search');
 
 	Route::get('/billing/patient_balance_report/{patient_id}', 'BillingReportController@patient_balance_report');
+
+	Route::get('/settings', 'ClientSettingController@index');
+	Route::post('/client/settings/set_setting', 'ClientSettingController@set_setting');
 });

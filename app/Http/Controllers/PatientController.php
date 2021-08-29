@@ -241,7 +241,6 @@ class PatientController extends Controller
         $patient_detail->doctor_id = $doctor->id;
         $patient_detail->clinic = $clinic->name;
         $patient_detail->doctor = $doctor->first_name .' '. $doctor->last_name;
-        $patient_detail->service = $request->service;
         $patient_detail->notes = nl2br($request->notes);
         $patient_detail->attachment_number = $request->attachment_number;
         $patient_detail->is_scheduled = $request->date_scheduled != '' ? true : false;
@@ -250,16 +249,20 @@ class PatientController extends Controller
         $patient_detail->created_by = Auth::user()->first_name . ' ' . Auth::user()->last_name;
 
         if ($request->invoice_item && count($request->invoice_item) > 0) {
-            
+            $description = "";
+
             for ($invoice_item_count=0; $invoice_item_count < count($request->invoice_item); $invoice_item_count++) { 
-                $billing_charge = new PatientBillingCharge;
-                $billing_charge->client_id = Auth::user()->client_id;
-                $billing_charge->patient_id = $request->patient_id;
-                $billing_charge->doctor_id = $request->doctor_id;
-                $billing_charge->description = $request->invoice_item[$invoice_item_count]['service'] ." x ". $request->invoice_item[$invoice_item_count]['qty'];
-                $billing_charge->amount = $request->invoice_item[$invoice_item_count]['qty'] * $request->invoice_item[$invoice_item_count]['price'];
-                $billing_charge->save();
+                $service_qty = (int)$request->invoice_item[$invoice_item_count]['qty'] > 1 ? $request->invoice_item[$invoice_item_count]['qty'] ." " : "";
+                $description = $description . $service_qty . $request->invoice_item[$invoice_item_count]['service'] . ", ";
             }
+
+            $billing_charge = new PatientBillingCharge;
+            $billing_charge->client_id = Auth::user()->client_id;
+            $billing_charge->patient_id = $request->patient_id;
+            $billing_charge->doctor_id = $request->doctor_id;
+            $billing_charge->description = rtrim($description, ", ");
+            $billing_charge->amount = str_replace(',', '', $request->invoice_total_amount);
+            $billing_charge->save();
         }
 
         if ($request->amount_paid) {
@@ -276,6 +279,7 @@ class PatientController extends Controller
           $patient_detail->status = 'Open';
         }
 
+        $patient_detail->service = rtrim($description, ", ");
         $patient_detail->save();
     }
 
