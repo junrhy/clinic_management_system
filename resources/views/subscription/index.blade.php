@@ -42,7 +42,13 @@
     cursor: pointer;
   }
 
-  #cancel-subscription:hover {
+  #enable-auto-renew {
+    text-decoration: none;
+    font-size: 10pt;
+    cursor: pointer;
+  }
+
+  #cancel-subscription:hover, #enable-auto-renew:hover {
     text-decoration: underline;
   }
 
@@ -101,7 +107,8 @@
                               Yes | 
                               <a id="cancel-subscription" data-subscription_id="{{ $subscription->id }}" data-plan="{{ $subscription->plan }}">Cancel</a>
                             @else
-                              No
+                              No | 
+                              <a id="enable-auto-renew" data-subscription_id="{{ $subscription->id }}" data-plan="{{ $subscription->plan }}">Enable</a>
                             @endif
                           </td>
                         </tr>
@@ -242,7 +249,42 @@ $(document).ready(function() {
               .done(function( msg ) {
                 Swal.fire(
                   'Canceled!',
-                  'Plan auto-renew has been cancelled.',
+                  'Auto-renew has been cancelled.',
+                  'success'
+                ).then((result) => {
+                  location.reload();
+                });
+              });
+            }
+        });
+    });
+
+    $("#enable-auto-renew").click(function(){
+        var id = $(this).data('subscription_id');
+        var plan = $(this).data('plan');
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This action will enable auto-renew on your "+capitalizeFirstLetter(plan)+" plan. Do you wish to proceed?",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Proceed!'
+        }).then((result) => {
+            if (result.value) {
+              $.ajax({
+                method: "POST",
+                url: "/subscription/enable_auto_renew",
+                data: { 
+                  id: id,
+                  _token: "{{ csrf_token() }}" 
+                }
+              })
+              .done(function( msg ) {
+                Swal.fire(
+                  'Enabled!',
+                  'Auto-renew has been enabled.',
                   'success'
                 ).then((result) => {
                   location.reload();

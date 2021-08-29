@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 use App\Model\Client;
 use App\Model\Subscription;
@@ -177,4 +178,12 @@ class SubscriptionController extends Controller
         $subscription->auto_renew = false;
         $subscription->save();
     }
+
+    public function enable_auto_renew(Request $request)
+    {
+        $subscription = Subscription::find($request->id);
+        $subscription->auto_renew = true;
+        $subscription->save();
+    }
+    
 }
