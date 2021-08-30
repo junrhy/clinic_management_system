@@ -67,7 +67,7 @@
   }
 
   .editable-amount:hover {
-    text-decoration: underline;
+    color: red;
   }
 </style>
 <!-- Modal -->
@@ -172,8 +172,19 @@
                   </div>
                   
                   <div class="form-group row total-fees-group">
-                    <h2 class="col-md-4" style="color:#ccc;position: relative;top: -3px;">Total</h2>
-                    <h2 class="col-md-8 {{ App\Model\ClientSettings::is_setting_checked('set_custom_total_amount', Auth::user()->client_id) == true ? 'editable-amount' : '' }}" id="total-fees" align="right">0.00</h2>
+                    @if( App\Model\ClientSettings::is_setting_checked('set_custom_total_amount', Auth::user()->client_id) )
+                    <div class="col-md-12" align="right">
+                      <small style="position:relative;top:20px;color: #ccc;">Click below amount to edit</small>
+                    </div>
+                    @endif
+
+                    <h2 class="col-md-4" style="color:#ccc;">Total</h2>
+
+                    @if( !App\Model\ClientSettings::is_setting_checked('set_custom_total_amount', Auth::user()->client_id) )
+                    <h2 class="col-md-8" id="total-fees" align="right">0.00</h2>
+                    @else
+                    <h2 class="col-md-8" id="total-fees" align="right"><span class="editable-amount" id="editable-amount">0.00</span></h2>
+                    @endif
                   </div>
 
                   <div class="form-group">
@@ -197,6 +208,8 @@ $(document).ready(function () {
   $("#add_patient_record").click(function(){
     $('select[name=clinic]').val(null);
     $('select[name=doctor]').val(null);
+
+    $("#editable-amount").text(numberWithCommas(parseFloat(0).toFixed(2)));
 
     $('#add_patient_record_modal').modal('show');
   });
