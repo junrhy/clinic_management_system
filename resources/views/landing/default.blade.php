@@ -328,7 +328,7 @@
         <div class="row h-100 align-items-center">
           <div class="col-12 text-center">
             <h1 class="font-weight-light">Welcome to <span style="font-weight: bold;color: #01d8da;">Bluewhale Clinic Management Software.</span></h1>
-            <p class="lead">Regardless of what type of clinic are you in, We simplify and automate the necessary process so that you will have a clear vision on how your clinic is doing. We are doing our best that our online system can help you easily manage your clinic operations.</p>
+            <p class="lead">Regardless of what type of clinic are you in, We simplify and automate the necessary process so that you will have a clear vision on how your clinic is doing. We are doing our best that our online system can help you to easily manage your clinic operations.</p>
 
             <img src="/img/brand/banner.png" class="col-md-10 mx-auto">
           </div>

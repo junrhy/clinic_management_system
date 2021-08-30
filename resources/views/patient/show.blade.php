@@ -326,6 +326,7 @@
                 </div>
 
                 @include('patient._add_prescription_modal')
+                @include('patient._calculator_modal')
                 @include('patient._print_preview')
             </div>
         </div>

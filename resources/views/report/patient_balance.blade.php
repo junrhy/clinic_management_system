@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading"><i class="fa fa-file-alt" aria-hidden="true"></i> Patient balance report of <span id="patient-name">{{ $patient->first_name }} {{ $patient->last_name }}</span></div>
+                <div class="panel-heading"><i class="fa fa-file-alt" aria-hidden="true"></i> Patient balance view for <span id="patient-name">{{ $patient->first_name }} {{ $patient->last_name }}</span></div>
 
                 <div class="panel-body">
                     <div class="row">
