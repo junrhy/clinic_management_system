@@ -99,7 +99,7 @@
                           <td><span style="font-family: sans-serif;">{{ $subscription->end->format('M-d-Y, h:iA') }}</span></td>
                           <td>
                             @if(\Carbon\Carbon::now()->diffInDays($subscription->end, false) > 0)
-                              Will expire in <span style="font-family: sans-serif;">{{ \Carbon\Carbon::now()->diffInDays($subscription->end, false) }}</span> days from now
+                              Expires in <span style="font-family: sans-serif;">{{ \Carbon\Carbon::now()->diffInDays($subscription->end, false) }}</span> days
                             @endif
                           </td>
                           <td align="center">

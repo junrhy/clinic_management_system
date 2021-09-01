@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 
 use App\User;
 use App\Model\AdminSetting;
+use App\Model\Client;
 
 use Hash;
 use Auth;
@@ -71,7 +72,12 @@ class AdminController extends Controller
             $user->save();
         }
 
-        return view('admin.index');
+        $clients = Client::all();
+        $users = User::all();
+
+        return view('admin.index')
+                ->with('clients', $clients)
+                ->with('users', $users);
     }
 
     public function change_password()

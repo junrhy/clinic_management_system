@@ -63,6 +63,10 @@
                 </li>
 
                 <li class="">
+                    <a href="{{ url('admin/users') }}"><i class="fa fa-users"></i> Users</a>
+                </li>
+
+                <li class="">
                     <a href="{{ url('admin/subscriptions') }}"><i class="fa fa-gear"></i> Subscriptions</a>
                 </li>
 
@@ -76,6 +80,10 @@
 
                 <li class="">
                     <a href="{{ url('admin/domains') }}">&nbsp;<i class="fa fa-globe"></i> Domains</a>
+                </li>
+
+                <li class="">
+                    <a href="{{ url('admin/features') }}">&nbsp;<i class="fa fa-cube"></i> Features</a>
                 </li>
 
                 <li class="">

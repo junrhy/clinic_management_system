@@ -234,6 +234,8 @@ class PatientController extends Controller
         $doctor = Doctor::find($request->doctor_id);
         $patient = Patient::find($request->patient_id);
 
+        $description = "";
+
         $patient_detail = new PatientDetail;
         $patient_detail->client_id = Auth::user()->client_id;
         $patient_detail->patient_id = $request->patient_id;
@@ -249,8 +251,6 @@ class PatientController extends Controller
         $patient_detail->created_by = Auth::user()->first_name . ' ' . Auth::user()->last_name;
 
         if ($request->invoice_item && count($request->invoice_item) > 0) {
-            $description = "";
-
             for ($invoice_item_count=0; $invoice_item_count < count($request->invoice_item); $invoice_item_count++) { 
                 $service_qty = (int)$request->invoice_item[$invoice_item_count]['qty'] > 1 ? $request->invoice_item[$invoice_item_count]['qty'] ." " : "";
                 $description = $description . $service_qty . $request->invoice_item[$invoice_item_count]['service'] . ", ";
