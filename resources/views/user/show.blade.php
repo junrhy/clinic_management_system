@@ -10,10 +10,17 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
 
 <style type="text/css">
-  .category {
-    font-weight: bold;
-    color: #109d9e!important;
-  }
+    .form-check {
+        height: 180px;
+        background-color: #eff7ff;
+        border: 5px solid #ffffff;
+        padding-top: 15px;
+    }
+
+    .category {
+        font-weight: bold;
+        color: #109d9e!important;
+    }
 </style>
 @endsection
 
@@ -36,18 +43,34 @@
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading">{{ $user->first_name }} {{ $user->last_name }}</div>
+                <div class="panel-heading">Staff Name: {{ $user->first_name }} {{ $user->last_name }}</div>
 
                 <div class="panel-body">
-                    @foreach($features as $key => $feature)
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="{{ $feature->name }}" data-id="{{ $feature->id }}" name="user_features"  {{ $user->is_client == 1 && in_array($feature->name, ['staffs', 'add_staff', 'edit_staff', 'delete_staff', 'set_privileges']) ? 'disabled' : '' }} {{ App\Model\FeatureUser::is_feature_checked($feature->name, $user->id) }}>
-                            <span id="txt_{{ $feature->name }}">{{ ucwords(str_replace('_', ' ', $feature->name)) }}</span>
-                        </div>
-                    @endforeach
+                    <div class="col-md-12">
+                        <div class="row">
+                            @foreach($features->where('parent_id', 0) as $key => $feature)
+                            <div class="col-md-2 form-check">
+                                <input class="form-check-input" type="checkbox" id="{{ $feature->name }}" data-id="{{ $feature->id }}" name="user_features"  {{ $user->is_client == 1 && in_array($feature->name, ['staffs', 'add_staff', 'edit_staff', 'delete_staff', 'set_privileges']) ? 'disabled' : '' }} {{ App\Model\FeatureUser::is_feature_checked($feature->name, $user->id) }}>
 
-                    <br>
-                    <button id="btn-save" data-user-id="{{ $user->id }}" class="btn btn-primary btn-round">Save Changes</button>
+                                <span id="txt_{{ $feature->name }}">{{ ucwords(str_replace('_', ' ', $feature->name)) }}</span><br>
+
+                                @foreach($features->where('parent_id', $feature->id) as $key => $sub_feature)
+                                    <input class="form-check-input" type="checkbox" id="{{ $sub_feature->name }}" data-id="{{ $sub_feature->id }}" name="user_features"  {{ $user->is_client == 1 && in_array($sub_feature->name, ['staffs', 'add_staff', 'edit_staff', 'delete_staff', 'set_privileges']) ? 'disabled' : '' }} {{ App\Model\FeatureUser::is_feature_checked($sub_feature->name, $user->id) }}>
+
+                                    <span id="txt_{{ $sub_feature->name }}">{{ ucwords(str_replace('_', ' ', $sub_feature->name)) }}</span><br>
+                                @endforeach
+                                <br>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    
+
+                    <div class="row col-md-12">
+                        <br>
+                        <button id="btn-save" data-user-id="{{ $user->id }}" class="btn btn-primary btn-round">Save Changes</button>
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -97,11 +120,17 @@ $(document).ready(function() {
         $("#add_patient").prop('checked', $(this).is(":checked"));
         $("#edit_patient").prop('checked', $(this).is(":checked"));
         $("#delete_patient").prop('checked', $(this).is(":checked"));
+    });
+
+    $("#patient_records").click(function(){
         $("#view_patient_record").prop('checked', $(this).is(":checked"));
         $("#add_patient_detail").prop('checked', $(this).is(":checked"));
         $("#delete_patient_detail").prop('checked', $(this).is(":checked"));
         $("#archive_patient_detail").prop('checked', $(this).is(":checked"));
         $("#unarchive_patient_detail").prop('checked', $(this).is(":checked"));
+    });
+
+    $("#patient_prescriptions").click(function(){
         $("#add_patient_prescription").prop('checked', $(this).is(":checked"));
         $("#edit_patient_prescription").prop('checked', $(this).is(":checked"));
         $("#delete_patient_prescription").prop('checked', $(this).is(":checked"));
@@ -148,6 +177,8 @@ $(document).ready(function() {
         $("#txt_appointment").addClass('category');
         $("#txt_dental").addClass('category');
         $("#txt_patients").addClass('category');
+        $("#txt_patient_records").addClass('category');
+        $("#txt_patient_prescriptions").addClass('category');
         $("#txt_clinics").addClass('category');
         $("#txt_doctors").addClass('category');
         $("#txt_services").addClass('category');

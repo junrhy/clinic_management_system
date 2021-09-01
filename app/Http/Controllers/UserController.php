@@ -77,7 +77,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         
-        $features = FeatureUser::all();
+        $features = FeatureUser::orderBy('order', 'ASC')->get();
 
         return view('user.show')
                 ->with('user', $user)

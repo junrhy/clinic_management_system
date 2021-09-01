@@ -33,7 +33,7 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-12">
-            <input type="text" name="calculator_text" value="0" class="form-control" disabled>
+            <input type="text" name="calculator_text" value="0" class="form-control" maxlength="10" disabled>
           </div>
         </div>
 

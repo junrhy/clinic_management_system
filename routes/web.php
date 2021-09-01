@@ -40,6 +40,8 @@ Route::group(['middleware' => ['is_admin']], function() {
 	Route::get('/admin/inactive_clients', 'AdminClientController@inactive_clients');
 	Route::post('/admin/delete_client', 'AdminClientController@delete_client');
 
+	Route::get('/admin/users', 'AdminUserController@index');
+
 	Route::get('/admin/subscriptions', 'AdminSubscriptionController@index');
 	Route::get('/admin/subscription/renew/{id}', 'AdminSubscriptionController@renew');
 	
@@ -63,6 +65,12 @@ Route::group(['middleware' => ['is_admin']], function() {
 	Route::get('/admin/domain/create', 'AdminDomainController@create');
 	Route::post('/admin/domain/store', 'AdminDomainController@store');
 	Route::delete('/admin/domain/delete/{id}', 'AdminDomainController@delete');
+
+	Route::get('/admin/features', 'AdminFeatureController@index');
+	Route::get('/admin/feature/create', 'AdminFeatureController@create');
+	Route::post('/admin/feature/store', 'AdminFeatureController@store');
+	Route::get('/admin/feature/{id}', 'AdminFeatureController@edit');
+	Route::put('/admin/feature/update/{id}', 'AdminFeatureController@update')->name('admin.feature.update');
 	
 	Route::get('/admin/settings', 'AdminSettingController@index');
 	Route::get('/admin/setting/create', 'AdminSettingController@create');
