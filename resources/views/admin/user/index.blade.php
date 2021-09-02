@@ -67,8 +67,10 @@
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->username }}</td>
                                         <td class="date">
+                                        @if($user->last_active_at != null)
                                             {{ $user->last_active_at->format('M-d-Y, h:iA') }}<br>
                                             <span class="diff">{{ $user->last_active_at->diffForHumans() }}</span>
+                                        @endif
                                         </td>
                                     </tr>
                                     @endforeach

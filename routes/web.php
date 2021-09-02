@@ -96,6 +96,8 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::get('/home', 'HomeController@index')
 		->name('home');	
 
+	Route::resource('message', 'MessageController');
+
 	Route::get('/business_information', 'AccountController@business_information');
 	Route::post('/update_business_information', 'AccountController@update_business_information');
 	Route::get('/delete_company_logo/{id}', 'AccountController@delete_company_logo');

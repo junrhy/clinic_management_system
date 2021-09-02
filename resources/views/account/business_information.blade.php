@@ -6,7 +6,7 @@
     color:red;
   }
 
-  .text-red {
+  .text-green {
     color:green;
   }
 
