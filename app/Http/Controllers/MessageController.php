@@ -63,9 +63,33 @@ class MessageController extends Controller
         $message = new Message;
         $message->client_id = Auth::user()->client_id;
         $message->room_id = $room->id;
+        $message->user_id = Auth::user()->id;
         $message->message = $request->message;
         $message->save();
 
         return redirect('message');
+    }
+
+    public function show_room_conversation(Request $request)
+    {
+        $messages = Message::where('room_id', $request->room_id)->orderBy('created_at', 'ASC')->get();
+
+        return view('message._show_conversation')
+                    ->with('messages', $messages);
+    }
+
+    public function add_reply(Request $request)
+    {
+        $message = new Message;
+        $message->client_id = Auth::user()->client_id;
+        $message->room_id = $request->room_id;
+        $message->user_id = Auth::user()->id;
+        $message->message = $request->message;
+        $message->save();
+
+        $messages = Message::where('room_id', $request->room_id)->orderBy('created_at', 'ASC')->get();
+
+        return view('message._show_conversation')
+                    ->with('messages', $messages);
     }
 }

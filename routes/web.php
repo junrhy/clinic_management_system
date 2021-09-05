@@ -97,6 +97,8 @@ Route::group(['middleware' => ['is_default']], function() {
 		->name('home');	
 
 	Route::resource('message', 'MessageController');
+	Route::post('/message/show_room_conversation', 'MessageController@show_room_conversation');
+	Route::post('/message/add_reply', 'MessageController@add_reply');
 
 	Route::get('/business_information', 'AccountController@business_information');
 	Route::post('/update_business_information', 'AccountController@update_business_information');

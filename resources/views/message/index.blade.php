@@ -54,6 +54,14 @@
         font-weight: bold;
         background-color: #f5ffeb;
     }
+
+    #message_content {
+        overflow-y: auto;
+    }
+
+    .required {
+        border: 1px solid red;
+    }
 </style>
 @endsection
 
@@ -93,7 +101,7 @@
                                 $unread = "";
                                 ?>
 
-                                <div class="row contact-row {{ $unread }}">
+                                <div class="row contact-row {{ $unread }}" data-room_id="{{ $room->id }}">
                                     <div class="col-md-12">
                                         <?php if ($room->is_for_admin) {
                                             $recipient = "Customer Support";
@@ -115,7 +123,7 @@
                                         @endforeach
                                         </div>
                                         <div class="message_header">
-                                            <small>{{ str_limit($room->messages->first()->message, 10) }}</small>
+                                            <small>{{ str_limit($room->messages->last()->message, 30) }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -132,14 +140,14 @@
                             </div>
 
                             <div class="row ui_footer">
-                                <div class="col-md-10"><textarea class="form-control" style="height: 70px; resize: none;" disabled></textarea></div>
-                                <div class="col-md-2"><button class="btn btn-primary btn-block" disabled>Send</button></div>
+                                <div class="col-md-10"><textarea id="new-message" class="form-control" style="height: 70px; resize: none;" disabled></textarea></div>
+                                <div class="col-md-2"><button id="send-message" data-room_id="0" class="btn btn-primary btn-block" disabled>Send</button></div>
                             </div>
                         </div>
 
                         <div class="col-md-2" id="message_recipient_profile">
                             <div class="row ui_header">
-                                Profile
+                                Settings
                             </div>
                         </div>
                     </div>
@@ -155,7 +163,59 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-  
+  $(".contact-row").unbind().click(function(){
+    $("#message_content").animate({ scrollTop: $(document).height() }, 1000);
+
+    var room_id = $(this).data('room_id');
+
+    $("#send-message").attr('data-room_id', room_id);
+
+    $.ajax({
+      method: "POST",
+      url: "/message/show_room_conversation",
+      data: { 
+        room_id: room_id,
+        _token: "{{ csrf_token() }}" 
+      }
+    })
+    .done(function( src ) {
+      $("#message_content").html(src);
+
+      $("#send-message").removeAttr('disabled');
+      $("#new-message").removeAttr('disabled');
+    });
+  });
+
+  $("#send-message").click(function(){
+    var room_id = $(this).data('room_id');
+
+    if ($("#new-message").val() == "") {
+        $("#new-message").addClass('required');
+        return false;
+    }
+    
+    $("#new-message").removeClass('required');
+
+    var message = $("#new-message").val();
+    
+    $.ajax({
+      method: "POST",
+      url: "/message/add_reply",
+      data: { 
+        room_id: room_id,
+        message: message,
+        _token: "{{ csrf_token() }}" 
+      }
+    })
+    .done(function( src ) {
+      $("#message_content").html(src);
+
+      $("#message_content").animate({ scrollTop: $(document).height() }, 1000);
+
+      $("#new-message").val("");
+      $("#new-message").focus();
+    });
+  });
 });
 </script>
 @endsection
