@@ -96,8 +96,14 @@
 
             <ul class="list-unstyled components">
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('dashboard', Auth::user()->id) }}">
-                    <a href="{{ url('home') }}"><i class="fa fa-chalkboard"></i> Dashboard</a>
+                    <a href="{{ url('home') }}"><i class="fa fa-chalkboard"></i>Dashboard</a>
                 </li>
+
+                @if(env('APP_ENV') == 'local')
+                <li class="{{ App\Model\FeatureUser::is_feature_allowed('messages', Auth::user()->id) }}">
+                    <a href="{{ url('message') }}"><i class="fa fa-envelope"></i> Messages</a>
+                </li>
+                @endif
 
               @if(Auth::user()->client->is_active && Auth::user()->client->is_suspended == 0)
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('appointment', Auth::user()->id) }}">
@@ -296,7 +302,7 @@
                     <a href="{{ url('settings') }}"><i class="fa fa-gear"></i> Settings</a>
                 </li>
 
-                <li class="">
+<!--                 <li class="">
                     <a href="#helpSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <i class="fa fa-question"></i> 
                         &nbsp;&nbsp;Help Center</a>
@@ -306,7 +312,7 @@
                             <a href="{{ url('/tickets') }}">Contact Support</a>
                         </li>
                     </ul>
-                </li>
+                </li> -->
             </ul>
 
         </nav>
