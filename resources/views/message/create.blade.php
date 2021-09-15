@@ -48,13 +48,13 @@
                                         <option value="helpcenter" style="font-weight:bold;">Customer Support</option>
                                     </optgroup>
 
-                                    <optgroup label="Patients">
+              <!--                       <optgroup label="Patients">
                                         @foreach($patients as $patient)
                                             @if($patient->user_id != null)
                                             <option value="{{ $patient->user->id }}">{{ $patient->first_name }} {{ $patient->last_name }}</option>
                                             @endif
                                         @endforeach
-                                    </optgroup>
+                                    </optgroup> -->
                                 </select>
                             </div>
                         </div>
