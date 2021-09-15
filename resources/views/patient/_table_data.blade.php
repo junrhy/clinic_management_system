@@ -22,7 +22,7 @@
     <td>
       @if($patient_item->user_id != null)
       <span style="font-family: sans-serif;">{{ $patient_item->user->username }}</span>
-<!--       <a class="remove-user-account" data-id="{{ $patient_item->id }}">remove</a> -->
+      <a class="remove-user-account" data-id="{{ $patient_item->id }}">remove</a>
       @else
       <a href="/patient/create_account/{{ $patient_item->id }}" style="font-size: 8pt;">Create account</a>
       @endif

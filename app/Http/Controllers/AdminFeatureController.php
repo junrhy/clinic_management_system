@@ -48,6 +48,7 @@ class AdminFeatureController extends Controller
     public function update(Request $request, $id)
     {
         $feature = FeatureUser::find($id);
+        $feature->name = $request->name;
         $feature->parent_id = $request->parent_id;
         $feature->order = $request->order;
         $feature->save();
