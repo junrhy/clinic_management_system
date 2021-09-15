@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('page_level_script')
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
@@ -75,12 +75,12 @@
                         <h2>Messages <small class="text-muted">Message your patients</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
-                        <a class="btn btn-white btn-icon btn-round float-right m-l-10 {{ App\Model\FeatureUser::is_feature_allowed('add_message', Auth::user()->id) }}" href="{{ url('message/create') }}" type="button">
+                        <a class="btn btn-white btn-icon btn-round float-right m-l-10" href="{{ url('admin/messages/create') }}" type="button">
                             <i class="fa fa-plus"></i>
                         </a>
 
                         <ul class="breadcrumb float-md-right">
-                            <li class="breadcrumb-item"><a href="/home"><i class="fa fa-home"></i> {{ Auth::user()->client->name }}</a></li>
+                          <li class="breadcrumb-item"><a href="/admin"><i class="fa fa-home"></i> Admin Panel</a></li>
                             <li class="breadcrumb-item active"><strong style="color:#fff;">Messages</strong></li>
                         </ul>
                     </div>
@@ -103,28 +103,30 @@
 
                                 <div class="row contact-row {{ $unread }}" data-room_id="{{ $room->id }}">
                                     <div class="col-md-12">
-                                        <?php if ($room->is_for_admin) {
-                                            $recipient = "Customer Support";
-                                        } else {
-                                            $recipient = $room->member_user_ids;
-                                        } ?>
-
+                                        <?php 
+                                        $recipient = $room->member_user_ids;
+                                        $show_members = [];
+                                        ?>
+                                        
                                         <div class="subject">
                                             {{ $room->name }}
                                         </div>
                                         <div class="sender">
-                                        @if($recipient == "Customer Support")
-                                            Customer Support
-                                        @endif
-
                                         <?php $members = explode(",", $recipient) ?>
+                                        
                                         @foreach($members as $id)
-                                            <?php $user = \App\User::find($id); ?>
+                                            <?php 
+                                                $user = \App\User::find($id);
 
-                                            @if($user)
-                                            {{ $user->first_name }}
-                                            @endif
+                                                if ($user) {
+                                                    $fullname = $user->first_name . ' ' . $user->last_name;
+
+                                                    array_push($show_members, $fullname);
+                                                }
+                                            ?>
                                         @endforeach
+
+                                        {{ str_limit( implode(",", $show_members), 30) }}
                                         </div>
                                         <div class="message_header">
                                             <small>{{ str_limit($room->messages->last()->message, 30) }}</small>
@@ -176,7 +178,7 @@ $(document).ready(function() {
 
     $.ajax({
       method: "POST",
-      url: "/message/show_room_conversation",
+      url: "/admin/message/show_room_conversation",
       data: { 
         room_id: room_id,
         _token: "{{ csrf_token() }}" 
@@ -204,7 +206,7 @@ $(document).ready(function() {
     
     $.ajax({
       method: "POST",
-      url: "/message/add_reply",
+      url: "/admin/message/add_reply",
       data: { 
         room_id: room_id,
         message: message,

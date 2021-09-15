@@ -45,6 +45,10 @@ Route::group(['middleware' => ['is_admin']], function() {
 	Route::get('/admin/subscriptions', 'AdminSubscriptionController@index');
 	Route::get('/admin/subscription/renew/{id}', 'AdminSubscriptionController@renew');
 	
+	Route::resource('admin/messages', 'AdminMessageController');
+	Route::post('/admin/message/show_room_conversation', 'AdminMessageController@show_room_conversation');
+	Route::post('/admin/message/add_reply', 'AdminMessageController@add_reply');
+
 	Route::get('/admin/billings', 'AdminBillingController@index');
 	Route::get('/admin/billing/view_estatements/{id}', 'AdminBillingController@view_estatements');
 	Route::get('/admin/billing/create/{id}', 'AdminBillingController@create_estatement');

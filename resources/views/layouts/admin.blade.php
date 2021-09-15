@@ -71,6 +71,10 @@
                 </li>
 
                 <li class="">
+                    <a href="{{ url('admin/messages') }}"><i class="fa fa-envelope"></i> Messages</a>
+                </li>
+
+                <li class="">
                     <a href="{{ url('admin/billings') }}">&nbsp;<i class="fa fa-file-alt"></i> Billings</a>
                 </li>
 
