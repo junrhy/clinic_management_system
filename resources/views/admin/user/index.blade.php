@@ -94,8 +94,10 @@
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->username }}</td>
                                         <td class="date">
-                                            {{ $user->last_active_at->format('M-d-Y, h:iA') }}<br>
-                                            <span class="diff">{{ $user->last_active_at->diffForHumans() }}</span>
+                                            @if($user->last_active_at != null)
+                                                {{ $user->last_active_at->format('M-d-Y, h:iA') }}<br>
+                                                <span class="diff">{{ $user->last_active_at->diffForHumans() }}</span>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
@@ -121,8 +123,10 @@
                                         <td>{{ $user->username }}</td>
                                         <td>{{ $user->client->name }}</td>
                                         <td class="date">
-                                            {{ $user->last_active_at->format('M-d-Y, h:iA') }}<br>
-                                            <span class="diff">{{ $user->last_active_at->diffForHumans() }}</span>
+                                            @if($user->last_active_at != null)
+                                                {{ $user->last_active_at->format('M-d-Y, h:iA') }}<br>
+                                                <span class="diff">{{ $user->last_active_at->diffForHumans() }}</span>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
