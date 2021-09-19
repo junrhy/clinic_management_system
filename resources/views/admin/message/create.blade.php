@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('page_level_css')
 <style type="text/css">
@@ -19,7 +19,7 @@
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
                         <ul class="breadcrumb float-md-right">
-                            <li class="breadcrumb-item"><a href="/home"><i class="fa fa-home"></i> {{ Auth::user()->client->name }}</a></li>
+                            <li class="breadcrumb-item"><a href="/admin"><i class="fa fa-home"></i> Admin Panel</a></li>
                             <li class="breadcrumb-item active"><strong style="color:#fff;">New Message</strong></li>
                         </ul>
                     </div>
@@ -36,33 +36,19 @@
                         </span>
                     @endif
 
-                    {{ Form::open(array('url' => 'message')) }}
+                    {{ Form::open(array('url' => 'admin/messages')) }}
                       <div class="form-group">
                         <div class="row">
                             <div class="col-md-5">
                                 {{ Form::label('recipient', 'Recipient') }}
                                 <select name="recipient" class="form-control">
                                     <option value="">Select Recipient</option>
-                                    
-                                    <optgroup label="Staffs">
-                                        @foreach($staffs as $staff)
-                                            @if($staff->id != auth()->user()->id)
-                                            <option value="{{ $staff->id }}">{{ $staff->first_name }} {{ $staff->last_name }}</option>
-                                            @endif
+
+                                    <optgroup label="Clients">
+                                        @foreach($clients as $user)
+                                        <option value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}</option>
                                         @endforeach
                                     </optgroup>
-
-                                    <optgroup label="Help Center">
-                                        <option value="helpcenter" style="font-weight:bold;">Customer Support</option>
-                                    </optgroup>
-
-              <!--                       <optgroup label="Patients">
-                                        @foreach($patients as $patient)
-                                            @if($patient->user_id != null)
-                                            <option value="{{ $patient->user->id }}">{{ $patient->first_name }} {{ $patient->last_name }}</option>
-                                            @endif
-                                        @endforeach
-                                    </optgroup> -->
                                 </select>
                             </div>
                         </div>

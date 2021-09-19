@@ -71,6 +71,10 @@
                 </li>
 
                 <li class="">
+                    <a href="{{ url('admin/messages') }}"><i class="fa fa-envelope"></i> Messages</a>
+                </li>
+
+                <li class="">
                     <a href="{{ url('admin/billings') }}">&nbsp;<i class="fa fa-file-alt"></i> Billings</a>
                 </li>
 
@@ -84,10 +88,6 @@
 
                 <li class="">
                     <a href="{{ url('admin/features') }}">&nbsp;<i class="fa fa-cube"></i> Features</a>
-                </li>
-
-                <li class="">
-                    <a href="{{ url('/tickets-admin') }}">&nbsp;<i class="fa fa-question"></i> Help Center</a>
                 </li>
 
                 <li class="">

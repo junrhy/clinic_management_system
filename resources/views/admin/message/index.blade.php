@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('page_level_script')
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
@@ -43,11 +43,6 @@
         padding-top: 15px;
     }
 
-    #contact-list {
-        height: 75vh;
-        overflow-y: auto;
-    }
-
     .contact-row {
         padding-top: 6px;
         padding-bottom: 6px;
@@ -67,15 +62,6 @@
     .required {
         border: 1px solid red;
     }
-
-    .hide {
-        display: none;
-    }
-
-    .setting-link:hover {
-        text-decoration: underline;
-        cursor: pointer;
-    }
 </style>
 @endsection
 
@@ -89,12 +75,12 @@
                         <h2>Messages <small class="text-muted">Message your patients</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
-                        <a class="btn btn-white btn-icon btn-round float-right m-l-10 {{ App\Model\FeatureUser::is_feature_allowed('add_message', Auth::user()->id) }}" href="{{ url('message/create') }}" type="button">
+                        <a class="btn btn-white btn-icon btn-round float-right m-l-10" href="{{ url('admin/messages/create') }}" type="button">
                             <i class="fa fa-plus"></i>
                         </a>
 
                         <ul class="breadcrumb float-md-right">
-                            <li class="breadcrumb-item"><a href="/home"><i class="fa fa-home"></i> {{ Auth::user()->client->name }}</a></li>
+                          <li class="breadcrumb-item"><a href="/admin"><i class="fa fa-home"></i> Admin Panel</a></li>
                             <li class="breadcrumb-item active"><strong style="color:#fff;">Messages</strong></li>
                         </ul>
                     </div>
@@ -110,7 +96,6 @@
                                 Contacts
                             </div>
 
-                            <div class="row" id="contact-list">
                             @foreach($rooms as $room)
                                 <?php
                                 $unread = "";
@@ -120,17 +105,18 @@
                                 if (!in_array(auth()->user()->id, $read_by_user_ids)) {
                                     $unread = "unread";
                                 }
-
-                                $show_members = [];
-                                $members = explode(",", $room->member_user_ids)
                                 ?>
 
-                                @if( in_array(auth()->user()->id, $members) )
-                                <div class="col-md-12 contact-row {{ $unread }}" data-room_id="{{ $room->id }}">
-                                    <div class="subject">
-                                        {{ $room->name }}
-                                    </div>
-                                    <div class="sender">
+                                <div class="row contact-row {{ $unread }}" data-room_id="{{ $room->id }}">
+                                    <div class="col-md-12">
+                                        <div class="subject">
+                                            {{ $room->name }}
+                                        </div>
+                                        <div class="sender">
+                                        <?php 
+                                        $show_members = [];
+                                        $members = explode(",", $room->member_user_ids) ?>
+                                        
                                         @foreach($members as $id)
                                             <?php 
                                                 $user = \App\User::find($id);
@@ -144,14 +130,13 @@
                                         @endforeach
 
                                         {{ str_limit( implode(",", $show_members), 30) }}
-                                    </div>
-                                    <div class="message_header">
-                                        <small>{{ str_limit($room->messages->last()->message, 30) }}</small>
+                                        </div>
+                                        <div class="message_header">
+                                            <small>{{ str_limit($room->messages->last()->message, 30) }}</small>
+                                        </div>
                                     </div>
                                 </div>
-                                @endif
                             @endforeach
-                            </div>
                         </div>
 
                         <div class="col-md-8" id="message_body">
@@ -173,13 +158,6 @@
                             <div class="row ui_header">
                                 Settings
                             </div>
-                            <br>
-                            <div class="row" id="">
-                                <div class="col-md-12" align="center">
-                                    <span class="setting-link hide" id="delete-conversation" data-room_id="">Delete Conversation</span>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                 </div>
@@ -205,7 +183,7 @@ $(document).ready(function() {
 
     $.ajax({
       method: "POST",
-      url: "/message/show_room_conversation",
+      url: "/admin/message/show_room_conversation",
       data: { 
         room_id: room_id,
         _token: "{{ csrf_token() }}" 
@@ -218,8 +196,6 @@ $(document).ready(function() {
       $("#new-message").removeAttr('disabled');
 
       thisElement.removeClass('unread');
-      $(".setting-link").removeClass('hide');
-      $("#delete-conversation").data('room_id', room_id);
     });
   });
 
@@ -237,7 +213,7 @@ $(document).ready(function() {
     
     $.ajax({
       method: "POST",
-      url: "/message/add_reply",
+      url: "/admin/message/add_reply",
       data: { 
         room_id: room_id,
         message: message,
@@ -252,39 +228,6 @@ $(document).ready(function() {
       $("#new-message").val("");
       $("#new-message").focus();
     });
-  });
-
-  $("#delete-conversation").click(function(){
-    var room_id = $(this).data('room_id');
-
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You are about to delete this conversation. You won't be able to revert this!",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.value) {
-        $.ajax({
-          method: "DELETE",
-          url: "/message/delete_conversation/" + room_id,
-          data: { 
-            _token: "{{ csrf_token() }}" 
-          }
-        })
-        .done(function( msg ) {
-          Swal.fire(
-            'Deleted!',
-            'Conversation has been deleted.',
-            'success'
-          ).then((result) => {
-            location.reload();
-          });
-        });
-      }
-    })
   });
 });
 </script>

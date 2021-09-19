@@ -99,11 +99,9 @@
                     <a href="{{ url('home') }}"><i class="fa fa-chalkboard"></i>Dashboard</a>
                 </li>
 
-                @if(env('APP_ENV') == 'local')
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('messages', Auth::user()->id) }}">
                     <a href="{{ url('message') }}"><i class="fa fa-envelope"></i> Messages</a>
                 </li>
-                @endif
 
               @if(Auth::user()->client->is_active && Auth::user()->client->is_suspended == 0)
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('appointment', Auth::user()->id) }}">

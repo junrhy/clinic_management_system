@@ -45,6 +45,10 @@ Route::group(['middleware' => ['is_admin']], function() {
 	Route::get('/admin/subscriptions', 'AdminSubscriptionController@index');
 	Route::get('/admin/subscription/renew/{id}', 'AdminSubscriptionController@renew');
 	
+	Route::resource('admin/messages', 'AdminMessageController');
+	Route::post('/admin/message/show_room_conversation', 'AdminMessageController@show_room_conversation');
+	Route::post('/admin/message/add_reply', 'AdminMessageController@add_reply');
+
 	Route::get('/admin/billings', 'AdminBillingController@index');
 	Route::get('/admin/billing/view_estatements/{id}', 'AdminBillingController@view_estatements');
 	Route::get('/admin/billing/create/{id}', 'AdminBillingController@create_estatement');
@@ -99,6 +103,7 @@ Route::group(['middleware' => ['is_default']], function() {
 	Route::resource('message', 'MessageController');
 	Route::post('/message/show_room_conversation', 'MessageController@show_room_conversation');
 	Route::post('/message/add_reply', 'MessageController@add_reply');
+	Route::delete('/message/delete_conversation/{room_id}', 'MessageController@delete_conversation');
 
 	Route::get('/business_information', 'AccountController@business_information');
 	Route::post('/update_business_information', 'AccountController@update_business_information');
