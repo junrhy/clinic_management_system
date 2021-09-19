@@ -29,7 +29,7 @@ class MessageController extends Controller
 
     public function create()
     {
-        $staffs = User::where('client_id', Auth::user()->client_id)->orderBy('last_name', 'ASC')->get();
+        $staffs = User::where('client_id', Auth::user()->client_id)->where('type', 'default')->orderBy('last_name', 'ASC')->get();
         $patients = Patient::where('client_id', Auth::user()->client_id)->orderBy('last_name', 'ASC')->get();
 
         return view('message.create')
