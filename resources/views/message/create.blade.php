@@ -44,6 +44,14 @@
                                 <select name="recipient" class="form-control">
                                     <option value="">Select Recipient</option>
                                     
+                                    <optgroup label="Staffs">
+                                        @foreach($staffs as $staff)
+                                            @if($staff->id != auth()->user()->id)
+                                            <option value="{{ $staff->id }}">{{ $staff->first_name }} {{ $staff->last_name }}</option>
+                                            @endif
+                                        @endforeach
+                                    </optgroup>
+
                                     <optgroup label="Help Center">
                                         <option value="helpcenter" style="font-weight:bold;">Customer Support</option>
                                     </optgroup>

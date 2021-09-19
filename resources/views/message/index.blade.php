@@ -43,6 +43,11 @@
         padding-top: 15px;
     }
 
+    #contact-list {
+        height: 75vh;
+        overflow-y: auto;
+    }
+
     .contact-row {
         padding-top: 6px;
         padding-bottom: 6px;
@@ -61,6 +66,15 @@
 
     .required {
         border: 1px solid red;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .setting-link:hover {
+        text-decoration: underline;
+        cursor: pointer;
     }
 </style>
 @endsection
@@ -96,42 +110,48 @@
                                 Contacts
                             </div>
 
+                            <div class="row" id="contact-list">
                             @foreach($rooms as $room)
                                 <?php
                                 $unread = "";
+
+                                $read_by_user_ids = explode(",", $room->read_by_user_ids);
+
+                                if (!in_array(auth()->user()->id, $read_by_user_ids)) {
+                                    $unread = "unread";
+                                }
+
+                                $show_members = [];
+                                $members = explode(",", $room->member_user_ids)
                                 ?>
 
-                                <div class="row contact-row {{ $unread }}" data-room_id="{{ $room->id }}">
-                                    <div class="col-md-12">
-                                        <?php if ($room->is_for_admin) {
-                                            $recipient = "Customer Support";
-                                        } else {
-                                            $recipient = $room->member_user_ids;
-                                        } ?>
-
-                                        <div class="subject">
-                                            {{ $room->name }}
-                                        </div>
-                                        <div class="sender">
-                                        @if($recipient == "Customer Support")
-                                            Customer Support
-                                        @endif
-
-                                        <?php $members = explode(",", $recipient) ?>
+                                @if( in_array(auth()->user()->id, $members) )
+                                <div class="col-md-12 contact-row {{ $unread }}" data-room_id="{{ $room->id }}">
+                                    <div class="subject">
+                                        {{ $room->name }}
+                                    </div>
+                                    <div class="sender">
                                         @foreach($members as $id)
-                                            <?php $user = \App\User::find($id); ?>
+                                            <?php 
+                                                $user = \App\User::find($id);
 
-                                            @if($user)
-                                            {{ $user->first_name }}
-                                            @endif
+                                                if ($user) {
+                                                    $fullname = $user->first_name . ' ' . $user->last_name;
+
+                                                    array_push($show_members, $fullname);
+                                                }
+                                            ?>
                                         @endforeach
-                                        </div>
-                                        <div class="message_header">
-                                            <small>{{ str_limit($room->messages->last()->message, 30) }}</small>
-                                        </div>
+
+                                        {{ str_limit( implode(",", $show_members), 30) }}
+                                    </div>
+                                    <div class="message_header">
+                                        <small>{{ str_limit($room->messages->last()->message, 30) }}</small>
                                     </div>
                                 </div>
+                                @endif
                             @endforeach
+                            </div>
                         </div>
 
                         <div class="col-md-8" id="message_body">
@@ -153,6 +173,13 @@
                             <div class="row ui_header">
                                 Settings
                             </div>
+                            <br>
+                            <div class="row" id="">
+                                <div class="col-md-12" align="center">
+                                    <span class="setting-link hide" id="delete-conversation" data-room_id="">Delete Conversation</span>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -168,6 +195,8 @@
 <script type="text/javascript">
 $(document).ready(function() {
   $(".contact-row").unbind().click(function(){
+    var thisElement = $(this);
+
     $("#message_content").animate({ scrollTop: $(document).height() }, 1000);
 
     var room_id = $(this).data('room_id');
@@ -187,6 +216,10 @@ $(document).ready(function() {
 
       $("#send-message").removeAttr('disabled');
       $("#new-message").removeAttr('disabled');
+
+      thisElement.removeClass('unread');
+      $(".setting-link").removeClass('hide');
+      $("#delete-conversation").data('room_id', room_id);
     });
   });
 
@@ -219,6 +252,39 @@ $(document).ready(function() {
       $("#new-message").val("");
       $("#new-message").focus();
     });
+  });
+
+  $("#delete-conversation").click(function(){
+    var room_id = $(this).data('room_id');
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You are about to delete this conversation. You won't be able to revert this!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.value) {
+        $.ajax({
+          method: "DELETE",
+          url: "/message/delete_conversation/" + room_id,
+          data: { 
+            _token: "{{ csrf_token() }}" 
+          }
+        })
+        .done(function( msg ) {
+          Swal.fire(
+            'Deleted!',
+            'Conversation has been deleted.',
+            'success'
+          ).then((result) => {
+            location.reload();
+          });
+        });
+      }
+    })
   });
 });
 </script>

@@ -99,20 +99,23 @@
                             @foreach($rooms as $room)
                                 <?php
                                 $unread = "";
+
+                                $read_by_user_ids = explode(",", $room->read_by_user_ids);
+
+                                if (!in_array(auth()->user()->id, $read_by_user_ids)) {
+                                    $unread = "unread";
+                                }
                                 ?>
 
                                 <div class="row contact-row {{ $unread }}" data-room_id="{{ $room->id }}">
                                     <div class="col-md-12">
-                                        <?php 
-                                        $recipient = $room->member_user_ids;
-                                        $show_members = [];
-                                        ?>
-                                        
                                         <div class="subject">
                                             {{ $room->name }}
                                         </div>
                                         <div class="sender">
-                                        <?php $members = explode(",", $recipient) ?>
+                                        <?php 
+                                        $show_members = [];
+                                        $members = explode(",", $room->member_user_ids) ?>
                                         
                                         @foreach($members as $id)
                                             <?php 
@@ -170,6 +173,8 @@
 <script type="text/javascript">
 $(document).ready(function() {
   $(".contact-row").unbind().click(function(){
+    var thisElement = $(this);
+
     $("#message_content").animate({ scrollTop: $(document).height() }, 1000);
 
     var room_id = $(this).data('room_id');
@@ -189,6 +194,8 @@ $(document).ready(function() {
 
       $("#send-message").removeAttr('disabled');
       $("#new-message").removeAttr('disabled');
+
+      thisElement.removeClass('unread');
     });
   });
 
