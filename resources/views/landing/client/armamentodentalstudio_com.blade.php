@@ -73,11 +73,11 @@
     <div class="navbar-header">
     @if ($domain && $domain->client->logo != "")
         @if(env('FILESYSTEM_DRIVER') == 'spaces')
-        <a href="/"><img class="img-navbar-brand" src="{{ asset('https://file-server1.sfo2.digitaloceanspaces.com/' . $client->logo) }}"></a>
+        <a href="/"><img class="img-navbar-brand" src="{{ asset('https://file-server1.sfo2.digitaloceanspaces.com/' . $domain->client->logo) }}"></a>
         @endif
 
         @if(env('FILESYSTEM_DRIVER') == 'public')
-        <a href="/"><img class="img-navbar-brand" src="{{ asset('storage/' . $client->logo) }}"></a>
+        <a href="/"><img class="img-navbar-brand" src="{{ asset('storage/' . $domain->client->logo) }}"></a>
         @endif
 
         
