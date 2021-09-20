@@ -76,11 +76,6 @@
         <a href="/"><img class="img-navbar-brand" src="{{ asset('https://file-server1.sfo2.digitaloceanspaces.com/' . $domain->client->logo) }}"></a>
         @endif
 
-        @if(env('FILESYSTEM_DRIVER') == 'public')
-        <a href="/"><img class="img-navbar-brand" src="{{ asset('storage/' . $domain->client->logo) }}"></a>
-        @endif
-
-        
     @else
         <h3 class="text-center" style="font-weight:bold;color:#01d8da;font-family: 'Nunito';">
           <i class="fa fa-clinic-medical"></i> CMS <br>
@@ -92,7 +87,7 @@
     <ul class="nav navbar-nav" style="margin-top:10px;">
         <li class="nav-item"><a class="nav-link" href="#doctors">Doctors</a></li>
         <li class="nav-item"><a class="nav-link" href="#clinicschedule">Clinic Schedule</a></li>
-        <li class="nav-item"><a class="nav-link" href="/patient-registration-form?profile={{ $client->slug }}&cid={{ $client->id }}">Patient Registration</a></li>
+        <li class="nav-item"><a class="nav-link" href="/patient-registration-form?profile={{ $domain->client->slug }}&cid={{ $domain->client->id }}">Patient Registration</a></li>
         <li class="nav-item" style="margin-right: 100px;"><a class="nav-link" href="{{ route('login') }}">Account Login</a></li>
         <li class="nav-item"><a class="btn btn-appointment" href="#bookanappointment" style="margin-left:15px;">Book an appointment </a></li>
     </ul>
