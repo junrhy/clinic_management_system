@@ -14,6 +14,7 @@ use App\Model\PatientDetail;
 use App\Model\Domain;
 use App\Model\Subscription;
 use App\Model\Client;
+use App\Model\MessageRoom;
 
 use Carbon\Carbon;
 
@@ -63,6 +64,7 @@ class HomeController extends Controller
         $clinic_count = $clinics->count();
         $doctor_count = $doctors->count();
         $service_count = $services->count();
+        $unread_message_count = MessageRoom::user_unread_messages(auth()->user()->client_id, auth()->user()->id);
 
         return view('home')
                 ->with('domains', $domains)
@@ -72,7 +74,8 @@ class HomeController extends Controller
                 ->with('patient_count', $patient_count)
                 ->with('clinic_count', $clinic_count)
                 ->with('doctor_count', $doctor_count)
-                ->with('service_count', $service_count);
+                ->with('service_count', $service_count)
+                ->with('unread_message_count', $unread_message_count);
     }
 
 }

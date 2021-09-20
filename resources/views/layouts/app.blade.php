@@ -100,7 +100,14 @@
                 </li>
 
                 <li class="{{ App\Model\FeatureUser::is_feature_allowed('messages', Auth::user()->id) }}">
-                    <a href="{{ url('message') }}"><i class="fa fa-envelope"></i> Messages</a>
+                    <a href="{{ url('message') }}"><i class="fa fa-envelope"></i> Messages
+
+                        <?php $unread_message_count = App\Model\MessageRoom::user_unread_messages(auth()->user()->client_id, auth()->user()->id) ?>
+
+                        @if($unread_message_count > 0)
+                        <span style="position: relative;top: -8px;right: -7px;padding: 1px 4px 2px 4px;background-color: red;color: white;font-size: 8pt;border-radius: 50%;font-family: sans-serif;">{{ $unread_message_count }}</span>
+                        @endif
+                    </a>
                 </li>
 
               @if(Auth::user()->client->is_active && Auth::user()->client->is_suspended == 0)

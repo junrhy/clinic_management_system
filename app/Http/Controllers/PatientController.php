@@ -122,7 +122,7 @@ class PatientController extends Controller
 
         $clinics = Clinic::where('client_id', Auth::user()->client_id)->orderBy('name', 'asc')->get();
 
-        $doctors = Doctor::select(DB::raw("CONCAT(first_name,' ',last_name) AS fullname"),'id')
+        $doctors = Doctor::select(DB::raw("CONCAT(first_name,' ',last_name) AS fullname"), 'ptr_no', 'id')
                             ->where('client_id', Auth::user()->client_id)
                             ->orderBy('first_name', 'asc')
                             ->get();

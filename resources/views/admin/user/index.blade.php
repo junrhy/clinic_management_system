@@ -28,10 +28,6 @@
                         <h2>Users <small class="text-muted">Manage web app users</small></h2>
                     </div>            
                     <div class="col-lg-7 col-md-7 col-sm-12 text-right">
-                        <a class="btn btn-white btn-icon btn-round float-right m-l-10" href="{{ url('/admin/setting/create') }}" type="button">
-                            <i class="fa fa-plus"></i>
-                        </a>
-
                         <ul class="breadcrumb float-md-right">
                             <li class="breadcrumb-item"><a href="/admin"><i class="fa fa-home"></i> Admin Panel</a></li>
                             <li class="breadcrumb-item active">Users</li>

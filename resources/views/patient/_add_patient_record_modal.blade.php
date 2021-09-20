@@ -99,7 +99,7 @@
                     <select name="doctor" class='form-control'>
                       <option value='' disabled>Select Doctor</option>
                       @foreach($doctors as $doctor)
-                      <option value="{{ $doctor->id }}">{{ $doctor->fullname }}</option>
+                      <option value="{{ $doctor->id }}">{{ $doctor->fullname }} #{{ $doctor->ptr_no }}</option>
                       @endforeach
                     </select>
                   </div>
