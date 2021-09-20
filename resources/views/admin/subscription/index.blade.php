@@ -10,7 +10,9 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
 
 <style type="text/css">
-
+    .subscription-row {
+        font-family: sans-serif;
+    }
 </style>
 @endsection
 
@@ -51,13 +53,13 @@
                             </thead>
                             <tbody>
                                 @foreach($subscriptions as $subscription)
-                                <tr>
+                                <tr class="subscription-row">
                                     <td>{{ $subscription->client->name }} ( #{{ $subscription->client->account_number }} )</td>
                                     <td>{{ $subscription->plan }}</td>
-                                    <td>{{ $subscription->amount }}</td>
+                                    <td>{{ number_format($subscription->amount, 2) }}</td>
                                     <td>{{ $subscription->frequency }}</td>
-                                    <td>{{ $subscription->start->format('M d, Y') }}</td>
-                                    <td>{{ $subscription->end->format('M d, Y') }}</td>
+                                    <td>{{ $subscription->start->format('M d, Y h:iA') }}</td>
+                                    <td>{{ $subscription->end->format('M d, Y h:iA') }}</td>
                                     <td>{{ \Carbon\Carbon::now()->diffInDays($subscription->end, false) }} Days</td>
                                     <td>
                                         <a href="/admin/subscription/renew/{{ $subscription->id }}">Renew</a>
