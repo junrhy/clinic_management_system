@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Mail;
 
 use App\Model\Domain;
 use App\Model\Client;
+use App\Model\MessageRoom;
+use App\Model\Message;
+use App\User;
 
 use App\Mail\ContactUsMessage;
 
@@ -55,5 +58,35 @@ class LandingController extends Controller
         Mail::send(new ContactUsMessage($request));
 
         return redirect()->back()->with('success', 'Your message has been sent! A representative will contact you shortly.');
+    }
+
+    public function book_appointment(Request $request)
+    {
+        $member_ids = [];
+
+        $client_users = User::select('id')
+                        ->where('client_id', $request->client_id)
+                        ->where('type', 'default')
+                        ->get();
+
+        foreach ($client_users as $user) {
+            array_push($member_ids, $user->id);
+        }
+
+        $room = new MessageRoom;
+        $room->client_id = $request->client_id;
+        $room->name = $request->subject;
+        $room->member_user_ids = implode(",", $member_ids);
+        $room->read_by_user_ids = 0;
+        $room->is_for_admin = 0;
+        $room->is_no_reply = 1;
+        $room->save();
+
+        $message = new Message;
+        $message->client_id = $request->client_id;
+        $message->room_id = $room->id;
+        $message->user_id = 0;
+        $message->message = "First Name: ".$request->first_name."<br/>"."Last Name: ".$request->last_name."<br/>"."Mobile #: ".$request->mobile_number."<br/>"."Email: ".$request->email."<br/>"."Subject: ".$request->subject."<br/><br/>"."Message: <br/><br/>".$request->message_body;
+        $message->save();
     }
 }

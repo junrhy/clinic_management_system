@@ -146,7 +146,8 @@
                                         {{ str_limit( implode(",", $show_members), 30) }}
                                     </div>
                                     <div class="message_header">
-                                        <small>{{ str_limit($room->messages->last()->message, 30) }}</small>
+                                        <?php  $last_message = str_replace("<br/>", "", $room->messages->last()->message) ?>
+                                        <small>{{ str_limit($last_message, 30) }}</small>
                                     </div>
                                 </div>
                                 @endif
@@ -214,8 +215,10 @@ $(document).ready(function() {
     .done(function( src ) {
       $("#message_content").html(src);
 
-      $("#send-message").removeAttr('disabled');
-      $("#new-message").removeAttr('disabled');
+      if ($("#is-no-reply").val() == "") {
+          $("#send-message").removeAttr('disabled');
+          $("#new-message").removeAttr('disabled');
+      }
 
       thisElement.removeClass('unread');
       $(".setting-link").removeClass('hide');
