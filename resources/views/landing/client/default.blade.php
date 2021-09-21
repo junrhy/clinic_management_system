@@ -37,9 +37,8 @@
     }
 
     .btn-appointment:hover {
-        background: #ffffff;
-        color: #DAA520;
-        border: 1px solid #DAA520;
+        background: #DAA520;
+        color: #ffffff;
     }
 
     .btn-appointment:active {
@@ -56,9 +55,18 @@
         color: #000000;
     }
 
-    .navbar-nav > li > a:hover {
-        background: #ffffff;
+    .navbar-nav > li > a.nav-link {
+        background: #FFFFFF;
+        color: #262626;
+    }
+
+    .navbar-nav > li > a.nav-link:hover {
         color: #DAA520;
+    }
+
+    .navbar-nav > li > a.btn-appointment {
+        background: #DAA520;
+        color: #FFFFFF;
     }
 
     .section {
@@ -66,6 +74,15 @@
         color: #262626;
         margin-top: 15px;
         font-weight: bold;
+    }
+
+    .required-textfield {
+        border: 1px solid red;
+    }
+
+    #booking-notification {
+        color: green;
+        font-size: 10pt;
     }
 </style>
 
@@ -106,18 +123,17 @@
     <div class="col-md-12">
         <br>
         <br>
-        <hr>
-        <br>
-        <br>
         <h1 class="section" id="doctors">Doctors</h1>
+        <hr>
         <br>
         <br>
         <br>
     </div>
 
     <div class="col-md-12 table-responsive">
-        <hr>
         <h1 class="section" id="clinicschedule">Clinic Schedule</h1>
+        <hr>
+        <br>
         <table class="table table-schedule" border="1">
             <tr>
                 <th></th>
@@ -235,23 +251,120 @@
     <div class="col-md-12">
         <br>
         <br>
-        <hr>
         <h1 class="section" id="bookanappointment">Book an Appointment</h1>
+        <hr>
+        <div align="center">Fill up the form below. A representative will contact you to finalize your appointment.</div>
         <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-2">
+                <label>First Name</label>
+                <input type="text" name="first_name" class="form-control">
+            </div>
 
+            <div class="col-md-4">
+                <label>Last Name</label>
+                <input type="text" name="last_name" class="form-control">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-2">
+                <label>Mobile Number</label>
+                <input type="text" name="mobile_number" class="form-control">
+            </div>
+
+            <div class="col-md-4">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <label>Subject</label>
+                <input type="text" name="subject" class="form-control">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <label>Message</label>
+                <textarea id="message_body" style="height: 150px; resize: none;" class="form-control"></textarea>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <button id="submit-appointment" class="btn btn-appointment btn-block btn-lg" data-client_id="{{ $client->id }}">Book Appointment</button>
+            </div>
+            <div class="col-md-8 col-md-offset-2" align="center" id="booking-notification"></div>
+        </div>
+        <br>
+        <br>
     </div>
+
 </div>
 
 <div class="container-fluid">
     <div class="row" style="text-align:center;padding: 10px;background-color: #262626;color: #ffffff;">
-        Copyright &copy; Armamento Dental Studio. All rights reserved.
+        Copyright &copy; {{ $client->name }}. All rights reserved.
     </div>
 </div>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#submit-appointment").click(function(){
+        var first_name = $("input[name='first_name']").val();
+        var last_name = $("input[name='last_name']").val();
+        var mobile_number = $("input[name='mobile_number']").val();
+        var email = $("input[name='email']").val();
+        var subject = $("input[name='subject']").val();
+        var message_body = $("#message_body").val();
+        var client_id = $(this).data('client_id');
+
+        $("input[name='first_name']").removeClass('required-textfield');
+        $("input[name='last_name']").removeClass('required-textfield');
+        $("input[name='mobile_number']").removeClass('required-textfield');
+        $("input[name='email']").removeClass('required-textfield');
+        $("input[name='subject']").removeClass('required-textfield');
+        $("#message_body").removeClass('required-textfield');
+
+        if (first_name == "") { $("input[name='first_name']").addClass('required-textfield') }
+        if (last_name == "") { $("input[name='last_name']").addClass('required-textfield') }
+        if (mobile_number == "") { $("input[name='mobile_number']").addClass('required-textfield') }
+        if (email == "") { $("input[name='email']").addClass('required-textfield') }
+        if (subject == "") { $("input[name='subject']").addClass('required-textfield') }
+        if (message_body == "") { $("#message_body").addClass('required-textfield'); }
+
+        if (first_name != "" && last_name != "" && mobile_number != "" && email != "" && subject != "" && message_body != "") {
+            $.ajax({
+                method: "POST",
+                url: "/landing/book_appointment",
+                data: { 
+                  client_id: client_id,
+                  first_name: first_name,
+                  last_name: last_name,
+                  mobile_number: mobile_number,
+                  email: email,
+                  subject: subject,
+                  message_body: message_body,
+                  _token: "{{ csrf_token() }}" 
+                }
+            })
+            .done(function( src ) {
+                $("#booking-notification").text("Appointment request successfully sent.");
+
+                $("input[name='first_name']").val('');
+                $("input[name='last_name']").val('');
+                $("input[name='mobile_number']").val('');
+                $("input[name='email']").val('');
+                $("input[name='subject']").val('');
+                $("#message_body").val('');
+            });
+        }
+    });
+});    
+</script>
 @endsection
