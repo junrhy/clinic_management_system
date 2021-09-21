@@ -292,7 +292,7 @@
         <br>
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <button id="submit-appointment" class="btn btn-appointment btn-block btn-lg" data-client_id="{{ $client->id }}">Book Appointment</button>
+                <button id="submit-appointment" class="btn btn-appointment btn-block btn-lg" data-client_id="{{ $domain->client->id }}">Book Appointment</button>
             </div>
             <div class="col-md-8 col-md-offset-2" align="center" id="booking-notification"></div>
         </div>
