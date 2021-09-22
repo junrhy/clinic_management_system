@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3 m-t-200">
-            <div class="panel">
+            <div class="panel panel-default">
                 <div class="panel-heading">
                     @if ($domain && $domain->client->logo != "")
                         <a href="/"><img src="{{ asset('https://file-server1.sfo2.digitaloceanspaces.com/'. $domain->client->logo) }}" class="col-md-10 col-sm-10 col-xs-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1"></a>
@@ -43,7 +43,7 @@
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <div class="col-md-10 col-md-offset-1">
                                 <div class="input-group input-lg">
-                                    <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
+                                    <input id="password" type="password" class="form-control" name="password" placeholder="Enter Password" required>
                                     <span class="input-group-addon">
                                         <i class="fa fa-key"></i>
                                     </span>
