@@ -8,7 +8,7 @@
                 <div class="panel-heading">
                     @if ($domain && $domain->client->logo != "")
                         <a href="/"><img src="{{ asset('https://file-server1.sfo2.digitaloceanspaces.com/'. $domain->client->logo) }}" class="col-md-10 col-sm-10 col-xs-10 col-md-offset-1 col-sm-offset-1 col-xs-offset-1"></a>
-                        <br><br><br><br><br>
+                        <br><br><br><br><br><br>
                     @else
                         <h3 class="text-center" style="font-weight:bold;color:#018d8e;">
                           <i class="fa fa-clinic-medical"></i> Clinic Management Software
