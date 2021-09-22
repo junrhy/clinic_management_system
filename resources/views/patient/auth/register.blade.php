@@ -28,11 +28,11 @@
                 <br>
             @endif
 
-            <div class="panel panel-primary">
+            <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="text-center" style="font-weight:bold;color:#ffffff;"><i class="fa fa-notes-medical"></i> Patient Registration Form</h3>
+                    <h3 class="text-center" style="font-weight:bold;color:#018d8e;"><i class="fa fa-notes-medical"></i> Patient Registration Form</h3>
                 </div>
-
+                
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('create_patient_user') }}">
                         {{ csrf_field() }}
