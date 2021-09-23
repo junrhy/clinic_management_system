@@ -86,6 +86,34 @@
         color: green;
         font-size: 10pt;
     }
+     
+    .navbar-nav > li.login-right-spacer {
+        margin-right: 100px;
+    }
+
+    @media (max-width: 1024px) {
+        .navbar-nav > li.non-priority-link {
+            display: none;
+        }
+
+        .navbar-nav > li.login-right-spacer {
+            margin-right: 0px;
+        }
+
+        .img-navbar-brand {
+            margin-right: 0px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .navbar-nav > li {
+            display: none;
+        }
+
+        .navbar-header {
+            text-align: center;
+        }
+    }
 </style>
 
 <div class="container">
@@ -107,17 +135,17 @@
     </div>
 
     <ul class="nav navbar-nav" style="margin-top:10px;">
-        <li class="nav-item"><a class="nav-link" href="#doctors">Doctors</a></li>
-        <li class="nav-item"><a class="nav-link" href="#clinicschedule">Clinic Schedule</a></li>
+        <li class="nav-item non-priority-link"><a class="nav-link" href="#doctors">Doctors</a></li>
+        <li class="nav-item non-priority-link"><a class="nav-link" href="#clinicschedule">Clinic Schedule</a></li>
         <li class="nav-item"><a class="nav-link" href="/patient-registration-form?profile={{ $client->slug }}&cid={{ $client->id }}">Patient Registration</a></li>
-        <li class="nav-item" style="margin-right: 100px;"><a class="nav-link" href="{{ route('login') }}">Account Login</a></li>
-        <li class="nav-item"><a class="btn btn-appointment" href="#bookanappointment" style="margin-left:15px;">Book an appointment </a></li>
+        <li class="nav-item login-right-spacer"><a class="nav-link" href="{{ route('login') }}">Account Login</a></li>
+        <li class="nav-item"><a class="btn btn-appointment" href="#bookanappointment">Book an appointment </a></li>
     </ul>
 </div>
 
 <div class="container-fluid">
-    <div class="row table-responsive" style="text-align: center;background-color: #262626;">
-        <img class="" style="height:80vh;border-top: 2px solid #262626;border-bottom: 2px solid #262626;" src="/img/client-images/armamentodentalstudio/bg.jpeg">
+    <div class="row" style="text-align: center;background-color: #262626;">
+        <img class="col-md-8 col-sm-12 col-xs-12 col-md-offset-2" style="border-top: 2px solid #262626;border-bottom: 2px solid #262626;" src="/img/client-images/armamentodentalstudio/bg.jpeg">
     </div>
 </div>
 
