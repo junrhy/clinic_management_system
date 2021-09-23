@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use App\User;
 use App\Model\AdminSetting;
 use App\Model\Client;
+use App\Model\MessageRoom;
 
 use Hash;
 use Auth;
@@ -74,10 +75,12 @@ class AdminController extends Controller
 
         $clients = Client::all();
         $users = User::all();
+        $unread_message_count = MessageRoom::admin_unread_messages();
 
         return view('admin.index')
                 ->with('clients', $clients)
-                ->with('users', $users);
+                ->with('users', $users)
+                ->with('unread_message_count', $unread_message_count);
     }
 
     public function change_password()

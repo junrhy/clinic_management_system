@@ -71,7 +71,14 @@
                 </li>
 
                 <li class="">
-                    <a href="{{ url('admin/messages') }}"><i class="fa fa-envelope"></i> Messages</a>
+                    <a href="{{ url('admin/messages') }}"><i class="fa fa-envelope"></i> Messages
+
+                        <?php $unread_message_count = App\Model\MessageRoom::admin_unread_messages(auth()->user()->id) ?>
+
+                        @if($unread_message_count > 0)
+                        <span style="position: relative;top: -8px;right: -7px;padding: 1px 4px 2px 4px;background-color: red;color: white;font-size: 8pt;border-radius: 50%;font-family: sans-serif;">{{ $unread_message_count }}</span>
+                        @endif
+                    </a>
                 </li>
 
                 <li class="">

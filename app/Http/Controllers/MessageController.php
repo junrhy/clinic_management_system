@@ -121,6 +121,7 @@ class MessageController extends Controller
         $messages = Message::where('room_id', $request->room_id)->orderBy('created_at', 'ASC')->get();
 
         return view('message._show_conversation')
+                    ->with('room', $room)
                     ->with('messages', $messages);
     }
 

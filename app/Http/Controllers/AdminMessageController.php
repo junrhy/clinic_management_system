@@ -66,9 +66,9 @@ class AdminMessageController extends Controller
 
         $read_by_user_ids = explode(",", $room->read_by_user_ids);
         
-        if (!in_array(Auth::user()->id, $read_by_user_ids))
+        if (!in_array('helpcenter', $read_by_user_ids))
         {
-            array_push($read_by_user_ids, Auth::user()->id);
+            array_push($read_by_user_ids, 'helpcenter');
         }
 
         $room->read_by_user_ids = implode(",", $read_by_user_ids);
