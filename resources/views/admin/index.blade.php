@@ -80,6 +80,11 @@
                             <h2 class="number count-to m-t-0 m-b-5" data-from="0" data-to="501" data-speed="1000" data-fresh-interval="700">{{ $users->count() }}</h2>
                             <p class="text-muted">Users</p>
                         </div>
+
+                        <div class="card card-color-2 col-md-2">
+                            <h2 class="number count-to m-t-0 m-b-5" data-from="0" data-to="501" data-speed="1000" data-fresh-interval="700">{{ $unread_message_count }}</h2>
+                            <p class="text-muted">Messages</p>
+                        </div>
                     </div>
                 </div>
             </div>

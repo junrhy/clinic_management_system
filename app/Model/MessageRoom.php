@@ -30,4 +30,24 @@ class MessageRoom extends Model
 
         return $unread;
     }
+
+    public static function admin_unread_messages()
+    {
+        $rooms = MessageRoom::where('is_for_admin', true)->get();
+        
+        $unread = 0;
+        foreach ($rooms as $room) {
+            $member_ids = explode(',', $room->member_user_ids);
+
+            if (in_array('helpcenter', $member_ids)) {
+                $read_by_user_ids = explode(',', $room->read_by_user_ids);
+
+                if ( !in_array('helpcenter', $read_by_user_ids) ) {
+                    $unread++;
+                }
+            }
+        }
+
+        return $unread;
+    }
 }

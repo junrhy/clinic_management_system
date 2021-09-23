@@ -29,9 +29,11 @@ if ($message->user_id == 0 || $message->sender->id == auth()->user()->id) {
 		{{ $message->created_at->format('D') }} at {{ $message->created_at->format('h:iA') }}
 	</small><br>
 	@else
-	<small style="font-size:8pt;font-family: sans-serif;">Guest | 
-		{{ $message->created_at->format('D') }} at {{ $message->created_at->format('h:iA') }}
-	</small><br>
+		@if($message->user_id == 0)
+		<small style="font-size:8pt;font-family: sans-serif;">Guest | 
+			{{ $message->created_at->format('D') }} at {{ $message->created_at->format('h:iA') }}
+		</small><br>
+		@endif
 	@endif
 
 	<div style="background-color: {{ $bg_color }};color: {{ $color }};padding: 10px;border-radius: {{ $border_radius }};display: inline-block;border-bottom: 1px solid #fff;">
