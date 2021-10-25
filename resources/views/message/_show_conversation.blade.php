@@ -54,6 +54,6 @@ if ($message->user_id != 0) {
 <div class="col-md-12">
 	<br>
 	@if($room->is_no_reply == 1)
-	<div align="center" style="color: #ccc;font-size: 8pt;font-weight: bold;">Conversation is disabled. You cannot reply on this message.</div>
+	<div align="center" style="color: #ccc;font-size: 8pt;font-weight: bold;">Sender does not support replies.</div>
 	@endif
 </div>
