@@ -23,14 +23,14 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        if (Schema::hasTable('domains'))
-        {
-            $domain_name = $request->gethost();
+        // if (Schema::hasTable('domains'))
+        // {
+        //     $domain_name = $request->gethost();
 
-            $domain = Domain::where('domain_name', $domain_name)->first();
+        //     $domain = Domain::where('domain_name', $domain_name)->first();
 
-            view()->share('domain', $domain);
-        }
+        //     view()->share('domain', $domain);
+        // }
 
         if (Schema::hasTable('admin_settings')) {
             $app_currency = AdminSetting::where('name', 'app_currency')->first();
