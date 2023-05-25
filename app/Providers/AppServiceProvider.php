@@ -23,34 +23,34 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        // if (Schema::hasTable('domains'))
-        // {
-        //     $domain_name = $request->gethost();
+        if (Schema::hasTable('domains'))
+        {
+            $domain_name = $request->gethost();
 
-        //     $domain = Domain::where('domain_name', $domain_name)->first();
+            $domain = Domain::where('domain_name', $domain_name)->first();
 
-        //     view()->share('domain', $domain);
-        // }
+            view()->share('domain', $domain);
+        }
 
-        // if (Schema::hasTable('admin_settings')) {
-        //     $app_currency = AdminSetting::where('name', 'app_currency')->first();
-        //     view()->share('app_currency', $app_currency->value);
+        if (Schema::hasTable('admin_settings')) {
+            $app_currency = AdminSetting::where('name', 'app_currency')->first();
+            view()->share('app_currency', $app_currency->value);
 
-        //     $bill_website_url = AdminSetting::where('name', 'bill_website_url')->first();
-        //     view()->share('bill_website_url', $bill_website_url->value);
+            $bill_website_url = AdminSetting::where('name', 'bill_website_url')->first();
+            view()->share('bill_website_url', $bill_website_url->value);
 
-        //     $bill_facebook_page = AdminSetting::where('name', 'bill_facebook_page')->first();
-        //     view()->share('bill_facebook_page', $bill_facebook_page->value);
+            $bill_facebook_page = AdminSetting::where('name', 'bill_facebook_page')->first();
+            view()->share('bill_facebook_page', $bill_facebook_page->value);
 
-        //     $bill_contact_numbers = AdminSetting::where('name', 'bill_contact_numbers')->first();
-        //     view()->share('bill_contact_numbers', $bill_contact_numbers->value);
+            $bill_contact_numbers = AdminSetting::where('name', 'bill_contact_numbers')->first();
+            view()->share('bill_contact_numbers', $bill_contact_numbers->value);
 
-        //     $bill_contact_email = AdminSetting::where('name', 'bill_contact_email')->first();
-        //     view()->share('bill_contact_email', $bill_contact_email->value);
+            $bill_contact_email = AdminSetting::where('name', 'bill_contact_email')->first();
+            view()->share('bill_contact_email', $bill_contact_email->value);
 
-        //     $bill_contact_persons = AdminSetting::where('name', 'bill_contact_persons')->first();
-        //     view()->share('bill_contact_persons', $bill_contact_persons->value);
-        // }
+            $bill_contact_persons = AdminSetting::where('name', 'bill_contact_persons')->first();
+            view()->share('bill_contact_persons', $bill_contact_persons->value);
+        }
         
     }
 
