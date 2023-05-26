@@ -191,7 +191,7 @@
                 </div>
             </div>
             <br>
-            <div class="text-center">Copyright &copy; 2021 - Clinic Management Software by <a href="https://www.bluewhalecms.com" target="_BLANK">Bluewhale CMS</a></div>
+            <div class="text-center">Copyright &copy; {{ now()->year }} - Clinic Management Software</a></div>
         </div>
     </div>
 </div>

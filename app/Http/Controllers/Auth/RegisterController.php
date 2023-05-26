@@ -128,7 +128,7 @@ class RegisterController extends Controller
             $feature->save();
         });
 
-        Mail::to($data['email'])->send(new NewClient());
+        // Mail::to($data['email'])->send(new NewClient());
 
         return $user;
     }

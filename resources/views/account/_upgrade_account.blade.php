@@ -110,9 +110,9 @@
                   <td class="basic-plan text-center">Yes</td>
                 </tr>
                 <tr>
-                  <td>Subscription Rate</td>
+                  <td>Subscription Fee</td>
                   <td class="free-plan text-center free">FREE</td>
-                  <td rowspan=2 class="basic-plan-foot text-center">&#8369;1,799 / month</td>
+                  <td rowspan=2 class="basic-plan-foot text-center">&#8369;500 / month</td>
                 </tr>
                 <tr>
                   <td>&nbsp;</td>
