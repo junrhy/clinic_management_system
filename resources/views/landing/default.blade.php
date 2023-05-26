@@ -7,14 +7,14 @@
   <meta property="og:image:width" content="400" /> 
   <meta property="og:image:height" content="300" />
 
-  <meta property="og:description" content="Welcome to Bluewhale Clinic Management Software. 
+  <meta property="og:description" content="Welcome to Clinic Management Software. 
             We are a start-up Software Development Company that primarily focus on building software solutions for doctor's that have their own clinic. We are doing our best that our software services can help you to easily manage your clinic operations." />
 
-  <meta property="og:url"content="http://clinic-app.junrhy.com" />
+  <meta property="og:url"content="http://clinic-app.junrhycrodua.com" />
 
-  <meta property="og:title" content="Manage your clinic with Bluewhale CMS" />
+  <meta property="og:title" content="Manage your Clinic Online" />
 
-  <title>Bluewhale - Manage your Clinic Online</title>
+  <title>Manage your Clinic Online</title>
 </head>
 
 <!-- Styles -->
@@ -264,7 +264,7 @@
     @endif
 
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ffffff;height: 85px;">
-        <a class="navbar-brand" href="/"><img src="/img/brand/bluewhalecms.png" class="logo"></a>
+        <a class="navbar-brand" href="/"><h2 class="font-weight-bold">C M S</h2></a>
         
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -327,7 +327,7 @@
       <div class="container h-100">
         <div class="row h-100 align-items-center">
           <div class="col-12 text-center">
-            <h1 class="font-weight-light">Welcome to <span style="font-weight: bold;color: #01d8da;">Bluewhale Clinic Management Software.</span></h1>
+            <h1 class="font-weight-light">Welcome to <span style="font-weight: bold;color: #01d8da;">Clinic Management Software.</span></h1>
             <p class="lead">Regardless of what type of clinic are you in, We simplify and automate the necessary process so that you will have a clear vision on how your clinic is doing. We are doing our best that our online system can help you to easily manage your clinic operations.</p>
 
             <img src="/img/brand/banner.png" class="col-md-10 mx-auto">
@@ -409,7 +409,7 @@
             <tr>
               <td class="free-plan-head text-center" width="25%">Free</td>
               <td class="basic-plan-head text-center" width="25%">Basic</td>
-              <td class="basic-enterprise-head text-center" width="25%">Enterprise</td>
+              <td class="basic-enterprise-head text-center" width="25%">Premium</td>
             </tr>
             <tr>
               <td class="free-plan" style="font-weight: bold;text-align: center;">Best for starting clinic with few patients</td>
@@ -479,21 +479,15 @@
               <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Inventory</td>
             </tr>
             <tr>
-              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> 24/7 Customer Service</td>
-              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> 24/7 Customer Service</td>
-              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> 24/7 Customer Service</td>
-            </tr>
-            <tr>
-              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Automatic upgrade for new features</td>
-              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Automatic upgrade for new features</td>
-              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Scheduled upgrade for new features</td>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-times"></i> Analytics</td>
+              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-times"></i> Analytics</td>
+              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Analytics</td>
             </tr>
             <tr>
               <td class="free-plan text-center free" style="vertical-align: middle;">FREE</td>
-              <td rowspan=2 class="basic-plan-foot text-center" style="vertical-align: middle;">&#8369;1,799 / Month</td>
+              <td rowspan=2 class="basic-plan-foot text-center" style="vertical-align: middle;">&#8369;500 / Month</td>
               <td rowspan=2 class="basic-enterprise-foot text-center" style="vertical-align: middle;">
-                  Contact Sales<br>
-                  <span style="font-size: 8pt;color: #636b6f;font-weight: normal;">sales@bluewhalecms.com</span>
+                  Coming Soon...
               </td>
             </tr>
         </table>
@@ -528,31 +522,15 @@
         <div class="col-md-3 mx-auto">
             <h2 id="aboutus" class="header" align="left">About Us</h2>
             <p align="justify">
-              Bluewhale Clinic Management Software is design and developed by Crodua Web Development Agency. 
+              Clinic Management Software is design and developed by Crodua Web Development Agency. 
             </p>
         </div>
         <div class="col-md-4 mx-auto" style="font-size:10pt;">
-            <h2 id="customerservice" class="header" align="left">Offices</h2>
+            <h2 id="customerservice" class="header" align="left">Contact</h2>
             <br>
             <span style="font-size: 14pt">Main Office Address</span> <br>
-            Address: Mivesa Salinas Drive Ext. Street Lahug Cebu City, Cebu Philippines <br>
-            Landline: +63 (032) 342-8998 <br>
-            <br>
-            <span style="font-size: 14pt">Office Hours</span> <br>
-            Monday - Friday<br>
-            8:00 am - 5:00 pm<br>
-            (except holidays)<br>
-            <br>
-            <span style="font-size: 14pt">Customer Contact Center</span> <br>
-            Monday - Sunday<br>
-            8:00 am - 5:00 pm<br>
-            (except holidays)<br>
-            <br>
-            Telephone: +63 (032) 342-8998<br>
-            Mobile: +63 (0926) 004-9848<br>
-            Email: ask@bluewhalecms.com<br>
-            <br>
-            <br>
+            Address: Sitio Fabrica Poblacion Sagbayan, Bohol Philippines <br>
+            Email: jrcrodua@gmail.com <br>
         </div>
         <div class="col-md-3 mx-auto">
             <h2 id="contact" class="header" align="left">How it works?</h2>

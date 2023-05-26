@@ -35,13 +35,10 @@
         }
 
         #button-upgrade-account {
-            border: 1px solid #FF8C00;
-            background: #FF8C00;
-            color: #fff;
-            margin-right: 20px;
-            border-radius: 3px;
+            background: #FF6065;
+            color: #FFFFFF;
             position: relative;
-            top: -3px;        }
+            right: 8px;
         }
     </style>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -355,17 +352,17 @@
                         @endif
                         
 
-                        <div class="float-right" style="margin: 8px;font-size: 11pt;color:#fff;">
+                        <div class="float-right" style="font-size: 11pt;color:#fff;">
                             @if(Auth::user()->client->account_type == 'free' 
                             && Auth::user()->client->is_active != 0 
                             && Auth::user()->client->is_suspended == 0 
                             && Auth::user()->is_client == 1)
                             
-                            <strong style="color:#ffeeda;">Free Plan</strong> <button id="button-upgrade-account">Upgrade</button>
+                            <a id="button-upgrade-account" class="btn btn-round btn-white float-right"><i class="fa fa-arrow-up"></i> Upgrade</a>
                            
                             @endif
 
-                            <strong><i class="fa fa-user-circle"></i>  {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</strong>
+                            <strong style="position: relative;top: 8px;right: 15px;"><i class="fa fa-user-circle"></i>  {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</strong>
                         </div>
                     </div>
                 </div>
