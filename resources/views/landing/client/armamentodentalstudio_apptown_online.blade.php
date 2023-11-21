@@ -14,7 +14,7 @@
 
     .btn-appointment {
         display: inline-block;
-        margin-bottom: 0;
+        margin-bottom: 5px;
         font-weight: normal;
         text-align: center;
         white-space: nowrap;
@@ -116,7 +116,7 @@
     }
 </style>
 
-<div class="container">
+<!-- <div class="container">
     <div class="navbar-header">
     @if ($domain && $domain->client->logo != "")
         @if(env('FILESYSTEM_DRIVER') == 'spaces')
@@ -137,7 +137,7 @@
         <li class="nav-item"><a class="btn btn-appointment" href="#bookanappointment">Book an appointment </a></li>
     </ul>
 </div>
-
+ -->
 <div class="container-fluid">
     <div class="row" style="text-align: center;background-color: #262626;">
         <img class="col-md-8 col-sm-12 col-xs-12 col-md-offset-2" style="border-top: 2px solid #262626;border-bottom: 2px solid #262626;" src="/img/client-images/armamentodentalstudio/bg.jpeg">
@@ -145,16 +145,6 @@
 </div>
 
 <div class="container">
-    <div class="col-md-12">
-        <br>
-        <br>
-        <h1 class="section" id="doctors">Doctors</h1>
-        <hr>
-        <br>
-        <br>
-        <br>
-    </div>
-
     <div class="col-md-12">
         <br>
         <br>
