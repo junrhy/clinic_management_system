@@ -311,11 +311,11 @@
                     </li>
                     @endif
 
-                    @if (Route::has('register'))
+      <!--               @if (Route::has('register'))
                     <li class="nav-item">
                       <a class="btn-signup-menu" href="{{ route('register') }}">Sign Up</a>
                     </li>
-                    @endif
+                    @endif -->
                 @endauth
             </ul>
         </div>
