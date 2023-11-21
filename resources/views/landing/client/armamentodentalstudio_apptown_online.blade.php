@@ -124,16 +124,14 @@
         @endif
 
     @else
-        <h3 class="text-center" style="font-weight:bold;color:#01d8da;font-family: 'Nunito';">
-          <i class="fa fa-clinic-medical"></i> CMS <br>
-          <small>Clinic Management Software</small>
+        <h3 class="text-center" style="font-weight:bold;color:#DAA520;font-family: 'Nunito';">
+          <i class="fa fa-clinic-medical"></i> CMS
         </h3>
     @endif
     </div>
 
     <ul class="nav navbar-nav" style="margin-top:10px;">
         <li class="nav-item non-priority-link"><a class="nav-link" href="#doctors">Doctors</a></li>
-        <li class="nav-item non-priority-link"><a class="nav-link" href="#clinicschedule">Clinic Schedule</a></li>
         <li class="nav-item"><a class="nav-link" href="/patient-registration-form?profile={{ $domain->client->slug }}&cid={{ $domain->client->id }}">Patient Registration</a></li>
         <li class="nav-item login-right-spacer"><a class="nav-link" href="{{ route('login') }}">Account Login</a></li>
         <li class="nav-item"><a class="btn btn-appointment" href="#bookanappointment">Book an appointment </a></li>
@@ -155,124 +153,6 @@
         <br>
         <br>
         <br>
-    </div>
-
-    <div class="col-md-12 table-responsive">
-        <h1 class="section" id="clinicschedule">Clinic Schedule</h1>
-        <hr>
-        <br>
-        <table class="table table-schedule" border="1">
-            <tr>
-                <th></th>
-                <th style="text-align: center;">Monday</th>
-                <th style="text-align: center;">Tuesday</th>
-                <th style="text-align: center;">Wednesday</th>
-                <th style="text-align: center;">Thursday</th>
-                <th style="text-align: center;">Friday</th>
-                <th style="text-align: center;">Saturday</th>
-                <th style="text-align: center;">Sunday</th>
-            </tr>
-            <tr>
-                <td>8:00AM</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td align="center" rowspan="10">Closed</td>
-            </tr>
-            <tr>
-                <td>9:00AM</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-
-            </tr>
-            <tr>
-                <td>10:00AM</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-
-            </tr>
-            <tr>
-                <td>11:00AM</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-
-            </tr>
-            <tr>
-                <td>12:00AM</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-
-            </tr>
-            <tr>
-                <td>1:00PM</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-
-            </tr>
-            <tr>
-                <td>2:00PM</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-
-            </tr>
-            <tr>
-                <td>3:00PM</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-
-            </tr>
-            <tr>
-                <td>4:00PM</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-
-            </tr>
-            <tr>
-                <td>5:00PM</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-
-            </tr>
-        </table>
     </div>
 
     <div class="col-md-12">
