@@ -2,7 +2,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <meta property="og:image" content="/img/brand/bluewhalecms.png" />
+  <meta property="og:image" content="/img/brand/clinic.apptown.png" />
   <meta property="og:image:type" content="image/jpeg" /> 
   <meta property="og:image:width" content="400" /> 
   <meta property="og:image:height" content="300" />
@@ -10,7 +10,7 @@
   <meta property="og:description" content="Welcome to Clinic Management Software. 
             We are a start-up Software Development Company that primarily focus on building software solutions for doctor's that have their own clinic. We are doing our best that our software services can help you to easily manage your clinic operations." />
 
-  <meta property="og:url"content="http://clinic-app.junrhycrodua.com" />
+  <meta property="og:url"content="http://clinic.junrhycrodua.com" />
 
   <meta property="og:title" content="Manage your Clinic Online" />
 
@@ -264,7 +264,9 @@
     @endif
 
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #ffffff;height: 85px;">
-        <a class="navbar-brand" href="/"><h2 class="font-weight-bold">C M S</h2></a>
+        <a class="navbar-brand" href="/">
+          <h2 class="font-weight-bold">.<span style="color:#01d8da;">app</span>town</h2>
+        </a>
         
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -471,7 +473,7 @@
     <br>
     <br>
 
-    <h2 id="testimonials" class="header" align="center">Our Clients</h2>
+    <h2 id="testimonials" class="header" align="center">Our Partners</h2>
     <br>
     <div class="col-md-12">
       <div class="row">
