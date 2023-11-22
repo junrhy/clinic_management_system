@@ -417,19 +417,9 @@
               <td class="enterprise-plan" style="font-weight: bold;text-align: center;">Best for multiple clinics with large operations</td>
             </tr>
             <tr>
-              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Web / Mobile / Tablet</td>
-              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Web / Mobile / Tablet</td>
-              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Web / Mobile / Tablet</td>
-            </tr>
-            <tr>
-              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Shared Server</td>
-              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Shared Server</td>
-              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Dedicated Server</td>
-            </tr>
-            <tr>
-              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-times"></i> Cannot use your own domain</td>
-              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-times"></i> Cannot use your own domain</td>
-              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Use Your Own Domain</td>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-times"></i> Landing Page</td>
+              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-times"></i> Landing Page</td>
+              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Landing Page</td>
             </tr>
             <tr>
               <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Appointments</td>
@@ -437,14 +427,9 @@
               <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Appointments</td>
             </tr>
             <tr>
-              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Unlimited Patients</td>
-              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Unlimited Patients</td>
-              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Unlimited Patients</td>
-            </tr>
-            <tr>
-              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Clinics</td>
-              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Clinics</td>
-              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Clinics</td>
+              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Patient's Records</td>
+              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Patient's Records</td>
+              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Patient's Records</td>
             </tr>
             <tr>
               <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-times"></i> Staff's Access <br>
@@ -452,16 +437,6 @@
               </td>
               <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Staff's Access</td>
               <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Staff's Access</td>
-            </tr>
-            <tr>
-              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Services</td>
-              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Services</td>
-              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Services</td>
-            </tr>
-            <tr>
-              <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Doctors</td>
-              <td class="basic-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Doctors</td>
-              <td class="enterprise-plan" style="padding-left: 4%;"><i class="fa fa-check"></i> Manage Doctors</td>
             </tr>
             <tr>
               <td class="free-plan" style="padding-left: 4%;"><i class="fa fa-times"></i> Dental Chart <br>
@@ -485,7 +460,7 @@
             </tr>
             <tr>
               <td class="free-plan text-center free" style="vertical-align: middle;">FREE</td>
-              <td rowspan=2 class="basic-plan-foot text-center" style="vertical-align: middle;">&#8369;500 / Month</td>
+              <td rowspan=2 class="basic-plan-foot text-center" style="vertical-align: middle;">&#8369;299 / Month</td>
               <td rowspan=2 class="basic-enterprise-foot text-center" style="vertical-align: middle;">
                   Coming Soon...
               </td>
@@ -496,18 +471,6 @@
     <br>
     <br>
 
-    <div class="col-md-4 mx-auto text-center">
-        <h2 class="">Want to try out?</h2>
-        @if ($domain == null)
-        <a href="/register" class="btn btn-lg btn-block btn-signup">
-            Sign Up FREE!
-        </a>
-        @endif
-    </div>
-
-    <br>
-    <br>
-    <br>
     <h2 id="testimonials" class="header" align="center">Our Clients</h2>
     <br>
     <div class="col-md-12">
@@ -526,11 +489,11 @@
             </p>
         </div>
         <div class="col-md-4 mx-auto" style="font-size:10pt;">
-            <h2 id="customerservice" class="header" align="left">Contact</h2>
+            <h2 id="customerservice" class="header" align="left">Company</h2>
             <br>
             <span style="font-size: 14pt">Main Office Address</span> <br>
-            Address: Sitio Fabrica Poblacion Sagbayan, Bohol Philippines <br>
-            Email: jrcrodua@gmail.com <br>
+            Address: Baracca Poblacion II Carcar City, Cebu Philippines <br>
+            Email: contact@junrhycrodua.com <br>
         </div>
         <div class="col-md-3 mx-auto">
             <h2 id="contact" class="header" align="left">How it works?</h2>
