@@ -32,7 +32,7 @@
                         </div>
 
                         <div class="form-group">
-                          {{ Form::label('default_price', 'Default Price') }}
+                          {{ Form::label('default_price', 'Default Fee') }}
                           {{ Form::number('default_price', Input::old('default_price'), array('class' => 'form-control', 'min' => '0', 'step' => '0.01', 'required')) }}
                         </div>
 

@@ -54,7 +54,7 @@
                     <table class="table table-striped">
                       <thead>
                         <th>Name</th>
-                        <th class="text-right">Default Price</th>
+                        <th class="text-right">Default Fee</th>
                         <th class="text-right">Action</th>
                       </thead>
                       <?php foreach ($services as $service_key => $service_item): ?>

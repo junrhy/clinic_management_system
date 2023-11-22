@@ -112,7 +112,7 @@
                 <tr>
                   <td>Subscription Fee</td>
                   <td class="free-plan text-center free">FREE</td>
-                  <td rowspan=2 class="basic-plan-foot text-center">&#8369;500 / month</td>
+                  <td rowspan=2 class="basic-plan-foot text-center">&#8369;299 / month</td>
                 </tr>
                 <tr>
                   <td>&nbsp;</td>
@@ -140,17 +140,17 @@
 
 <script type="text/javascript">
 $(document).ready(function () {
-  // $("#form-add-patient").submit(function() {
-  //   if ($("#check-account-type").data('account-type') == "free") {
-  //     if ($("#check-patient-count").data('patient-count') >= 100) {
-  //       $('#upgrade-message').html('You have reach the limitation of your account.');
-  //       $('#upgrade_account_modal').modal('show');
-  //       return false;
-  //     } else {
-  //       return true;
-  //     }
-  //   }
-  // });
+  $("#form-add-patient").submit(function() {
+    if ($("#check-account-type").data('account-type') == "free") {
+      if ($("#check-patient-count").data('patient-count') >= 100) {
+        $('#upgrade-message').html('You have reach the limitation of your account.');
+        $('#upgrade_account_modal').modal('show');
+        return false;
+      } else {
+        return true;
+      }
+    }
+  });
 
   $("#sidebar-menu-upgrade-account, #button-upgrade-account").click(function(){
     $('#upgrade-message').html('Is your business growing fast? We got you covered.');

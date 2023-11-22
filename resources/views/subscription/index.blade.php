@@ -145,13 +145,13 @@
                               Inventory Management
                             </td>
                             <td>
-                              <span class="pricing">&#8369;1,799 / Month</span><br>
+                              <span class="pricing">&#8369;299 / Month</span><br>
                             </td>
                             <td>
                               @if($subscriptions->where('plan', 'basic')->first())
                                 <button class="btn btn-success"><i class="fa fa-check"></i> Subscribed</button>
                               @else
-                                <button data-plan="Basic" data-plan-amount="1799" data-plan-currency="&#8369" class="btn btn-primary subscribe">Subscribe</button>
+                                <button data-plan="Basic" data-plan-amount="299" data-plan-currency="&#8369" class="btn btn-primary subscribe">Subscribe</button>
                               @endif
                             </td>
                           </tr>
